@@ -33,7 +33,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img src="${path }/resources/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
+                <a class="nav-brand" href="${path }"><img src="${path }/resources/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -90,6 +90,8 @@
                             </li>
 
                             <li><a href="contact.html" >커뮤니티 </span></a></li>
+							<li><a href="${path }/ranking/ranking.do" > 랭킹  </span></a></li>
+                            
                         </ul>
                     </div>
                     <!-- Nav End -->
