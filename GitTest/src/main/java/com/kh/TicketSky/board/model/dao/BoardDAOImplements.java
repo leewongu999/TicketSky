@@ -2,7 +2,6 @@ package com.kh.TicketSky.board.model.dao;
 import java.util.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.kh.TicketSky.board.model.vo.Board;
 
 @Repository

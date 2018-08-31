@@ -1,6 +1,5 @@
 package com.kh.TicketSky.board.model.service;
 import java.util.*;
-
 import com.kh.TicketSky.board.model.vo.Board;
 
 public interface BoardService {

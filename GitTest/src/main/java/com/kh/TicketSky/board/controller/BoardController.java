@@ -1,13 +1,10 @@
 package com.kh.TicketSky.board.controller;
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import com.kh.TicketSky.board.model.service.BoardService;
 import com.kh.TicketSky.common.Page;
 
