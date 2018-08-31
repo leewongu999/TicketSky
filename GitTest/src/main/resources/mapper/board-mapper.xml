@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<resultMap type="map" id="boardMap">
+	</resultMap>
+	<select id="selectList" resultType="map">
+		SELECT * FROM freeboard
+	</select>
+	<select id="selectOne" resultMap="boardMap" resultType="_int">
+		SELECT COUNT(*) cnt FROM freeboard
+	</select>
+	<insert id="insert">
+		INSERT INTO freeboard VALUES(freeboard_seq.val, ${}, ${}, ${}, ${}, ${}, ${}, ${})
+	</insert>
+	<update id="update">
+		UPDATE freeboard SET contents=${} WHERE boardNo=${}
+	</update>
+	<delete id="delete">
+		DELETE FROM freeboard WHERE boardNo=${}
+	</delete>
+	<select id="selectBoard" resultMap="board">
+		SELECT * FROM freeboard WHERE boardNo=${}
+	</select>
+</mapper>
