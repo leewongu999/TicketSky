@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mtbatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+	<insert id="insertConsumer">
+ 		INSERT INTO MEMBER VALUES(#{userId}, #{password}, #{userName}, #{email},#{gender},#{birthdate},#{address},#{phone},#{categoryNo}, sysdate, 'A', 'C')
+ 	</insert>
+ 	<resultMap type="member" id="memberMap">
+ 	</resultMap>
+ 	<select id="selectOne" resultMap="memberMap" parameterType="string">
+ 		select * from member where userId = #{userId}
+ 	</select>
+ 	<!-- <update id="updateMember" parameterType="member">
+ 		update member set username=#{userName}, gender=#{gender}, age=#{age}, email=#{email},address=#{address},hobby=#{hobby, typeHandler=strArr} where userid=#{userId}
+ 	</update> -->
+</mapper>

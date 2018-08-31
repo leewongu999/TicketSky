@@ -23,7 +23,13 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="${path }/resources/css/core-style.css"/>
     <link rel="stylesheet" href="${path }/resources/style.css"/>
-	<link rel="stylesheet" href="${path }/resources/classy-nav.min.css"/>
+<%-- 	<link rel="stylesheet" href="${path }/resources/classy-nav.min.css"/>
+ --%>	
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+	
+	
 </head>
 
 <body>
@@ -108,11 +114,11 @@
                 <link href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css" rel="stylesheet">
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#"><!--<img src="img/core-img/user.svg" alt="">-->로그인</a>
+                    <a href="#" onclick="window.open('${path}/user/login', '_blank', 'width=400 height=350');"><!--<img src="img/core-img/user.svg" alt="">-->로그인</a>
                 </div>
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#"><!--<img src="img/core-img/user.svg" alt="">--> 마이 페이지</a>
+                    <a href="${path }/user/consumerMyPage"><!--<img src="img/core-img/user.svg" alt="">--> 마이 페이지</a>
                 </div>
                 <div class="user-login-info">
                     <a href="#"><!--<img src="img/core-img/user.svg" alt="">--> 고객 센터</a>
