@@ -33,7 +33,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img src="${path }/resources/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
+                <a class="nav-brand" href="${path }/"><img src="${path }/resources/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -48,44 +48,42 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                  
-                            
-                            <li><a href="#"> 뮤지컬 </a>
+                            <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 뮤지컬 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
-                                    <li><a href="shop.html"> 오리지널/내한공연 </a></li>
-                                    <li><a href="single-product-details.html"> 라이선스 </a></li>
-                                    <li><a href="checkout.html"> 창작 뮤지컬 </a></li>
-                                    <li><a href="blog.html"> 넌버별 퍼포먼스 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 오리지널/내한공연 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 라이선스 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 창작 뮤지컬 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 넌버별 퍼포먼스 </a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"> 연극 </a>
+                            <li><a href="${path }/performance/performanceList.do?category=연극"> 연극 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
-                                    <li><a href="shop.html">로맨틱 </a></li>
-                                    <li><a href="single-product-details.html"> 코미디 </a></li>
-                                    <li><a href="checkout.html"> 드라마 </a></li>
-                                    <li><a href="blog.html"> 스릴러 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=연극">로맨틱 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 코미디 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 드라마 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 스릴러 </a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"> 콘서트 </a>
+                            <li><a href="${path }/performance/performanceList.do?category=콘서트"> 콘서트 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
-                                    <li><a href="shop.html"> 발라드 </a></li>
-                                    <li><a href="blog.html"> 락/메탈 </a></li>
-                                    <li><a href="blog.html"> 랩/힙합 </a></li>
-                                    <li><a href="blog.html"> 내한공연 </a></li>
-                                    <li><a href="single-product-details.html"> 페스티벌 </a></li>
-                                    <li><a href="checkout.html"> 기타 </a></li>                                    
+                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 발라드 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 락/메탈 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 랩/힙합 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 내한공연 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 페스티벌 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 기타 </a></li>                                    
                                 </ul>
                             </li>
-                            <li><a href="#"> 클래식/무용 </a>
+                            <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 클래식/무용 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
-                                    <li><a href="shop.html"> 클래식 </a></li>
-                                    <li><a href="single-product-details.html"> 오페라 </a></li>
-                                    <li><a href="checkout.html"> 발레/무용 </a></li>
-                                    <li><a href="blog.html"> 국악 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 클래식 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 오페라 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 발레/무용 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 국악 </a></li>
                                 </ul>
                             </li>
 
@@ -206,4 +204,4 @@
         </div>
     </div>
     <!-- ##### Right Side Cart End ##### -->
-    <section class="new_arrivals_area section-padding-80 clearfix">
+    <!-- <section class="new_arrivals_area section-padding-80 clearfix"> -->
