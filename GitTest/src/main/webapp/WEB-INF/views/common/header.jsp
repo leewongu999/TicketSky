@@ -15,11 +15,11 @@
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico"/>
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/board.css"/>
-    <link rel="stylesheet" href="css/button_flat.css"/>
-    <link rel="stylesheet" href="css/core-style.css"/>
-    <link rel="stylesheet" href="css/write_form.css"/>
-    <link rel="stylesheet" href="css/_style_list.css"/>
+    <link rel="stylesheet" href="${path}/css/board.css"/>
+    <link rel="stylesheet" href="${path}/css/button_flat.css"/>
+    <link rel="stylesheet" href="${path}/css/core-style.css"/>
+    <link rel="stylesheet" href="${path}/css/write_form.css"/>
+    <link rel="stylesheet" href="${path}/css/_style_list.css"/>
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css"/>
 </head>
@@ -30,7 +30,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img src="img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
+                <a class="nav-brand" href="index.html"><img src="${path}/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -110,7 +110,7 @@
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="img/core-img/heart.svg" alt=""> <span>3</span></a>
+                    <a href="#" id="essenceCartBtn"><img src="${path}/img/core-img/heart.svg" alt=""> <span>3</span></a>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
 	<div class="right-side-cart-area">
 		<!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+            <a href="#" id="rightSideCart"><img src="${path}/img/core-img/bag.svg" alt=""> <span>3</span></a>
         </div>
 		<div class="cart-content d-flex">
 			<!-- Cart List Area -->
@@ -129,7 +129,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src="${path}/img/product-img/product-1.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                         </div>
@@ -138,7 +138,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
+                        <img src="${path}/img/product-img/product-2.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                         </div>
@@ -147,7 +147,7 @@
 				<!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
+                        <img src="${path}/img/product-img/product-3.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                         </div>
