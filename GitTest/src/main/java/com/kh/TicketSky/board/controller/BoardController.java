@@ -28,8 +28,7 @@ public class BoardController {
 		List<Map<String,String>> list = service.selectList();
 		logger.debug("리스트 : "+list);
 		int totalContents = service.selectTotalContents();	// 전체 게시글 수
-		String pageBar = new Page()
-				.getPage(cPage, numPerPage, totalContents,
+		String pageBar = new Page().getPage(cPage, numPerPage, totalContents,
 						request.getRequestURI());
 		
 		request.setAttribute("cPage", cPage);
@@ -37,6 +36,7 @@ public class BoardController {
 		request.setAttribute("list", list);
 		request.setAttribute("totalContents", totalContents);
 		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("url", request.getRequestURI());
 		
 		return "community/board";
 	}
