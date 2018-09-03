@@ -5,9 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:param value="게시글" name="title"/>
 <%
-	request.getAttribute("list");
-	request.getAttribute("totalContents");
-	request.getAttribute("pageBar");
+	Board b = (Board)request.getAttribute("board");
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
         <section class='height-800'>
@@ -19,25 +17,25 @@
                 <table class='table'>
                     <tr>
                         <th>게시글 번호</th>
-                        <td><%= %></td>
+                        <td><%=b.getBoardNo()%></td>
                         <th>글 제목</th>
-                        <td><%= %></td>
+                        <td><%=b.getBoardTitle()%></td>
                     </tr>
                     <tr>
                         <th>작성자</th>
-                        <td><%= %></td>
+                        <td><%=b.getUserId()%></td>
                         <th>작성일</th>
-                        <td><%= %></td>
+                        <td><%=b.getWriteDate()%></td>
                     </tr>
                     <tr>
                         <th>조회수</th>
-                        <td><%= %></td>
+                        <td><%=b.getVisits()%></td>
                         <th>첨부파일</th>
-                        <td><%= %></td>
+                        <td><%=b.getOriginalFileName()%></td>
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td colspan="3"><%= %></td>
+                        <td colspan="3"><%=b.getContent()%></td>
                     </tr>
                 </table>
                 <hr>
