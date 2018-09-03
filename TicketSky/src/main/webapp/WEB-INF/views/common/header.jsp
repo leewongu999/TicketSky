@@ -23,7 +23,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="${path }/resources/css/core-style.css"/>
     <link rel="stylesheet" href="${path }/resources/style.css"/>
-	<link rel="stylesheet" href="${path }/resources/classy-nav.min.css"/>
+	<link rel="stylesheet" href="${path }/resources/css/classy-nav.min.css"/>
 </head>
 
 <body>
@@ -79,15 +79,15 @@
                             </li>
                             <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 클래식/무용 </a>
                                 <ul class="dropdown">
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 전체 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 클래식 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 오페라 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 발레/무용 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용""> 국악 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 클래식 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 오페라 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 발레/무용 </a></li>
+                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 국악 </a></li>
                                 </ul>
                             </li>
 
-                            <li><a href="contact.html" >커뮤니티 </span></a></li>
+                            <li><a href="contact.html" >커뮤니티 </a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -103,7 +103,7 @@
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-                <link href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css" rel="stylesheet">
+                <link href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css" rel="stylesheet"/>
                 <!-- User Login Info -->
                 <div class="user-login-info">
                     <a href="#"><!--<img src="img/core-img/user.svg" alt="">-->로그인</a>

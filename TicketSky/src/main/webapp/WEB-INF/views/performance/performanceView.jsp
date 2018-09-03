@@ -8,14 +8,18 @@
 
 <jsp:include page = "/WEB-INF/views/common/header.jsp"/>
 
-<style>
-	#sebuimg{
-		margin : auto;
-		width: 300px;
-		height: 380px;
-	}
-		
-</style>
+	
+	<script src="${path}/resources/sebu/js/jquery-3.2.1.min.js"></script>
+	<script src="${path}/resources/sebu/styles/bootstrap4/popper.js"></script>
+	<script src="${path}/resources/sebu/styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="${path}/resources/sebu/plugins/Isotope/isotope.pkgd.min.js"></script>
+	<script src="${path}/resources/sebu/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="${path}/resources/sebu/plugins/easing/easing.js"></script>
+	<script src="${path}/resources/sebu/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	<script src="${path}/resources/sebu/js/single_custom.js"></script>
+
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="${path}/resources/sebu/styles/bootstrap4/bootstrap.min.css">
 	<link href="${path}/resources/sebu/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="${path}/resources/sebu/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -25,6 +29,24 @@
 	<link rel="stylesheet" type="text/css" href="${path}/resources/sebu/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="${path}/resources/sebu/styles/single_styles.css">
 	<link rel="stylesheet" type="text/css" href="${path}/resources/sebu/styles/single_responsive.css">
+	<style>
+		#sebuimg{
+			margin : auto;
+			width: 300px;
+			height: 380px;
+		}
+		
+	</style>
+	<script>
+		$(function(){
+			$('.user_star_rating').children().on('click',function(){
+				console.log($(this).children().attr('aa'));
+			});
+		});
+
+	</script>
+
+
 
 	<div class="fs_menu_overlay"></div>
 
@@ -97,45 +119,47 @@
 
 		<div class="row" >
 			
-			<div class="col-lg-6">
+			<div class="col-lg-5" style='margin:auto;'>
 				<div class="single_product_pics">
 					<div class="row" >
 						<img id='sebuimg' src="${path}/resources/img/product-img/barnum1.jpg" alt=""  />
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5">
+			<div class="col-lg-5" style='margin-right:2.3%;'>
 				<div class="product_details">
 					<div class="product_details_title">
-						
-						<h2>위대한 쇼맨</h2>
+						<span>
+							<ul class="star_rating" style='margin-left:5px;'>
+								<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+							</ul>
+						</span>
+						<h3>
+							위대한 쇼맨
+						</h3>
 						<p><strong>장소</strong>&nbsp;&nbsp;&nbsp;&nbsp;충무아트센터 대극장</p>
 						<p><strong>기간</strong>&nbsp;&nbsp;&nbsp;&nbsp;2018.09.20~2018.10.10</p>
 						<p><strong>관람시간</strong>&nbsp;&nbsp;&nbsp;&nbsp;160분</p>
 						<p><strong>관람등급</strong>&nbsp;&nbsp;&nbsp;&nbsp;만 7세이상</p>
 					</div>
-					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+					<div class="free_delivery d-flex flex-row align-items-center justify-content-center" style='margin-right:15%; margin-bottom:15px;'>
 						<!-- <span class="ti-truck"></span> -->
-						<span>가격</span>
+						<span>
+							가격
+						</span>
 					</div>
 					<div class="product_price">
 							<p><strong>VIP석</strong>&nbsp;&nbsp;&nbsp;&nbsp;$495.00</p>
 							<p><strong>S석</strong>&nbsp;&nbsp;&nbsp;&nbsp;$495.00</p>
 							<p><strong>R석</strong>&nbsp;&nbsp;&nbsp;&nbsp;$495.00</p>
-						
+
 					</div>
-					<ul class="star_rating">
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-					</ul>
-					
-					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						
-						
-						<div class="red_button add_to_cart_button" ><a href="#">구매하기</a></div>
+					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center" style='margin-top:10px;'>
+						<div class="red_button add_to_cart_button" style='margin-left:0'><a href="#">구매하기</a></div>
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 					</div>
 				</div>
@@ -149,7 +173,7 @@
 	<div class="tabs_section_container">
 
 		<div class="container">
-			<div class="row" >
+			<div class="row" style='margin:0 auto;'>
 				<div class="col">
 					<div class="tabs_container">
 						<ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
@@ -165,23 +189,24 @@
 
 					<!-- Tab Description -->
 
-					<div id="tab_1" class="tab_container active"  >
+					<div id="tab_1" class="tab_container active" style='margin:0 auto;'>
 						<div class="row w-100" >
-							<div class="col-lg-5 desc_col" style='margin-left:13%;'>
-								<div class="tab_title" style='margin-bottom:15px;'>
+							<div class="col-lg-5 desc_col" style='margin-left:15%;'>
+								<div class="tab_title" style='margin-bottom:14px;'>
 									<h4>Description</h4>
 								</div>
 								<div class="tab_text_block" style='margin-bottom:10px;'>
 									<p>[공연정보]</p>
 									<p>
-									2018년 09월 13일(목) ~ 2018년 11월 18일(일) 
-									화,목,금 20시 / 수 16시, 20시 / 토 15시, 19시 / 일, 공휴일 14시, 18시	
-									* 월 공연 없음</p>
+										2018년 09월 13일(목) ~ 2018년 11월 18일(일) 
+										화,목,금 20시 / 수 16시, 20시 / 토 15시, 19시 / 일, 공휴일 14시, 18시	
+										* 월 공연 없음
+									</p>
 									<br>
 								</div>
 							</div>
 							<div class="col-lg-9 " style='margin:0 auto;'>
-								<div class="tab_image">
+								<div class="tab_image" style="margin-left:3%;">
 									<img src="${path}/resources/img/product-img/very.jpg" alt="" style='width:100%; height: 100%;'>
 									<img src="${path}/resources/img/product-img/very.jpg" alt="" style='width:100%; height: 100%;'>
 									<img src="${path}/resources/img/product-img/very.jpg" alt="" style='width:100%; height: 100%;'>
@@ -194,9 +219,9 @@
 					<!-- Tab Additional Info -->
 
 					<div id="tab_2" class="tab_container">
-						<div class="row w-100"  >
-							<div class="col-lg-5 desc_col" style='margin-left:13%;'>
-								<div class="tab_title" style='margin-bottom:15px;'>
+						<div class="row w-100">
+							<div class="col-lg-5 desc_col" style='margin-left:15%;'>
+								<div class="tab_title" style='margin-bottom:14px;'>
 									<h4>Information</h4>
 								</div>
 								<div class="tab_text_block" style='margin-bottom:10px;'>
@@ -206,44 +231,49 @@
 									<p>대표번호 : 02-2056-5787</p>
 								</div>
 								<br>
-								
 							</div>
-							<div id="map" style="width:100%;height:350px; margin-left:13%;margin-right:13%;"></div>
+							<div id="map" style="width:100%;height:350px; margin-left:16.5%; margin-right:11%"></div>
 								<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2ce19947ed179f0c460473a072a402ed&libraries=services"></script>
 								<script>
 								var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 								    mapOption = {
 								        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 								        level: 3 // 지도의 확대 레벨
-								    };  
+								    };
 								
-								// 지도를 생성합니다    
+								// 지도를 생성합니다
+								
 								var map = new daum.maps.Map(mapContainer, mapOption); 
 								
 								// 주소-좌표 변환 객체를 생성합니다
 								var geocoder = new daum.maps.services.Geocoder();
 								
 								// 주소로 좌표를 검색합니다
-								geocoder.addressSearch('서울 성동구 하왕십리동 966-30', function(result, status) {
+								
+								geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
 								
 								    // 정상적으로 검색이 완료됐으면 
+								    
 								     if (status === daum.maps.services.Status.OK) {
 								
 								        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 								
 								        // 결과값으로 받은 위치를 마커로 표시합니다
+								        
 								        var marker = new daum.maps.Marker({
 								            map: map,
 								            position: coords
 								        });
 								
 								        // 인포윈도우로 장소에 대한 설명을 표시합니다
+								        
 								        var infowindow = new daum.maps.InfoWindow({
-								            content: '<div style="width:150px;text-align:center;padding:6px 0;">공연장</div>'
+								            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
 								        });
 								        infowindow.open(map, marker);
 								
 								        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+								        
 								        map.setCenter(coords);
 								    } 
 								});    
@@ -254,20 +284,74 @@
 
 					<!-- Tab Reviews -->
 
-					<div id="tab_3" class="tab_container" >
-						<div class="row w-100" style='margin:0 auto;'>
+					<div id="tab_3" class="tab_container" style='margin-left: 10%; margin-right: 10%;' >
+						<div class="col w-100" >
+							<!-- Add Review -->
+							<div class="tab_title reviews_title" style='margin-bottom:-5%;' >
+								<h4>Reviews (2)</h4>
+							</div>
+							<div class=" add_review_col">
 
+								<div class="add_review">
+									<form id="review_form" action="post"></form>
+										<div>
+<!-- <script>
+
+	function ff()
+	{
+		var value=$('.aa').attr("name");
+		$('#difo').val(value);
+		
+	}
+</script> -->								
+										<h1>&nbsp;&nbsp;
+											ID : admin 
+											<ul class="user_star_rating">
+												<li><i class="fa fa-star" aria-hidden="true" ></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star" aria-hidden="true" name='4' onclick = 'ff()'></i></li>
+												<li><i class="fa fa-star" aria-hidden="true"></i></li>
+												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+											</ul>
+										</h1>
+											<span></span>
+											<textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="5" required data-error="Please, leave us a review."></textarea>
+										</div>
+										<div class="text-left text-sm-right">
+											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">확인</button>
+										</div>
+									</form>
+								</div>
+
+							</div>
 							<!-- User Reviews -->
 
-							<div class="col-lg-6 reviews_col">
-								<div class="tab_title reviews_title" style='margin-left:5%;' >
-									<h4>Reviews (2)</h4>
-								</div>
+							<div class="">
+								
 
 								<!-- User Review -->
-
+								<hr>
 								<div class="user_review_container d-flex flex-column flex-sm-row">
-									<div class="review">
+									<div>
+										<div class="review_date">27 Aug 2016</div>
+										<div class="user_name">
+											Brandon William
+											<span>
+												<ul class="star_rating">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+												</ul>
+											</span>
+										</div>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+									</div>
+								</div>
+								<hr>
+								<div class="user_review_container d-flex flex-column flex-sm-row">
+									<div>
 										<div class="review_date">27 Aug 2016</div>
 										<div class="user_name">
 											Brandon William
@@ -284,28 +368,10 @@
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 									</div>
 								</div>
-								<div class="user_review_container d-flex flex-column flex-sm-row">
-									<div class="review">
-										<div class="review_date">27 Aug 2016</div>
-										<div class="user_name">
-											Brandon William
-											<span>
-												<ul class="star_rating">
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-												</ul>
-											</span>
-										</div>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									</div>
-								</div>
 								<!-- User Review -->
-
+								<hr>
 								<div class="user_review_container d-flex flex-column flex-sm-row">
-										<div class="review">
+										<div>
 											<div class="review_date">27 Aug 2016</div>
 											<div class="user_name">
 												Brandon William
@@ -322,46 +388,36 @@
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 										</div>
 									</div>
-							</div>
-
-							<!-- Add Review -->
-
-							<div class="col-lg-5 add_review_col">
-
-								<div class="add_review">
-									<form id="review_form" action="post">
-										<div>
-											<h1>Add Review</h1>
-											<input id="review_name" class="form_input input_name" type="text" name="name" value='이원구' data-error="Name is required." readonl>
+									<hr>
+									<div class="user_review_container d-flex flex-column flex-sm-row">
+											<div>
+												<div class="review_date">27 Aug 2016</div>
+												<div class="user_name">
+													Brandon William
+													<span>
+														<ul class="star_rating">
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star" aria-hidden="true"></i></li>
+															<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+														</ul>
+													</span>
+												</div>
+												<form id="reviewUp_form" action="post"></form>
+												<textarea id="reviewUp_message" class="input_review" name="message"  placeholder="Your Review" rows="5" cols="160" required data-error="Please, leave us a review."></textarea>
+												<div class="text-left text-sm-right">
+													<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">수정</button>
+													<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">뒤로</button>
+												</div>
+											</div>
 											
 										</div>
-										<div>
-<!-- <script>
 
-	function ff()
-	{
-		var value=$('.aa').attr("name");
-		$('#difo').val(value);
-		
-	}
-</script> -->
-											<h1>Your Rating:</h1>
-											<ul class="user_star_rating">
-												<li><i class="fa fa-star" aria-hidden="true" ></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true" name='4' onclick = 'ff()'></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-											</ul>
-											<textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-										</div>
-										<div class="text-left text-sm-right">
-											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-										</div>
-									</form>
-								</div>
 
 							</div>
+
+							
 
 						</div>
 					</div>
@@ -369,8 +425,6 @@
 				</div>
 			</div>
 		</div>
-
-	</div>
 
 	<!-- Benefit -->
 
@@ -439,14 +493,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="${path}/resources/sebu/js/jquery-3.2.1.min.js"></script>
-	<script src="${path}/resources/sebu/styles/bootstrap4/popper.js"></script>
-	<script src="${path}/resources/sebu/styles/bootstrap4/bootstrap.min.js"></script>
-	<script src="${path}/resources/sebu/plugins/Isotope/isotope.pkgd.min.js"></script>
-	<script src="${path}/resources/sebu/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-	<script src="${path}/resources/sebu/plugins/easing/easing.js"></script>
-	<script src="${path}/resources/sebu/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-	<script src="${path}/resources/sebu/js/single_custom.js"></script>
-
-
+	
+	
 <jsp:include page = "/WEB-INF/views/common/footer.jsp"/>
