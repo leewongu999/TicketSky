@@ -2,7 +2,7 @@
 	import="com.kh.TicketSky.common.Page,com.kh.TicketSky.board.model.vo.Board, java.util.*"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="<%=request.getContextPath()%>"/>
+<c:set var="path" value="${pageContext.request.contextPath}/WEB-INF"/>
 <%
 	int cPage = Integer.parseInt((String)request.getAttribute("cPage"));
 	int numPerPage = Integer.parseInt((String)request.getAttribute("numPerPage"));
@@ -41,7 +41,7 @@
         <div class='container'>
             <div class='text-center'>
                 <h2>
-                    <img src="img/core-img/communityboardlogo.PNG"/> 자유게시판 <img src="img/core-img/communityboardlogo.PNG"/>
+                    <img src="${path}/img/core-img/communityboardlogo.PNG"/> 자유게시판 <img src="${path}/img/core-img/communityboardlogo.PNG"/>
                 </h2>
             </div>
             <br><br><br>
