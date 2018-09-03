@@ -30,7 +30,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img src="${path}/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
+                <a class="nav-brand" href="${path}/../index.jsp"><img src="${path}/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -131,8 +131,7 @@
                     <a href="#" class="product-image">
                         <img src="${path}/img/product-img/product-1.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                        </div>
+                        <div class="cart-item-desc"></div>
                     </a>
                 </div>
                 <!-- Single Cart Item -->
@@ -140,8 +139,7 @@
                     <a href="#" class="product-image">
                         <img src="${path}/img/product-img/product-2.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                        </div>
+                        <div class="cart-item-desc"></div>
                     </a>
                 </div>
 				<!-- Single Cart Item -->
@@ -149,8 +147,7 @@
                     <a href="#" class="product-image">
                         <img src="${path}/img/product-img/product-3.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                        </div>
+                        <div class="cart-item-desc"></div>
                     </a>
                 </div>
             </div>
