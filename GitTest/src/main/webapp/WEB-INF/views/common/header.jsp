@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="${path}/css/core-style.css"/>
     <link rel="stylesheet" href="${path}/css/write_form.css"/>
     <link rel="stylesheet" href="${path}/css/_style_list.css"/>
-    <link rel="stylesheet" href="${path}/style.css"/>
+    <link rel="stylesheet" href="${path}/css/style.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css"/>
 </head>
 <body>
