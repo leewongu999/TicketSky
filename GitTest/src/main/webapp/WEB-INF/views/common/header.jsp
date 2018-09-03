@@ -15,12 +15,12 @@
     <!-- Favicon -->
     <link rel="icon" href="${path}/img/core-img/favicon.ico">
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="${path}/css/board.css"/>
-    <link rel="stylesheet" href="${path}/css/button_flat.css"/>
-    <link rel="stylesheet" href="${path}/css/core-style.css"/>
-    <link rel="stylesheet" href="${path}/css/write_form.css"/>
-    <link rel="stylesheet" href="${path}/css/_style_list.css"/>
-    <link rel="stylesheet" href="${path}/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${path}/css/board.css"/>
+    <link rel="stylesheet" type="text/css" href="${path}/css/button_flat.css"/>
+    <link rel="stylesheet" type="text/css" href="${path}/css/core-style.css"/>
+    <link rel="stylesheet" type="text/css" href="${path}/css/write_form.css"/>
+    <link rel="stylesheet" type="text/css" href="${path}/css/_style_list.css"/>
+    <link rel="stylesheet" type="text/css" href="${path}/css/style.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css">
 </head>
 <body>
@@ -103,14 +103,14 @@
                 </div>
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#"><!--<img src="img/core-img/user.svg" alt="">--> 마이 페이지</a>
+                    <a href="#"><!--<img src="img/core-img/user.svg" alt="">-->마이 페이지</a>
                 </div>
                 <div class="user-login-info">
-                    <a href="#"><!--<img src="img/core-img/user.svg" alt="">--> 고객 센터</a>
+                    <a href="#"><!--<img src="img/core-img/user.svg" alt="">-->고객 센터</a>
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="${path}/img/core-img/heart.svg" alt=""> <span>3</span></a>
+                    <a href="#" id="essenceCartBtn"><img src="${path}/img/core-img/heart.svg" alt=""><span>3</span></a>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
 	<div class="right-side-cart-area">
 		<!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="${path}/img/core-img/bag.svg" alt=""> <span>3</span></a>
+            <a href="#" id="rightSideCart"><img src="${path}/img/core-img/bag.svg" alt=""><span>3</span></a>
         </div>
 		<div class="cart-content d-flex">
 			<!-- Cart List Area -->
