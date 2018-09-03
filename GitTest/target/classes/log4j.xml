@@ -11,8 +11,8 @@
 	</appender>
 	<appender name="filelogger" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file" value="D:\\springwork\\TicketSky\\src\\main\\webapp\\WEB-INF\\logs\\spring.log"/>
-		<param name="append" value="true"/>
-		<param name="dataPattern" value=".yyyy-MM-dd"/>
+		<param name="Append" value="true"/>
+		<param name="dataPattern" value="yyyy-MM-dd"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss} %-5p: %l - %m]%n"/>
 		</layout>
