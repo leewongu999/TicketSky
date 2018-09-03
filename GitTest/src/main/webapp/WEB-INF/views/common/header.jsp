@@ -46,7 +46,7 @@
                         <ul>
                             <li><a href="#"> 뮤지컬 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
+                                    <li><a href="${path}/index.jsp"> 전체 </a></li>
                                     <li><a href="shop.html"> 오리지널/내한공연 </a></li>
                                     <li><a href="single-product-details.html"> 라이선스 </a></li>
                                     <li><a href="checkout.html"> 창작 뮤지컬 </a></li>
@@ -55,7 +55,7 @@
                             </li>
                             <li><a href="#"> 연극 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
+                                    <li><a href="${path}/index.jsp"> 전체 </a></li>
                                     <li><a href="shop.html">로맨틱 </a></li>
                                     <li><a href="single-product-details.html"> 코미디 </a></li>
                                     <li><a href="checkout.html"> 드라마 </a></li>
@@ -64,7 +64,7 @@
                             </li>
                             <li><a href="#"> 콘서트 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
+                                    <li><a href="${path}/index.jsp"> 전체 </a></li>
                                     <li><a href="shop.html"> 발라드 </a></li>
                                     <li><a href="blog.html"> 락/메탈 </a></li>
                                     <li><a href="blog.html"> 랩/힙합 </a></li>
@@ -75,7 +75,7 @@
                             </li>
                             <li><a href="#"> 클래식/무용 </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html"> 전체 </a></li>
+                                    <li><a href="${path}/index.jsp"> 전체 </a></li>
                                     <li><a href="shop.html"> 클래식 </a></li>
                                     <li><a href="single-product-details.html"> 오페라 </a></li>
                                     <li><a href="checkout.html"> 발레/무용 </a></li>
