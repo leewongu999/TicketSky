@@ -14,7 +14,7 @@
 		<param name="append" value="true"/>
 		<param name="dataPattern" value=".yyyy-MM-dd"/>
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%d{yyyy년 MM월 dd일 HH:mm:ss} %-5p: %l - %m]%n"/>
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss} %-5p: %l - %m]%n"/>
 		</layout>
 	</appender>
 	<appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
