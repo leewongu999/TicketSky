@@ -250,7 +250,7 @@
 								
 								// 주소로 좌표를 검색합니다
 								
-								geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+								geocoder.addressSearch('서울특별시 성동구 하왕십리동 1064', function(result, status) {
 								
 								    // 정상적으로 검색이 완료됐으면 
 								    
@@ -268,7 +268,7 @@
 								        // 인포윈도우로 장소에 대한 설명을 표시합니다
 								        
 								        var infowindow = new daum.maps.InfoWindow({
-								            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+								            content: '<div style="width:150px;text-align:center;padding:1px 0;">공연장</div>'
 								        });
 								        infowindow.open(map, marker);
 								
@@ -293,23 +293,14 @@
 							<div class=" add_review_col">
 
 								<div class="add_review">
-									<form id="review_form" action="post"></form>
-										<div>
-<!-- <script>
-
-	function ff()
-	{
-		var value=$('.aa').attr("name");
-		$('#difo').val(value);
-		
-	}
-</script> -->								
+									<form id="review_form" action="post">
+										<div>							
 										<h1>&nbsp;&nbsp;
 											ID : admin 
 											<ul class="user_star_rating">
 												<li><i class="fa fa-star" aria-hidden="true" ></i></li>
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true" name='4' onclick = 'ff()'></i></li>
+												<li><i class="fa fa-star" aria-hidden="true" onclick = 'ff()'></i></li>
 												<li><i class="fa fa-star" aria-hidden="true"></i></li>
 												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 											</ul>
@@ -411,14 +402,8 @@
 													<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">뒤로</button>
 												</div>
 											</div>
-											
 										</div>
-
-
 							</div>
-
-							
-
 						</div>
 					</div>
 
@@ -493,6 +478,4 @@
 			</div>
 		</div>
 	</div>
-	
-	
 <jsp:include page = "/WEB-INF/views/common/footer.jsp"/>
