@@ -5,7 +5,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:param value="게시글" name="title"/>
 <%
-	Board b = new Board();
+	request.getAttribute("list");
+	request.getAttribute("totalContents");
+	request.getAttribute("pageBar");
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
         <section class='height-800'>

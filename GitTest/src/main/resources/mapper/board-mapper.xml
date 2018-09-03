@@ -10,15 +10,15 @@
 		SELECT COUNT(*) cnt FROM freeboard
 	</select>
 	<insert id="insert">
-		INSERT INTO freeboard VALUES(freeboard_seq.val, ${}, ${}, ${}, ${}, ${}, ${}, ${})
+		INSERT INTO freeboard VALUES(freeboard_seq.val, #{boardTitle}, #{content}, #{userId}, 0, #{attachmentNo}, #{originalfileName}, sysdate)
 	</insert>
 	<update id="update">
-		UPDATE freeboard SET contents=${} WHERE boardNo=${}
+		UPDATE freeboard SET content=#{content} WHERE boardNo=#{boardNO}
 	</update>
 	<delete id="delete">
-		DELETE FROM freeboard WHERE boardNo=${}
+		DELETE FROM freeboard WHERE boardNo=#{boardNo}
 	</delete>
 	<select id="selectBoard" resultMap="board">
-		SELECT * FROM freeboard WHERE boardNo=${}
+		SELECT * FROM freeboard WHERE boardNo=#{boardNo}
 	</select>
 </mapper>
