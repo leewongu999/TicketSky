@@ -2,7 +2,7 @@
 		import="com.kh.TicketSky.board.model.vo.Board"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}/WEB-INF"/>
 <jsp:param value="게시글" name="title"/>
 <%
 	Board b = (Board)request.getAttribute("board");

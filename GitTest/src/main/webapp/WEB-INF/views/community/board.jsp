@@ -80,7 +80,7 @@
                     <tr>
                         <td><%=b.getBoardNo()%></td>
                         <td>
-	                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
+	                        <a class='boardtitle' href='${path}/views/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
 		                        <%=b.getBoardTitle()%>
 	                        </a>
                         </td>
