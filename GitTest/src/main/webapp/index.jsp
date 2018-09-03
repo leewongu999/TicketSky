@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}/WEB-INF"/>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<!-- ##### Welcome Area Start ##### -->
     <section class="welcome_area bg-img background-overlay" style="background-image: url(https://static.dezeen.com/uploads/2013/08/ss1_dezeen_Henry-Goss-Architects_Lode-House-02.jpg); image-rendering: 100%">
@@ -30,7 +30,7 @@
                 </div>
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(${path}/img/bg-img/4684_16715_3028.jpg);">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/4684_16715_3028.jpg);">
                         <div class="catagory-content">
                             <a href="#"> CONCERT </a>
                         </div>
@@ -47,7 +47,7 @@
                 <br>
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(${path}/img/bg-img/4684_16715_3028.jpg);">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(/img/bg-img/4684_16715_3028.jpg);">
                         <div class="catagory-content">
                             <a href="#"> CONCERT </a>
                         </div>
@@ -55,7 +55,7 @@
                 </div>
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(${path}/img/bg-img/4684_16715_3028.jpg);">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/4684_16715_3028.jpg);">
                         <div class="catagory-content">
                             <a href="#"> CONCERT </a>
                         </div>
@@ -63,7 +63,7 @@
                 </div>
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(${path}/img/bg-img/4684_16715_3028.jpg);">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/4684_16715_3028.jpg);">
                         <div class="catagory-content">
                             <a href="#"> CONCERT </a>
                         </div>
@@ -71,14 +71,14 @@
                 </div>
                 <!-- Single Catagory -->
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(${path}/img/bg-img/4684_16715_3028.jpg);">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/4684_16715_3028.jpg);">
                         <div class="catagory-content">
                             <a href="#"> CONCERT </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(${path}/img/bg-img/4684_16715_3028.jpg);">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/4684_16715_3028.jpg);">
                         <div class="catagory-content">
                             <a href="#"> CONCERT </a>
                         </div>
@@ -93,7 +93,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="cta-content bg-img background-overlay" style="background-image: url(${path}/img/bg-img/bg-5.jpg);">
+                    <div class="cta-content bg-img background-overlay" style="background-image: url(img/bg-img/bg-5.jpg);">
                         <div class="h-100 d-flex align-items-center justify-content-end">
                             <div class="cta--text">
                                 <h6>-60%</h6>
@@ -128,7 +128,7 @@
                             <div class="product-img">
                                 <img src="${path}/img/product-img/product-1.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-2.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -152,7 +152,7 @@
                             <div class="product-img">
                                 <img src="${path}/img/product-img/product-2.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-3.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-3.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -176,7 +176,7 @@
                             <div class="product-img">
                                 <img src="${path}/img/product-img/product-3.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-4.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-4.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge offer-badge">
                                     <span>-30%</span>
@@ -208,7 +208,7 @@
                             <div class="product-img">
                                 <img src="${path}/img/product-img/product-4.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-5.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-5.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge new-badge">
                                     <span>New</span>
@@ -254,9 +254,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="${path}/img/product-img/product-1.jpg" alt="">
+                                <img src="img/product-img/product-1.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-2.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -278,9 +278,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="${path}/img/product-img/product-2.jpg" alt="">
+                                <img src="img/product-img/product-2.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-3.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-3.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -304,7 +304,7 @@
                             <div class="product-img">
                                 <img src="${path}/img/product-img/product-3.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-4.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-4.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge offer-badge">
                                     <span>-30%</span>
@@ -336,7 +336,7 @@
                             <div class="product-img">
                                 <img src="${path}/img/product-img/product-4.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="${path}/img/product-img/product-5.jpg" alt="">
+                                <img class="hover-img" src="img/product-img/product-5.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge new-badge">
                                     <span>New</span>

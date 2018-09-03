@@ -26,12 +26,4 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>statCont</servlet-name>
-		<url-pattern>*.js</url-pattern>
-		<url-pattern>*.css</url-pattern>
-		<url-pattern>*.jpg</url-pattern>
-		<url-pattern>*.png</url-pattern>
-		<url-pattern>*.svg</url-pattern>
-	</servlet-mapping>
 </web-app>

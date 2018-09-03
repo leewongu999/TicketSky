@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}/WEB-INF"/>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,12 +15,12 @@
     <!-- Favicon -->
     <link rel="icon" href="${path}/img/core-img/favicon.ico">
     <!-- Core Style CSS -->
-    <link rel="stylesheet" type="text/css" href="${path}/css/board.css"/>
-    <link rel="stylesheet" type="text/css" href="${path}/css/button_flat.css"/>
-    <link rel="stylesheet" type="text/css" href="${path}/css/core-style.css"/>
-    <link rel="stylesheet" type="text/css" href="${path}/css/write_form.css"/>
-    <link rel="stylesheet" type="text/css" href="${path}/css/_style_list.css"/>
-    <link rel="stylesheet" type="text/css" href="${path}/css/style.css"/>
+    <link rel="stylesheet" href="${path}/resoures/css/board.css"/>
+    <link rel="stylesheet" href="${path}/resoures/css/button_flat.css"/>
+    <link rel="stylesheet" href="${path}/resoures/css/core-style.css"/>
+    <link rel="stylesheet" href="${path}/resoures/css/write_form.css"/>
+    <link rel="stylesheet" href="${path}/resoures/css/_style_list.css"/>
+    <link rel="stylesheet" href="${path}/resoures/css/style.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css">
 </head>
 <body>
@@ -30,7 +30,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="${path}/../index.jsp"><img src="${path}/img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
+                <a class="nav-brand" href="${path}/WEB-INF/index.jsp"><img src="img/core-img/KakaoTalk_20180823_202728608.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
