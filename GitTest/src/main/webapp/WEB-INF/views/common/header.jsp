@@ -82,7 +82,7 @@
                                     <li><a href="blog.html"> 국악 </a></li>
                                 </ul>
                             </li>
-                            <li><a href="${path}/views/community/board">커뮤니티 </a></li>
+                            <li><a href="${path}/WEB-INF/views/community/board">커뮤니티 </a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->
