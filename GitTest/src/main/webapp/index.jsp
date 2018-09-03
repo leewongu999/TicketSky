@@ -150,7 +150,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-2.jpg" alt="">
+                                <img src="${path}/img/product-img/product-2.jpg" alt="">
                                 <!-- Hover Thumb -->
                                 <img class="hover-img" src="${path}/img/product-img/product-3.jpg" alt="">
                             </div>
@@ -206,7 +206,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-4.jpg" alt="">
+                                <img src="${path}/img/product-img/product-4.jpg" alt="">
                                 <!-- Hover Thumb -->
                                 <img class="hover-img" src="${path}/img/product-img/product-5.jpg" alt="">
                                 <!-- Product Badge -->
@@ -334,7 +334,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-4.jpg" alt="">
+                                <img src="${path}/img/product-img/product-4.jpg" alt="">
                                 <!-- Hover Thumb -->
                                 <img class="hover-img" src="${path}/img/product-img/product-5.jpg" alt="">
                                 <!-- Product Badge -->
