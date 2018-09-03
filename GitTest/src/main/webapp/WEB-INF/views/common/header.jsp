@@ -13,14 +13,14 @@
     <!-- Title -->
     <title>TICKET SKY - Fashion Ecommerce Template</title>
     <!-- Favicon -->
-    <link rel="icon" href="${path}/img/core-img/favicon.ico">
+    <link rel="icon" href="img/core-img/favicon.ico"/>
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="${path}/resoures/css/board.css"/>
-    <link rel="stylesheet" href="${path}/resoures/css/button_flat.css"/>
-    <link rel="stylesheet" href="${path}/resoures/css/core-style.css"/>
-    <link rel="stylesheet" href="${path}/resoures/css/write_form.css"/>
-    <link rel="stylesheet" href="${path}/resoures/css/_style_list.css"/>
-    <link rel="stylesheet" href="${path}/resoures/css/style.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/board.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/button_flat.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/core-style.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/write_form.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/_style_list.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/style.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css">
 </head>
 <body>
@@ -110,7 +110,7 @@
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="${path}/img/core-img/heart.svg" alt=""><span>3</span></a>
+                    <a href="#" id="essenceCartBtn"><img src="img/core-img/heart.svg" alt=""><span>3</span></a>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
 	<div class="right-side-cart-area">
 		<!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="${path}/img/core-img/bag.svg" alt=""><span>3</span></a>
+            <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""><span>3</span></a>
         </div>
 		<div class="cart-content d-flex">
 			<!-- Cart List Area -->

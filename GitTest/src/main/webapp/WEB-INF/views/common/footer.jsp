@@ -32,16 +32,16 @@
     </footer>
     <!-- ##### Footer Area End ##### -->
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="${path}/resoures/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="${path}/resoures/js/popper.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="${path}/resoures/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- Plugins js -->
-    <script src="${path}/resoures/js/plugins.js"></script>
+    <script src="js/plugins.js"></script>
     <!-- Classy Nav js -->
-    <script src="${path}/resoures/js/classy-nav.min.js"></script>
+    <script src="js/classy-nav.min.js"></script>
     <!-- Active js -->
-    <script src="${path}/resoures/js/active.js"></script>
+    <script src="js/active.js"></script>
 </body>
 </html>
