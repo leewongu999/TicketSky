@@ -16,7 +16,7 @@ public class BoardController {
 	private BoardService service;
 	
 	@RequestMapping("/community/board.do")
-	public void boardList(int cPage, HttpServletRequest request) {
+	public String boardList(int cPage, HttpServletRequest request) {
 		try {
 			
 		}
@@ -35,6 +35,8 @@ public class BoardController {
 		request.setAttribute("list", list);
 		request.setAttribute("totalContents", totalContents);
 		request.setAttribute("pageBar", pageBar);
+		
+		return "community/board";
 	}
 	
 	@RequestMapping("/community/comboardView.do")

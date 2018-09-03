@@ -13,7 +13,7 @@
 		INSERT INTO freeboard VALUES(freeboard_seq.val, #{boardTitle}, #{content}, #{userId}, 0, #{attachmentNo}, #{originalfileName}, sysdate)
 	</insert>
 	<update id="update">
-		UPDATE freeboard SET content=#{content} WHERE boardNo=#{boardNO}
+		UPDATE freeboard SET content=#{content} WHERE boardNo=#{boardNo}
 	</update>
 	<delete id="delete">
 		DELETE FROM freeboard WHERE boardNo=#{boardNo}
