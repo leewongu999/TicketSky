@@ -9,13 +9,13 @@
 	<select id="selectOne" resultMap="boardMap" resultType="_int">
 		SELECT COUNT(*) cnt FROM freeboard
 	</select>
-	<insert id="insert">
+	<insert id="insert" parameterType="board">
 		INSERT INTO freeboard VALUES(freeboard_seq.val, #{boardTitle}, #{content}, #{userId}, 0, #{attachmentNo}, #{originalfileName}, sysdate)
 	</insert>
-	<update id="update">
+	<update id="update" parameterType="board">
 		UPDATE freeboard SET content=#{content} WHERE boardNo=#{boardNo}
 	</update>
-	<delete id="delete">
+	<delete id="delete" parameterType="board">
 		DELETE FROM freeboard WHERE boardNo=#{boardNo}
 	</delete>
 	<select id="selectBoard" resultMap="board">
