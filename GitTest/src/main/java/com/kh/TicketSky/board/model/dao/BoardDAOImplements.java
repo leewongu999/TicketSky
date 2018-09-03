@@ -15,7 +15,7 @@ public class BoardDAOImplements implements BoardDAO {
 		return sst.selectOne("selectOne");
 	}
 	@Override
-	public int insertBoard(SqlSessionTemplate sst) {
+	public int insertBoard(SqlSessionTemplate sst, Board b) {
 		return sst.insert("insert");
 	}
 	@Override

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.kh.TicketSky.board.model.service.BoardService;
+import com.kh.TicketSky.board.model.vo.Board;
 import com.kh.TicketSky.common.Page;
 
 @Controller
@@ -45,5 +46,31 @@ public class BoardController {
 	public String selectBoard(int boardNo, HttpServletRequest request) {
 		request.setAttribute("board", service.selectBoard(boardNo));
 		return "community/comboardView";
+	}
+	
+	@RequestMapping(value="/community/comboardForm.do", method= {RequestMethod.POST})
+	public String insertBoard(Board b) {
+		String msg = "";
+		String loc = "";
+		int result = service.insertBoard(b);
+		if(result>0) {
+			msg = "성공적으로 등록되었습니다.";
+			loc = "/community/comboardView.do?boardNo="+b.getBoardNo();
+		}
+		else {
+			msg = "등록을 실패하였습니다.";
+			loc = "/community/board.do";
+		}
+		return "common/msg";
+	}
+	
+	@RequestMapping("/community/comboardUpdate.do")
+	public String updateBoard() {
+		return "";
+	}
+	
+	@RequestMapping("/community/comboardDelete.do")
+	public String deleteBoard() {
+		return "";
 	}
 }

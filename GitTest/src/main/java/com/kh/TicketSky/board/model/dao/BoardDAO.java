@@ -6,7 +6,7 @@ import java.util.*;
 public interface BoardDAO {
 	List<Map<String,String>> selectList(SqlSessionTemplate sst);
 	int selectTotalContents(SqlSessionTemplate sst);
-	int insertBoard(SqlSessionTemplate sst);
+	int insertBoard(SqlSessionTemplate sst, Board b);
 	int updateBoard(SqlSessionTemplate sst);
 	int deleteBoard(SqlSessionTemplate sst);
 	Board selectBoard(SqlSessionTemplate sst, int boardNo);
