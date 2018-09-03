@@ -41,7 +41,7 @@
         <div class='container'>
             <div class='text-center'>
                 <h2>
-                    <img src="img/core-img/communityboardlogo.PNG"/> 자유게시판 <img src="img/core-img/communityboardlogo.PNG"/>
+                    <img src="${path}/resources/img/core-img/communityboardlogo.PNG"/> 자유게시판 <img src="${path}/resources/img/core-img/communityboardlogo.PNG"/>
                 </h2>
             </div>
             <br><br><br>
@@ -80,7 +80,7 @@
                     <tr>
                         <td><%=b.getBoardNo()%></td>
                         <td>
-	                        <a class='boardtitle' href='community/comboardView?boardNo=<%=b.getBoardNo()%>'>
+	                        <a class='boardtitle' href='${path}/WEB-INF/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
 		                        <%=b.getBoardTitle()%>
 	                        </a>
                         </td>
