@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}/WEB-INF"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<!-- ##### Welcome Area Start ##### -->
     <section class="welcome_area bg-img background-overlay" style="background-image: url(https://static.dezeen.com/uploads/2013/08/ss1_dezeen_Henry-Goss-Architects_Lode-House-02.jpg); image-rendering: 100%">
@@ -126,9 +126,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-1.jpg" alt="">
+                                <img src="${path}/img/product-img/product-1.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
+                                <img class="hover-img" src="${path}/img/product-img/product-2.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -152,7 +152,7 @@
                             <div class="product-img">
                                 <img src="img/product-img/product-2.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-3.jpg" alt="">
+                                <img class="hover-img" src="${path}/img/product-img/product-3.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -161,7 +161,6 @@
                                     <h6>Poplin Displaced Wrap Dress</h6>
                                 </a>
                                 <p class="product-price">$80.00</p>
-
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
@@ -175,9 +174,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-3.jpg" alt="">
+                                <img src="${path}/img/product-img/product-3.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-4.jpg" alt="">
+                                <img class="hover-img" src="${path}/img/product-img/product-4.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge offer-badge">
                                     <span>-30%</span>
@@ -194,7 +193,6 @@
                                     <h6>PETITE Crepe Wrap Mini Dress</h6>
                                 </a>
                                 <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
-
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
@@ -204,20 +202,17 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Single Product -->
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
                                 <img src="img/product-img/product-4.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-5.jpg" alt="">
-
+                                <img class="hover-img" src="${path}/img/product-img/product-5.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge new-badge">
                                     <span>New</span>
                                 </div> -->
-
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -226,7 +221,6 @@
                                     <h6>PETITE Belted Jumper Dress</h6>
                                 </a>
                                 <p class="product-price">$80.00</p>
-
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
@@ -256,14 +250,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="popular-products-slides owl-carousel">
-
                         <!-- Single Product -->
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-1.jpg" alt="">
+                                <img src="${path}/img/product-img/product-1.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
+                                <img class="hover-img" src="${path}/img/product-img/product-2.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -272,7 +265,6 @@
                                     <h6>Knot Front Mini Dress</h6>
                                 </a>
                                 <p class="product-price">$80.00</p>
-
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
@@ -286,9 +278,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-2.jpg" alt="">
+                                <img src="${path}/img/product-img/product-2.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-3.jpg" alt="">
+                                <img class="hover-img" src="${path}/img/product-img/product-3.jpg" alt="">
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
@@ -310,9 +302,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/product-3.jpg" alt="">
+                                <img src="${path}/img/product-img/product-3.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-4.jpg" alt="">
+                                <img class="hover-img" src="${path}/img/product-img/product-4.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge offer-badge">
                                     <span>-30%</span>
@@ -344,7 +336,7 @@
                             <div class="product-img">
                                 <img src="img/product-img/product-4.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/product-5.jpg" alt="">
+                                <img class="hover-img" src="${path}/img/product-img/product-5.jpg" alt="">
                                 <!-- Product Badge -->
                                 <!-- <div class="product-badge new-badge">
                                     <span>New</span>
