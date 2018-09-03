@@ -55,7 +55,7 @@ public class BoardController {
 		int result = service.insertBoard(b);
 		if(result>0) {
 			msg = "성공적으로 등록되었습니다.";
-			loc = "/community/comboardView.do?boardNo="+b.getBoardNo();
+			loc = "/community/comboardView?boardNo="+b.getBoardNo();
 		}
 		else {
 			msg = "등록을 실패하였습니다.";
@@ -71,7 +71,7 @@ public class BoardController {
 		int result = service.updateBoard(b);
 		if(result>0) {
 			msg = "정상적으로 수정되었습니다.";
-			loc = "/community/comboardView.do?boardNo="+b.getBoardNo();
+			loc = "/community/comboardView?boardNo="+b.getBoardNo();
 		}
 		else {
 			msg = "수정을 실패하였습니다.";
@@ -91,7 +91,7 @@ public class BoardController {
 		}
 		else {
 			msg = "삭제를 실패하였습니다.";
-			loc = "/community/comboardView.do?boardNo="+b.getBoardNo();
+			loc = "/community/comboardView?boardNo="+b.getBoardNo();
 		}
 		return "common/msg";
 	}
