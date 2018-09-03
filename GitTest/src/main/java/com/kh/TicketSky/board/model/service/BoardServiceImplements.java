@@ -30,13 +30,13 @@ public class BoardServiceImplements implements BoardService {
 	}
 
 	@Override
-	public int updateBoard() {
-		return dao.updateBoard(sst);
+	public int updateBoard(Board b) {
+		return dao.updateBoard(sst, b);
 	}
 
 	@Override
-	public int deleteBoard() {
-		return dao.deleteBoard(sst);
+	public int deleteBoard(Board b) {
+		return dao.deleteBoard(sst, b);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ public interface BoardService {
 	List<Map<String,String>> selectList();
 	int selectTotalContents();
 	int insertBoard(Board b);
-	int updateBoard();
-	int deleteBoard();
+	int updateBoard(Board b);
+	int deleteBoard(Board b);
 	Board selectBoard(int boardNo);
 }

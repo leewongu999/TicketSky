@@ -16,15 +16,15 @@ public class BoardDAOImplements implements BoardDAO {
 	}
 	@Override
 	public int insertBoard(SqlSessionTemplate sst, Board b) {
-		return sst.insert("insert");
+		return sst.insert("insert", b);
 	}
 	@Override
-	public int updateBoard(SqlSessionTemplate sst) {
-		return sst.insert("update");
+	public int updateBoard(SqlSessionTemplate sst, Board b) {
+		return sst.insert("update", b);
 	}
 	@Override
-	public int deleteBoard(SqlSessionTemplate sst) {
-		return sst.delete("delete");
+	public int deleteBoard(SqlSessionTemplate sst, Board b) {
+		return sst.delete("delete", b);
 	}
 	@Override
 	public Board selectBoard(SqlSessionTemplate sst, int boardNo) {

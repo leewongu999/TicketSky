@@ -65,12 +65,34 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardUpdate.do")
-	public String updateBoard() {
-		return "";
+	public String updateBoard(Board b) {
+		String msg = "";
+		String loc = "";
+		int result = service.updateBoard(b);
+		if(result>0) {
+			msg = "정상적으로 수정되었습니다.";
+			loc = "/community/comboardView.do?boardNo="+b.getBoardNo();
+		}
+		else {
+			msg = "수정을 실패하였습니다.";
+			loc = "/community/board.do";
+		}
+		return "common/msg";
 	}
 	
 	@RequestMapping("/community/comboardDelete.do")
-	public String deleteBoard() {
-		return "";
+	public String deleteBoard(Board b) {
+		String msg = "";
+		String loc = "";
+		int result = service.deleteBoard(b);
+		if(result>0) {
+			msg = "게시글이 정상적으로 삭제되었습니다.";
+			loc = "/community/board.do";
+		}
+		else {
+			msg = "삭제를 실패하였습니다.";
+			loc = "/community/comboardView.do?boardNo="+b.getBoardNo();
+		}
+		return "common/msg";
 	}
 }

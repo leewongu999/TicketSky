@@ -9,7 +9,7 @@
 	<select id="selectOne" resultMap="boardMap" resultType="_int">
 		SELECT COUNT(*) cnt FROM freeboard
 	</select>
-	<insert id="insert" resultType="board">
+	<insert id="insert">
 		INSERT INTO freeboard VALUES(freeboard_seq.val, #{boardTitle}, #{content}, #{userId}, 0, #{attachmentNo}, #{originalfileName}, sysdate)
 	</insert>
 	<update id="update">
