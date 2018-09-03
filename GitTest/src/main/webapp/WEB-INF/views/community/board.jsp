@@ -8,7 +8,7 @@
 	int numPerPage = Integer.parseInt((String)request.getAttribute("numPerPage"));
 	int totalContents = Integer.parseInt((String)request.getAttribute("totalContents"));
 	String url = (String)request.getAttribute("url");
-	List<Board> bList = new ArrayList<Board>();
+	List<Board> bList = (List<Board>)request.getAttribute("list");
 %>
 <style>
     a.boardtitle{

@@ -15,11 +15,11 @@
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico"/>
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/board.css"/>
-    <link rel="stylesheet" href="css/button_flat.css"/>
-    <link rel="stylesheet" href="css/core-style.css"/>
-    <link rel="stylesheet" href="css/write_form.css"/>
-    <link rel="stylesheet" href="css/_style_list.css"/>
+    <link rel="stylesheet" href="../css/board.css"/>
+    <link rel="stylesheet" href="../css/button_flat.css"/>
+    <link rel="stylesheet" href="../css/core-style.css"/>
+    <link rel="stylesheet" href="../css/write_form.css"/>
+    <link rel="stylesheet" href="../css/_style_list.css"/>
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css"/>
 </head>

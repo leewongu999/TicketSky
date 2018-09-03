@@ -32,6 +32,8 @@ public class BoardController {
 				.getPage(cPage, numPerPage, totalContents,
 						request.getRequestURI());
 		
+		request.setAttribute("cPage", cPage);
+		request.setAttribute("numPerPage", numPerPage);
 		request.setAttribute("list", list);
 		request.setAttribute("totalContents", totalContents);
 		request.setAttribute("pageBar", pageBar);
