@@ -7,7 +7,7 @@ import com.kh.TicketSky.board.model.vo.Board;
 @Repository
 public class BoardDAOImplements implements BoardDAO {
 	@Override
-	public List<Map<String, String>> selectList(SqlSessionTemplate sst) {
+	public List<Board> selectList(SqlSessionTemplate sst) {
 		return sst.selectList("selectList");
 	}
 	@Override
@@ -27,7 +27,7 @@ public class BoardDAOImplements implements BoardDAO {
 		return sst.delete("delete", b);
 	}
 	@Override
-	public Board selectBoard(SqlSessionTemplate sst, int boardNo) {
+	public Board selectOne(SqlSessionTemplate sst, int boardNo) {
 		return sst.selectOne("selectBoard", boardNo);
 	}
 }

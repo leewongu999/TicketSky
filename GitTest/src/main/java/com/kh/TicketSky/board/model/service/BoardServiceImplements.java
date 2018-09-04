@@ -15,7 +15,7 @@ public class BoardServiceImplements implements BoardService {
 	private SqlSessionTemplate sst;
 	
 	@Override
-	public List<Map<String, String>> selectList() {
+	public List<Board> selectList() {
 		return dao.selectList(sst);
 	}
 
@@ -40,7 +40,7 @@ public class BoardServiceImplements implements BoardService {
 	}
 
 	@Override
-	public Board selectBoard(int boardNo) {
-		return dao.selectBoard(sst, boardNo);
+	public Board selectOne(int boardNo) {
+		return dao.selectOne(sst, boardNo);
 	}
 }

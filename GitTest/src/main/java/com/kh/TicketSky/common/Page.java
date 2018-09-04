@@ -18,9 +18,9 @@ public class Page {
 		// 페이지 바 디자인
 		// 먼저 페이지 바 왼쪽 부분
 		if(pageStart==1) {				// 1페이지일 때
-			pageBar += "<li class='btn btn-primary'><span>1</span></li>";
+			pageBar += "<li class='xet_btn medium'><span>&laquo;</span></li>";
 		}else{							// 그 외 페이지일 때
-			pageBar += "<li class='btn btn-default'>";
+			pageBar += "<li class='xet_btn medium'>";
 			pageBar += "<a href='javascript:fn_paging("+(pageStart-1)+")'>&laquo</a>";
 			pageBar += "</li>";
 		}

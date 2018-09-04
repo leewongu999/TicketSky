@@ -3,10 +3,10 @@
 <mapper namespace="board">
 	<resultMap type="map" id="boardMap">
 	</resultMap>
-	<select id="selectList" resultType="map">
+	<select id="selectList" resultType="board">
 		SELECT * FROM freeboard
 	</select>
-	<select id="selectOne" resultMap="boardMap" resultType="_int">
+	<select id="selectOne" resultType="_int">
 		SELECT COUNT(*) cnt FROM freeboard
 	</select>
 	<insert id="insert" parameterType="board">
@@ -18,7 +18,7 @@
 	<delete id="delete" parameterType="board">
 		DELETE FROM freeboard WHERE boardNo=#{boardNo}
 	</delete>
-	<select id="selectBoard" resultMap="board">
+	<select id="selectBoard" parameterType="_int">
 		SELECT * FROM freeboard WHERE boardNo=#{boardNo}
 	</select>
 </mapper>

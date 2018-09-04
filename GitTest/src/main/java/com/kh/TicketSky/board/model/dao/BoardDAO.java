@@ -4,10 +4,10 @@ import com.kh.TicketSky.board.model.vo.Board;
 import java.util.*;
 
 public interface BoardDAO {
-	List<Map<String,String>> selectList(SqlSessionTemplate sst);
+	List<Board> selectList(SqlSessionTemplate sst);
 	int selectTotalContents(SqlSessionTemplate sst);
 	int insertBoard(SqlSessionTemplate sst, Board b);
 	int updateBoard(SqlSessionTemplate sst, Board b);
 	int deleteBoard(SqlSessionTemplate sst, Board b);
-	Board selectBoard(SqlSessionTemplate sst, int boardNo);
+	Board selectOne(SqlSessionTemplate sst, int boardNo);
 }

@@ -13,7 +13,7 @@
     <!-- Title -->
     <title>TICKET SKY - Fashion Ecommerce Template</title>
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico"/>
+    <link rel="icon" href="${path}/resources/img/core-img/favicon.ico"/>
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="${path}/resources/css/board.css"/>
     <link rel="stylesheet" href="${path}/resources/css/button_flat.css"/>
@@ -82,7 +82,7 @@
                                     <li><a href="blog.html"> 국악 </a></li>
                                 </ul>
                             </li>
-                            <li><a href="${path}/WEB-INF/views/community/board.jsp">커뮤니티 </a></li>
+                            <li><a href="${path}/community/board.do">커뮤니티 </a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->

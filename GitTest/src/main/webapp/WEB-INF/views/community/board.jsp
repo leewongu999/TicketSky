@@ -4,10 +4,8 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%
-	int cPage = Integer.parseInt((String)request.getAttribute("cPage"));
-	int numPerPage = Integer.parseInt((String)request.getAttribute("numPerPage"));
-	int totalContents = Integer.parseInt((String)request.getAttribute("totalContents"));
-	String url = (String)request.getAttribute("url");
+	int totalContents = (int)request.getAttribute("totalContents");
+	String pageBar = (String)(request.getAttribute("pageBar"));
 	List<Board> bList = (List<Board>)request.getAttribute("list");
 %>
 <style>
@@ -64,7 +62,7 @@
                 <h3>전체 글(<%=totalContents%>)&nbsp;</h3>
             </div>
             <br><br><br>
-            <table class='table table-hover table-sm'>
+            <table id='xet_board' class='boardList'>
                 <thead>
                     <tr>
                         <th style="width:70px;">글 번호</th>
@@ -80,7 +78,7 @@
                     <tr>
                         <td><%=b.getBoardNo()%></td>
                         <td>
-	                        <a class='boardtitle' href='${path}/WEB-INF/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
+	                        <a class='boardtitle' href='${path}/community/comboardView.do?boardNo=<%=b.getBoardNo()%>'>
 		                        <%=b.getBoardTitle()%>
 	                        </a>
                         </td>
@@ -96,7 +94,7 @@
             </table>
             <hr>
             <div id='pagebar'>
-                <%=new Page().getPage(cPage, numPerPage, totalContents, url)%>
+                <%=pageBar%>
             </div>
         </div>
     </section>

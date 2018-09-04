@@ -17,16 +17,17 @@ public class BoardController {
 	private BoardService service;
 	
 	@RequestMapping("/community/board.do")
-	public String boardList(int cPage, HttpServletRequest request) {
+	public String boardList(HttpServletRequest request) {
+		int cPage;
 		try {
-			
+			cPage = 1;
 		}
 		catch(NumberFormatException e) {
 			cPage = 1;
 		}
 		logger.debug("목록페이지(cPage) : "+cPage);
 		final int numPerPage = 10;
-		List<Map<String,String>> list = service.selectList();
+		List<Board> list = service.selectList();
 		logger.debug("리스트 : "+list);
 		int totalContents = service.selectTotalContents();	// 전체 게시글 수
 		String pageBar = new Page().getPage(cPage, numPerPage, totalContents,
@@ -44,7 +45,7 @@ public class BoardController {
 	
 	@RequestMapping("/community/comboardView.do")
 	public String selectBoard(int boardNo, HttpServletRequest request) {
-		request.setAttribute("board", service.selectBoard(boardNo));
+		request.setAttribute("board", service.selectOne(boardNo));
 		return "community/comboardView";
 	}
 	
