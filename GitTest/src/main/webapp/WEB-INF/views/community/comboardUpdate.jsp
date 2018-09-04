@@ -59,7 +59,7 @@
                             </tr>
                         </table>
                         <hr>
-                        <input type="submit" class="xet_btn medium" value="수정 완료" onclick='fn_update()' name='updateboard'/>
+                        <input type="submit" class="xet_btn medium" value="수정 완료" onclick='return fn_update()' name='updateboard'/>
                         <input type="button" class="xet_btn medium" value="뒤로 가기" onclick='fn_back()'/>
                     </div>
                 </form>
