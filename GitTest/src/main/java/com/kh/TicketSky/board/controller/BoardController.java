@@ -54,26 +54,26 @@ public class BoardController {
 		return "community/comboardForm";
 	}
 	
-	@RequestMapping("/community/comboardFormEnd.do")
+	@RequestMapping("/community/comboardFormEnd")
 	public String insertBoard(Board b) {
 		String msg = "";
 		String loc = "";
 		int result = service.insertBoard(b);
+		System.out.println(b);
 		if(result>0) {
 			msg = "성공적으로 등록되었습니다.";
-			loc = "/community/comboardView?boardNo="+b.getBoardNo();
+			loc = "/community/board";
 		}
 		else {
 			msg = "등록을 실패하였습니다.";
-			loc = "/community/board.do";
+			loc = "/community/board";
 		}
 		return "common/msg";
 	}
 	
 	@RequestMapping("/community/comboardUpdate")
-	public String updateOne(int boardNo, HttpServletRequest request) {
-		Board b = service.selectOne(boardNo);
-		System.out.println(b);
+	public String updateOne(Board board, HttpServletRequest request) {
+		request.setAttribute("board", board);
 		return "community/comboardUpdate";
 	}
 	
@@ -88,7 +88,7 @@ public class BoardController {
 		}
 		else {
 			msg = "수정을 실패하였습니다.";
-			loc = "/community/board.do";
+			loc = "/community/board";
 		}
 		return "common/msg";
 	}
@@ -105,7 +105,7 @@ public class BoardController {
 		int result = service.deleteBoard(b);
 		if(result>0) {
 			msg = "게시글이 정상적으로 삭제되었습니다.";
-			loc = "/community/board.do";
+			loc = "/community/board";
 		}
 		else {
 			msg = "삭제를 실패하였습니다.";

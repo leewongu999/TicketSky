@@ -26,7 +26,7 @@
                 <h2>새 게시글 작성</h2>
             </div>
             <br><br><br>
-            <form method='post'>
+            <form method='post' action='${path}/community/comboardFormEnd'>
                 <div>
                     <table>
                         <tr>
@@ -38,7 +38,7 @@
                         <tr>
                             <th><label>&nbsp;작성자&nbsp;</label></th>
                             <td>
-                                <input type="text" class="form-control" readonly/>
+                                <input type="text" class="form-control" value="<%="userId"%>" readonly/>
                             </td>
                         </tr>
                         <tr>
