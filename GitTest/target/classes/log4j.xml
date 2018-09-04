@@ -18,7 +18,7 @@
 	</appender>
 	<appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%d{yyyy.MM.dd HH:mm:ss}%-5p : %m]%n"/>
+			<param name="ConversionPattern" value="[%d{yyyy년 MM월 dd일 HH시 mm분 ss초} %-5p : %m]%n"/>
 		</layout>
 	</appender>
 	<!-- Application Loggers -->

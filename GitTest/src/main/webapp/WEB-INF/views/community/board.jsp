@@ -4,7 +4,7 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%
-	int totalContents = (int)request.getAttribute("totalContents");
+	int totalContents = Integer.parseInt(String.valueOf(request.getAttribute("totalContents")));
 	String pageBar = (String)(request.getAttribute("pageBar"));
 	List<Board> bList = (List<Board>)request.getAttribute("list");
 %>
@@ -82,13 +82,7 @@
 		                        <%=b.getBoardTitle()%>
 	                        </a>
                         </td>
-                        <td>
-                        	<%if(b.getAttachmentNo()>0){ %>
-                        		<%=b.getOriginalFileName()%>
-                        	<%}else{ %>
-                        		<%=" "%>
-                        	<%} %>
-                        </td>
+                        <td><%=b.getOriginalFileName()%></td>
                         <td><%="userId"%></td>
                         <td><%=b.getWriteDate()%></td>
                         <td><%=b.getVisits()%></td>

@@ -26,11 +26,10 @@ public class BoardController {
 		}
 		logger.debug("목록페이지(cPage) : "+cPage);
 		final int numPerPage = 10;
-		List<Board> list = service.selectList();
+		List<Board> list = service.selectList(cPage, numPerPage);
 		logger.debug("리스트 : "+list);
 		int totalContents = service.selectTotalContents();	// 전체 게시글 수
-		String pageBar = new Page().getPage(cPage, numPerPage, totalContents,
-						request.getRequestURI());
+		String pageBar = new Page().getPage(cPage, numPerPage, totalContents, request.getRequestURI());
 		
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);

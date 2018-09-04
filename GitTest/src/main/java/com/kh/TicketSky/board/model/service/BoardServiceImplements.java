@@ -15,8 +15,8 @@ public class BoardServiceImplements implements BoardService {
 	private SqlSessionTemplate sst;
 	
 	@Override
-	public List<Board> selectList() {
-		return dao.selectList(sst);
+	public List<Board> selectList(int cPage, int numPerPage) {
+		return dao.selectList(sst, cPage, numPerPage);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ import java.util.*;
 import com.kh.TicketSky.board.model.vo.Board;
 
 public interface BoardService {
-	List<Board> selectList();
+	List<Board> selectList(int cPage, int numPerPage);
 	int selectTotalContents();
 	int insertBoard(Board b);
 	int updateBoard(Board b);
