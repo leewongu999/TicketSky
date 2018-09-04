@@ -20,9 +20,8 @@ public class BoardController {
 	public String boardList(HttpServletRequest request) {
 		int cPage;
 		try {
-			cPage = 1;
-		}
-		catch(NumberFormatException e) {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
 			cPage = 1;
 		}
 		logger.debug("목록페이지(cPage) : "+cPage);
@@ -62,9 +61,8 @@ public class BoardController {
 		System.out.println(b);
 		if(result>0) {
 			msg = "성공적으로 등록되었습니다.";
-			loc = "/community/board";
-		}
-		else {
+			loc = "/community/boardView?boardNo="+b.getBoardNo();
+		}else {
 			msg = "등록을 실패하였습니다.";
 			loc = "/community/board";
 		}
@@ -72,8 +70,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardUpdate")
-	public String updateOne(Board board, HttpServletRequest request) {
-		request.setAttribute("board", board);
+	public String updateOne(Board b, HttpServletRequest request) {
+		request.setAttribute("board", b);
 		return "community/comboardUpdate";
 	}
 	
@@ -85,8 +83,7 @@ public class BoardController {
 		if(result>0) {
 			msg = "정상적으로 수정되었습니다.";
 			loc = "/community/comboardView?boardNo="+b.getBoardNo();
-		}
-		else {
+		}else {
 			msg = "수정을 실패하였습니다.";
 			loc = "/community/board";
 		}
@@ -98,7 +95,7 @@ public class BoardController {
 		return "community/comboardDelete";
 	}
 	
-	@RequestMapping("/community/comboardDeleteEnd.do")
+	@RequestMapping("/community/comboardDeleteEnd")
 	public String deleteBoard(Board b) {
 		String msg = "";
 		String loc = "";
@@ -106,8 +103,7 @@ public class BoardController {
 		if(result>0) {
 			msg = "게시글이 정상적으로 삭제되었습니다.";
 			loc = "/community/board";
-		}
-		else {
+		}else {
 			msg = "삭제를 실패하였습니다.";
 			loc = "/community/comboardView?boardNo="+b.getBoardNo();
 		}

@@ -10,7 +10,7 @@
 		SELECT COUNT(*) cnt FROM freeboard
 	</select>
 	<insert id="insert" parameterType="board">
-		INSERT INTO freeboard VALUES(freeboard_SEQ.val, #{BOARDTITLE}, #{CONTENT}, #{USERID}, 0, #{ATTACHMENTNO}, #{ORIGINALFILENAME}, sysdate)
+		INSERT INTO freeboard VALUES(freeboard_SEQ.val, #{boardTitle}, #{content}, #{userId}, 0, #{attachmentNo}, #{originalfileName}, sysdate)
 	</insert>
 	<update id="update" parameterType="board">
 		UPDATE freeboard SET content=#{content} WHERE boardNo=#{boardNo}

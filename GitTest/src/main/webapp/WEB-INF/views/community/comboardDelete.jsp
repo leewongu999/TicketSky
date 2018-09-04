@@ -26,21 +26,30 @@
                 <h2>게시글 삭제 확인</h2>
             </div>
             <br><br><br>
-            <div>
-                <table class="table">
-                    <tr>
-                        <th><strong>정말로 삭제하시겠습니까?</strong></th>
-                    </tr>
-                </table>
-                <br><br>
-                <input type="submit" class="xet_btn medium" value="예" name='yes'/>
-                <input type="reset" class="xet_btn medium" value="아니오" name='no' onclick='fn_back()'/>
-            </div>
-            <script>
-                function fn_back(){
-                    history.back(-1);
-                }
-            </script>
+            <form method='post' action='/community/comboardDeleteEnd'>
+	            <div>
+	                <table class="table">
+	                    <tr>
+	                        <th>
+	                        	<strong>
+	                        		한 번 삭제되면 다시 복구할 수 없습니다.<br>정말로 삭제하시겠습니까?
+	                        	</strong>
+	                        </th>
+	                    </tr>
+	                </table>
+	                <br><br>
+	                <input type="submit" class="xet_btn medium" value="예" name='yes' onclick='return fn_delete()'/>
+	                <input type="reset" class="xet_btn medium" value="아니오" name='no' onclick='fn_back()'/>
+	            </div>
+	            <script>
+	            	function fn_delete(){
+	            		return true;
+	            	}
+	                function fn_back(){
+	                    history.back(-1);
+	                }
+	            </script>
+            </form>
         </div>
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

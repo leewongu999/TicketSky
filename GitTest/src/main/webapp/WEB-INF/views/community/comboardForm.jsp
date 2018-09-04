@@ -55,8 +55,8 @@
                         </tr>
                     </table>
                     <hr>
-                    <input type="submit" id='add' class="xet_btn medium" value="등록" name='addboard' onclick='fn_add()'/>
-                    <input type="button" class="xet_btn medium" value="뒤로 가기" onclick='fn_back()'/>
+                    <input type="submit" id='add' class="xet_btn medium" value="등록" name='addboard' onclick='return fn_add()'/>
+                    <input type="button" class="xet_btn medium" value="뒤로 가기" onclick='return fn_back()'/>
                 </div>
             </form>
             <script>
@@ -72,8 +72,7 @@
                         }
                     }
                     else{
-                        alert("등록이 완료되었습니다.");
-                        return true;
+                    	return true;
                     }
                 }
                 function fn_back(){
