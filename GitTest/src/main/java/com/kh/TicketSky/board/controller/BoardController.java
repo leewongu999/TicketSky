@@ -49,7 +49,12 @@ public class BoardController {
 		return "community/comboardView";
 	}
 	
-	@RequestMapping(value="/community/comboardForm.do", method= {RequestMethod.POST})
+	@RequestMapping("/community/comboardForm.do")
+	public String insertOne() {
+		return "community/comboardForm";
+	}
+	
+	@RequestMapping("/community/comboardFormEnd.do")
 	public String insertBoard(Board b) {
 		String msg = "";
 		String loc = "";
@@ -66,6 +71,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardUpdate.do")
+	public String updateOne() {
+		return "community/comboardUpdate";
+	}
+	
+	@RequestMapping("/community/comboardUpdateEnd.do")
 	public String updateBoard(Board b) {
 		String msg = "";
 		String loc = "";
@@ -79,6 +89,11 @@ public class BoardController {
 			loc = "/community/board.do";
 		}
 		return "common/msg";
+	}
+	
+	@RequestMapping("/community/comboardDelete.do")
+	public String deleteOne() {
+		return "community/comboardDelete";
 	}
 	
 	@RequestMapping("/community/comboardDelete.do")

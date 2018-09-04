@@ -36,9 +36,9 @@ public class Page {
 		}
 		// 페이지 바 오른쪽(끝나는 부분)
 		if(pageStart>totalPage) {	// 마지막 페이지까지 갔을 때
-			pageBar += "<li class='btn btn-primary'><span>"+pageStart+"</span></li>";
+			pageBar += "<li class='xet_btn medium'><span>&raquo;</span></li>";
 		}else{						// 마지막 페이지까지 가지 않았을 때
-			pageBar += "<li class='btn btn-default' href='javascript:fn_paging("+pageStart+")'>&raquo;</li>";
+			pageBar += "<li class='xet_btn medium' href='javascript:fn_paging("+pageStart+")'>&raquo;</li>";
 		}
 		pageBar += "</ul>";				// 닫기 태그
 		pageBar += "<script>";

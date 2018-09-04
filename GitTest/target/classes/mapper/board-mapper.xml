@@ -18,7 +18,7 @@
 	<delete id="delete" parameterType="board">
 		DELETE FROM freeboard WHERE boardNo=#{boardNo}
 	</delete>
-	<select id="selectBoard" parameterType="_int">
+	<select id="selectBoard" parameterType="_int" resultType="board">
 		SELECT * FROM freeboard WHERE boardNo=#{boardNo}
 	</select>
 </mapper>

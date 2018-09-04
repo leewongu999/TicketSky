@@ -7,7 +7,6 @@ public class Board {
 	private String content;				// 게시글 내용
 	private String userId;				// 작성자
 	private int visits;					// 조회 수
-	private String boardCode;			// 게시판 코드
 	private int attachmentNo;			// 첨부파일번호
 	private String originalFileName;	// 업로드 첨부파일명
 	private Date writeDate;				// 작성일
@@ -17,14 +16,13 @@ public class Board {
 	}
 
 	public Board(int boardNo, String boardTitle, String content, String userId, int visits,
-			String boardCode, int attachmentNo, String originalFileName, Date writeDate) {
+			int attachmentNo, String originalFileName, Date writeDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.content = content;
 		this.userId = userId;
 		this.visits = visits;
-		this.boardCode = boardCode;
 		this.attachmentNo = attachmentNo;
 		this.originalFileName = originalFileName;
 		this.writeDate = writeDate;
@@ -70,14 +68,6 @@ public class Board {
 		this.visits = visits;
 	}
 	
-	public String getBoardCode() {
-		return boardCode;
-	}
-
-	public void setBoardCode(String boardCode) {
-		this.boardCode = boardCode;
-	}
-
 	public int getAttachmentNo() {
 		return attachmentNo;
 	}
@@ -106,9 +96,7 @@ public class Board {
 	public String toString() {
 		return "글 번호 : " + boardNo + ", 제목 : " + boardTitle
 				+ ", 내용 : " + content + ", 작성자 아이디 : " + userId
-				+ ", 조회수 : " + visits + ", 게시판 코드 : " + boardCode
-				+ ", 첨부파일 번호 : " + attachmentNo
-				+ ", 업로드한 첨부파일명 : " + originalFileName
-				+ ", 작성일 : " + writeDate;
+				+ ", 조회수 : " + visits + ", 첨부파일 번호 : " + attachmentNo
+				+ ", 업로드한 첨부파일명 : " + originalFileName + ", 작성일 : " + writeDate;
 	}
 }

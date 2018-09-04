@@ -53,13 +53,13 @@
                 <input type='text' class="form-control" id="searchtext" placeholder="검색할 내용을 입력하시오"/>
             </div>
             <div style="float:left;">
-                <input type="button" class="btn btn-primary" value="검색" name='search'/>
+                <input type="button" class="xet_btn large" value="검색" name='search'/>
             </div>
             <div style="float:right;">
-                <input type='button' class="btn btn-default" id="essay" name="newEssay" value="새 글 쓰기" onclick="location.href='comboardForm.html'"/>
+                <input type='button' class="xet_btn medium" id="essay" name="newEssay" value="새 글 쓰기" onclick="location.href='${path}/community/comboardForm.do'"/>
             </div>
             <div style="float:right;">
-                <h3>전체 글(<%=totalContents%>)&nbsp;</h3>
+                <h4>전체 글(<%=totalContents%>)&nbsp;</h4>
             </div>
             <br><br><br>
             <table id='xet_board' class='boardList'>
@@ -83,7 +83,11 @@
 	                        </a>
                         </td>
                         <td>
-                        	<%=b.getAttachmentNo()%>
+                        	<%if(b.getAttachmentNo()!=0){ %>
+                        		<%=b.getOriginalFileName()%>
+                        	<%}else{ %>
+                        		
+                        	<%} %>
                         </td>
                         <td><%="userId"%></td>
                         <td><%=b.getWriteDate()%></td>
