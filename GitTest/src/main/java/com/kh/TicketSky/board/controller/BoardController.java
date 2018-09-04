@@ -57,7 +57,8 @@ public class BoardController {
 		String msg = "";
 		String loc = "";
 		int result = service.insertBoard(b);
-		System.out.println(b);
+		System.out.println("선택한 게시글 : "+b);
+		System.out.println("결과 : "+result);
 		if(result>0) {
 			msg = "성공적으로 등록되었습니다.";
 			loc = "/community/boardView?boardNo="+b.getBoardNo();
@@ -65,6 +66,7 @@ public class BoardController {
 			msg = "등록을 실패하였습니다.";
 			loc = "/community/board";
 		}
+		System.out.println(msg);
 		return "common/msg";
 	}
 	
@@ -99,6 +101,8 @@ public class BoardController {
 		String msg = "";
 		String loc = "";
 		int result = service.deleteBoard(b);
+		System.out.println("선택한 게시글 : "+b);
+		System.out.println("결과 : "+result);
 		if(result>0) {
 			msg = "게시글이 정상적으로 삭제되었습니다.";
 			loc = "/community/board";

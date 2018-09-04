@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
-	<resultMap type="map" id="boardMap">
-	</resultMap>
 	<select id="selectList" resultType="board">
 		SELECT * FROM freeboard
 	</select>
@@ -10,11 +8,12 @@
 		SELECT COUNT(*) cnt FROM freeboard
 	</select>
 	<insert id="insert" parameterType="board">
-		INSERT INTO freeboard VALUES(freeboard_SEQ.val,#{boardTitle},#{content},#{userId},
-									 0,#{attachmentNo},#{originalFileName},sysdate)
+		INSERT INTO freeboard VALUES(freeboard_SEQ.nextval,#{boardTitle, jdbcType=VARCHAR},
+									 #{content, jdbcType=VARCHAR},#{userId, jdbcType=VARCHAR},
+									 0,#{attachmentNo},#{originalFileName, jdbcType=VARCHAR},sysdate)
 	</insert>
 	<update id="update" parameterType="board">
-		UPDATE freeboard SET content=#{content} WHERE boardNo=#{boardNo}
+		UPDATE freeboard SET content=#{content, jdbcType=VARCHAR} WHERE boardNo=#{boardNo}
 	</update>
 	<delete id="delete" parameterType="board">
 		DELETE FROM freeboard WHERE boardNo=#{boardNo}
