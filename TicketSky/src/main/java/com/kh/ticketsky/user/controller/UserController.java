@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +26,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.ticketsky.common.Page;
 import com.kh.ticketsky.user.controller.UserController;
 import com.kh.ticketsky.user.model.service.UserService;
 import com.kh.ticketsky.user.model.vo.Member;
@@ -71,9 +73,86 @@ public class UserController {
 	}
 	
 	
+	@RequestMapping("/user/forgetPassword")
+	public String forgetPassword() {
+		return "consumer/forgetPassword";
+	}
+	
 	@RequestMapping("/user/userUpdate")
 	public String userUpdate() {
 		return "consumer/userUpdate";
+	}
+	
+	@RequestMapping("/user/sellerUpdate")
+	public String sellerUpdate() {
+		return "seller/sellerUpdate";
+	}
+	
+	@RequestMapping("/user/consumerList")
+	public String consumerList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpServletRequest req,Model model) {
+		
+		int numPerPage = 10;
+		List<Member> list = service.selectConsumerList(cPage, numPerPage);
+
+		int totalCount = service.selectConsumerTotalCount();
+		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("pageBar",pageBar);
+		
+		return "admin/consumerList";
+	}
+	
+	@RequestMapping("/user/sellerList")
+	public String sellerList() {
+		return "admin/sellerList";
+	}
+	
+	
+	@RequestMapping("/user/sellerStatus")
+	public String sellerStatus() {
+		return "seller/sellerStatus";
+	}
+	
+	@RequestMapping("/user/sellerStatusInfo")
+	public String sellerStatusInfo() {
+		return "seller/sellerStatusInfo";
+	}
+	
+	@RequestMapping("/user/userDeleteChk")
+	public String userDeleteChk() {
+		return "consumer/userDeleteChk";
+	}
+	
+	@RequestMapping("/user/userDelete.do")
+	public String userDelete(String password, Model model,HttpSession session) {
+		String msg="";
+		String loc="";
+		String deleteChk="";
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		if(bcryptPasswordEncoder.matches(password, memberLoggedIn.getPassword())){ // 현재 비밀번호가 일치하면
+			int result = service.deleteConsumer(memberLoggedIn.getUserId());
+			if(result>0){
+				msg="회원탈퇴가 정상적으로 처리되었습니다.";
+				loc="/user/userlogout.do";
+				
+			}
+			else {
+				msg="회원탈퇴가 실패하였습니다";
+				loc="/user/userDelete";
+			}
+			deleteChk="1";
+
+		}else {
+			msg="비밀번호가 일치하지 않습니다.";
+			loc="/user/userDeleteChk";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		model.addAttribute("deleteChk",deleteChk);
+		return "common/msg";
 	}
 	
 	@RequestMapping("/user/userUpdateEnd")
@@ -127,6 +206,36 @@ public class UserController {
 	public String consumerEnroll() {
 		return "consumer/consumerEnroll";
 	}
+	
+	@RequestMapping("/user/sellerEnroll")
+	public String sellerEnroll() {
+		return "seller/sellerEnroll";
+	}
+	
+	/* 구매자 회원가입 */
+	@RequestMapping("/user/sellerEnrollEnd")
+	public String sellerEnrollEnd(Member member, Model model)
+	{		
+		//암호화 처리
+		String enPw = bcryptPasswordEncoder.encode(member.getPassword());
+				
+		member.setPassword(enPw);
+		
+		int result=service.insertSeller(member);
+		String msg="";
+		String loc="";
+		if(result>0)
+		{
+			msg="회원가입을 성공하였습니다. 로그인을 해주세요.";
+		}
+		else
+			msg="회원가입을 실패하였습니다.";
+		loc="/";
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		return "common/msg";
+	}
+	
 	
 	/* 구매자 회원가입 */
 	@RequestMapping("/user/consumerEnrollEnd")
@@ -189,6 +298,7 @@ public class UserController {
 		if(m==null)
 		{
 			msg="존재하지 않는 아이디입니다.";
+			loc="/user/login";
 		}
 		else
 		{
@@ -217,6 +327,7 @@ public class UserController {
 			else
 			{
 				msg="비밀번호가 일치하지 않습니다.";
+				loc="/user/login";
 			}
 		}
 		mv.addObject("msg",msg);

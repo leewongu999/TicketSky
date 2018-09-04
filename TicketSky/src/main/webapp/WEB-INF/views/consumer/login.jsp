@@ -64,7 +64,7 @@
             </div>
         </form>
         <p style="margin-top:3px;" class="text-center text-muted small">Ticket Sky 계정이 없으신가요? <a herf="#" onclick="fn_con_enroll();">구매자 회원가입</a></p>
-        <p class="text-center text-muted small">Ticket Sky 계정이 없으신가요? <a herf="#" onclick="fn_enroll();">판매자 회원가입</a></p>
+        <p class="text-center text-muted small">Ticket Sky 계정이 없으신가요? <a herf="#" onclick="fn_sel_enroll();">판매자 회원가입</a></p>
         
     </div>
   </div>
@@ -74,9 +74,14 @@
     window.open('${path}/user/consumerEnroll');
     window.close();
   }
+  
+  function fn_sel_enroll(){
+	window.open('${path}/user/sellerEnroll');
+	window.close();
+  }
 
   function fn_forgetPassword(){
-    window.open('forgetPassword.html', '_blank', 'width=400 height=480');
+    window.open('${path}/user/forgetPassword', '_blank', 'width=400 height=480');
     window.close();
   }
 </script>

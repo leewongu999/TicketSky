@@ -12,4 +12,20 @@
  	<update id="updateConsumer" parameterType="member">
  		update member set password = #{password}, phone = #{phone}, categoryNo = #{categoryNo}, email=#{email},address=#{address} where userId=#{userId}
  	</update>
+ 	<delete id="deleteConsumer" parameterType="string">
+ 		delete from member where userId = #{userId}
+ 	</delete>
+ 	
+ 	<!-- seller -->
+ 	<insert id="insertSeller">
+ 		INSERT INTO MEMBER VALUES(#{userId}, #{password}, #{userName}, #{email},#{gender},#{birthdate},#{address},#{phone},#{categoryNo}, sysdate, 'A', 'S')
+ 	</insert>
+ 	
+ 	<!-- admin -->
+ 	<select id="selectConsumerList" resultMap="memberMap">
+ 		select * from member join consumerrating on(member.ratingCode = consumerrating.ratingCode)  where separator='C'
+ 	</select>
+ 	<select id="selectConsumerTotalCount" resultType="_int">
+  	select count(*) cnt from member where separator = 'C'
+  </select>
 </mapper>

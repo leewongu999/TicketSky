@@ -4,42 +4,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/views/common/consumerAside.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/adminAside.jsp"></jsp:include>
 
-	<div class="col-12 col-md-8 col-lg-9">
+<div class="col-12 col-md-8 col-lg-9">
                     <div class="row">
-                      <h4>예매확인/취소</h4>
+                      <h4>회원 관리</h4>
                     </div>
                     <hr>
                     <div class="row">          
 	                        <form class="form-inline pull-right" action="">
-                            <label for="">월 별 조회</label>
-                            &nbsp;&nbsp;
                             <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                <option value="searchUser">예매일</option>
-                                <option value="searchTitle">관람일</option>
+                                <option value="searchUser">회원명</option>
+                                <option value="searchUser">아이디</option>
+                                <option value="searchTitle">회원등급</option>
                             </select>
                             &nbsp;&nbsp;
-                            <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                <option value="searchUser">2018</option>
-                                <option value="searchTitle">2017</option>
-                                <option value="searchTitle">2016</option>
-                            </select>
-                            &nbsp;&nbsp;
-                            <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                <option value="searchUser">1</option>
-                                <option value="searchTitle">2</option>
-                                <option value="searchTitle">3</option>
-                                <option value="searchTitle">4</option>
-                                <option value="searchTitle">5</option>
-                                <option value="searchTitle">6</option>
-                                <option value="searchTitle">7</option>
-                                <option value="searchTitle">8</option>
-                                <option value="searchTitle">9</option>
-                                <option value="searchTitle">10</option>
-                                <option value="searchTitle">11</option>
-                                <option value="searchTitle">12</option>
-                            </select>
+                            <input type="text" class="form-control" name="searchTitle"/>
                             &nbsp;&nbsp;
                             <button type="submit" class="btn btn-primary floa">조회</button>
 	                        </form>
@@ -59,35 +39,29 @@
                       </colgroup> -->
                       <thead>
                           <tr>
-                              <th scope="col">예매번호</th>
-                              <th scope="col">티켓명</th>
-                              <th scope="col">관람일시</th>
-                              <th scope="col">매수</th>
-                              <th scope="col">상태</th>
+                              <th scope="col">아이디</th>
+                              <th scope="col">회원명</th>
+                              <th scope="col">이메일</th>
+                              <th scope="col">회원등급</th>
+                              <th scope="col">가입일</th>
                               <th scope="col">비고</th>
                           </tr>
                       </thead>
                       <tbody>
-
+						<c:forEach items="${list }" var="m">
       		               	<tr>
-      			                <td>E10323432</td>
-      			                <td>오즈의 마법사</td>
-                            <td>2018.08.28 14:00</td>
-      			                <td>2</td>
-      			                <td>구매완료</td>
-      			                <td> <button type="button" class="btn btn-sm btn-danger" name="button">예매취소</button> </td>
+      			                <td>${m.userId }</td>
+      			                <td>${m.userName }</td>
+                            <td>${m.email }</td>
+      			                <td>${m.ratingName }</td>
+      			                <td><fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd"/></td>
+      			                <td> <button type="button" class="btn btn-sm btn-danger" name="button">삭제</button> </td>
       			            </tr>
-                        <tr>
-                          <td>E10323433</td>
-                          <td>점프 ( JUMP )</td>
-                          <td>2018.08.31 14:30</td>
-                          <td>4</td>
-                          <td>취소요청</td>
-                          <td></td>
-                      </tr>
+      			        </c:forEach>
       		             </tbody>
                       </table>
-                      <div class="row" style="margin:auto;">
+                      ${pageBar }
+                      <!-- <div class="row" style="margin:auto;">
                         <nav aria-label="Page navigation example" >
                         <ul class="pagination">
                         <li class="page-item" style="margin:0;">
@@ -108,11 +82,10 @@
                         </ul>
                         </nav>
                       </div>
-
+ -->
                     </div>
                   </div>
               </div>
           </div>
-      <!-- ##### Shop Grid Area End ##### -->
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

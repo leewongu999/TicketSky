@@ -35,7 +35,7 @@
                           </label>
                         </div>
                         <div class="row" >
-                            <button class="btn btn-danger" type="button" name="button" style="margin:auto" onclick="location.href='userUpdate.html'">회원 탈퇴</button>
+                            <button class="btn btn-danger" type="button" name="button" style="margin:auto" onclick="fn_deleteChk();">회원 탈퇴</button>
                         </div>
 
 
@@ -45,5 +45,16 @@
           </div>
       </section>
       <!-- ##### Shop Grid Area End ##### -->
+      
+      <script>
+      function fn_deleteChk(){
+    	  if($("#agree").prop("checked") == true)
+    		  window.open('${path}/ticketsky/user/userDeleteChk', '_blank', 'width=400 height=200');
+    	  else{
+    		  alert("약관을 읽고 동의해주세요.")
+    		  $("#agree").focus();
+    	  }
+      }
+      </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

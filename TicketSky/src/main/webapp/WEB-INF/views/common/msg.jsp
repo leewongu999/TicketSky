@@ -11,6 +11,17 @@
 	if("${userChk}" == "C"){
 		self.close();
 		opener.location.href="${path}/user/consumerMyPage";
+	}else if("${userChk}" == "S"){
+		self.close();
+		opener.location.href="${path}/user/sellerStatus";
+	}else if("${userChk}" == "A"){
+		self.close();
+		opener.location.href="${path}/user/consumerList";
+	}
+	
+	if("${deleteChk}" == "1"){
+		self.close();
+		opener.location.href="${path}${loc}";
 	}
 	location.href="${path}${loc}";
 	
