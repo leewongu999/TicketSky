@@ -1,6 +1,7 @@
 package com.kh.ticketsky.user.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,23 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Override
-	public List<Member> selectConsumerList(int cPage, int numPerPage) {
-		return dao.selectConsumerList(sqlSession,cPage,numPerPage);
+	public int updateConsumerRating(Map<String, String> map) {
+		return dao.updateConsumerRating(sqlSession,map);
 	}
 
 	@Override
-	public int selectConsumerTotalCount() {
-		return dao.selectConsumerTotalCount(sqlSession);
+	public List<Map<String, String>> selectConsumerRating() {
+		return dao.selectConsumerRating(sqlSession);
+	}
+
+	@Override
+	public List<Member> selectConsumerList(int cPage, int numPerPage, Map<String, String> map) {
+		return dao.selectConsumerList(sqlSession,cPage,numPerPage,map);
+	}
+
+	@Override
+	public int selectConsumerTotalCount( Map<String, String> map) {
+		return dao.selectConsumerTotalCount(sqlSession,map);
 	}
 
 	@Override

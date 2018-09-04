@@ -1,6 +1,7 @@
 package com.kh.ticketsky.user.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -18,8 +19,12 @@ public interface UserDao {
 
 	int insertSeller(SqlSessionTemplate sqlSession, Member member);
 
-	List<Member> selectConsumerList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
+	List<Member> selectConsumerList(SqlSessionTemplate sqlSession, int cPage, int numPerPage, Map<String, String> map);
 
-	int selectConsumerTotalCount(SqlSessionTemplate sqlSession);
+	int selectConsumerTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map);
+
+	List<Map<String, String>> selectConsumerRating(SqlSessionTemplate sqlSession);
+
+	int updateConsumerRating(SqlSessionTemplate sqlSession, Map<String, String> map);
 
 }

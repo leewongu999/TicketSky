@@ -55,6 +55,7 @@
                                       <li data-toggle="collapse" data-target="#clothing">
                                           <a href="${path }/user/sellerList">공연주 관리</a>
                                           <a href="${path }/user/consumerList">회원 관리</a>
+                                          <a href="${path }/user/consumerRatingSetting">회원 등급 관리</a>
                                       </li>
                                   </ul>
                               </div>

@@ -1,7 +1,5 @@
 package com.kh.ticketsky.user.controller;
 
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.ticketsky.common.Page;
-import com.kh.ticketsky.user.controller.UserController;
 import com.kh.ticketsky.user.model.service.UserService;
 import com.kh.ticketsky.user.model.vo.Member;
 
@@ -88,13 +85,58 @@ public class UserController {
 		return "seller/sellerUpdate";
 	}
 	
-	@RequestMapping("/user/consumerList")
-	public String consumerList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpServletRequest req,Model model) {
+	@RequestMapping("/user/consumerRatingSetting")
+	public String consumeRatingSetting(Model model) {
+		List<Map<String,String>> list = service.selectConsumerRating(); 
+		model.addAttribute("list",list);
+		return "admin/ratingSetting";
+	}
+	
+	@RequestMapping("/user/consumerRatingSettingEnd")
+	public String consumeRatingSettingEnd(String ratingCode, String ratingName, String discountrate, String ratingamount, Model model) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("ratingCode", ratingCode);
+		map.put("ratingName", ratingName);
+		map.put("discountrate", discountrate);
+		map.put("ratingamount", ratingamount);
 		
-		int numPerPage = 10;
-		List<Member> list = service.selectConsumerList(cPage, numPerPage);
+		System.out.println("ratingCode : " + ratingCode);
+		System.out.println("ratingName : " + ratingName);
+		System.out.println("discountrate : " + discountrate);
+		System.out.println("ratingamount : " + ratingamount);
+		
+		int result = service.updateConsumerRating(map);	
+		String msg="";
+		String 	loc="/user/consumerRatingSetting";
 
-		int totalCount = service.selectConsumerTotalCount();
+		if(result>0){
+			msg="등급 수정 완료.";
+		}
+		else {
+			msg="등급 수정 실패.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		return "common/msg";
+	}
+	
+	
+	
+	
+	@RequestMapping("/user/consumerList")
+	public String consumerList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
+			@RequestParam(value="searchTitle", required=false, defaultValue="") String searchTitle,
+			HttpServletRequest req,Model model) {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("searchType", searchType);
+		map.put("searchTitle", searchTitle);
+		int numPerPage = 10;
+		List<Member> list = service.selectConsumerList(cPage, numPerPage,map);
+
+		int totalCount = service.selectConsumerTotalCount(map);
 		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
 		
 		

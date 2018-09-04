@@ -11,12 +11,14 @@
                       <h4>회원 관리</h4>
                     </div>
                     <hr>
-                    <div class="row">          
-	                        <form class="form-inline pull-right" action="">
+                    
+                    <div class="row">     
+                    	<div class="col-md-5">전체 ${totalCount }</div>     
+	                        <form class="form-inline col-md-6" action="${path }/ticketsky/user/consumerList">
                             <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                <option value="searchUser">회원명</option>
-                                <option value="searchUser">아이디</option>
-                                <option value="searchTitle">회원등급</option>
+                                <option value="userName">회원명</option>
+                                <option value="userId">아이디</option>
+                                <option value="ratingName">회원등급</option>
                             </select>
                             &nbsp;&nbsp;
                             <input type="text" class="form-control" name="searchTitle"/>

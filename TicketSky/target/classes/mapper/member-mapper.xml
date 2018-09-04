@@ -6,6 +6,8 @@
  	</insert>
  	<resultMap type="member" id="memberMap">
  	</resultMap>
+ 	<resultMap type="map" id="ratingMap">
+ 	</resultMap>
  	<select id="selectOne" resultMap="memberMap" parameterType="string">
  		select * from member join consumerrating on(member.ratingCode = consumerrating.ratingCode) where userId = #{userId}
  	</select>
@@ -22,10 +24,22 @@
  	</insert>
  	
  	<!-- admin -->
- 	<select id="selectConsumerList" resultMap="memberMap">
+ 	<select id="selectConsumerList" parameterType="map" resultMap="memberMap">
  		select * from member join consumerrating on(member.ratingCode = consumerrating.ratingCode)  where separator='C'
+ 		  <if test="searchType != null and searchType != ''">
+        	 AND ${searchType} like '%'||#{searchTitle}||'%'
+     	 </if>      
  	</select>
  	<select id="selectConsumerTotalCount" resultType="_int">
-  	select count(*) cnt from member where separator = 'C'
+  	select count(*) cnt from member join consumerrating on(member.ratingCode = consumerrating.ratingCode) where separator = 'C'
+  	<if test="searchType != null and searchType != ''">
+        	 AND ${searchType} like '%'||#{searchTitle}||'%'
+     	 </if>   
   </select>
+  	<select id="selectConsumerRating" resultMap="ratingMap">
+  		select * from consumerrating
+  	</select>
+  	<update id="updateConsumerRating" parameterType="map">
+  		update consumerrating set ratingName = #{ratingName}, discountrate=#{discountrate}, ratingamount=#{ratingamount} where ratingCode = #{ratingCode}
+  	</update>
 </mapper>
