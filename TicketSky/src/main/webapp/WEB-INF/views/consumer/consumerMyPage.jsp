@@ -16,30 +16,30 @@
                         <hr>
                         <div class="row">
                           <div class="col-12" style="text-align:center; background-color:#e5e5e5; margin:3% 0%; padding: 3.5%;">
-                            <span style="font-size:1.3em">회원님은 '일반회원' 이십니다.</span>
+                            <span style="font-size:1.3em">회원님은 '${memberLoggedIn.ratingName }' 이십니다.</span>
                           </div>
                         </div>
                         <div class="row">
                           <table class="table table-bordered myInfo" >
                             <tr>
                               <td style="vertical-align: middle;">아이디</td>
-                              <td style="vertical-align: middle;">tlvm21</td>
+                              <td style="vertical-align: middle;">${memberLoggedIn.userId }</td>
                             </tr>
                             <tr>
                               <td  style="vertical-align: middle;">이름</td>
-                              <td style="vertical-align: middle;">김성조</td>
+                              <td style="vertical-align: middle;">${memberLoggedIn.userName }</td>
                             </tr>
                             <tr>
                               <td style="vertical-align: middle;">이메일</td>
-                              <td style="vertical-align: middle;">tlvm21@naver.com</td>
+                              <td style="vertical-align: middle;">${memberLoggedIn.email }</td>
                             </tr>
                             <tr>
                               <td style="vertical-align: middle;">연락처</td>
-                              <td style="vertical-align: middle;">010-1234-5678</td>
+                              <td style="vertical-align: middle;">${memberLoggedIn.phone }</td>
                             </tr>
                             <tr>
                               <td style="vertical-align: middle;">주소</td>
-                              <td style="vertical-align: middle;">경기도 수원시 영통구 강남처인로 kh정보교육원 건물 101동 101호</td>
+                              <td style="vertical-align: middle;">${memberLoggedIn.address }</td>
                             </tr>
                           </table>
                         </div>

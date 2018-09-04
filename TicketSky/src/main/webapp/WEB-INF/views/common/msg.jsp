@@ -8,7 +8,11 @@
 
 <script>
 	alert("${msg}");
-	self.close();
-	opener.location.href="${path}/user/consumerMyPage";
+	if("${userChk}" == "C"){
+		self.close();
+		opener.location.href="${path}/user/consumerMyPage";
+	}
+	location.href="${path}${loc}";
+	
 	
 </script>

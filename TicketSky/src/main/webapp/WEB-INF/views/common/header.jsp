@@ -114,7 +114,12 @@
                 <link href="http://cdn.jsdelivr.net/xeicon/1.0.4/xeicon.min.css" rel="stylesheet">
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="#" onclick="window.open('${path}/user/login', '_blank', 'width=400 height=350');"><!--<img src="img/core-img/user.svg" alt="">-->로그인</a>
+                <c:if test="${memberLoggedIn eq null }">
+                    <a href="#" onclick="window.open('${path}/user/login', '_blank', 'width=400 height=350');">로그인</a>
+				</c:if>
+				<c:if test="${memberLoggedIn ne null }">
+                    <a href="${path }/user/userlogout.do">로그아웃</a>
+				</c:if>
                 </div>
                 <!-- User Login Info -->
                 <div class="user-login-info">

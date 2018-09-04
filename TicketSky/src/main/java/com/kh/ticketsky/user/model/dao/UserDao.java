@@ -10,4 +10,6 @@ public interface UserDao {
 
 	Member selectOne(SqlSessionTemplate sqlSession, String userId);
 
+	int updateConsumer(SqlSessionTemplate sqlSession, Member m);
+
 }

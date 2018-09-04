@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +29,8 @@ import com.kh.ticketsky.user.controller.UserController;
 import com.kh.ticketsky.user.model.service.UserService;
 import com.kh.ticketsky.user.model.vo.Member;
 
+//value = "" 이렇게 주면 session으로 값 저장하게 됨.
+@SessionAttributes(value= {"memberLoggedIn"})
 @Controller
 public class UserController {
 
@@ -67,9 +76,51 @@ public class UserController {
 		return "consumer/userUpdate";
 	}
 	
+	@RequestMapping("/user/userUpdateEnd")
+	public String userUpdateEnd(String oripassword, Member m, Model model,HttpSession session) {
+		String msg="";
+		String loc="";
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		String enPw = bcryptPasswordEncoder.encode(m.getPassword());
+		m.setPassword(enPw);
+		if(bcryptPasswordEncoder.matches(oripassword, memberLoggedIn.getPassword())){ // 현재 비밀번호가 일치하면
+			int result = service.updateConsumer(m);
+			if(result>0){
+				msg="회원정보가 변경되었습니다. 다시 로그인 해주세요";
+				loc="/user/userlogout.do";
+			}
+			else {
+				msg="회원정보 수정이 실패하였습니다.";
+				loc="/user/userUpdate";
+			}
+		}else {
+			msg="비밀번호가 일치하지 않습니다.";
+			loc="/user/userUpdate";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		return "common/msg";
+	}
+	
 	@RequestMapping("/user/login")
 	public String login() {
 		return "consumer/login";
+	}
+	
+	@RequestMapping("/user/userlogout.do")
+	public String memberLogout(SessionStatus ss)
+	{
+		if(logger.isDebugEnabled()) {
+			logger.debug("로그인아웃  : "+ss);
+		}
+		//SessionStatus ss에 완료가 됬으면 세션값이 끊어지는데 완료 안됬다고 조건을 주고
+		//조건문 안에 setCompelete를 하면 세션이 끊어짐!!
+		if(!ss.isComplete())
+		{
+			ss.setComplete();
+		}
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/user/consumerEnroll")
@@ -126,32 +177,15 @@ public class UserController {
 	
 	/* 로그인 */
 	@RequestMapping(value="/user/memberLogin.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView login(String userId, String password) throws Exception
+	public ModelAndView login(@RequestParam(value="saveId", required=false, defaultValue="0") String saveId, String userId, String password, HttpServletResponse response) throws Exception
 	{		
-		/*과부화 줄이기 위해*/
-		if(logger.isDebugEnabled())
-		{
-			logger.debug("로그인페이지 : "+userId);
-		}
-		
 		Member m = service.selectOne(userId);
-		
-		/*try {
-			if(true)
-			{
-				throw new RuntimeException("my Error");
-			}
-		}
-		catch(Exception e)
-		{
-			logger.error("로그인 에러 : ", e);
-			throw new MyException("로그인 에러 : "+e.getMessage());
-		}*/
 		
 		ModelAndView mv=new ModelAndView();
 		//객체를 String, model로 나뉜걸 같이 쓰는게 ModelAndView 이다.
 		String msg="";
 		String loc="";
+		String userChk = "";
 		if(m==null)
 		{
 			msg="존재하지 않는 아이디입니다.";
@@ -163,16 +197,31 @@ public class UserController {
 				//맞는지 비교해줌.
 				msg="로그인 성공";
 				mv.addObject("memberLoggedIn",m);
-				
+				userChk = m.getSeparator();
+				if(saveId.equals("1")) {
+					Cookie setCookie = new Cookie("saveId", saveId); // 쿠키 생성
+					Cookie id = new Cookie("id", userId); // 쿠키 생성
+					setCookie.setMaxAge(60*60*24*30);
+					response.addCookie(setCookie);
+					id.setMaxAge(60*60*24*30);
+					response.addCookie(id);
+				}else {
+					Cookie setCookie = new Cookie("saveId", null); // 쿠키 생성
+					setCookie.setMaxAge(0); // 기간을 하루로 지정
+					response.addCookie(setCookie);
+					Cookie id = new Cookie("id", null); // 쿠키 생성
+					id.setMaxAge(0); // 기간을 하루로 지정
+					response.addCookie(id);
+				}
 			}
 			else
 			{
 				msg="비밀번호가 일치하지 않습니다.";
 			}
 		}
-		loc="/";
 		mv.addObject("msg",msg);
 		mv.addObject("loc",loc);
+		mv.addObject("userChk",userChk);
 		mv.setViewName("common/msg");
 		return mv;
 	}

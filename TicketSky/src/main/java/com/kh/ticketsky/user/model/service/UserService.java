@@ -8,4 +8,6 @@ public interface UserService {
 
 	Member selectOne(String userId);
 
+	int updateConsumer(Member m);
+
 }

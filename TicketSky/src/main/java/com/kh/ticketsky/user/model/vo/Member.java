@@ -14,12 +14,12 @@ public class Member {
 	private int categoryNo;
 	private Date enrollDate;
 	private String ratingCode;
+	private String ratingName;
 	private String separator;
 	
-	public Member() {}
-	
 	public Member(String userId, String password, String userName, String email, String gender, String birthdate,
-			String address, String phone, int categoryNo, Date enrollDate, String ratingCode, String separator) {
+			String address, String phone, int categoryNo, Date enrollDate, String ratingCode, String ratingName,
+			String separator) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -32,7 +32,18 @@ public class Member {
 		this.categoryNo = categoryNo;
 		this.enrollDate = enrollDate;
 		this.ratingCode = ratingCode;
+		this.ratingName = ratingName;
 		this.separator = separator;
+	}
+
+	public Member() {}
+
+	public String getRatingName() {
+		return ratingName;
+	}
+
+	public void setRatingName(String ratingName) {
+		this.ratingName = ratingName;
 	}
 
 	public String getUserId() {

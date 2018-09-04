@@ -9,6 +9,11 @@ import com.kh.ticketsky.user.model.vo.Member;
 public class UserDaoImpl implements UserDao {
 
 	@Override
+	public int updateConsumer(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("member.updateConsumer",m);
+	}
+
+	@Override
 	public int insertConsumer(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.insert("member.insertConsumer",member);
 	}

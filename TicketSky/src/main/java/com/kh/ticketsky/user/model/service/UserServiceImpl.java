@@ -11,6 +11,11 @@ import com.kh.ticketsky.user.model.vo.Member;
 public class UserServiceImpl implements UserService {
 
 	
+	@Override
+	public int updateConsumer(Member m) {
+		return dao.updateConsumer(sqlSession,m);
+	}
+
 	@Autowired
 	UserDao dao;
 	@Autowired

@@ -38,7 +38,7 @@
             <div class="form-group">
             	<div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="userId" placeholder="Username" required="required">
+                    <input type="text" class="form-control" name="userId" placeholder="Username" required="required" value="${cookie.id.value }">
                 </div>
             </div>
     		<div class="form-group">
@@ -51,7 +51,7 @@
                 <button type="submit" class="btn btn-primary login-btn btn-block">로그인</button>
             </div>
             <div class="clearfix">
-                <label class="pull-left checkbox-inline"><input type="checkbox"> 아이디 저장</label>
+                <label class="pull-left checkbox-inline"><input type="checkbox" name="saveId" value="1"<c:if test="${cookie.saveId.value ne null }">checked</c:if>> 아이디 저장</label>
                 <a herf="#" onclick="fn_forgetPassword();" class="pull-right">아이디/비밀번호 찾기</a>
             </div>
     		<!-- <div class="or-seperator"><i>or</i></div> -->

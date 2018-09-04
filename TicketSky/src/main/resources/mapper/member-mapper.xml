@@ -7,9 +7,9 @@
  	<resultMap type="member" id="memberMap">
  	</resultMap>
  	<select id="selectOne" resultMap="memberMap" parameterType="string">
- 		select * from member where userId = #{userId}
+ 		select * from member join consumerrating on(member.ratingCode = consumerrating.ratingCode) where userId = #{userId}
  	</select>
- 	<!-- <update id="updateMember" parameterType="member">
- 		update member set username=#{userName}, gender=#{gender}, age=#{age}, email=#{email},address=#{address},hobby=#{hobby, typeHandler=strArr} where userid=#{userId}
- 	</update> -->
+ 	<update id="updateConsumer" parameterType="member">
+ 		update member set password = #{password}, phone = #{phone}, categoryNo = #{categoryNo}, email=#{email},address=#{address} where userId=#{userId}
+ 	</update>
 </mapper>
