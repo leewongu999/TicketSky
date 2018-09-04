@@ -83,10 +83,10 @@
 	                        </a>
                         </td>
                         <td>
-                        	<%if(b.getAttachmentNo()!=0){ %>
+                        	<%if(b.getAttachmentNo()>0){ %>
                         		<%=b.getOriginalFileName()%>
                         	<%}else{ %>
-                        		
+                        		<%=" "%>
                         	<%} %>
                         </td>
                         <td><%="userId"%></td>
