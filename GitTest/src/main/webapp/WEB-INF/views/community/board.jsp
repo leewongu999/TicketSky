@@ -56,7 +56,7 @@
                 <input type="button" class="xet_btn large" value="검색" name='search'/>
             </div>
             <div style="float:right;">
-                <input type='button' class="xet_btn medium" id="essay" name="newEssay" value="새 글 쓰기" onclick="location.href='${path}/community/comboardForm.do'"/>
+                <input type='button' class="xet_btn medium" id="essay" name="newEssay" value="새 글 쓰기" onclick="location.href='${path}/community/comboardForm'"/>
             </div>
             <div style="float:right;">
                 <h4>전체 글(<%=totalContents%>)&nbsp;</h4>
@@ -78,7 +78,7 @@
                     <tr>
                         <td><%=b.getBoardNo()%></td>
                         <td>
-	                        <a class='boardtitle' href='${path}/community/comboardView.do?boardNo=<%=b.getBoardNo()%>'>
+	                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
 		                        <%=b.getBoardTitle()%>
 	                        </a>
                         </td>

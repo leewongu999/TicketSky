@@ -94,10 +94,10 @@
                 </form>
                 <script>
                     function fn_update(){
-                        location.href="${path}/community/comboardUpdate.do";
+                        location.href="${path}/community/comboardUpdate";
                     }
                     function fn_delete(){
-                        location.href="${path}/community/comboardDelete.do";
+                        location.href="${path}/community/comboardDelete";
                     }
                     function fn_report(){
                         location.href="${path}/community/comboardReport.do";

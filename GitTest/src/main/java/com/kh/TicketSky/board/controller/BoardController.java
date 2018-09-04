@@ -16,7 +16,7 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	@RequestMapping("/community/board.do")
+	@RequestMapping("/community/board")
 	public String boardList(HttpServletRequest request) {
 		int cPage;
 		try {
@@ -43,13 +43,13 @@ public class BoardController {
 		return "community/board";
 	}
 	
-	@RequestMapping("/community/comboardView.do")
+	@RequestMapping("/community/comboardView")
 	public String selectBoard(int boardNo, HttpServletRequest request) {
 		request.setAttribute("board", service.selectOne(boardNo));
 		return "community/comboardView";
 	}
 	
-	@RequestMapping("/community/comboardForm.do")
+	@RequestMapping("/community/comboardForm")
 	public String insertOne() {
 		return "community/comboardForm";
 	}
@@ -70,12 +70,14 @@ public class BoardController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/community/comboardUpdate.do")
-	public String updateOne() {
+	@RequestMapping("/community/comboardUpdate")
+	public String updateOne(int boardNo, HttpServletRequest request) {
+		Board b = service.selectOne(boardNo);
+		System.out.println(b);
 		return "community/comboardUpdate";
 	}
 	
-	@RequestMapping("/community/comboardUpdateEnd.do")
+	@RequestMapping("/community/comboardUpdateEnd")
 	public String updateBoard(Board b) {
 		String msg = "";
 		String loc = "";
@@ -91,12 +93,12 @@ public class BoardController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/community/comboardDelete.do")
+	@RequestMapping("/community/comboardDelete")
 	public String deleteOne() {
 		return "community/comboardDelete";
 	}
 	
-	@RequestMapping("/community/comboardDelete.do")
+	@RequestMapping("/community/comboardDeleteEnd.do")
 	public String deleteBoard(Board b) {
 		String msg = "";
 		String loc = "";
