@@ -31,4 +31,11 @@ public interface UserDao {
 
 	int selectSellerTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map);
 
+	List<Map<String, String>> selectReserveList(SqlSessionTemplate sqlSession, String userId);
+
+	List<Map<String, String>> selectMyPlayList(SqlSessionTemplate sqlSession, int cPage, int numPerPage,
+			Map<String, String> map);
+
+	int selectSellerPlayTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map);
+
 }

@@ -30,7 +30,7 @@
         	 AND ${searchType} like '%'||#{searchTitle}||'%'
      	 </if>      
  	</select>
- 	<select id="selectConsumerTotalCount" resultType="_int">
+ 	<select id="selectConsumerTotalCount" parameterType="map" resultType="_int">
   	select count(*) cnt from member join consumerrating on(member.ratingCode = consumerrating.ratingCode) where separator = 'C'
   	<if test="searchType != null and searchType != ''">
         	 AND ${searchType} like '%'||#{searchTitle}||'%'
@@ -55,3 +55,4 @@
      	 </if>   
   </select>
 </mapper>
+

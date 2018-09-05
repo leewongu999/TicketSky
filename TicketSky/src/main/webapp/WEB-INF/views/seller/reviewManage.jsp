@@ -4,20 +4,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/views/common/consumerAside.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/sellerAside.jsp"></jsp:include>
+
 
 <div class="col-12 col-md-8 col-lg-9">
-
                     <div class="row">
-                      <h4>문의관리</h4>
+                      <h4>리뷰관리</h4>
                     </div>
                     <hr>
                     <div class="row">
             						<div class="col-xs-12">
-                          <div class="select-group" style="margin">
+                          <div class="select-group">
 
                           </div>
-	                        <form class="form-inline pull-right" action="">
+	                        <form class="form-inline float-right" action="">
                             <label for="">월 별 조회</label>
                             &nbsp;&nbsp;
                             <select id="searchSelectBox" name="searchType" class="form-control input-sm">
@@ -53,33 +53,40 @@
                     <!-- /.content -->
                     <div class="row" style="margin-top:3%;">
                       <table class="tableTL table table-striped"  style="text-align:center;">
-                      <colgroup>
-                            <col width="18%"/>
+                      <!-- <colgroup>
+                         <col width="1%"/>
+                            <col width="2%"/>
+                            <col width="10%"/>
+                            <col width="2%"/>
                             <col width="25%"/>
                             <col width="4%"/>
                             <col width="5%"/>
-                      </colgroup>
+                            <col width="6%"/>
+                      </colgroup> -->
                       <thead>
                           <tr>
-                              <th scope="col">제목</th>
-                              <th scope="col">문의내용</th>
+                              <th scope="col">예매번호</th>
+                              <th scope="col">티켓명</th>
+                              <th scope="col">후기내용</th>
                               <th scope="col">작성일</th>
-                              <th scope="col">답변</th>
+                              <th scope="col">비고</th>
                           </tr>
                       </thead>
                       <tbody>
 
-      		               	<tr style="overflow:">
-      			                <td>오즈의 마법사 어디서 하나요?ㅇㅇ</td>
-      			                <td>ㅈㄱㄴ</td>
+      		               	<tr>
+      			                <td>E10323432</td>
+      			                <td>오즈의 마법사</td>
+      			                <td>재밌게 잘봤습니다. 또보고싶진 않네요.</td>
       			                <td>2018.08.30</td>
-      			                <td> <button type="button" class="btn btn-sm btn-success" name="button">완료</button> </td>
+      			                <td> <button type="button" class="btn btn-sm btn-danger" name="button">리뷰삭제</button> </td>
       			            </tr>
                         <tr>
+                          <td>E10323433</td>
                           <td>점프 ( JUMP )</td>
                           <td>냉무</td>
                           <td>2018.07.15</td>
-                          <td> <button type="button" class="btn btn-sm btn-default" name="button">대기</button> </td>
+                          <td> <button type="button" class="btn btn-sm btn-danger" name="button">리뷰삭제</button> </td>
                       </tr>
       		             </tbody>
                       </table>
@@ -109,6 +116,7 @@
                   </div>
               </div>
           </div>
+      </section>
       <!-- ##### Shop Grid Area End ##### -->
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

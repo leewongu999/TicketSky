@@ -29,26 +29,21 @@
 	<!-- interceptor 처리 -->
 	
 	<!-- interceptor 처리부분 쓸사람 알아서 !!  -->
-	<!-- <interceptors>
+	<interceptors>
 		<interceptor>
-			<mapping path="/member/memberLogin.do"/>
-			<mapping path="/member/memberlogout.do"/>
-			exclude는 제외시킬 path를 등록! 
-			<exclude-mapping path="/demo/*"/>
-			<beans:bean id="loggerInterceptor" class="com.kh.spring.common.interceptor.LoggerInterceptor">
+			<!-- 매핑 path를 잘 선택해줘야함. 
+			servlet 어노테이션 경로만 적어 두면 됨.  -->
+			<mapping path="/user/*"/>
+			<exclude-mapping path="/user/login"/>
+			<exclude-mapping path="/user/memberLogin.do"/>
+			<exclude-mapping path="/user/forgetPassword"/>
+			<exclude-mapping path="/user/*Enroll"/>
+			<exclude-mapping path="/user/*EnrollEnd"/>
+			<exclude-mapping path="/user/checkDuplicate.do"/>
+			<beans:bean id="loginCheckInterceptor" class="com.kh.ticketsky.common.interceptor.LogginCheckInterceptor">
 			</beans:bean>
 		</interceptor>
-		<interceptor>
-			매핑 path를 잘 선택해줘야함. 
-			servlet 어노테이션 경로만 적어 두면 됨. 
-			<mapping path="/member/memberView.do"/>
-			<mapping path="/member/memberUpdate.do"/>
-			<mapping path="/board/**/*.do"/>
-			<exclude-mapping path="/board/boardList.do"/>
-			<beans:bean id="loginCheckInterceptor" class="com.kh.spring.common.interceptor.LogginCheckInterceptor">
-			</beans:bean>
-		</interceptor>
-	</interceptors>	 -->
+	</interceptors>
 	
 	<!--파일업로드 처리 객체 등록  -->
 	<beans:bean id='multipartResolver' class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

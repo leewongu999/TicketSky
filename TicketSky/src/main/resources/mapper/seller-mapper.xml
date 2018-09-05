@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mtbatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="seller">
+	<resultMap type="map" id="playMap">
+	</resultMap>
+	<select id="selectMyPlayList" parameterType="map"  resultMap="playMap">
+		select * from performInfo where userId = #{userId}
+		<if test="searchType != null and searchType != ''">
+        	 AND ${searchType} like '%'||#{searchTitle}||'%'
+     	</if> 
+	</select>
+	<select id="selectSellerPlayTotalCount" parameterType="map" resultType="_int">
+		select count(*) cnt from performInfo where userId = #{userId}
+		<if test="searchType != null and searchType != ''">
+        	 AND ${searchType} like '%'||#{searchTitle}||'%'
+     	</if> 
+	</select>
+</mapper>

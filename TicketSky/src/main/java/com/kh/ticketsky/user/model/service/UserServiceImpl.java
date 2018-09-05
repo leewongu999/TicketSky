@@ -13,7 +13,21 @@ import com.kh.ticketsky.user.model.vo.Member;
 @Service
 public class UserServiceImpl implements UserService {
 
-	
+
+	@Override
+	public int selectSellerPlayTotalCount(Map<String, String> map) {
+		return dao.selectSellerPlayTotalCount(sqlSession,map);
+	}
+
+	@Override
+	public List<Map<String, String>> selectReserveList(String userId) {
+		return dao.selectReserveList(sqlSession,userId);
+	}
+
+	@Override
+	public List<Map<String, String>> selectMyPlayList(int cPage, int numPerPage, Map<String, String> map) {
+		return dao.selectMyPlayList(sqlSession,cPage,numPerPage,map);
+	}
 
 	@Override
 	public int selectSellerTotalCount(Map<String, String> map) {

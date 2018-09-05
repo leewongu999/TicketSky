@@ -67,9 +67,9 @@
                                   <ul id="menu-content2" class="menu-content collapse show">
                                       <!-- Single Item -->
                                       <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/reviewManage">내 공연</a>
-                                          <a href="${path }/user/inquiryManage">공연 등록</a>
-                                          <a href="${path }/user/inquiryManage">공연 삭제</a>
+                                          <a href="${path }/user/sellerMyPlayList">내 공연</a>
+                                          <a href="#">공연 등록</a>
+                                          <a href="#">공연 삭제</a>
                                       </li>
                                   </ul>
                               </div>
@@ -83,8 +83,8 @@
                                   <ul id="menu-content2" class="menu-content collapse show">
                                       <!-- Single Item -->
                                       <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/consumerMyPage">리뷰 관리</a>
-                                          <a href="${path }/user/userDelete">문의 관리</a>
+                                          <a href="${path }/user/sellerReviewManage">리뷰 관리</a>
+                                          <a href="${path }/user/sellerInquiryManage">문의 관리</a>
                                       </li>
                                   </ul>
                               </div>

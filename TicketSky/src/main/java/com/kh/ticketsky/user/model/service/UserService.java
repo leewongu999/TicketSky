@@ -29,4 +29,10 @@ public interface UserService {
 
 	int selectSellerTotalCount(Map<String, String> map);
 
+	List<Map<String, String>> selectReserveList(String userId);
+
+	List<Map<String, String>> selectMyPlayList(int cPage, int numPerPage, Map<String, String> map);
+
+	int selectSellerPlayTotalCount(Map<String, String> map);
+
 }

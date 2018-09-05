@@ -4,7 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/views/common/consumerAside.jsp"></jsp:include>
+<c:if test="${memberLoggedIn.separator eq 'C' }">
+	<jsp:include page="/WEB-INF/views/common/consumerAside.jsp"></jsp:include>
+</c:if>
+<c:if test="${memberLoggedIn.separator eq 'S' }">
+	<jsp:include page="/WEB-INF/views/common/sellerAside.jsp"></jsp:include>
+</c:if>
 
 <div class="col-12 col-md-8 col-lg-9">
                       <div class="shop_grid_product_area">

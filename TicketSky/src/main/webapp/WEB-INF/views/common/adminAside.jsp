@@ -69,8 +69,8 @@
                                   <ul id="menu-content2" class="menu-content collapse show">
                                       <!-- Single Item -->
                                       <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/reviewManage">공연 컨펌</a>
-                                          <a href="${path }/user/inquiryManage">공연 관리</a>
+                                          <a href="${path }/user/adminPlayConfirm">공연 컨펌</a>
+                                          <a href="${path }/user/adminPlayManage">공연 관리</a>
                                       </li>
                                   </ul>
                               </div>
@@ -98,7 +98,7 @@
                                   <ul id="menu-content2" class="menu-content collapse show">
                                       <!-- Single Item -->
                                       <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/consumerMyPage">신고 게시물</a>
+                                          <a href="${path }/user/adminReportBoard">신고 게시물</a>
                                       </li>
                                   </ul>
                               </div>
@@ -112,7 +112,7 @@
                                   <ul id="menu-content2" class="menu-content collapse show">
                                       <!-- Single Item -->
                                       <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/consumerMyPage">문의 관리</a>
+                                          <a href="${path }/user/adminInquiryManage">문의 관리</a>
                                       </li>
                                   </ul>
                               </div>

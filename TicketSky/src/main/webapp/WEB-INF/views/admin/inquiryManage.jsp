@@ -4,10 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/views/common/consumerAside.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/adminAside.jsp"></jsp:include>
 
 <div class="col-12 col-md-8 col-lg-9">
-
                     <div class="row">
                       <h4>문의관리</h4>
                     </div>
@@ -109,6 +108,7 @@
                   </div>
               </div>
           </div>
+      </section>
       <!-- ##### Shop Grid Area End ##### -->
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

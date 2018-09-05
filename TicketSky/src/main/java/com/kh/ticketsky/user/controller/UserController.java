@@ -54,7 +54,11 @@ public class UserController {
 	
 
 	@RequestMapping("/user/reserveList")
-	public String reserveList() {
+	public String reserveList(Model model, HttpSession session) {
+		
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		List<Map<String,String>> list = service.selectReserveList(m.getUserId());
+		
 		return "consumer/reserveList";
 	}
 	
@@ -73,6 +77,16 @@ public class UserController {
 	@RequestMapping("/user/forgetPassword")
 	public String forgetPassword() {
 		return "consumer/forgetPassword";
+	}
+	
+	@RequestMapping("/user/adminPlayConfirm")
+	public String adminPlayConfirm() {
+		return "admin/playConfirm";
+	}
+	
+	@RequestMapping("/user/adminPlayManage")
+	public String adminPlayManage() {
+		return "admin/playManage";
 	}
 	
 	@RequestMapping("/user/userUpdate")
@@ -212,6 +226,68 @@ public class UserController {
 	@RequestMapping("/user/userDeleteChk")
 	public String userDeleteChk() {
 		return "consumer/userDeleteChk";
+	}
+	
+	@RequestMapping("/user/sellerReviewManage")
+	public String sellerReviewManage() {
+		return "seller/reviewManage";
+	}
+	
+	@RequestMapping("/user/sellerInquiryManage")
+	public String sellerInquiryManage() {
+		return "seller/inquiryManage";
+	}
+	
+	@RequestMapping("/user/sellerMyPlayList")
+	public String sellerMyPlayList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
+			@RequestParam(value="searchTitle", required=false, defaultValue="") String searchTitle,
+			HttpServletRequest req,Model model, HttpSession session) {
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("searchType", searchType);
+		map.put("searchTitle", searchTitle);
+		map.put("userId", m.getUserId());
+		int numPerPage = 10;
+
+		
+		List<Map<String,String>> list = service.selectMyPlayList(cPage, numPerPage,map);
+		int totalCount = service.selectSellerPlayTotalCount(map);
+		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
+
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("pageBar",pageBar);
+
+
+		return "seller/myPlayList";
+		
+		/*Map<String,String> map = new HashMap<String,String>();
+		map.put("searchType", searchType);
+		map.put("searchTitle", searchTitle);
+		int numPerPage = 10;
+		List<Member> list = service.selectConsumerList(cPage, numPerPage,map);
+
+		int totalCount = service.selectConsumerTotalCount(map);
+		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("pageBar",pageBar);
+		
+		return "admin/consumerList";*/
+	}
+	
+	@RequestMapping("/user/adminInquiryManage")
+	public String adminInquiryManage() {
+		return "admin/inquiryManage";
+	}
+	
+	@RequestMapping("/user/adminReportBoard")
+	public String adminReportBoard() {
+		return "admin/reportBoard";
 	}
 	
 	@RequestMapping("/user/consumerDeleteOne")
