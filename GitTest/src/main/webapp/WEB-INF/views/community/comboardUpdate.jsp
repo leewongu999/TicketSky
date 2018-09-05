@@ -8,6 +8,7 @@
 </jsp:include>
 <%
 	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html;charset=UTF-8");
 	Board b = (Board)request.getAttribute("board");
 %>
 <style>
@@ -36,14 +37,14 @@
                             <tr>
                                 <th><label>&nbsp;제목&nbsp;</label></th>
                                 <td>
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" name='boardtitle'
                                     value="<%=b.getBoardTitle()%>" readonly/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><label>&nbsp;작성자&nbsp;</label></th>
                                 <td>
-                                    <input type="text" class="form-control" value="<%=b.getUserId()%>" readonly/>
+                                    <input type="text" class="form-control" name='userID' value="<%=b.getUserId()%>" readonly/>
                                 </td>
                             </tr>
                             <tr>

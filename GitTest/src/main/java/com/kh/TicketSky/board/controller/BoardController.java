@@ -77,7 +77,7 @@ public class BoardController {
 	public String updateOne(Board b, HttpServletRequest request) {
 		int boardNo;
 		try {
-			boardNo = Integer.parseInt((String)request.getAttribute("boardNo"));
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		}catch(NumberFormatException e) {
 			boardNo = 1;
 		}
@@ -88,9 +88,16 @@ public class BoardController {
 	
 	@RequestMapping("/community/comboardUpdateEnd")
 	public String updateBoard(Board b, HttpServletRequest request) {
+		request.getCharacterEncoding();
 		String msg = "";
 		String loc = "";
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String boardtitle = request.getParameter("boardtitle");
+		String userID = request.getParameter("userID");
+		String file = request.getParameter("file");
+		String content = request.getParameter("content");
 		b = (Board)request.getAttribute("board");
+		b = new Board(boardNo, boardtitle, content, userID, 0, 0, file, null);
 		int result = service.updateBoard(b);
 		System.out.println("게시글 수정 결과 : "+b);
 		System.out.println("결과 : "+result);
