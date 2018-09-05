@@ -28,9 +28,11 @@ public class Page {
 		// 해당 페이지의 노드 번호가 한 페이지 바 내의 노드 번호 끝까지 가거나, 마지막 페이지 번호로 가는 동안 진행되는 로직
 		while(pageStart<=pageEnd && pageStart<=totalPage) {
 			if(cPage==pageStart) {				// 현재 위치한 페이지가 해당 페이지 노드 번호에 있을 때
-				pageBar += "<li><a>"+pageStart+"</a></li>";
+				pageBar += "<li class='xet_btn medium'><a>"+pageStart+"</a></li>";
 			}else {								// 그 외의 노드 번호 처리
-				pageBar += "<li><a href='javascript:fn_paging("+pageStart+")'>"+pageStart+"</a></li>";
+				pageBar += "<li class='xet_btn medium'>";
+				pageBar += "<a href='javascript:fn_paging("+pageStart+")'>"+pageStart+"</a>";
+				pageBar += "</li>";
 			}
 			pageStart++;	// 반복문이기 때문에, 끝까지 가서 조건문을 빠져나오기 위해서는 이 증감식을 꼭 써야 한다.
 		}
@@ -42,8 +44,8 @@ public class Page {
 		}
 		pageBar += "</ul>";				// 닫기 태그
 		pageBar += "<script>";
-		pageBar += "function fn_paging(cPage, numPerPage){";
-		pageBar += "location.href='"+url+"?cPage='"+cPage;
+		pageBar += "function fn_paging(cPage){";
+		pageBar += "location.href='"+url+"?cPage="+cPage+"'";
 		pageBar += "}";
 		pageBar += "</script>";
 		return pageBar;

@@ -1,5 +1,4 @@
 package com.kh.TicketSky.board.controller;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.*;
@@ -18,26 +17,15 @@ public class BoardController {
 	private BoardService service;
 	
 	@RequestMapping("/community/board")
-	public String boardList(HttpServletRequest request) {
-		int cPage;
-		try {
-			cPage = Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
-			cPage = 1;
-		}
-		logger.debug("목록페이지(cPage) : "+cPage);
+	public String boardList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpServletRequest request) {
 		final int numPerPage = 10;
 		List<Board> list = service.selectList(cPage, numPerPage);
-		logger.debug("리스트 : "+list);
 		int totalContents = service.selectTotalContents();	// 전체 게시글 수
 		String pageBar = new Page().getPage(cPage, numPerPage, totalContents, request.getRequestURI());
 		
-		request.setAttribute("cPage", cPage);
-		request.setAttribute("numPerPage", numPerPage);
 		request.setAttribute("list", list);
 		request.setAttribute("totalContents", totalContents);
 		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("url", request.getRequestURI());
 		
 		return "community/board";
 	}
@@ -75,12 +63,7 @@ public class BoardController {
 	
 	@RequestMapping("/community/comboardUpdate")
 	public String updateOne(Board b, HttpServletRequest request) {
-		int boardNo;
-		try {
-			boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		}catch(NumberFormatException e) {
-			boardNo = 1;
-		}
+		int boardNo = Integer.parseInt((String)request.getAttribute("boardNo"));
 		b = service.selectOne(boardNo);
 		request.setAttribute("board", b);
 		return "community/comboardUpdate";
