@@ -6,6 +6,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="새 글 쓰기"/>
 </jsp:include>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <style>
     section{
         text-align:center;

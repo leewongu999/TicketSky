@@ -5,7 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <script>
-	alert("${msg}");
-	location.href="${path}${loc}";
+	alert('<%=request.getAttribute("msg")%>');
+	location.href='${path}<%=request.getAttribute("loc")%>';
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

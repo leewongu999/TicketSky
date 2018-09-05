@@ -5,6 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%
 	Board b = (Board)request.getAttribute("board");
+	request.setAttribute("boardNo", b.getBoardNo());
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글" name="title"/>
@@ -47,7 +48,7 @@
                 <table id='xet_board' class='boardList'>
                     <tr>
                         <th>게시글 번호</th>
-                        <td><%=b.getBoardNo()%></td>
+                        <td id='boardNo'><%=b.getBoardNo()%></td>
                         <th>글 제목</th>
                         <td><%=b.getBoardTitle()%></td>
                         <th>작성자</th>

@@ -1,4 +1,5 @@
 package com.kh.TicketSky.board.controller;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.*;
@@ -53,9 +54,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardFormEnd")
-	public String insertBoard(Board b) {
+	public String insertBoard(Board b, HttpServletRequest request) {
+		request.getCharacterEncoding();
 		String msg = "";
 		String loc = "";
+		String boardTitle = request.getParameter("boardtitle");
+		String file = request.getParameter("file");
+		String contents = request.getParameter("content");
+		b = new Board(0, boardTitle, contents, null, 0, 0, file, null);
 		int result = service.insertBoard(b);
 		System.out.println("선택한 게시글 : "+b);
 		System.out.println("결과 : "+result);
@@ -66,12 +72,21 @@ public class BoardController {
 			msg = "등록을 실패하였습니다.";
 			loc = "/community/board";
 		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		System.out.println(msg);
 		return "common/msg";
 	}
 	
 	@RequestMapping("/community/comboardUpdate")
 	public String updateOne(Board b, HttpServletRequest request) {
+		int boardNo;
+		try {
+			boardNo = Integer.parseInt((String)request.getAttribute("boardNo"));
+		}catch(NumberFormatException e) {
+			boardNo = 1;
+		}
+		b = service.selectOne(boardNo);
 		request.setAttribute("board", b);
 		return "community/comboardUpdate";
 	}
@@ -81,6 +96,8 @@ public class BoardController {
 		String msg = "";
 		String loc = "";
 		int result = service.updateBoard(b);
+		System.out.println("게시글 수정 결과 : "+b);
+		System.out.println("결과 : "+result);
 		if(result>0) {
 			msg = "정상적으로 수정되었습니다.";
 			loc = "/community/comboardView?boardNo="+b.getBoardNo();

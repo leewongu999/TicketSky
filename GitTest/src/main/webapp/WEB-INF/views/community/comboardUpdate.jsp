@@ -8,6 +8,7 @@
 </jsp:include>
 <%
 	Board b = (Board)request.getAttribute("board");
+	request.setCharacterEncoding("UTF-8");
 %>
 <style>
     section{
