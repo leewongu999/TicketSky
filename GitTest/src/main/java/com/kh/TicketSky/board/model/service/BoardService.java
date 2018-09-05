@@ -9,4 +9,5 @@ public interface BoardService {
 	int updateBoard(Board b);
 	int deleteBoard(Board b);
 	Board selectOne(int boardNo);
+	int addVisits(Board b);
 }

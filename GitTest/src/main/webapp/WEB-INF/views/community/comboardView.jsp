@@ -7,6 +7,7 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html;charset=UTF-8");
 	Board b = (Board)request.getAttribute("board");
+	int visits = Integer.parseInt(String.valueOf(request.getAttribute("visits")));
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글" name="title"/>
@@ -49,7 +50,7 @@
                 <table id='xet_board' class='boardList'>
                     <tr>
                         <th>게시글 번호</th>
-                        <td id='boardNo'><%=b.getBoardNo()%></td>
+                        <td><%=b.getBoardNo()%></td>
                         <th>글 제목</th>
                         <td><%=b.getBoardTitle()%></td>
                         <th>작성자</th>

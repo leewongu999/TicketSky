@@ -19,6 +19,11 @@ public class BoardController {
 	@RequestMapping("/community/board")
 	public String boardList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpServletRequest request) {
 		final int numPerPage = 10;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage = 1;
+		}
 		List<Board> list = service.selectList(cPage, numPerPage);
 		int totalContents = service.selectTotalContents();	// 전체 게시글 수
 		String pageBar = new Page().getPage(cPage, numPerPage, totalContents, request.getRequestURI());
@@ -33,6 +38,7 @@ public class BoardController {
 	@RequestMapping("/community/comboardView")
 	public String selectBoard(int boardNo, HttpServletRequest request) {
 		request.setAttribute("board", service.selectOne(boardNo));
+		request.setAttribute("visits", service.addVisits(service.selectOne(boardNo)));
 		return "community/comboardView";
 	}
 	

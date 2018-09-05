@@ -32,4 +32,8 @@ public class BoardDAOImplements implements BoardDAO {
 	public Board selectOne(SqlSessionTemplate sst, int boardNo) {
 		return sst.selectOne("board.selectBoard", boardNo);
 	}
+	@Override
+	public int addVisits(SqlSessionTemplate sst, Board b) {
+		return sst.update("board.addVisit", b);
+	}
 }

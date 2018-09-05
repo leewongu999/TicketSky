@@ -8,7 +8,6 @@ import java.util.*;
 
 @Service
 public class BoardServiceImplements implements BoardService {
-	
 	@Autowired
 	private BoardDAO dao;
 	@Autowired
@@ -18,29 +17,28 @@ public class BoardServiceImplements implements BoardService {
 	public List<Board> selectList(int cPage, int numPerPage) {
 		return dao.selectList(sst, cPage, numPerPage);
 	}
-
 	@Override
 	public int selectTotalContents() {
 		return dao.selectTotalContents(sst);
 	}
-
 	@Override
 	public int insertBoard(Board b) {
 		return dao.insertBoard(sst, b);
 	}
-
 	@Override
 	public int updateBoard(Board b) {
 		return dao.updateBoard(sst, b);
 	}
-
 	@Override
 	public int deleteBoard(Board b) {
 		return dao.deleteBoard(sst, b);
 	}
-
 	@Override
 	public Board selectOne(int boardNo) {
 		return dao.selectOne(sst, boardNo);
+	}
+	@Override
+	public int addVisits(Board b) {
+		return dao.addVisits(sst, b);
 	}
 }

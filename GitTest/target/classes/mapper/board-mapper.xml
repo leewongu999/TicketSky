@@ -21,4 +21,7 @@
 	<select id="selectBoard" parameterType="_int" resultType="board">
 		SELECT * FROM freeboard WHERE boardNo=#{boardNo}
 	</select>
+	<update id="addVisit" parameterType="board">
+		UPDATE freeboard SET visits=visits+1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
+	</update>
 </mapper>
