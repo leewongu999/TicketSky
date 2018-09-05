@@ -16,7 +16,7 @@
 		UPDATE freeboard SET content=#{content, jdbcType=VARCHAR} WHERE boardNo=#{boardNo}
 	</update>
 	<delete id="delete" parameterType="board">
-		DELETE FROM freeboard WHERE boardNo=#{boardNo}
+		DELETE FROM freeboard WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</delete>
 	<select id="selectBoard" parameterType="_int" resultType="board">
 		SELECT * FROM freeboard WHERE boardNo=#{boardNo}

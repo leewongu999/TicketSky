@@ -7,7 +7,6 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html;charset=UTF-8");
 	Board b = (Board)request.getAttribute("board");
-	request.setAttribute("boardNo", b.getBoardNo());
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글" name="title"/>
@@ -97,10 +96,10 @@
                 </form>
                 <script>
                     function fn_update(){
-                        location.href="${path}/community/comboardUpdate";
+                        location.href="${path}/community/comboardUpdate?boardNo=<%=b.getBoardNo()%>";
                     }
                     function fn_delete(){
-                        location.href="${path}/community/comboardDelete";
+                        location.href="${path}/community/comboardDelete?boardNo=<%=b.getBoardNo()%>";
                     }
                     function fn_report(){
                         location.href="${path}/community/comboardReport.do";
@@ -111,4 +110,7 @@
                 </script>
             </div>
         </section>
+<%
+	request.setAttribute("boardNo", b.getBoardNo());
+%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.TicketSky.board.model.vo.Board"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글 삭제" name="title"/>
 </jsp:include>
+<%
+	Board b = (Board)request.getAttribute("board");
+%>
 <style>
     section{
         text-align:center;
@@ -26,11 +29,13 @@
                 <h2>게시글 삭제 확인</h2>
             </div>
             <br><br><br>
-            <form method='post' action='/community/comboardDeleteEnd'>
+            <form method='post' action='${path}/community/comboardDeleteEnd'>
 	            <div>
 	                <table class="table">
 	                    <tr>
 	                        <th>
+	                        	<p>삭제하는 게시글 번호 : <%=b.getBoardNo()%></p>
+	                        	<br>
 	                        	<strong>
 	                        		한 번 삭제되면 다시 복구할 수 없습니다.<br>정말로 삭제하시겠습니까?
 	                        	</strong>

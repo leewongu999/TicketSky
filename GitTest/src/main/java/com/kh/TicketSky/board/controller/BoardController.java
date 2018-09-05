@@ -63,7 +63,12 @@ public class BoardController {
 	
 	@RequestMapping("/community/comboardUpdate")
 	public String updateOne(Board b, HttpServletRequest request) {
-		int boardNo = Integer.parseInt((String)request.getAttribute("boardNo"));
+		int boardNo;
+		try {
+			boardNo = Integer.parseInt((String)request.getParameter("boardNo"));
+		}catch(NumberFormatException e) {
+			boardNo = 1;
+		}
 		b = service.selectOne(boardNo);
 		request.setAttribute("board", b);
 		return "community/comboardUpdate";
@@ -74,12 +79,18 @@ public class BoardController {
 		request.getCharacterEncoding();
 		String msg = "";
 		String loc = "";
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int boardNo;
+		try {
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		}catch(NumberFormatException e) {
+			boardNo = 1;
+		}
 		String boardtitle = request.getParameter("boardtitle");
 		String userID = request.getParameter("userID");
 		String file = request.getParameter("file");
 		String content = request.getParameter("content");
 		b = (Board)request.getAttribute("board");
+		
 		b = new Board(boardNo, boardtitle, content, userID, 0, 0, file, null);
 		int result = service.updateBoard(b);
 		System.out.println("게시글 수정 결과 : "+b);
@@ -100,7 +111,7 @@ public class BoardController {
 	public String deleteOne(Board b, HttpServletRequest request) {
 		int boardNo;
 		try {
-			boardNo = Integer.parseInt((String)request.getAttribute("boardNo"));
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		}catch(NumberFormatException e) {
 			boardNo = 1;
 		}
@@ -113,15 +124,19 @@ public class BoardController {
 	public String deleteBoard(Board b, HttpServletRequest request) {
 		String msg = "";
 		String loc = "";
-		b = (Board)request.getAttribute("board");
+		try {
+			b.setBoardNo(Integer.parseInt(request.getParameter("deleteBoardNo")));
+		}catch(NumberFormatException e) {
+			b.setBoardNo(1);
+		}
 		int result = service.deleteBoard(b);
-		System.out.println("선택한 게시글 : "+b);
+		System.out.println("선택한 게시글 번호 : "+b.getBoardNo());
 		if(result>0) {
 			msg = "게시글이 정상적으로 삭제되었습니다.";
 			loc = "/community/board";
 		}else {
 			msg = "삭제를 실패하였습니다.";
-			loc = "/community/comboardView?boardNo="+b.getBoardNo();
+			loc = "/community/board";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
