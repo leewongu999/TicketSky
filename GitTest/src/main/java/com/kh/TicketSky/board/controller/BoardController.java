@@ -57,24 +57,19 @@ public class BoardController {
 	public String insertBoard(Board b, HttpServletRequest request) {
 		request.getCharacterEncoding();
 		String msg = "";
-		String loc = "";
 		String boardTitle = request.getParameter("boardtitle");
+		String userID = request.getParameter("userID");
 		String file = request.getParameter("file");
 		String contents = request.getParameter("content");
-		b = new Board(0, boardTitle, contents, null, 0, 0, file, null);
+		b = new Board(0, boardTitle, contents, userID, 0, 0, file, null);
 		int result = service.insertBoard(b);
-		System.out.println("선택한 게시글 : "+b);
-		System.out.println("결과 : "+result);
 		if(result>0) {
 			msg = "성공적으로 등록되었습니다.";
-			loc = "/community/boardView?boardNo="+b.getBoardNo();
 		}else {
 			msg = "등록을 실패하였습니다.";
-			loc = "/community/board";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		System.out.println(msg);
+		request.setAttribute("loc", "/community/board");
 		return "common/msg";
 	}
 	
@@ -92,9 +87,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardUpdateEnd")
-	public String updateBoard(Board b) {
+	public String updateBoard(Board b, HttpServletRequest request) {
 		String msg = "";
 		String loc = "";
+		b = (Board)request.getAttribute("board");
 		int result = service.updateBoard(b);
 		System.out.println("게시글 수정 결과 : "+b);
 		System.out.println("결과 : "+result);
@@ -105,21 +101,31 @@ public class BoardController {
 			msg = "수정을 실패하였습니다.";
 			loc = "/community/board";
 		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		return "common/msg";
 	}
 	
 	@RequestMapping("/community/comboardDelete")
-	public String deleteOne() {
+	public String deleteOne(Board b, HttpServletRequest request) {
+		int boardNo;
+		try {
+			boardNo = Integer.parseInt((String)request.getAttribute("boardNo"));
+		}catch(NumberFormatException e) {
+			boardNo = 1;
+		}
+		b = service.selectOne(boardNo);
+		request.setAttribute("board", b);
 		return "community/comboardDelete";
 	}
 	
 	@RequestMapping("/community/comboardDeleteEnd")
-	public String deleteBoard(Board b) {
+	public String deleteBoard(Board b, HttpServletRequest request) {
 		String msg = "";
 		String loc = "";
+		b = (Board)request.getAttribute("board");
 		int result = service.deleteBoard(b);
 		System.out.println("선택한 게시글 : "+b);
-		System.out.println("결과 : "+result);
 		if(result>0) {
 			msg = "게시글이 정상적으로 삭제되었습니다.";
 			loc = "/community/board";
@@ -127,6 +133,8 @@ public class BoardController {
 			msg = "삭제를 실패하였습니다.";
 			loc = "/community/comboardView?boardNo="+b.getBoardNo();
 		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		return "common/msg";
 	}
 }

@@ -7,8 +7,8 @@
 	<jsp:param name="title" value="게시글 수정"/>
 </jsp:include>
 <%
-	Board b = (Board)request.getAttribute("board");
 	request.setCharacterEncoding("UTF-8");
+	Board b = (Board)request.getAttribute("board");
 %>
 <style>
     section{

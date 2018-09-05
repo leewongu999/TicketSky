@@ -41,7 +41,7 @@
                         <tr>
                             <th><label>&nbsp;작성자&nbsp;</label></th>
                             <td>
-                                <input type="text" class="form-control" value="<%="userId"%>" readonly/>
+                                <input type="text" class="form-control" name="userID" value="<%="userId"%>" readonly/>
                             </td>
                         </tr>
                         <tr>

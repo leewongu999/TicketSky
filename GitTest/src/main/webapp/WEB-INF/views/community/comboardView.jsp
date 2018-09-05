@@ -4,6 +4,7 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%
+	request.getCharacterEncoding();
 	Board b = (Board)request.getAttribute("board");
 	request.setAttribute("boardNo", b.getBoardNo());
 %>
