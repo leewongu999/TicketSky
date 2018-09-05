@@ -110,7 +110,4 @@
                 </script>
             </div>
         </section>
-<%
-	request.setAttribute("boardNo", b.getBoardNo());
-%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

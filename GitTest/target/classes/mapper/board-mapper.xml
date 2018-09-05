@@ -13,7 +13,7 @@
 									 0,#{attachmentNo},#{originalFileName, jdbcType=VARCHAR},sysdate)
 	</insert>
 	<update id="update" parameterType="board">
-		UPDATE freeboard SET content=#{content, jdbcType=VARCHAR} WHERE boardNo=#{boardNo}
+		UPDATE freeboard SET content=#{content, jdbcType=VARCHAR} WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
 	<delete id="delete" parameterType="board">
 		DELETE FROM freeboard WHERE boardNo=#{boardNo, jdbcType=NUMERIC}

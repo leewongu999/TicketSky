@@ -33,6 +33,9 @@
             <br><br><br>
                 <form method='post' action="${path}/community/comboardUpdateEnd">
                     <div>
+                    	<p>
+                    		<input type='text' name='boardNo' style="width:60px;text-align:center;" value='<%=b.getBoardNo()%>'/>번 게시글을 수정합니다.
+                    	</p>
                         <table>
                             <tr>
                                 <th><label>&nbsp;제목&nbsp;</label></th>
@@ -60,7 +63,7 @@
                             </tr>
                         </table>
                         <hr>
-                        <input type="submit" class="xet_btn medium" value="수정 완료" onclick='return fn_update()' name='updateboard'/>
+                        <input type="submit" class="xet_btn medium" value="수정 완료" onclick='return fn_update()'/>
                         <input type="button" class="xet_btn medium" value="뒤로 가기" onclick='fn_back()'/>
                     </div>
                 </form>

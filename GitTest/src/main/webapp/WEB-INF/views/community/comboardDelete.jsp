@@ -34,7 +34,11 @@
 	                <table class="table">
 	                    <tr>
 	                        <th>
-	                        	<p>삭제하는 게시글 번호 : <%=b.getBoardNo()%></p>
+	                        	<p>
+	                        		삭제하는 게시글 번호 :
+	                        		<input type="text" name='deleteBoardNo'
+	                        		style="width:60px;text-align:center;" value='<%=b.getBoardNo()%>' readonly/>
+	                        	</p>
 	                        	<br>
 	                        	<strong>
 	                        		한 번 삭제되면 다시 복구할 수 없습니다.<br>정말로 삭제하시겠습니까?
