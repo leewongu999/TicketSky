@@ -13,6 +13,17 @@ import com.kh.ticketsky.user.model.vo.Member;
 public class UserDaoImpl implements UserDao {
 
 	@Override
+	public int selectSellerTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map) {
+		return sqlSession.selectOne("member.selectSellerTotalCount",map);
+	}
+
+	@Override
+	public List<Member> selectSellerList(SqlSessionTemplate sqlSession, int cPage, int numPerPage,Map<String, String> map) {
+		RowBounds row=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectSellerList",map,row);
+	}
+
+	@Override
 	public int updateConsumerRating(SqlSessionTemplate sqlSession, Map<String, String> map) {
 		return sqlSession.update("member.updateConsumerRating",map);
 	}

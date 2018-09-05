@@ -25,4 +25,8 @@ public interface UserService {
 
 	int updateConsumerRating(Map<String, String> map);
 
+	List<Member> selectSellerList(int cPage, int numPerPage, Map<String, String> map);
+
+	int selectSellerTotalCount(Map<String, String> map);
+
 }

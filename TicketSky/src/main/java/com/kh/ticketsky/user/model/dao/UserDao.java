@@ -27,4 +27,8 @@ public interface UserDao {
 
 	int updateConsumerRating(SqlSessionTemplate sqlSession, Map<String, String> map);
 
+	List<Member> selectSellerList(SqlSessionTemplate sqlSession, int cPage, int numPerPage, Map<String, String> map);
+
+	int selectSellerTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map);
+
 }

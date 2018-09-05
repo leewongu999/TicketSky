@@ -16,6 +16,12 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Override
+	public int selectSellerTotalCount(Map<String, String> map) {
+		return dao.selectSellerTotalCount(sqlSession,map);
+
+	}
+
+	@Override
 	public int updateConsumerRating(Map<String, String> map) {
 		return dao.updateConsumerRating(sqlSession,map);
 	}
@@ -23,6 +29,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Map<String, String>> selectConsumerRating() {
 		return dao.selectConsumerRating(sqlSession);
+	}
+
+	@Override
+	public List<Member> selectSellerList(int cPage, int numPerPage, Map<String, String> map) {
+		return dao.selectSellerList(sqlSession,cPage,numPerPage,map);
 	}
 
 	@Override

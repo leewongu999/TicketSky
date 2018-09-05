@@ -52,42 +52,29 @@
                       <tbody>
 						<c:forEach items="${list }" var="m">
       		               	<tr>
-      			                <td>${m.userId }</td>
+      			                <td><a href="${path }/ticketsky/user/adminUserUpdate?userId=${m.userId}">${m.userId }</a></td>
       			                <td>${m.userName }</td>
                             <td>${m.email }</td>
       			                <td>${m.ratingName }</td>
       			                <td><fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd"/></td>
-      			                <td> <button type="button" class="btn btn-sm btn-danger" name="button">삭제</button> </td>
+      			                <td> <button type="button" class="btn btn-sm btn-danger" name="button" onclick="fn_delete('${m.userId}');">삭제</button> </td>
       			            </tr>
       			        </c:forEach>
       		             </tbody>
                       </table>
                       ${pageBar }
-                      <!-- <div class="row" style="margin:auto;">
-                        <nav aria-label="Page navigation example" >
-                        <ul class="pagination">
-                        <li class="page-item" style="margin:0;">
-                        <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                        </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"  style="margin:0;">
-                        <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                        </a>
-                        </li>
-                        </ul>
-                        </nav>
-                      </div>
- -->
                     </div>
                   </div>
               </div>
           </div>
+          
+          <script>
+          	function fn_delete(userId){
+          		var con = confirm(userId+"님을 탈퇴 시키겠습니까?");
+          		if(con == true){
+          			location.href="${path}/ticketsky/user/consumerDeleteOne?userId="+userId;
+          		}
+          	}
+          </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

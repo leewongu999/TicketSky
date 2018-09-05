@@ -80,6 +80,34 @@ public class UserController {
 		return "consumer/userUpdate";
 	}
 	
+	@RequestMapping("user/adminUserUpdate")
+	public String adminUserUpdate(String userId, Model model) {
+		Member m = service.selectOne(userId);
+		
+		model.addAttribute("m",m);
+		return "admin/userUpdate";
+	}
+	
+	@RequestMapping("user/adminUserUpdateEnd")
+	public String adminUserUpdateEnd(Member m, Model model) {
+		String msg="";
+		String loc="";
+		
+		int result = service.updateConsumer(m);
+		if(result>0){
+			msg="회원정보가 변경되었습니다.";
+			loc="/user/consumerList";
+		}
+		else {
+			msg="회원정보 수정이 실패하였습니다.";
+			loc="/user/consumerList";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		return "common/msg";
+	}
+	
 	@RequestMapping("/user/sellerUpdate")
 	public String sellerUpdate() {
 		return "seller/sellerUpdate";
@@ -148,7 +176,25 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/sellerList")
-	public String sellerList() {
+	public String sellerList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
+			@RequestParam(value="searchTitle", required=false, defaultValue="") String searchTitle,
+			HttpServletRequest req,Model model) {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("searchType", searchType);
+		map.put("searchTitle", searchTitle);
+		int numPerPage = 10;
+		List<Member> list = service.selectSellerList(cPage, numPerPage,map);
+
+		int totalCount = service.selectSellerTotalCount(map);
+		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("pageBar",pageBar);
+		
 		return "admin/sellerList";
 	}
 	
@@ -168,6 +214,24 @@ public class UserController {
 		return "consumer/userDeleteChk";
 	}
 	
+	@RequestMapping("/user/consumerDeleteOne")
+	public String consumerDeleteOne(String userId, Model model) {
+		String msg="";
+		String loc="/user/consumerList";
+		int result = service.deleteConsumer(userId);
+		
+		if(result>0){
+			msg="회원 삭제가 정상적으로 완료되었습니다.";
+		}
+		else {
+			msg="회원 삭제가 실패하였습니다";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		return "common/msg";
+	}
+
 	@RequestMapping("/user/userDelete.do")
 	public String userDelete(String password, Model model,HttpSession session) {
 		String msg="";

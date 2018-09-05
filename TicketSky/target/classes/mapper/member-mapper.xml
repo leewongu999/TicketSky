@@ -42,4 +42,16 @@
   	<update id="updateConsumerRating" parameterType="map">
   		update consumerrating set ratingName = #{ratingName}, discountrate=#{discountrate}, ratingamount=#{ratingamount} where ratingCode = #{ratingCode}
   	</update>
+  	<select id="selectSellerList" parameterType="map" resultMap="memberMap">
+ 		select * from member where separator='S'
+ 		  <if test="searchType != null and searchType != ''">
+        	 AND ${searchType} like '%'||#{searchTitle}||'%'
+     	 </if>      
+ 	</select>
+ 	<select id="selectSellerTotalCount" resultType="_int">
+  	select count(*) cnt from member where separator = 'S'
+  	<if test="searchType != null and searchType != ''">
+        	 AND ${searchType} like '%'||#{searchTitle}||'%'
+     	 </if>   
+  </select>
 </mapper>

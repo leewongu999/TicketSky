@@ -123,7 +123,20 @@
                 </div>
                 <!-- User Login Info -->
                 <div class="user-login-info">
-                    <a href="${path }/user/consumerMyPage"><!--<img src="img/core-img/user.svg" alt="">--> 마이 페이지</a>
+                <c:if test="${memberLoggedIn.separator eq 'C' }">
+                    <a href="${path }/user/consumerMyPage">마이 페이지</a>
+                </c:if>
+                <c:if test="${memberLoggedIn.separator eq 'S' }">
+                    <a href="${path }/user/sellerStatus">마이 페이지</a>
+                </c:if>
+                <c:if test="${memberLoggedIn.separator eq 'A' }">
+                    <a href="${path }/user/consumerList">마이 페이지</a>
+                </c:if>
+                <c:if test="${memberLoggedIn.separator eq null }">
+                    <a href="" onclick="window.open('${path}/user/login', '_blank', 'width=400 height=350');">마이 페이지</a>
+                </c:if>
+                
+                    
                 </div>
                 <div class="user-login-info">
                     <a href="#"><!--<img src="img/core-img/user.svg" alt="">--> 고객 센터</a>
