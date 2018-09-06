@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +37,8 @@ import com.kh.ticketsky.user.model.vo.Member;
 @Controller
 public class UserController {
 
+	@Autowired
+	private JavaMailSender mailSender;
 	private Logger logger=LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
@@ -527,4 +532,56 @@ public class UserController {
 		mv.setViewName("common/msg");
 		return mv;
 	}
+	
+	   @RequestMapping(value="/user/findPassword", method= {RequestMethod.POST,RequestMethod.GET})
+	   public ModelAndView findPassword(String userName, String email, HttpServletResponse response,HttpServletRequest request) throws Exception
+	   {
+	      ModelAndView mv=new ModelAndView();
+	      //객체를 String, model로 나뉜걸 같이 쓰는게 ModelAndView 이다.
+	      
+	      Member m = service.selectOne("kdf321");
+	      
+	      String msg="";
+	      String loc="";
+	      String userChk = "";
+	      
+	      if(/*m.getUserName().equals(userName) && m.getEmail().equals(email)*/true)
+	      {
+	          String setfrom = "TicketSky7@gmail.com";  //이메일을 보낼 주소     
+	         
+	          try 
+	          {
+	             
+	            MimeMessage message = mailSender.createMimeMessage();
+	            MimeMessageHelper messageHelper 
+	                              = new MimeMessageHelper(message, true, "UTF-8");
+	       
+	            messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	            messageHelper.setTo(m.getEmail());     // 받는사람 이메일
+	            messageHelper.setSubject("요청하신 비밀번호입니다."); // 메일제목은 생략이 가능하다
+	            messageHelper.setText("비밀번호 "+m.getPassword());  // 메일 내용
+	           
+	            mailSender.send(message);
+	            
+	            msg = "입력하신 메일 주소로 비밀번호를 발송하였습니다";
+	          }
+	          
+	          catch(Exception e)
+	          {
+	             e.printStackTrace();
+	          }
+	          
+	      }
+	      else
+	      {
+	         msg =" (임시)false임니당 "; 
+	      }
+	      
+	      mv.addObject("msg",msg);
+	      mv.addObject("loc",loc);
+	      mv.addObject("userChk",userChk);
+	      mv.setViewName("common/msg");
+	      return mv;
+	   }
+	
 }

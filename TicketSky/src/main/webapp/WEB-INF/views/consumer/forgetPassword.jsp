@@ -52,7 +52,7 @@
             </div>
           </form>
           <br>
-          <form class="" action="index.html" method="post">
+          <form class="" action="${path }/ticketsky/user/findPassword" method="post">
             <h4 class="text-left">비밀번호 찾기</h4>
             <hr>
             <div class="form-group">
