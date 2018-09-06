@@ -1,6 +1,6 @@
 package com.kh.TicketSky.board.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
-import com.kh.TicketSky.board.model.vo.Board;
+import com.kh.TicketSky.board.model.vo.*;
 import java.util.*;
 
 public interface BoardDAO {
@@ -13,4 +13,5 @@ public interface BoardDAO {
 	int addVisits(SqlSessionTemplate sst, Board b);
 	List<Map<String,Object>> selectSearch(SqlSessionTemplate sst, Map<String,Object> map);
 	int selectSearchTotalContents(SqlSessionTemplate sst, Map<String,Object> map);
+	int addReply(SqlSessionTemplate sst, Reply re);
 }

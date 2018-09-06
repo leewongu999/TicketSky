@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-		import="com.kh.TicketSky.board.model.vo.Board"%>
+		import="com.kh.TicketSky.board.model.vo.*"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -8,6 +8,7 @@
 	response.setContentType("text/html;charset=UTF-8");
 	Board b = (Board)request.getAttribute("board");
 	int visits = Integer.parseInt(String.valueOf(request.getAttribute("visits")));
+	Reply re = (Reply)request.getAttribute("reply");
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글" name="title"/>
@@ -120,6 +121,20 @@
                     	$('#reply').val("");
                     }
                 </script>
+                <form>
+	                <%if(re!=null){%>
+	                	<div>
+	                		<table id='xet_board'>
+	                			<tr>
+	                				<td><%=re.getUserId()%></td>
+	                				<td><%=re.getComments()%></td>
+	                				<td><%=re.getWriteDate()%></td>
+	                			</tr>
+	                		</table>
+	                		<input type="button" name="deleteReply" id="delReply" value="삭제"/>
+	                	</div>
+	                <%}%>
+                </form>
             </div>
         </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

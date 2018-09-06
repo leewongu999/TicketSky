@@ -39,4 +39,7 @@
 			${item} LIKE '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'
 		</if>
 	</select>
+	<insert id="addReply" parameterType="reply">
+		INSERT INTO community_reply VALUES(community_reply_SEQ.nextval,#{userId, jdbcType=VARCHAR},#{comments, jdbcType=VARCHAR},sysdate)
+	</insert>
 </mapper>

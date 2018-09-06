@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kh.TicketSky.board.model.dao.BoardDAO;
 import com.kh.TicketSky.board.model.vo.Board;
+import com.kh.TicketSky.board.model.vo.Reply;
+
 import java.util.*;
 
 @Service
@@ -48,5 +50,9 @@ public class BoardServiceImplements implements BoardService {
 	@Override
 	public int selectSearchTotalContents(Map<String,Object> map) {
 		return dao.selectSearchTotalContents(sst, map);
+	}
+	@Override
+	public int addReply(Reply re) {
+		return dao.addReply(sst, re);
 	}
 }

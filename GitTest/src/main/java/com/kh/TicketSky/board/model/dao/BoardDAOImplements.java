@@ -3,7 +3,7 @@ import java.util.*;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-import com.kh.TicketSky.board.model.vo.Board;
+import com.kh.TicketSky.board.model.vo.*;
 
 @Repository
 public class BoardDAOImplements implements BoardDAO {
@@ -43,5 +43,9 @@ public class BoardDAOImplements implements BoardDAO {
 	@Override
 	public int selectSearchTotalContents(SqlSessionTemplate sst, Map<String,Object> map){
 		return sst.selectOne("board.selectSearchOne", map);
+	}
+	@Override
+	public int addReply(SqlSessionTemplate sst, Reply re) {
+		return sst.insert("board.addReply", re);
 	}
 }

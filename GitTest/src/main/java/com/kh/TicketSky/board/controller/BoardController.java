@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.kh.TicketSky.board.model.service.BoardService;
-import com.kh.TicketSky.board.model.vo.Board;
+import com.kh.TicketSky.board.model.vo.*;
 import com.kh.TicketSky.common.*;
 
 @Controller
@@ -176,8 +176,23 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardReply")
-	public String addReply() {
-		return "";
+	public String addReply(int boardNo, HttpServletRequest request) {
+		String replyContent = request.getParameter("replyContent");
+		String msg = "";
+		
+		Reply re = new Reply(0, "userId2", replyContent, null);
+		int result = service.addReply(re);
+		if(result>0) {
+			msg = "댓글이 정상적으로 달렸습니다.";
+		}
+		else {
+			msg = "댓글 추가를 실패하였습니다.";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("board", service.selectOne(boardNo));
+		request.setAttribute("loc", "/community/comboardView?boardNo="+service.selectOne(boardNo).getBoardNo());
+		request.setAttribute("reply", re);
+		return "community/comboardView";
 	}
 
 }

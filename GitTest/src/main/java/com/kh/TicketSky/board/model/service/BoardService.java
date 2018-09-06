@@ -1,6 +1,6 @@
 package com.kh.TicketSky.board.model.service;
 import java.util.*;
-import com.kh.TicketSky.board.model.vo.Board;
+import com.kh.TicketSky.board.model.vo.*;
 
 public interface BoardService {
 	List<Board> selectList(int cPage, int numPerPage);
@@ -12,4 +12,5 @@ public interface BoardService {
 	int addVisits(Board b);
 	List<Map<String,Object>> selectSearch(Map<String,Object> map);
 	int selectSearchTotalContents(Map<String,Object> map);
+	int addReply(Reply re);
 }
