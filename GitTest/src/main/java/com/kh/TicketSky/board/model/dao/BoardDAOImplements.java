@@ -40,4 +40,8 @@ public class BoardDAOImplements implements BoardDAO {
 	public List<Map<String,Object>> selectSearch(SqlSessionTemplate sst, Map<String,Object> map){
 		return sst.selectList("board.selectSearch", map);
 	}
+	@Override
+	public int selectSearchTotalContents(SqlSessionTemplate sst, Map<String,Object> map){
+		return sst.selectOne("board.selectSearchOne", map);
+	}
 }

@@ -26,7 +26,17 @@
 	<update id="addVisit" parameterType="board">
 		UPDATE freeboard SET visits=visits+1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
-	<select id='selectSearch' parameterType='map' resultMap="search">
-		SELECT * FROM freeboard WHERE userId LIKE '%'||#{searchKeyword}||'%'
+	<select id='selectSearch' parameterType="map" resultMap="search">
+		SELECT * FROM freeboard WHERE
+		<if test="item != null and item !=''">
+			${item} LIKE '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'
+		</if>
+		ORDER BY boardNo DESC
+	</select>
+	<select id='selectSearchOne' parameterType="map" resultType="_int">
+		SELECT COUNT(*) cnt FROM freeboard WHERE
+		<if test="item != null and item !=''">
+			${item} LIKE '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'
+		</if>
 	</select>
 </mapper>

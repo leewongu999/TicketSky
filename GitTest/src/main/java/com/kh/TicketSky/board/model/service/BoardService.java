@@ -11,4 +11,5 @@ public interface BoardService {
 	Board selectOne(int boardNo);
 	int addVisits(Board b);
 	List<Map<String,Object>> selectSearch(Map<String,Object> map);
+	int selectSearchTotalContents(Map<String,Object> map);
 }

@@ -75,9 +75,8 @@
                             return false;
                         }
                     }
-                    else{
+                    else
                     	return true;
-                    }
                 }
                 function fn_back(){
                     history.back(-1);

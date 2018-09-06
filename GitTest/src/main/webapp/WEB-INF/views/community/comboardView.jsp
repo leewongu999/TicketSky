@@ -83,16 +83,16 @@
                     <input type='button' class='xet_btn medium' value='뒤로 가기' onclick='fn_back()'/>
                 </div>
                 <hr>
-                <form>
+                <form method='post' action="${path}/community/comboardReply">
                     <div style="float:left;">
                         <h5>댓글 달기&nbsp;</h5>
                     </div>
                     <div style="float:left;">
-                        <input type="submit" class="xet_btn medium" value="OK" name="reply" onclick="fn_reply()"/>
+                        <input type="submit" class="xet_btn medium" value="OK" name="reply" onclick="return fn_reply()"/>
                         <input type="reset" class="xet_btn medium" value="취소" name="cancel" onclick="fn_clear()"/>
                     </div><br><br>
                     <div>
-                        <textarea cols="100" rows="5" id="reply" class="form-control" style="resize:none;"></textarea>
+                        <textarea cols="100" rows="5" name="replyContent" id="reply" class="form-control" style="resize:none;"></textarea>
                     </div>
                 </form>
                 <script>
@@ -107,6 +107,17 @@
                     }
                     function fn_back(){
                     	history.back(-1);                       // 현재 페이지를 기준으로 바로 직전 페이지로 돌아가게 하는 메소드 구현
+                    }
+                    function fn_reply(){
+                    	if($('#reply').val()==''){
+                    		alert("댓글 내용을 입력하세요.");
+                    		return false;
+                    	}
+                    	else
+                    		return true;
+                    }
+                    function fn_clear(){
+                    	$('#reply').val("");
                     }
                 </script>
             </div>

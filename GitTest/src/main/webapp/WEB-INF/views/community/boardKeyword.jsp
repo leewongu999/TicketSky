@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="com.kh.TicketSky.common.Page,com.kh.TicketSky.board.model.vo.Board, java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*, com.kh.TicketSky.board.model.vo.Board"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <%
 	int totalContents = Integer.parseInt(String.valueOf(request.getAttribute("totalContents")));
 	String pageBar = (String)(request.getAttribute("pageBar"));
-	List<Board> list = (List<Board>)request.getAttribute("list");
+	List<Map<String,Object>> bList = (List<Map<String,Object>>)request.getAttribute("bList");
 %>
 <style>
     a.boardtitle{
@@ -45,8 +45,8 @@
 	            <form name='search' method='post' action="${path}/community/boardKeyword">
 		            <select name='item'>
 		                <option value="userId" ${"userId" eq param.item?"selected":""}>작성자</option>
-		                <option value="boardTitle" ${"boardTitle" eq param.item?"selected":""}>글 제목</option>
-		                <option value="boardNo" ${"boardNo" eq param.item?"selected":""}>글 번호</option>
+		                <option value="title" ${"title" eq param.item?"selected":""}>글 제목</option>
+		            	<option value="boardnum" ${"boardnum" eq param.item?"selected":""}>글 번호</option>
 		            </select>
 			        <div style="float:left;">
 			            <input type='search' name="searchKeyword" class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
@@ -74,24 +74,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                	<%for(Board b : list){%>
+                	<c:forEach var="b" items="${bList}">
                     <tr>
-                        <td><%=b.getBoardNo()%></td>
+                        <td><c:out value="${b['BOARDNO']}"/></td>
                         <td>	<!-- 첨부 파일이 있을 때 다운로드 할 수 있는 아이콘을 추가한다. -->
-	                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
-		                        <%=b.getBoardTitle()%>
+	                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<c:out value="${b['BOARDNO']}"/>'>
+		                        <c:out value="${b['BOARDTITLE']}"/>
 		                    </a>
-	                        <%if(b.getOriginalFileName()!=null){%>
+		                    <c:if test="${not empty b['ORIGINALFILENAME']}">
 		                        <i class='fileIcon'>
 		                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
 		                        </i>
-		                    <%}%>
+		                    </c:if>
                         </td>
                         <td><%="userId"%></td>
-                        <td><%=b.getWriteDate()%></td>
-                        <td><%=b.getVisits()%></td>
+                        <td><c:out value="${b['WRITEDATE']}"/></td>
+                        <td><c:out value="${b['VISITS']}"/></td>
                     </tr>
-                    <%} %>
+                    </c:forEach>
                 </tbody>
             </table>
             <hr>

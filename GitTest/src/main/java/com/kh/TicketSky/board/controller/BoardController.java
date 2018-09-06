@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.kh.TicketSky.board.model.service.BoardService;
 import com.kh.TicketSky.board.model.vo.Board;
-import com.kh.TicketSky.common.Page;
+import com.kh.TicketSky.common.*;
 
 @Controller
 public class BoardController {
@@ -150,8 +150,34 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/boardKeyword")
-	public String selectSearch(Map<String,Object> map) {
+	public String selectSearch(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+								Map<String,Object> map, HttpServletRequest request) {
+		final int numPerPage = 10;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage = 1;
+		}
+		String item = request.getParameter("item");
+		String searchKeyword = request.getParameter("searchKeyword");
+		
+		map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("searchKeyword", searchKeyword);
+		
+		int totalContents = service.selectSearchTotalContents(map);
 		List<Map<String,Object>> bList = service.selectSearch(map);
-		return "community/board";
+		String pageBar = new PageKeyword().getPage(cPage, numPerPage, totalContents, request.getRequestURI());
+		
+		request.setAttribute("bList", bList);
+		request.setAttribute("totalContents", totalContents);
+		request.setAttribute("pageBar", pageBar);
+		return "community/boardKeyword";
 	}
+	
+	@RequestMapping("/community/comboardReply")
+	public String addReply() {
+		return "";
+	}
+
 }
