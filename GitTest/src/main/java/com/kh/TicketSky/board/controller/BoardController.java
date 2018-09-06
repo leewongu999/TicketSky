@@ -189,10 +189,8 @@ public class BoardController {
 			msg = "댓글 추가를 실패하였습니다.";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("board", service.selectOne(boardNo));
 		request.setAttribute("loc", "/community/comboardView?boardNo="+service.selectOne(boardNo).getBoardNo());
 		request.setAttribute("reply", re);
 		return "community/comboardView";
 	}
-
 }

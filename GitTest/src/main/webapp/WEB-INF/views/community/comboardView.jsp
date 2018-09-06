@@ -121,8 +121,8 @@
                     	$('#reply').val("");
                     }
                 </script>
-                <form>
-	                <%if(re!=null){%>
+                <%if(re!=null){%>
+	                <form>
 	                	<div>
 	                		<table id='xet_board'>
 	                			<tr>
@@ -133,8 +133,8 @@
 	                		</table>
 	                		<input type="button" name="deleteReply" id="delReply" value="삭제"/>
 	                	</div>
-	                <%}%>
-                </form>
+	                </form>
+	            <%}%>
             </div>
         </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
