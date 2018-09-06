@@ -12,15 +12,13 @@
     a.boardtitle{
         color:black;
     }
+    .fileIcon{
+    	width:16px;
+    	height:16px;
+    }
     .form-control{
         width:300px;
         margin:0px;
-    }
-    #pagebar{
-        padding:16px;
-    }
-    #pagebar ul li{
-        display:inline;
     }
     section{
         text-align:center;
@@ -44,30 +42,31 @@
             </div>
             <br><br><br>
             <div style="float:left;">
-                <select>
-                    <option>작성자</option>
-                    <option>글 제목</option>
-                </select>
-            </div>
-            <div style="float:left;">
-                <input type='text' class="form-control" id="searchtext" placeholder="검색할 내용을 입력하시오"/>
-            </div>
-            <div style="float:left;">
-                <input type="button" class="xet_btn large" value="검색" name='search'/>
-            </div>
-            <div style="float:right;">
-                <input type='button' class="xet_btn medium" id="essay" name="newEssay" value="새 글 쓰기" onclick="location.href='${path}/community/comboardForm'"/>
-            </div>
-            <div style="float:right;">
-                <h4>전체 글(<%=totalContents%>)&nbsp;</h4>
-            </div>
+	            <form name='search' method='post' action="${path}/community/boardKeyword">
+		            <select name='item'>
+		                <option value="userId" ${"userId" eq param.item?"selected":""}>작성자</option>
+		                <option value="title" ${"title" eq param.item?"selected":""}>글 제목</option>
+		            </select>
+			        <div style="float:left;">
+			            <input type='search' class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
+			        </div>
+			        <div style="float:left;">
+			            <input type="submit" class="xet_btn large" value="검색"/>
+			        </div>
+	        	</form>
+	        </div>
+	        <div style="float:right;">
+	            <input type='button' class="xet_btn medium" id="essay" name="newEssay" value="새 글 쓰기" onclick="location.href='${path}/community/comboardForm'"/>
+	        </div>
+	        <div style="float:right;">
+	            <h4>전체 글(<%=totalContents%>)&nbsp;</h4>
+	        </div>
             <br><br><br>
             <table id='xet_board' class='boardList'>
                 <thead>
                     <tr>
                         <th style="width:70px;">글 번호</th>
                         <th style="width:270px;">글 제목</th>
-                        <th style="width:90px;">첨부파일</th>
                         <th style="width:150px;">작성자</th>
                         <th style="width:120px;">작성일</th>
                         <th style="width:70px;">조회수</th>
@@ -77,12 +76,16 @@
                 	<%for(Board b : bList){%>
                     <tr>
                         <td><%=b.getBoardNo()%></td>
-                        <td>
+                        <td>	<!-- 첨부 파일이 있을 때 다운로드 할 수 있는 아이콘을 추가한다. -->
 	                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
 		                        <%=b.getBoardTitle()%>
-	                        </a>
+		                    </a>
+	                        <%if(b.getOriginalFileName()!=null){%>
+		                        <i class='fileIcon'>
+		                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
+		                        </i>
+		                    <%}%>
                         </td>
-                        <td><%=b.getOriginalFileName()%></td>
                         <td><%="userId"%></td>
                         <td><%=b.getWriteDate()%></td>
                         <td><%=b.getVisits()%></td>
@@ -91,9 +94,11 @@
                 </tbody>
             </table>
             <hr>
-            <div id='pagebar'>
-                <%=pageBar%>
-            </div>
+        </div>
+    </section>
+    <section class='new_arrivals_area section-padding-80 clearfix'>
+    	<div>
+            <%=pageBar%>
         </div>
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

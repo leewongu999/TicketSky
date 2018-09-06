@@ -63,7 +63,7 @@ public class BoardController {
 			msg = "등록을 실패하였습니다.";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/community/board");
+		request.setAttribute("loc", "/community/board?cPage=1");
 		return "common/msg";
 	}
 	
@@ -106,7 +106,7 @@ public class BoardController {
 			loc = "/community/comboardView?boardNo="+b.getBoardNo();
 		}else {
 			msg = "수정을 실패하였습니다.";
-			loc = "/community/board";
+			loc = "/community/board?cPage=1";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
@@ -139,13 +139,19 @@ public class BoardController {
 		System.out.println("선택한 게시글 번호 : "+b.getBoardNo());
 		if(result>0) {
 			msg = "게시글이 정상적으로 삭제되었습니다.";
-			loc = "/community/board";
+			loc = "/community/board?cPage=1";
 		}else {
 			msg = "삭제를 실패하였습니다.";
-			loc = "/community/board";
+			loc = "/community/board?cPage=1";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		return "common/msg";
+	}
+	
+	@RequestMapping("/community/boardKeyword")
+	public String selectSearch(Map<String,Object> map) {
+		List<Map<String,Object>> bList = service.selectSearch(map);
+		return "community/board";
 	}
 }

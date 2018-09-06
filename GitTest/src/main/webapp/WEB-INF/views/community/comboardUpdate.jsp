@@ -33,10 +33,8 @@
             <br><br><br>
                 <form method='post' action="${path}/community/comboardUpdateEnd">
                     <div>
-                    	<p>
-                    		<input type='text' name='boardNo' style="width:60px;text-align:center;" value='<%=b.getBoardNo()%>'/>번 게시글을 수정합니다.
-                    	</p>
-                        <table>
+                    	<input type='hidden' name='boardNo' style="width:60px;text-align:center;" value='<%=b.getBoardNo()%>'/>
+                    	<table>
                             <tr>
                                 <th><label>&nbsp;제목&nbsp;</label></th>
                                 <td>

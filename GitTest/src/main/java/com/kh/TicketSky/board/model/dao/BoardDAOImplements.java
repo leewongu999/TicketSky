@@ -36,4 +36,8 @@ public class BoardDAOImplements implements BoardDAO {
 	public int addVisits(SqlSessionTemplate sst, Board b) {
 		return sst.update("board.addVisit", b);
 	}
+	@Override
+	public List<Map<String,Object>> selectSearch(SqlSessionTemplate sst, Map<String,Object> map){
+		return sst.selectList("board.selectSearch", map);
+	}
 }

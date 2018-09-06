@@ -41,4 +41,8 @@ public class BoardServiceImplements implements BoardService {
 	public int addVisits(Board b) {
 		return dao.addVisits(sst, b);
 	}
+	@Override
+	public List<Map<String,Object>> selectSearch(Map<String,Object> map){
+		return dao.selectSearch(sst, map);
+	}
 }

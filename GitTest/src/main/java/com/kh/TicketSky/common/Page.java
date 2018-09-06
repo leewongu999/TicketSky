@@ -40,12 +40,14 @@ public class Page {
 		if(pageStart>totalPage) {	// 마지막 페이지까지 갔을 때
 			pageBar += "<li class='xet_btn medium'><span>&raquo;</span></li>";
 		}else{						// 마지막 페이지까지 가지 않았을 때
-			pageBar += "<li class='xet_btn medium' href='javascript:fn_paging("+pageStart+")'>&raquo;</li>";
+			pageBar += "<li class='xet_btn medium'>";
+			pageBar += "<a href='javascript:fn_paging("+pageStart+")'>&raquo;</a>";
+			pageBar += "</li>";
 		}
 		pageBar += "</ul>";				// 닫기 태그
 		pageBar += "<script>";
 		pageBar += "function fn_paging(cPage){";
-		pageBar += "location.href='"+url+"?cPage="+cPage+"'";
+		pageBar += "location.href='"+url+"?cPage='+cPage";
 		pageBar += "}";
 		pageBar += "</script>";
 		return pageBar;

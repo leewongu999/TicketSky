@@ -11,4 +11,5 @@ public interface BoardDAO {
 	int deleteBoard(SqlSessionTemplate sst, Board b);
 	Board selectOne(SqlSessionTemplate sst, int boardNo);
 	int addVisits(SqlSessionTemplate sst, Board b);
+	List<Map<String,Object>> selectSearch(SqlSessionTemplate sst, Map<String,Object> map);
 }

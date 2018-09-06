@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
+	<resultMap type="map" id='search'>
+	</resultMap>
 	<select id="selectList" resultType="board">
 		SELECT * FROM freeboard ORDER BY boardNo DESC
 	</select>
@@ -24,4 +26,7 @@
 	<update id="addVisit" parameterType="board">
 		UPDATE freeboard SET visits=visits+1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
+	<select id='selectSearch' parameterType='map' resultMap="search">
+		SELECT * FROM freeboard WHERE userId LIKE '%'||#{searchKeyword}||'%'
+	</select>
 </mapper>

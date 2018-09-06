@@ -10,4 +10,5 @@ public interface BoardService {
 	int deleteBoard(Board b);
 	Board selectOne(int boardNo);
 	int addVisits(Board b);
+	List<Map<String,Object>> selectSearch(Map<String,Object> map);
 }

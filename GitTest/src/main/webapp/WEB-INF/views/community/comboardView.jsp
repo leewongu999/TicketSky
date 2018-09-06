@@ -60,11 +60,11 @@
                     </tr>
                     <tr>
                         <th>조회수</th>
-                        <td><%=b.getVisits()%></td>
+                        <td><%=b.getVisits()+1%></td>
                         <th>첨부파일</th>
                         <td colspan='5'>
                         <%if(b.getOriginalFileName()!=null){%>
-                        	<a><%=b.getOriginalFileName()%></a>
+                        	<a href='#'><%=b.getOriginalFileName()%></a>
                         <%}else{%>
                         	<%="첨부 파일이 없습니다."%>
                         <%} %>
@@ -106,7 +106,7 @@
                         location.href="${path}/community/comboardReport.do";
                     }
                     function fn_back(){
-                        history.back(-1);                       // 현재 페이지를 기준으로 바로 직전 페이지로 돌아가게 하는 메소드 구현
+                    	history.back(-1);                       // 현재 페이지를 기준으로 바로 직전 페이지로 돌아가게 하는 메소드 구현
                     }
                 </script>
             </div>
