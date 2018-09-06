@@ -31,13 +31,15 @@
         </div>
         <hr>
         <form class="form-horizontal" id="enrollform" action="${path }/user/userUpdateEnd" method="post" onsubmit="return fn_enroll_validate();">
+          
+          <c:if test="${snsLoginChk eq '0' }">
           <div class="form-group" >
             <label for="inputEmail" class="col-xs-2 control-label">아이디</label>
             <div class="col-xs-9">
               <input type="text" name="userId" class="form-control" id="userId_" value="${memberLoggedIn.userId }" readonly>
             </div>
           </div>
-           <div class="form-group">
+          <div class="form-group">
             <label for="inputPassword" class="col-xs-2 control-label">현재비밀번호</label>
             <div class="col-xs-9">
               <input type="password" name="oripassword" class="form-control" id="oripassword" placeholder="비밀번호" >
@@ -57,6 +59,28 @@
               <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
             </div>
           </div>
+          </c:if>
+          <c:if test="${snsLoginChk eq '1' }">
+          <div class="form-group" hidden>
+            <label for="inputEmail" class="col-xs-2 control-label" hidden>아이디</label>
+            <div class="col-xs-9">
+              <input type="text" name="userId" class="form-control" id="userId_" value="${memberLoggedIn.userId }" readonly>
+            </div>
+          </div>
+           <div class="form-group" hidden>
+            <label for="inputPassword" class="col-xs-2 control-label">현재비밀번호</label>
+            <div class="col-xs-9">
+              <input type="password" name="oripassword" class="form-control" id="oripassword" placeholder="비밀번호" value="${memberLoggedIn.userId }">
+            </div>
+          </div>
+          <div class="form-group" hidden>
+            <label for="inputPassword" class="col-xs-2 control-label">변결할 비밀번호</label>
+            <div class="col-xs-9">
+              <input type="password" name="password" class="form-control" id="password_" placeholder="비밀번호" value="${memberLoggedIn.userId }">
+              <p class="help-block">숫자, 특수문자 포함 8자 이상</p>
+            </div>
+          </div>
+          </c:if>
           <div class="form-group">
             <label for="inputRipple" class="col-xs-2 control-label">이메일</label>
             <div class="col-xs-9">

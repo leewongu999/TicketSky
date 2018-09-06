@@ -23,6 +23,7 @@
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 
 </head>
@@ -33,36 +34,45 @@
 <body>
   <div class="container">
     <div class="login-form">
-        <form action="${path }/user/memberLogin.do" method="post">
+        <form id="loginForm" action="${path }/user/memberLogin.do" method="post">
+        <input id="snsLoginChk" type="hidden" name="snsLoginChk">
             <h2 class="text-center">로그인</h2>
             <div class="form-group">
             	<div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="userId" placeholder="Username" required="required" value="${cookie.id.value }">
+                    <input id="userId" type="text" class="form-control" name="userId" placeholder="Username" required="required" value="${cookie.id.value }">
                 </div>
             </div>
     		<div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required="required">
                 </div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary login-btn btn-block">로그인</button>
             </div>
             <div class="clearfix">
-                <label class="pull-left checkbox-inline"><input type="checkbox" name="saveId" value="1"<c:if test="${cookie.saveId.value ne null }">checked</c:if>> 아이디 저장</label>
+                <label  class="pull-left checkbox-inline"><input id="saveId" type="checkbox" name="saveId" value="1"<c:if test="${cookie.saveId.value ne null }">checked</c:if>> 아이디 저장</label>
                 <a herf="#" onclick="fn_forgetPassword();" class="pull-right">아이디/비밀번호 찾기</a>
             </div>
     		<!-- <div class="or-seperator"><i>or</i></div> -->
             <br>
             <!-- <p class="text-center">소셜 로그인</p> -->
             <div class="text-center social-btn">
-                <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
-                <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
-    			<a href="#" class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
+    			<a id="kakao-login-btn"></a>
+				<a href="http://developers.kakao.com/logout"></a>
             </div>
+            <div style="text-align:center;" >
+			<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true" onlogin="fbLogin();"></div>
+			</div>
+            <div id="fb-root"></div>
         </form>
+        <form id="myForm" name="myForm" action="${path}/user/consumerEnroll" method="POST">
+            	<input id="snsLogin" type="hidden" name="snsLogin" value=""/>
+				<input id="snsUserId" type="hidden" name="userId" value="" />
+				<input id="snsUserName" type="hidden" name="userName" value="" />
+		</form>
         <p style="margin-top:3px;" class="text-center text-muted small">Ticket Sky 계정이 없으신가요? <a herf="#" onclick="fn_con_enroll();">구매자 회원가입</a></p>
         <p class="text-center text-muted small">Ticket Sky 계정이 없으신가요? <a herf="#" onclick="fn_sel_enroll();">판매자 회원가입</a></p>
         
@@ -70,6 +80,11 @@
   </div>
 
 <script type="text/javascript">
+function a(){
+	 FB.api('/me',function(response) {
+	    console.log(JSON.stringify(response));
+	});
+}
   function fn_con_enroll(){
     window.open('${path}/user/consumerEnroll');
     window.close();
@@ -85,8 +100,105 @@
     window.close();
   }
 </script>
+<script>
+
+function fbLogin() {
+	// 로그인 여부 체크
+	snslogin();
+}
+function snslogin(){
+	FB.getLoginStatus(function(response) {
+		if (response.status === 'connected') {
+			FB.api('/me', function(res) {
+				// 제일 마지막에 실행
+				console.log("Success Login : " + res.name);
+				console.log("Success Login : " + res.id);
+				// alert("Success Login : " + response.name);
+				
+				/*Ticketsky 페이지로 이동!*/
+				if(enrollchk(res.id) == true){ // 회원정보가 없음
+					$('#snsLogin').val("1");
+					$('#snsUserId').val(res.id);
+					$('#snsUserName').val(res.name);
+					window.opener.name = "parentPage"; // 부모창의 이름 설정
+				    document.myForm.target = window.opener.name; // 타켓을 부모창으로 설정
+				    document.myForm.action = "${path}/user/consumerEnroll";
+				    $("#myForm").submit();
+					self.close();
+				}else{ // 회원정보가 있음
+					
+					$('#userId').val(res.id);
+					$('#password').val(res.id);
+					$("#snsLoginChk").val('1');
+					$('#saveId').prop("checked",false);
+					$('#loginForm').submit();
+				}
+			});
+		} else if (response.status === 'not_authorized') {
+			// 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
+		} else {
+			// 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
+		}
+	}, true); // 중복실행방지
+}
+
+	
+	window.fbAsyncInit = function() {
+	    FB.init({
+	        appId : '{258880038085261}',
+	        cookie : true,
+	        xfbml : true,
+	        version : 'v3.1'
+	    });
+	
+	    snslogin();
+	};
+
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.1&appId=258880038085261&autoLogAppEvents=1';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+			
+			</script>
+<!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="${path }/resources/js/jquery/jquery-2.2.4.min.js"></script>
 
 
+	<script>
+	function enrollchk(id){ // TS 가입체크
+		var inputUserId=id;
+		var re;
+		$.ajax({
+			url:"${pageContext.request.contextPath}/user/checkDuplicate.do",
+			data:{userId:inputUserId}, //키 밸류 값으로 보내서
+			dataType:"json",
+			async: false,
+			success:function(data) // .flag는 jsonView방식?
+			{
+				
+				if(data.flag==false) // 회원가입 가능
+				{
+					re = true;
+				}
+				else // 회원가입 불가
+				{
+					re= false;
+				}
+			},
+			error:function(xhr, status, errormsg)
+			{
+				console.log(xhr);
+				console.log(status);
+				console.log(errormsg);
+			}
+		});
+		return re;
+	};
+	</script>
 </body>
 
 </html>

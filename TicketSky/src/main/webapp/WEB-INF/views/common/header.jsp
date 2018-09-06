@@ -28,6 +28,30 @@
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	
+	<script>
+	/* function snslogout(){
+		FB.logout(function(response) {});
+	}
+	
+	window.fbAsyncInit = function() {
+	    FB.init({
+	        appId : '{258880038085261}',
+	        cookie : true,
+	        xfbml : true,
+	        version : 'v3.1'
+	    });
+	
+	    snslogin();
+	};
+
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.1&appId=258880038085261&autoLogAppEvents=1';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk')); */
+	</script>
 	
 	
 </head>
@@ -118,7 +142,7 @@
                     <a href="#" onclick="window.open('${path}/user/login', '_blank', 'width=400 height=350');">로그인</a>
 				</c:if>
 				<c:if test="${memberLoggedIn ne null }">
-                    <a href="${path }/user/userlogout.do">로그아웃</a>
+                    <a href="${path }/user/userlogout.do" onclick="snslogout();">로그아웃</a>
 				</c:if>
                 </div>
                 <!-- User Login Info -->

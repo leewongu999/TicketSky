@@ -29,7 +29,8 @@ import com.kh.ticketsky.user.model.service.UserService;
 import com.kh.ticketsky.user.model.vo.Member;
 
 //value = "" 이렇게 주면 session으로 값 저장하게 됨.
-@SessionAttributes(value= {"memberLoggedIn"})
+@SessionAttributes(value= {"memberLoggedIn","snsLoginChk"})
+
 @Controller
 public class UserController {
 
@@ -385,7 +386,14 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/consumerEnroll")
-	public String consumerEnroll() {
+	public String consumerEnroll(@RequestParam(value="userId", required=false, defaultValue="") String userId, 
+			@RequestParam(value="userName", required=false, defaultValue="") String userName,
+			@RequestParam(value="snsLogin", required=false, defaultValue="0") String snsLogin, Model model) {
+		if(snsLogin.equals("1")) {
+			model.addAttribute("userName",userName);
+			model.addAttribute("userId",userId);
+			model.addAttribute("snsLogin",snsLogin);
+		}
 		return "consumer/consumerEnroll";
 	}
 	
@@ -468,7 +476,7 @@ public class UserController {
 	
 	/* 로그인 */
 	@RequestMapping(value="/user/memberLogin.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView login(@RequestParam(value="saveId", required=false, defaultValue="0") String saveId, String userId, String password, HttpServletResponse response) throws Exception
+	public ModelAndView login(@RequestParam(value="saveId", required=false, defaultValue="0") String saveId,@RequestParam(value="snsLoginChk", required=false, defaultValue="0") String snsLoginChk, String userId, String password, HttpServletResponse response) throws Exception
 	{		
 		Member m = service.selectOne(userId);
 		
@@ -489,6 +497,7 @@ public class UserController {
 				//맞는지 비교해줌.
 				msg="로그인 성공";
 				mv.addObject("memberLoggedIn",m);
+				mv.addObject("snsLoginChk",snsLoginChk);
 				userChk = m.getSeparator();
 				if(saveId.equals("1")) {
 					Cookie setCookie = new Cookie("saveId", saveId); // 쿠키 생성

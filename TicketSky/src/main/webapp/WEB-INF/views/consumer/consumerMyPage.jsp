@@ -23,7 +23,12 @@
                           <table class="table table-bordered myInfo" >
                             <tr>
                               <td style="vertical-align: middle;">아이디</td>
-                              <td style="vertical-align: middle;">${memberLoggedIn.userId }</td>
+                              <c:if test="${snsLoginChk ne '1' }">
+                              	<td style="vertical-align: middle;">${memberLoggedIn.userId }</td>
+                              </c:if>
+                              <c:if test="${snsLoginChk eq '1' }">
+                              	<td style="vertical-align: middle;">Facebook Login</td>
+                              </c:if>
                             </tr>
                             <tr>
                               <td  style="vertical-align: middle;">이름</td>

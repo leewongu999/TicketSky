@@ -30,10 +30,11 @@
         </div>
         <hr>
         <form class="form-horizontal" id="enrollform" action="${path }/user/consumerEnrollEnd" method="post" onsubmit="return fn_enroll_validate();">
+        <c:if test="${snsLogin ne '1' }">
           <div class="form-group" >
             <label for="inputEmail" class="col-xs-2 control-label">아이디</label>
             <div class="col-xs-9">
-              <input type="text" name="userId" class="form-control" id="userId_" placeholder="아이디_4글자이상">
+              <input type="text" name="userId" class="form-control" id="userId_" placeholder="아이디_4글자이상" value="">
               <span class="guide ok" style="color:blue">이 아이디는 사용 가능합니다.</span>
               <span class="guide error" style="color:red">이 아이디는 사용 불가능합니다.</span>
               <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value='0'/>
@@ -53,6 +54,32 @@
               <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
             </div>
           </div>
+        </c:if>
+        <c:if test="${snsLogin eq '1' }">
+        	<div class="form-group" hidden>
+            <label for="inputEmail" class="col-xs-2 control-label">아이디</label>
+            <div class="col-xs-9">
+              <input type="text" name="userId" class="form-control" id="userId_" placeholder="아이디_4글자이상" value="${userId}">
+              <span class="guide ok" style="color:blue">이 아이디는 사용 가능합니다.</span>
+              <span class="guide error" style="color:red">이 아이디는 사용 불가능합니다.</span>
+              <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value='1'/>
+            </div>
+          </div>
+          <div class="form-group" hidden>
+            <label for="inputPassword" class="col-xs-2 control-label">비밀번호</label>
+            <div class="col-xs-9">
+              <input type="password" name="password" class="form-control" id="password_" placeholder="비밀번호" value="${userId }">
+              <p class="help-block">숫자, 영문, 특수문자 포함 8자 이상 16자 이하</p>
+            </div>
+          </div>
+          <div class="form-group" hidden>
+            <label for="inputPasswordCheck" class="col-xs-2 control-label">비밀번호 확인</label>
+            <div class="col-xs-9">
+              <input type="password" class="form-control" id="password2" placeholder="비밀번호 확인" value="${userId}">
+              <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+            </div>
+          </div>
+        </c:if>
           <div class="form-group">
             <label for="inputRipple" class="col-xs-2 control-label">이메일</label>
             <div class="col-xs-9">
@@ -62,7 +89,12 @@
           <div class="form-group">
             <label for="inputName" class="col-xs-2 control-label">이름</label>
             <div class="col-xs-9">
+        	<c:if test="${snsLogin ne '1' }">
               <input type="text" name="userName" class="form-control" placeholder="이름">
+            </c:if>
+            <c:if test="${snsLogin eq '1' }">
+            	<input type="text" name="userName" class="form-control" placeholder="이름" value="${userName }" readonly>
+            </c:if>
             </div>
           </div>
 
@@ -76,7 +108,8 @@
             <div class="form-group">
               <label for="inputName" class="col-xs-2 control-label">생년월일</label>
               <div class="col-xs-9">
-                <input type="text" name="birthdate" class="form-control"  placeholder="생년월일">
+                <input id="birthdate" type="text" name="birthdate" class="form-control"  placeholder="생년월일">
+                <p class="help-block">YYYYMMDD 형식으로 입력해주세요</p>
               </div>
             </div>
             <div class="form-group">
@@ -239,6 +272,22 @@ $(function(){
 					$("#password_").val("");
 					$("#password2").val("");
 					$("#password_").focus();
+				}
+				var regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}/;
+
+				if(!regex.test($("#password_").val())){
+					alert('숫자, 영문, 특수문자 포함 8자 이상 16자 이하로 설정해주세요.');
+					$("#password_").focus();
+				}
+			});
+			$("#birthdate").blur(function(){
+				var dayRegExp = /^(19|20)\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$/;
+				if($('#birthdate').val()!=''){
+					if(!dayRegExp.test($("#birthdate").val())){
+						alert('YYYYMMDD 형식으로 입력해주세요.');
+						$("#birthdate").val("");
+						$("#birthdate").focus();
+					}
 				}
 			});
 		});

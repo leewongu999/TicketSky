@@ -40,7 +40,7 @@
   		      <div class="form-group">
               <div class="">
               	<label>비밀번호 확인</label>
-                <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력하세요." required="required">
+                <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력하세요." required="required" <c:if test="${snsLoginChk eq '1' }">value="${memberLoggedIn.userId }"</c:if>>
               </div>
             </div>
             <div class="form-group">
