@@ -109,13 +109,17 @@ function fbLogin() {
 function snslogin(){
 	FB.getLoginStatus(function(response) {
 		if (response.status === 'connected') {
+			FB.api('/me', {fields: 'name,email,gender,birthday'}, function(response) {
+		        console.log("gd"+JSON.stringify(response));
+		    });
+			
 			FB.api('/me', function(res) {
 				// 제일 마지막에 실행
 				console.log("Success Login : " + res.name);
 				console.log("Success Login : " + res.id);
 				// alert("Success Login : " + response.name);
 				
-				/*Ticketsky 페이지로 이동!*/
+				
 				if(enrollchk(res.id) == true){ // 회원정보가 없음
 					$('#snsLogin').val("1");
 					$('#snsUserId').val(res.id);
@@ -124,14 +128,13 @@ function snslogin(){
 				    document.myForm.target = window.opener.name; // 타켓을 부모창으로 설정
 				    document.myForm.action = "${path}/user/consumerEnroll";
 				    $("#myForm").submit();
-					self.close();
+					self.close(); 
 				}else{ // 회원정보가 있음
-					
+				 	
 					$('#userId').val(res.id);
-					$('#password').val(res.id);
 					$("#snsLoginChk").val('1');
 					$('#saveId').prop("checked",false);
-					$('#loginForm').submit();
+					$('#loginForm').submit(); 
 				}
 			});
 		} else if (response.status === 'not_authorized') {

@@ -37,12 +37,22 @@
         </div>
         <hr>
         <form action="${path }/ticketsky/user/userDelete.do" method="post">
+        <c:if test="${snsLoginChk eq '0' }">
   		      <div class="form-group">
               <div class="">
               	<label>비밀번호 확인</label>
-                <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력하세요." required="required" <c:if test="${snsLoginChk eq '1' }">value="${memberLoggedIn.userId }"</c:if>>
+                <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력하세요." required="required" >
               </div>
             </div>
+        </c:if>
+        <c:if test="${snsLoginChk eq '1' }">
+  		      <div class="form-group">
+              <div class="">
+              	<label>탈퇴를 하면 데이터가 삭제됩니다.</label>
+              	<label>확인을 누르면 탈퇴가 완료됩니다.</label>
+              </div>
+            </div>
+        </c:if>
             <div class="form-group">
               <button type="submit" class="btn btn-danger login-btn btn-block">확인</button>
             </div>

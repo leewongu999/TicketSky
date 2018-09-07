@@ -16,7 +16,36 @@ public class Member {
 	private String ratingCode;
 	private String ratingName;
 	private String separator;
+	private String snsLogin;
 	
+	public Member(String userId, String password, String userName, String email, String gender, String birthdate,
+			String address, String phone, int categoryNo, Date enrollDate, String ratingCode, String ratingName,
+			String separator, String snsLogin) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.userName = userName;
+		this.email = email;
+		this.gender = gender;
+		this.birthdate = birthdate;
+		this.address = address;
+		this.phone = phone;
+		this.categoryNo = categoryNo;
+		this.enrollDate = enrollDate;
+		this.ratingCode = ratingCode;
+		this.ratingName = ratingName;
+		this.separator = separator;
+		this.snsLogin = snsLogin;
+	}
+
+	public String getSnsLogin() {
+		return snsLogin;
+	}
+
+	public void setSnsLogin(String snsLogin) {
+		this.snsLogin = snsLogin;
+	}
+
 	public Member(String userId, String password, String userName, String email, String gender, String birthdate,
 			String address, String phone, int categoryNo, Date enrollDate, String ratingCode, String ratingName,
 			String separator) {

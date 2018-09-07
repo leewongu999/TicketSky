@@ -31,6 +31,7 @@
         <hr>
         <form class="form-horizontal" id="enrollform" action="${path }/user/consumerEnrollEnd" method="post" onsubmit="return fn_enroll_validate();">
         <c:if test="${snsLogin ne '1' }">
+        <input type="hidden" name="snsLogin" value="0"/>
           <div class="form-group" >
             <label for="inputEmail" class="col-xs-2 control-label">아이디</label>
             <div class="col-xs-9">
@@ -56,6 +57,8 @@
           </div>
         </c:if>
         <c:if test="${snsLogin eq '1' }">
+                <input type="hidden" name="snsLogin" value="1"/>
+        
         	<div class="form-group" hidden>
             <label for="inputEmail" class="col-xs-2 control-label">아이디</label>
             <div class="col-xs-9">

@@ -319,13 +319,14 @@ public class UserController {
 		String msg="";
 		String loc="";
 		String deleteChk="";
+		System.out.println(password);
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		String snsLoginChk = (String)session.getAttribute("snsLoginChk"); 
 		if(bcryptPasswordEncoder.matches(password, memberLoggedIn.getPassword())){ // 현재 비밀번호가 일치하면
 			int result = service.deleteConsumer(memberLoggedIn.getUserId());
 			if(result>0){
 				msg="회원탈퇴가 정상적으로 처리되었습니다.";
 				loc="/user/userlogout.do";
-				
 			}
 			else {
 				msg="회원탈퇴가 실패하였습니다";
@@ -334,8 +335,21 @@ public class UserController {
 			deleteChk="1";
 
 		}else {
-			msg="비밀번호가 일치하지 않습니다.";
-			loc="/user/userDeleteChk";
+			if(snsLoginChk.equals("1")) { // sns 로그인이면 
+				int result = service.deleteConsumer(memberLoggedIn.getUserId());
+				if(result>0){
+					msg="회원탈퇴가 정상적으로 처리되었습니다.";
+					loc="/user/userlogout.do";
+				}
+				else {
+					msg="회원탈퇴가 실패하였습니다";
+					loc="/user/userDelete";
+				}
+				deleteChk="1";
+			}else {
+				msg="비밀번호가 일치하지 않습니다.";
+				loc="/user/userDeleteChk";
+			}
 		}
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
@@ -348,6 +362,7 @@ public class UserController {
 		String msg="";
 		String loc="";
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		String snsLoginChk= (String)session.getAttribute("snsLoginChk");
 		String enPw = bcryptPasswordEncoder.encode(m.getPassword());
 		m.setPassword(enPw);
 		if(bcryptPasswordEncoder.matches(oripassword, memberLoggedIn.getPassword())){ // 현재 비밀번호가 일치하면
@@ -361,8 +376,20 @@ public class UserController {
 				loc="/user/userUpdate";
 			}
 		}else {
-			msg="비밀번호가 일치하지 않습니다.";
-			loc="/user/userUpdate";
+			if(snsLoginChk.equals("1")) {
+				int result = service.updateConsumer(m);
+				if(result>0){
+					msg="회원정보가 변경되었습니다. 다시 로그인 해주세요";
+					loc="/user/userlogout.do";
+				}
+				else {
+					msg="회원정보 수정이 실패하였습니다.";
+					loc="/user/userUpdate";
+				}
+			}else {
+				msg="비밀번호가 일치하지 않습니다.";
+				loc="/user/userUpdate";
+			}
 		}
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
@@ -522,8 +549,30 @@ public class UserController {
 			}
 			else
 			{
-				msg="비밀번호가 일치하지 않습니다.";
-				loc="/user/login";
+				if(snsLoginChk.equals("1")) {
+					msg="로그인 성공";
+					mv.addObject("memberLoggedIn",m);
+					mv.addObject("snsLoginChk",snsLoginChk);
+					userChk = m.getSeparator();
+					if(saveId.equals("1")) {
+						Cookie setCookie = new Cookie("saveId", saveId); // 쿠키 생성
+						Cookie id = new Cookie("id", userId); // 쿠키 생성
+						setCookie.setMaxAge(60*60*24*30);
+						response.addCookie(setCookie);
+						id.setMaxAge(60*60*24*30);
+						response.addCookie(id);
+					}else {
+						Cookie setCookie = new Cookie("saveId", null); // 쿠키 생성
+						setCookie.setMaxAge(0); // 기간을 하루로 지정
+						response.addCookie(setCookie);
+						Cookie id = new Cookie("id", null); // 쿠키 생성
+						id.setMaxAge(0); // 기간을 하루로 지정
+						response.addCookie(id);
+					}
+				}else {
+					msg="비밀번호가 일치하지 않습니다.";
+					loc="/user/login";
+				}
 			}
 		}
 		mv.addObject("msg",msg);
