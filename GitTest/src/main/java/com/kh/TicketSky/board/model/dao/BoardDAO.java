@@ -4,14 +4,20 @@ import com.kh.TicketSky.board.model.vo.*;
 import java.util.*;
 
 public interface BoardDAO {
-	List<Board> selectList(SqlSessionTemplate sst, int cPage, int numPerPage);
-	int selectTotalContents(SqlSessionTemplate sst);
-	int insertBoard(SqlSessionTemplate sst, Board b);
-	int updateBoard(SqlSessionTemplate sst, Board b);
-	int deleteBoard(SqlSessionTemplate sst, Board b);
-	Board selectOne(SqlSessionTemplate sst, int boardNo);
-	int addVisits(SqlSessionTemplate sst, Board b);
-	List<Map<String,Object>> selectSearch(SqlSessionTemplate sst, Map<String,Object> map);
-	int selectSearchTotalContents(SqlSessionTemplate sst, Map<String,Object> map);
-	int addReply(SqlSessionTemplate sst, Reply re);
+	// 1. 게시판 관련
+	List<Board> selectList(SqlSessionTemplate sst, int cPage, int numPerPage);		// 전체 게시글 출력
+	int selectTotalContents(SqlSessionTemplate sst);								// 전체 게시글의 수
+	int insertBoard(SqlSessionTemplate sst, Board b);								// 새 게시글 등록
+	int updateBoard(SqlSessionTemplate sst, Board b);								// 해당 게시글 내용 수정
+	int deleteBoard(SqlSessionTemplate sst, Board b);								// 해당 게시글 삭제
+	Board selectOne(SqlSessionTemplate sst, int boardNo);							// 해당 게시글 조회
+	int addVisits(SqlSessionTemplate sst, Board b);									// 조회수 증가
+	// 2. 검색 조건을 만족하는 게시글 관련
+	List<Map<String,Object>> selectSearch(SqlSessionTemplate sst, Map<String,Object> map);	// 검색 조건을 만족하는 게시글만 출력
+	int selectSearchTotalContents(SqlSessionTemplate sst, Map<String,Object> map);			// 검색 조건을 만족하는 게시글만의 수 출력
+	// 3. 댓글 관련
+	int addReply(SqlSessionTemplate sst, Reply re);									// 댓글 달기
+	List<Reply> showReplies(SqlSessionTemplate sst, int boardNo);					// 해당 게시글에 달린 전체 댓글 보여주기
+	int selectTotalReplies(SqlSessionTemplate sst, int boardNo);					// 해당 게시글에 달린 댓글의 수
+	int deleteReply(SqlSessionTemplate sst, Reply re);								// 해당 게시글에 달린 댓글 삭제(댓글 고유 번호로 찾는다.)
 }

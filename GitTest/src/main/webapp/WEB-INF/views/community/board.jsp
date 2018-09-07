@@ -7,6 +7,7 @@
 	int totalContents = Integer.parseInt(String.valueOf(request.getAttribute("totalContents")));
 	String pageBar = (String)(request.getAttribute("pageBar"));
 	List<Board> list = (List<Board>)request.getAttribute("list");
+	int totalReplies = 0;
 %>
 <style>
     a.boardtitle{
@@ -86,6 +87,9 @@
 		                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
 		                        </i>
 		                    <%}%>
+		                    <span style="font-size:10px;color:red;">
+		                    	<strong>(<%=totalReplies%>)</strong>
+		                    </span>
                         </td>
                         <td><%="userId"%></td>
                         <td><%=b.getWriteDate()%></td>

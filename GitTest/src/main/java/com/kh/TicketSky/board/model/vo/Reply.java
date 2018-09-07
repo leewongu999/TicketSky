@@ -7,17 +7,20 @@ public class Reply {
 	private String userId;
 	private String comments;
 	private Date writeDate;
+	private int boardNo;		// 댓글 달린 게시글의 번호를 알아야 한다.
 	
 	public Reply() {
 		
 	}
 
-	public Reply(int replyNo, String userId, String comments, Date writeDate) {
+	public Reply(int replyNo, String userId, String comments,
+			Date writeDate, int boardNo) {
 		super();
 		this.replyNo = replyNo;
 		this.userId = userId;
 		this.comments = comments;
 		this.writeDate = writeDate;
+		this.boardNo = boardNo;
 	}
 
 	public int getReplyNo() {
@@ -52,9 +55,18 @@ public class Reply {
 		this.writeDate = writeDate;
 	}
 
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
 	@Override
 	public String toString() {
 		return "댓글 번호 : " + replyNo + ", 댓글 작성자 ID : " + userId
-			+ ", 댓글 내용 : " + comments + ", 댓글 단 날 : " + writeDate;
+			+ ", 댓글 내용 : " + comments + ", 댓글 단 날 : " + writeDate
+			+ ", 게시글 번호 : " + boardNo;
 	}
 }

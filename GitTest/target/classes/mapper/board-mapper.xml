@@ -3,29 +3,41 @@
 <mapper namespace="board">
 	<resultMap type="map" id='search'>
 	</resultMap>
+	<!-- 게시판 관련 -->
+	<!-- 게시글을 최근에 올린 순서대로 정렬한다. 단, 페이징 처리를 하며, 한 페이지마다 10개의 게시글씩 올린다. -->
 	<select id="selectList" resultType="board">
 		SELECT * FROM freeboard ORDER BY boardNo DESC
 	</select>
+	<!-- 전체 게시글의 수를 구한다. -->
 	<select id="selectOne" resultType="_int">
 		SELECT COUNT(*) cnt FROM freeboard
 	</select>
+	<!-- 새 게시글을 올린다. -->
 	<insert id="insert" parameterType="board">
 		INSERT INTO freeboard VALUES(freeboard_SEQ.nextval,#{boardTitle, jdbcType=VARCHAR},
 									 #{content, jdbcType=VARCHAR},#{userId, jdbcType=VARCHAR},
 									 0,#{attachmentNo},#{originalFileName, jdbcType=VARCHAR},sysdate)
 	</insert>
+	<!-- 해당 게시글의 내용을 수정한다. 그러기 위해서는 그 게시글의 고유 번호를 찾아야 한다. 그렇지 않으면 모든 게시글의 내용이 수정된다. -->
 	<update id="update" parameterType="board">
 		UPDATE freeboard SET content=#{content, jdbcType=VARCHAR} WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
+	<!-- 해당 게시글만 삭제할 수 있도록 게시글 고유 번호로 찾는다. 그렇지 않으면 모든 게시글이 삭제된다. -->
 	<delete id="delete" parameterType="board">
 		DELETE FROM freeboard WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</delete>
+	
+	<!-- 특정한 게시글 하나만 볼 수 있도록 한다. -->
 	<select id="selectBoard" parameterType="_int" resultType="board">
 		SELECT * FROM freeboard WHERE boardNo=#{boardNo}
 	</select>
+	<!-- 조회수 관련 -->
 	<update id="addVisit" parameterType="board">
 		UPDATE freeboard SET visits=visits+1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
+	
+	<!-- 게시글 검색 관련 -->
+	<!-- 검색한 게시글만 출력한다. -->
 	<select id='selectSearch' parameterType="map" resultMap="search">
 		SELECT * FROM freeboard WHERE
 		<if test="item != null and item !=''">
@@ -33,13 +45,30 @@
 		</if>
 		ORDER BY boardNo DESC
 	</select>
+	<!-- 검색해서 나온 게시글만의 수를 출력한다. -->
 	<select id='selectSearchOne' parameterType="map" resultType="_int">
 		SELECT COUNT(*) cnt FROM freeboard WHERE
 		<if test="item != null and item !=''">
 			${item} LIKE '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'
 		</if>
 	</select>
+	
+	<!-- 댓글 관련 -->
+	<!-- 댓글은 해당 게시글에만 달아야 하므로 게시글 고유 번호로 따져야 한다. -->
 	<insert id="addReply" parameterType="reply">
-		INSERT INTO community_reply VALUES(community_reply_SEQ.nextval,#{userId, jdbcType=VARCHAR},#{comments, jdbcType=VARCHAR},sysdate)
+		INSERT INTO community_reply VALUES(community_reply_SEQ.nextval,
+		#{userId, jdbcType=VARCHAR},#{comments, jdbcType=VARCHAR},sysdate,#{boardNo, jdbcType=NUMERIC})
 	</insert>
+	<!-- 해당 게시글에 달린 댓글을 모두 구한다. -->
+	<select id="showReplies" resultType="reply" parameterType="_int">
+		SELECT * FROM community_reply WHERE boardNo=#{boardNo}
+	</select>
+	<!-- 고유의 번호를 가진 게시글에 달린 각각의 댓글의 수 -->
+	<select id="countReplies" resultType="_int" parameterType="_int">
+		SELECT COUNT(*) cnt FROM community_reply WHERE boardNo=#{boardNo}
+	</select>
+	<!-- 댓글 고유 번호로 해당 댓글만 삭제 -->
+	<delete id="deleteReply" parameterType="reply">
+		DELETE FROM community_reply WHERE replyNo=#{replyNo, jdbcType=NUMERIC}
+	</delete>
 </mapper>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-		import="com.kh.TicketSky.board.model.vo.*"%>
+		import="com.kh.TicketSky.board.model.vo.*, java.util.*"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -8,7 +8,7 @@
 	response.setContentType("text/html;charset=UTF-8");
 	Board b = (Board)request.getAttribute("board");
 	int visits = Integer.parseInt(String.valueOf(request.getAttribute("visits")));
-	Reply re = (Reply)request.getAttribute("reply");
+	List<Reply> replies = (List<Reply>)request.getAttribute("replies");
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글" name="title"/>
@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <th>조회수</th>
-                        <td><%=b.getVisits()+1%></td>
+                        <td><%=b.getVisits()%></td>
                         <th>첨부파일</th>
                         <td colspan='5'>
                         <%if(b.getOriginalFileName()!=null){%>
@@ -81,10 +81,10 @@
                     <input type='button' class='xet_btn medium' value='수정' name='update' onclick='fn_update()'/>
                     <input type='button' class='xet_btn medium' value='삭제' name='delete' onclick='fn_delete()'/>
                     <input type='button' class='xet_btn medium' value='이 게시글 신고' name='report' onclick='fn_report()'/>
-                    <input type='button' class='xet_btn medium' value='뒤로 가기' onclick='fn_back()'/>
                 </div>
                 <hr>
                 <form method='post' action="${path}/community/comboardReply">
+                	<input type="hidden" name="boardNo" value="<%=b.getBoardNo()%>"/>
                     <div style="float:left;">
                         <h5>댓글 달기&nbsp;</h5>
                     </div>
@@ -106,9 +106,6 @@
                     function fn_report(){
                         location.href="${path}/community/comboardReport.do";
                     }
-                    function fn_back(){
-                    	history.back(-1);                       // 현재 페이지를 기준으로 바로 직전 페이지로 돌아가게 하는 메소드 구현
-                    }
                     function fn_reply(){
                     	if($('#reply').val()==''){
                     		alert("댓글 내용을 입력하세요.");
@@ -121,19 +118,27 @@
                     	$('#reply').val("");
                     }
                 </script>
-                <%if(re!=null){%>
-	                <form>
-	                	<div>
-	                		<table id='xet_board'>
-	                			<tr>
-	                				<td><%=re.getUserId()%></td>
-	                				<td><%=re.getComments()%></td>
-	                				<td><%=re.getWriteDate()%></td>
-	                			</tr>
-	                		</table>
-	                		<input type="button" name="deleteReply" id="delReply" value="삭제"/>
-	                	</div>
-	                </form>
+                <hr>
+                <%if(replies!=null){%>
+                	<%for(Reply re : replies){%>
+                	<section class='new_arrivals_area section-padding-80 clearfix'>
+		                <form method="post" action="${path}/community/delReply">
+		                	<input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
+		                	<input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
+		                	<div>
+		                		<table id='xet_board' class='boardList'>
+		                			<tr>
+		                				<td><%=re.getUserId()%></td>
+		                				<td><%=re.getComments()%></td>
+		                				<td><%=re.getWriteDate()%></td>
+		                				<td><input type="submit" name="deleteReply" class="xet_btn medium" value="삭제"/></td>
+		                			</tr>
+		                		</table>
+		                	</div>
+		                </form>
+	                </section>
+	                <hr>
+	                <%}%>
 	            <%}%>
             </div>
         </section>

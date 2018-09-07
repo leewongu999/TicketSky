@@ -17,7 +17,8 @@ public class BoardController {
 	private BoardService service;
 	
 	@RequestMapping("/community/board")
-	public String boardList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, HttpServletRequest request) {
+	public String boardList(@RequestParam(value="cPage", required=false, defaultValue="1")
+							int cPage, HttpServletRequest request) {
 		final int numPerPage = 10;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -37,8 +38,10 @@ public class BoardController {
 	
 	@RequestMapping("/community/comboardView")
 	public String selectBoard(int boardNo, HttpServletRequest request) {
-		request.setAttribute("board", service.selectOne(boardNo));
 		request.setAttribute("visits", service.addVisits(service.selectOne(boardNo)));
+		request.setAttribute("board", service.selectOne(boardNo));
+		List<Reply> replies = service.showReplies(boardNo);
+		request.setAttribute("replies", replies);
 		return "community/comboardView";
 	}
 	
@@ -176,11 +179,16 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardReply")
-	public String addReply(int boardNo, HttpServletRequest request) {
+	public String addReply(HttpServletRequest request) {
 		String replyContent = request.getParameter("replyContent");
 		String msg = "";
-		
-		Reply re = new Reply(0, "userId2", replyContent, null);
+		int boardNo;
+		try {
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		}catch(NumberFormatException e) {
+			boardNo = 1;
+		}
+		Reply re = new Reply(0, "userId2", replyContent, null, boardNo);
 		int result = service.addReply(re);
 		if(result>0) {
 			msg = "댓글이 정상적으로 달렸습니다.";
@@ -188,9 +196,31 @@ public class BoardController {
 		else {
 			msg = "댓글 추가를 실패하였습니다.";
 		}
+		
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/community/comboardView?boardNo="+service.selectOne(boardNo).getBoardNo());
+		request.setAttribute("loc", "/community/comboardView?boardNo="+re.getBoardNo());
 		request.setAttribute("reply", re);
-		return "community/comboardView";
+		return "common/msg";
+	}
+	
+	@RequestMapping("/community/delReply")
+	public String deleteReply(Reply re, HttpServletRequest request) {
+		String msg = "";
+		try {
+			re.setReplyNo(Integer.parseInt(request.getParameter("replyNo")));
+			re.setBoardNo(Integer.parseInt(request.getParameter("bNo")));
+		}catch(NumberFormatException e) {
+			re.setReplyNo(1);
+			re.setBoardNo(1);
+		}
+		int result = service.deleteReply(re);
+		if(result>0) {
+			msg = "댓글이 정상적으로 삭제되었습니다.";
+		}else {
+			msg = "댓글 삭제가 실패하였습니다.";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/community/comboardView?boardNo="+re.getBoardNo());
+		return "common/msg";
 	}
 }
