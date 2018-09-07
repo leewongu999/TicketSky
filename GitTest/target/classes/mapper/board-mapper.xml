@@ -16,7 +16,7 @@
 	<insert id="insert" parameterType="board">
 		INSERT INTO freeboard VALUES(freeboard_SEQ.nextval,#{boardTitle, jdbcType=VARCHAR},
 									 #{content, jdbcType=VARCHAR},#{userId, jdbcType=VARCHAR},
-									 0,#{attachmentNo},#{originalFileName, jdbcType=VARCHAR},sysdate)
+									 0,#{attachmentNo},#{originalFileName, jdbcType=VARCHAR},sysdate,0)
 	</insert>
 	<!-- 해당 게시글의 내용을 수정한다. 그러기 위해서는 그 게시글의 고유 번호를 찾아야 한다. 그렇지 않으면 모든 게시글의 내용이 수정된다. -->
 	<update id="update" parameterType="board">
@@ -61,7 +61,7 @@
 	</insert>
 	<!-- 해당 게시글에 달린 댓글을 모두 구한다. -->
 	<select id="showReplies" resultType="reply" parameterType="_int">
-		SELECT * FROM community_reply WHERE boardNo=#{boardNo}
+		SELECT * FROM community_reply WHERE boardNo=#{boardNo} ORDER BY writeDate ASC
 	</select>
 	<!-- 고유의 번호를 가진 게시글에 달린 각각의 댓글의 수 -->
 	<select id="countReplies" resultType="_int" parameterType="_int">

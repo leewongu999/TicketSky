@@ -1,7 +1,7 @@
 package com.kh.TicketSky.board.controller;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
-import org.slf4j.*;
+/*import org.slf4j.*;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import com.kh.TicketSky.common.*;
 
 @Controller
 public class BoardController {
-	private Logger logger = LoggerFactory.getLogger(BoardController.class);
+/*	private Logger logger = LoggerFactory.getLogger(BoardController.class);*/
 	
 	@Autowired
 	private BoardService service;
@@ -36,12 +36,26 @@ public class BoardController {
 		return "community/board";
 	}
 	
+	@RequestMapping("/community/replies")
+	public String replies(int boardNo, HttpServletRequest request) {
+		int totalReplies;
+		try {
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			totalReplies = service.selectTotalReplies(boardNo);
+		}catch(NumberFormatException e) {
+			boardNo = 1;
+			totalReplies = 0;
+		}
+		request.setAttribute("totalReplies", totalReplies);
+		return "community/board";
+	}
+	
 	@RequestMapping("/community/comboardView")
 	public String selectBoard(int boardNo, HttpServletRequest request) {
 		request.setAttribute("visits", service.addVisits(service.selectOne(boardNo)));
 		request.setAttribute("board", service.selectOne(boardNo));
-		List<Reply> replies = service.showReplies(boardNo);
-		request.setAttribute("replies", replies);
+		request.setAttribute("replies", service.showReplies(boardNo));
+		request.setAttribute("totalReplies", service.selectTotalReplies(boardNo));
 		return "community/comboardView";
 	}
 	
@@ -58,7 +72,7 @@ public class BoardController {
 		String userID = request.getParameter("userID");
 		String file = request.getParameter("file");
 		String contents = request.getParameter("content");
-		b = new Board(0, boardTitle, contents, userID, 0, 0, file, null);
+		b = new Board(0, boardTitle, contents, userID, 0, 0, file, null, 0);
 		int result = service.insertBoard(b);
 		if(result>0) {
 			msg = "성공적으로 등록되었습니다.";
@@ -79,6 +93,9 @@ public class BoardController {
 			boardNo = 1;
 		}
 		b = service.selectOne(boardNo);
+		b.setBoardNo(boardNo);
+		b.setBoardTitle(request.getParameter("title"));
+		b.setUserId(request.getParameter("userID"));
 		request.setAttribute("board", b);
 		return "community/comboardUpdate";
 	}
@@ -87,7 +104,6 @@ public class BoardController {
 	public String updateBoard(Board b, HttpServletRequest request) {
 		request.getCharacterEncoding();
 		String msg = "";
-		String loc = "";
 		int boardNo;
 		try {
 			boardNo = Integer.parseInt(request.getParameter("boardNo"));
@@ -100,19 +116,15 @@ public class BoardController {
 		String content = request.getParameter("content");
 		b = (Board)request.getAttribute("board");
 		
-		b = new Board(boardNo, boardtitle, content, userID, 0, 0, file, null);
+		b = new Board(boardNo, boardtitle, content, userID, 0, 0, file, null, 0);
 		int result = service.updateBoard(b);
-		System.out.println("게시글 수정 결과 : "+b);
-		System.out.println("결과 : "+result);
 		if(result>0) {
 			msg = "정상적으로 수정되었습니다.";
-			loc = "/community/comboardView?boardNo="+b.getBoardNo();
 		}else {
 			msg = "수정을 실패하였습니다.";
-			loc = "/community/board?cPage=1";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
+		request.setAttribute("loc", "/community/board?cPage=1");
 		return "common/msg";
 	}
 	
@@ -132,7 +144,6 @@ public class BoardController {
 	@RequestMapping("/community/comboardDeleteEnd")
 	public String deleteBoard(Board b, HttpServletRequest request) {
 		String msg = "";
-		String loc = "";
 		try {
 			b.setBoardNo(Integer.parseInt(request.getParameter("deleteBoardNo")));
 		}catch(NumberFormatException e) {
@@ -142,13 +153,11 @@ public class BoardController {
 		System.out.println("선택한 게시글 번호 : "+b.getBoardNo());
 		if(result>0) {
 			msg = "게시글이 정상적으로 삭제되었습니다.";
-			loc = "/community/board?cPage=1";
 		}else {
 			msg = "삭제를 실패하였습니다.";
-			loc = "/community/board?cPage=1";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
+		request.setAttribute("loc", "/community/board?cPage=1");
 		return "common/msg";
 	}
 	
@@ -182,23 +191,28 @@ public class BoardController {
 	public String addReply(HttpServletRequest request) {
 		String replyContent = request.getParameter("replyContent");
 		String msg = "";
+		String loc = "";
 		int boardNo;
 		try {
 			boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		}catch(NumberFormatException e) {
 			boardNo = 1;
 		}
-		Reply re = new Reply(0, "userId2", replyContent, null, boardNo);
+		// 아래의 줄 설명
+		// Reply 객체에서 두 번째 요소(String형)는 Member 객체에서 가져와야 한다.
+		// 여기서는 임의의 값을 넣었기 때문에, 나중에 다른 것과 합칠 때에는 이 입력한 값을 지우고 m.getUserId()와 같이 바꿔주세요.
+		Reply re = new Reply(0, "유병승", replyContent, null, boardNo);
+		
 		int result = service.addReply(re);
 		if(result>0) {
 			msg = "댓글이 정상적으로 달렸습니다.";
-		}
-		else {
+			loc = "/community/comboardView?boardNo="+re.getBoardNo();
+		}else {
 			msg = "댓글 추가를 실패하였습니다.";
+			loc = "/community/board";
 		}
-		
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/community/comboardView?boardNo="+re.getBoardNo());
+		request.setAttribute("loc", loc);
 		request.setAttribute("reply", re);
 		return "common/msg";
 	}
@@ -220,7 +234,7 @@ public class BoardController {
 			msg = "댓글 삭제가 실패하였습니다.";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/community/comboardView?boardNo="+re.getBoardNo());
+		request.setAttribute("loc", "/community/board");
 		return "common/msg";
 	}
 }

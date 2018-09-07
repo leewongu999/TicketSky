@@ -9,6 +9,7 @@
 	Board b = (Board)request.getAttribute("board");
 	int visits = Integer.parseInt(String.valueOf(request.getAttribute("visits")));
 	List<Reply> replies = (List<Reply>)request.getAttribute("replies");
+	int totalReplies = Integer.parseInt(String.valueOf(request.getAttribute("totalReplies")));
 %>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글" name="title"/>
@@ -42,7 +43,7 @@
         background-color:beige;
     }
 </style>
-        <section class='height-800'>
+        <section class='height-600'>
             <div class='container'>
                 <div class='text-center'>
                     <h4 class='boardTitle'>게시글</h4>
@@ -78,9 +79,13 @@
                 </table>
                 <hr>
                 <div id="buttons">
-                    <input type='button' class='xet_btn medium' value='수정' name='update' onclick='fn_update()'/>
-                    <input type='button' class='xet_btn medium' value='삭제' name='delete' onclick='fn_delete()'/>
-                    <input type='button' class='xet_btn medium' value='이 게시글 신고' name='report' onclick='fn_report()'/>
+                	<form method='post' action="${path}/community/comboardUpdate">
+                		<input type="hidden" name="title" value="<%=b.getBoardTitle()%>"/>
+                		<input type="hidden" name="userID" value="<%=b.getUserId()%>"/>
+                    	<input type='button' class='xet_btn medium' value='수정' name='update' onclick='fn_update()'/>
+                    	<input type='button' class='xet_btn medium' value='삭제' name='delete' onclick='fn_delete()'/>
+	                    <input type='button' class='xet_btn medium' value='이 게시글 신고' name='report' onclick='fn_report()'/>
+                    </form>
                 </div>
                 <hr>
                 <form method='post' action="${path}/community/comboardReply">
@@ -119,27 +124,28 @@
                     }
                 </script>
                 <hr>
-                <%if(replies!=null){%>
-                	<%for(Reply re : replies){%>
-                	<section class='new_arrivals_area section-padding-80 clearfix'>
-		                <form method="post" action="${path}/community/delReply">
-		                	<input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
-		                	<input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
-		                	<div>
-		                		<table id='xet_board' class='boardList'>
-		                			<tr>
-		                				<td><%=re.getUserId()%></td>
-		                				<td><%=re.getComments()%></td>
-		                				<td><%=re.getWriteDate()%></td>
-		                				<td><input type="submit" name="deleteReply" class="xet_btn medium" value="삭제"/></td>
-		                			</tr>
-		                		</table>
-		                	</div>
-		                </form>
-	                </section>
-	                <hr>
-	                <%}%>
-	            <%}%>
+                
             </div>
         </section>
+        <%if(replies!=null){%>
+        	<section class='new_arrivals_area section-padding-80 clearfix'>
+        	<div class="container">
+        		<h5>댓글(<%=totalReplies%>)</h5>
+	        	<form method="post" action="${path}/community/delReply">
+		        	<table id='xet_board' class='boardList'>
+		            <%for(Reply re : replies){%>
+		            	<input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
+				        <input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
+		            	<tr>
+				            <td><%=re.getUserId()%></td>
+				            <td><%=re.getComments()%></td>
+				            <td><%=re.getWriteDate()%></td>
+				            <td><input type="submit" name="deleteReply" class="xet_btn medium" value="삭제"/></td>
+			            </tr>
+			        <%}%>
+			        </table>
+		        </form>
+	        </div>
+	        </section>
+	    <%}%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

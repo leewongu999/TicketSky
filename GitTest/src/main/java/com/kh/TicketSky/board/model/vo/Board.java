@@ -10,13 +10,14 @@ public class Board {
 	private int attachmentNo;			// 첨부파일번호
 	private String originalFileName;	// 업로드 첨부파일명
 	private Date writeDate;				// 작성일
+	private int countReplies;			// 각 게시글에 달린 댓글 수
 	
 	public Board() {
 		
 	}
 
 	public Board(int boardNo, String boardTitle, String content, String userId, int visits,
-			int attachmentNo, String originalFileName, Date writeDate) {
+			int attachmentNo, String originalFileName, Date writeDate, int countReplies) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -26,6 +27,7 @@ public class Board {
 		this.attachmentNo = attachmentNo;
 		this.originalFileName = originalFileName;
 		this.writeDate = writeDate;
+		this.countReplies = countReplies;
 	}
 
 	public int getBoardNo() {
@@ -91,12 +93,21 @@ public class Board {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
+	
+	public int getCountReplies() {
+		return countReplies;
+	}
+
+	public void setCountReplies(int countReplies) {
+		this.countReplies = countReplies;
+	}
 
 	@Override
 	public String toString() {
 		return "글 번호 : " + boardNo + ", 제목 : " + boardTitle
 				+ ", 내용 : " + content + ", 작성자 아이디 : " + userId
 				+ ", 조회수 : " + visits + ", 첨부파일 번호 : " + attachmentNo
-				+ ", 업로드한 첨부파일명 : " + originalFileName + ", 작성일 : " + writeDate;
+				+ ", 업로드한 첨부파일명 : " + originalFileName + ", 작성일 : " + writeDate
+				+ ", 댓글 수 : " + countReplies;
 	}
 }

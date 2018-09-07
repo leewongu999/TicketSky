@@ -45,8 +45,8 @@
 	            <form name='search' method='post' action="${path}/community/boardKeyword">
 		            <select name='item'>
 		                <option value="userId" ${"userId" eq param.item?"selected":""}>작성자</option>
-		                <option value="title" ${"title" eq param.item?"selected":""}>글 제목</option>
-		            	<option value="boardnum" ${"boardnum" eq param.item?"selected":""}>글 번호</option>
+		                <option value="boardTitle" ${"title" eq param.item?"selected":""}>글 제목</option>
+		            	<option value="boardNo" ${"boardnum" eq param.item?"selected":""}>글 번호</option>
 		            </select>
 			        <div style="float:left;">
 			            <input type='search' name="searchKeyword" class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
