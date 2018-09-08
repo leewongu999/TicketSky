@@ -48,42 +48,42 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                            <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 뮤지컬 </a>
+                            <li><a href="${path }/performance/performanceAllList.do?category=뮤지컬"> 뮤지컬 </a>
                                 <ul class="dropdown">
-                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 전체 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 오리지널/내한공연 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 라이선스 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 창작 뮤지컬 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=뮤지컬"> 넌버별 퍼포먼스 </a></li>
+                                    <li><a href="${path }/performance/performanceAllList.do?category=뮤지컬"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=오리지널/내한공연"> 오리지널/내한공연 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=라이선스"> 라이선스 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=창작뮤지컬"> 창작뮤지컬 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=넌버별퍼포먼스"> 넌버별퍼포먼스 </a></li>
                                 </ul>
                             </li>
-                            <li><a href="${path }/performance/performanceList.do?category=연극"> 연극 </a>
+                            <li><a href="${path }/performance/performanceAllList.do?category=연극"> 연극 </a>
                                 <ul class="dropdown">
-                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 전체 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=연극">로맨틱 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 코미디 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 드라마 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=연극"> 스릴러 </a></li>
+                                    <li><a href="${path }/performance/performanceAllList.do?category=연극"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱">로맨틱 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱"> 코미디 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱"> 드라마 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱"> 스릴러 </a></li>
                                 </ul>
                             </li>
-                            <li><a href="${path }/performance/performanceList.do?category=콘서트"> 콘서트 </a>
+                            <li><a href="${path }/performance/performanceAllList.do?category=콘서트"> 콘서트 </a>
                                 <ul class="dropdown">
-                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 전체 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 발라드 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 락/메탈 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 랩/힙합 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 내한공연 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 페스티벌 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=콘서트"> 기타 </a></li>                                    
+                                    <li><a href="${path }/performance/performanceAllList.do?category=콘서트"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=콘서트&subCategory=발라드"> 발라드 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=콘서트&subCategory=락/메탈"> 락/메탈 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=콘서트&subCategory=랩/힙합"> 랩/힙합 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=콘서트&subCategory=내한공연"> 내한공연 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=콘서트&subCategory=페스티벌"> 페스티벌 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=콘서트&subCategory=기타"> 기타 </a></li>                                    
                                 </ul>
                             </li>
-                            <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 클래식/무용 </a>
+                            <li><a href="${path }/performance/performanceAllList.do?category=클래식/무용"> 클래식/무용 </a>
                                 <ul class="dropdown">
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 전체 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 클래식 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 오페라 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 발레/무용 </a></li>
-                                    <li><a href="${path }/performance/performanceList.do?category=클래식/무용"> 국악 </a></li>
+                                    <li><a href="${path }/performance/performanceAllList.do?category=클래식/무용"> 전체 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=클래식/무용&subCategory=클래식"> 클래식 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=클래식/무용&subCategory=오페라"> 오페라 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=클래식/무용&subCategory=발레/무용"> 발레/무용 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=클래식/무용&subCategory=국악"> 국악 </a></li>
                                 </ul>
                             </li>
 

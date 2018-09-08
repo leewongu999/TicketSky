@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="performance">
+  
+  <resultMap type="map" id="performMap">
+  </resultMap>
+  <select id='categoryList' parameterType="string" resultMap="performMap">
+  	select * from category where major = #{category}
+  </select>
+  <select id="performAllList" parameterType="string" resultMap="performMap">
+  	select * from performinfo join category on(performinfo.categoryno = category.categoryno) join performContent on(performinfo.performno = performcontent.performno) where major = #{category}
+  </select>
+  <select id = "performSelectList" parameterType="map" resultMap="performMap">
+  	select * from performinfo join category on(performinfo.categoryno = category.categoryno) join performContent on(performinfo.performno = performcontent.performno) where major = #{category} and minor = #{subCategory}
+  </select>
+  <select id ="performSelectOne" parameterType="_int" resultType="com.kh.ticketsky.performance.model.vo.Performance">
+  	select 
+  		performNo as performNo, 
+  		performname as performName, 
+  		placename as placeName,
+  		placeAddress as placeAddress,
+		ticketopendate as ticketOpenDate, 
+		startDate as startDate, 
+		endDate as endDate, 
+		performinfo.categoryNo as categoryNo,
+		regDate as regDate, 
+		userid as userId, 
+		companyName as companyName, 
+		companyPhoneNum as companyPhoneNum,
+		performTime as performTime, 
+		performGrade as performGrade, 
+		performConfirm as performConfirm, 
+		performContent as performContent, 
+		category.major as major,
+		category.minor as minor 
+		from performinfo 
+		join category on(performinfo.categoryno = category.categoryno)
+		where performNo=#{no}
+  </select>
+</mapper>
+
+
+

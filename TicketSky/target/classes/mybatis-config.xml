@@ -2,6 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<typeAliases>
-		<!-- <typeAlias type="com.kh.spring.member.model.vo.Member" alias="member"/> -->
+		<typeAlias type="com.kh.ticketsky.performance.model.vo.Performance" alias="performance"/>
 	</typeAliases>
 </configuration>
