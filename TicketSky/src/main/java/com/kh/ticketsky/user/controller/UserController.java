@@ -34,6 +34,7 @@ import com.kh.ticketsky.user.model.vo.Member;
 //value = "" 이렇게 주면 session으로 값 저장하게 됨.
 @SessionAttributes(value= {"memberLoggedIn","snsLoginChk"})
 
+/* 대부분 return 쪽 consumer, seller, admin  을 보면 누가 하는지 알수있음 */
 @Controller
 public class UserController {
 
@@ -47,18 +48,20 @@ public class UserController {
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	/* 구매자 - 마이페이지 */
 	@RequestMapping("/user/consumerMyPage")
 	public String consumerMyPage()
 	{
 		return "consumer/consumerMyPage";
 	}
 	
+	/* 구매자 - 탈퇴페이지 */
 	@RequestMapping("/user/userDelete")
 	public String consumerDelete() {
 		return "consumer/userDelete";
 	}
 	
-
+	/* 구매자 - 구매내역 */
 	@RequestMapping("/user/reserveList")
 	public String reserveList(Model model, HttpSession session) {
 		
@@ -68,38 +71,43 @@ public class UserController {
 		return "consumer/reserveList";
 	}
 	
+	/* 구매자 - 리뷰관리 페이지 */
 	@RequestMapping("/user/reviewManage")
 	public String reviewManage() {
 		return "consumer/reviewManage";
 	}
 	
-	
+	/* 구매자 - 문의고나리 페이지 */
 	@RequestMapping("/user/inquiryManage")
 	public String inquiryManage() {
 		return "consumer/inquiryManage";
 	}
 	
-	
+	/* 비밀번호 찾기 페이지 */
 	@RequestMapping("/user/forgetPassword")
 	public String forgetPassword() {
 		return "consumer/forgetPassword";
 	}
 	
+	/* 관리자 - 공연 컨펌 페이지 */
 	@RequestMapping("/user/adminPlayConfirm")
 	public String adminPlayConfirm() {
 		return "admin/playConfirm";
 	}
 	
+	/* 관리자 - 공연 관리 페이지 */
 	@RequestMapping("/user/adminPlayManage")
 	public String adminPlayManage() {
 		return "admin/playManage";
 	}
 	
+	/* 구매자 - 업데이트 페이지 */
 	@RequestMapping("/user/userUpdate")
 	public String userUpdate() {
 		return "consumer/userUpdate";
 	}
 	
+	/* 관리자 - 사용자 정보 수정 페이지 */
 	@RequestMapping("user/adminUserUpdate")
 	public String adminUserUpdate(String userId, Model model) {
 		Member m = service.selectOne(userId);
@@ -108,6 +116,7 @@ public class UserController {
 		return "admin/userUpdate";
 	}
 	
+	/* 관리자 - 사용자 정보 수정 끝 */
 	@RequestMapping("user/adminUserUpdateEnd")
 	public String adminUserUpdateEnd(Member m, Model model) {
 		String msg="";
@@ -128,11 +137,13 @@ public class UserController {
 		return "common/msg";
 	}
 	
+	/* 판매자 - 판매자 정보 수정 */
 	@RequestMapping("/user/sellerUpdate")
 	public String sellerUpdate() {
 		return "seller/sellerUpdate";
 	}
 	
+	/* 관리자 - 구매자등급관리 */ 
 	@RequestMapping("/user/consumerRatingSetting")
 	public String consumeRatingSetting(Model model) {
 		List<Map<String,String>> list = service.selectConsumerRating(); 
@@ -140,6 +151,7 @@ public class UserController {
 		return "admin/ratingSetting";
 	}
 	
+	/* 관리자 - 구매자등급관리 끝*/ 
 	@RequestMapping("/user/consumerRatingSettingEnd")
 	public String consumeRatingSettingEnd(String ratingCode, String ratingName, String discountrate, String ratingamount, Model model) {
 		Map<String,String> map = new HashMap<String,String>();
@@ -171,7 +183,7 @@ public class UserController {
 	
 	
 	
-	
+	/* 관리자 - 구매자 목록 */ 
 	@RequestMapping("/user/consumerList")
 	public String consumerList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
@@ -195,6 +207,7 @@ public class UserController {
 		return "admin/consumerList";
 	}
 	
+	/* 관리자 - 판매자 목록 */ 
 	@RequestMapping("/user/sellerList")
 	public String sellerList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
@@ -218,32 +231,37 @@ public class UserController {
 		return "admin/sellerList";
 	}
 	
-	
+	/* 판매자 - 판매 통계 페이지 */
 	@RequestMapping("/user/sellerStatus")
 	public String sellerStatus() {
 		return "seller/sellerStatus";
 	}
 	
+	/* 판매자 - 판매 상세 통계 */
 	@RequestMapping("/user/sellerStatusInfo")
 	public String sellerStatusInfo() {
 		return "seller/sellerStatusInfo";
 	}
 	
+	/* 사용자 - 사용자 탈퇴 체크 페이지 */
 	@RequestMapping("/user/userDeleteChk")
 	public String userDeleteChk() {
 		return "consumer/userDeleteChk";
 	}
 	
+	/* 판매자 - 리뷰관리 페이지 */
 	@RequestMapping("/user/sellerReviewManage")
 	public String sellerReviewManage() {
 		return "seller/reviewManage";
 	}
 	
+	/* 판매자 - 문의관리 페이지 */
 	@RequestMapping("/user/sellerInquiryManage")
 	public String sellerInquiryManage() {
 		return "seller/inquiryManage";
 	}
 	
+	/* 판매자 - 공연 리스트*/
 	@RequestMapping("/user/sellerMyPlayList")
 	public String sellerMyPlayList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
@@ -257,7 +275,6 @@ public class UserController {
 		map.put("userId", m.getUserId());
 		int numPerPage = 10;
 
-		
 		List<Map<String,String>> list = service.selectMyPlayList(cPage, numPerPage,map);
 		int totalCount = service.selectSellerPlayTotalCount(map);
 		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
@@ -266,24 +283,7 @@ public class UserController {
 		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("pageBar",pageBar);
 
-
 		return "seller/myPlayList";
-		
-		/*Map<String,String> map = new HashMap<String,String>();
-		map.put("searchType", searchType);
-		map.put("searchTitle", searchTitle);
-		int numPerPage = 10;
-		List<Member> list = service.selectConsumerList(cPage, numPerPage,map);
-
-		int totalCount = service.selectConsumerTotalCount(map);
-		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
-		
-		
-		model.addAttribute("list",list);
-		model.addAttribute("totalCount",totalCount);
-		model.addAttribute("pageBar",pageBar);
-		
-		return "admin/consumerList";*/
 	}
 	
 	@RequestMapping("/user/adminInquiryManage")
@@ -296,6 +296,7 @@ public class UserController {
 		return "admin/reportBoard";
 	}
 	
+	/* 관리자 - 구매자 삭제 */
 	@RequestMapping("/user/consumerDeleteOne")
 	public String consumerDeleteOne(String userId, Model model) {
 		String msg="";
@@ -314,6 +315,7 @@ public class UserController {
 		return "common/msg";
 	}
 
+	/* 사용자 - 회원탈퇴 */
 	@RequestMapping("/user/userDelete.do")
 	public String userDelete(String password, Model model,HttpSession session) {
 		String msg="";
@@ -357,6 +359,7 @@ public class UserController {
 		return "common/msg";
 	}
 	
+	/* 사용자  - 회원정보 변경 */
 	@RequestMapping("/user/userUpdateEnd")
 	public String userUpdateEnd(String oripassword, Member m, Model model,HttpSession session) {
 		String msg="";
@@ -396,11 +399,13 @@ public class UserController {
 		return "common/msg";
 	}
 	
+	/* 로그인 페이지 */
 	@RequestMapping("/user/login")
 	public String login() {
 		return "consumer/login";
 	}
 	
+	/* 로그아웃 */
 	@RequestMapping("/user/userlogout.do")
 	public String memberLogout(SessionStatus ss)
 	{
@@ -417,6 +422,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	/* 구매자 회원가입 페이지 */
 	@RequestMapping("/user/consumerEnroll")
 	public String consumerEnroll(@RequestParam(value="userId", required=false, defaultValue="") String userId, 
 			@RequestParam(value="userName", required=false, defaultValue="") String userName,
@@ -429,6 +435,7 @@ public class UserController {
 		return "consumer/consumerEnroll";
 	}
 	
+	/* 판매자 회원가입 페이지 */
 	@RequestMapping("/user/sellerEnroll")
 	public String sellerEnroll() {
 		return "seller/sellerEnroll";
@@ -459,7 +466,7 @@ public class UserController {
 	}
 	
 	
-	/* 구매자 회원가입 */
+	/* 구매자 회원가입 끝 */
 	@RequestMapping("/user/consumerEnrollEnd")
 	public String memberEnrollEnd(Member member, Model model)
 	{		
@@ -493,20 +500,15 @@ public class UserController {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = null;
 		boolean flag=service.selectOne(userId)!=null?true:false; 
-//		List<Board> bList = new ArrayList<Board>(); 
-//		bList.add(new Board(0,"board","yoo",URLEncoder.encode("하하하", "UTF-8"),null,0));
-//		bList.add(new Board(1,"board1","boo",URLEncoder.encode("호호호", "UTF-8"),null,1));
-		
 		
 		map.put("flag", flag);
 		
 		jsonStr = mapper.writeValueAsString(map);
 		
-		
 		return jsonStr;
 	}
 	
-	/* 로그인 */
+	/* 로그인 로직 */
 	@RequestMapping(value="/user/memberLogin.do", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView login(@RequestParam(value="saveId", required=false, defaultValue="0") String saveId,@RequestParam(value="snsLoginChk", required=false, defaultValue="0") String snsLoginChk, String userId, String password, HttpServletResponse response) throws Exception
 	{		
@@ -582,6 +584,7 @@ public class UserController {
 		return mv;
 	}
 	
+	/* 비밀번호 찾기 ------------------------(진석이형) */
 	   @RequestMapping(value="/user/findPassword", method= {RequestMethod.POST,RequestMethod.GET})
 	   public ModelAndView findPassword(String userName, String email, HttpServletResponse response,HttpServletRequest request) throws Exception
 	   {
