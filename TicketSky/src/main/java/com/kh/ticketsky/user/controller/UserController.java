@@ -1,5 +1,6 @@
 package com.kh.ticketsky.user.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,12 +64,50 @@ public class UserController {
 	
 	/* 구매자 - 구매내역 */
 	@RequestMapping("/user/reserveList")
-	public String reserveList(Model model, HttpSession session) {
+	public String reserveList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage,
+			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
+			@RequestParam(value="year", required=false, defaultValue="") String year,
+			@RequestParam(value="month", required=false, defaultValue="") String month,
+			HttpServletRequest req, Model model, HttpSession session) {
 		
 		Member m = (Member)session.getAttribute("memberLoggedIn");
-		List<Map<String,String>> list = service.selectReserveList(m.getUserId());
 		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("searchType", searchType);
+		map.put("year", year);
+		map.put("month", month);
+		map.put("userId", m.getUserId());
+		
+		Date date = new Date();
+		
+		int numPerPage = 10;
+		
+		List<Map<String,String>> list = service.selectReserveList(cPage, numPerPage, map);
+		int totalCount = service.selectReserveListCount(map);
+		
+		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
+		
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("pageBar",pageBar);
+		model.addAttribute("date",date);
 		return "consumer/reserveList";
+		
+		/*Map<String,String> map = new HashMap<String,String>();
+		map.put("searchType", searchType);
+		map.put("searchTitle", searchTitle);
+		int numPerPage = 10;
+		List<Member> list = service.selectConsumerList(cPage, numPerPage,map);
+
+		int totalCount = service.selectConsumerTotalCount(map);
+		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("pageBar",pageBar);
+		
+		return "admin/consumerList";*/
 	}
 	
 	/* 구매자 - 리뷰관리 페이지 */

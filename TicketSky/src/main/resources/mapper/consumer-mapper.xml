@@ -3,7 +3,16 @@
 <mapper namespace="consumer">
 	<resultMap type="map" id="reserveMap">
 	</resultMap>
-	<select id="selectReserveList" resultMap="reserveMap" >
+	<select id="selectReserveList" parameterType="map" resultMap="reserveMap" >
 		select * from purchase where userId = #{userId}
+		<if test="searchType != null and searchType != ''">
+        	 AND extract(year from ${searchType}) = #{year} and extract(month from ${searchType}) = #{month}
+     	 </if>   
 	</select>
+	<select id="selectReserveListCount" parameterType="map" resultType="_int">
+  	select count(*) cnt from purchase where userId = #{userId}
+  	<if test="searchType != null and searchType != ''">
+        	 AND extract(year from ${searchType}) = #{year} and extract(month from ${searchType}) = #{month}
+     	 </if>   
+  </select>
 </mapper>

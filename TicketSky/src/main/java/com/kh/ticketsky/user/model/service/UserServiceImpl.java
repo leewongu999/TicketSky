@@ -15,13 +15,18 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
+	public int selectReserveListCount(Map<String, String> map) {
+		return dao.selectReserveListCount(sqlSession,map);
+	}
+
+	@Override
 	public int selectSellerPlayTotalCount(Map<String, String> map) {
 		return dao.selectSellerPlayTotalCount(sqlSession,map);
 	}
 
 	@Override
-	public List<Map<String, String>> selectReserveList(String userId) {
-		return dao.selectReserveList(sqlSession,userId);
+	public List<Map<String, String>> selectReserveList(int cPage, int numPerPage, Map<String, String> map) {
+		return dao.selectReserveList(sqlSession,cPage,numPerPage,map);
 	}
 
 	@Override

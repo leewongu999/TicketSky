@@ -13,6 +13,11 @@ import com.kh.ticketsky.user.model.vo.Member;
 public class UserDaoImpl implements UserDao {
 
 	@Override
+	public int selectReserveListCount(SqlSessionTemplate sqlSession, Map<String, String> map) {
+		return sqlSession.selectOne("consumer.selectReserveListCount",map);
+	}
+
+	@Override
 	public int selectSellerPlayTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map) {
 		return sqlSession.selectOne("seller.selectSellerPlayTotalCount",map);
 	}
@@ -25,9 +30,12 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<Map<String, String>> selectReserveList(SqlSessionTemplate sqlSession, String userId) {
-		return sqlSession.selectList("consumer.selectReserveList",userId);
+	public List<Map<String, String>> selectReserveList(SqlSessionTemplate sqlSession, int cPage, int numPerPage,
+			Map<String, String> map) {
+		RowBounds row=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("consumer.selectReserveList",map,row);
 	}
+
 
 	@Override
 	public int selectSellerTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map) {
