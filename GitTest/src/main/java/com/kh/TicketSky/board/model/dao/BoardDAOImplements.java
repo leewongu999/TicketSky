@@ -63,6 +63,11 @@ public class BoardDAOImplements implements BoardDAO {
 	public int addReply(SqlSessionTemplate sst, Reply re) {
 		return sst.insert("board.addReply", re);
 	}
+	// 댓글이 하나 달릴 때마다 댓글의 수를 1 증가
+	@Override
+	public int replyPlus(SqlSessionTemplate sst, Reply re) {
+		return sst.update("board.replyPlus", re);
+	}
 	// 해당 게시글에 달린 전체 댓글 출력
 	@Override
 	public List<Reply> showReplies(SqlSessionTemplate sst, int boardNo) {
@@ -77,5 +82,10 @@ public class BoardDAOImplements implements BoardDAO {
 	@Override
 	public int deleteReply(SqlSessionTemplate sst, Reply re) {
 		return sst.delete("board.deleteReply", re);
+	}
+	// 댓글이 하나 삭제될 때마다 댓글의 수를 1 감소
+	@Override
+	public int replyMinus(SqlSessionTemplate sst, Reply re) {
+		return sst.update("board.replyMinus", re);
 	}
 }

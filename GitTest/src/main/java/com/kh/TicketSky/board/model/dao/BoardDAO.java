@@ -17,7 +17,9 @@ public interface BoardDAO {
 	int selectSearchTotalContents(SqlSessionTemplate sst, Map<String,Object> map);			// 검색 조건을 만족하는 게시글만의 수 출력
 	// 3. 댓글 관련
 	int addReply(SqlSessionTemplate sst, Reply re);									// 댓글 달기
+	int replyPlus(SqlSessionTemplate sst, Reply re);								// 댓글 추가될 때마다 댓글 수 증가
 	List<Reply> showReplies(SqlSessionTemplate sst, int boardNo);					// 해당 게시글에 달린 전체 댓글 보여주기
 	int selectTotalReplies(SqlSessionTemplate sst, int boardNo);					// 해당 게시글에 달린 댓글의 수
 	int deleteReply(SqlSessionTemplate sst, Reply re);								// 해당 게시글에 달린 댓글 삭제(댓글 고유 번호로 찾는다.)
+	int replyMinus(SqlSessionTemplate sst, Reply re);								// 댓글 삭제될 때마다 댓글 수 감소
 }

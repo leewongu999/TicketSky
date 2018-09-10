@@ -70,6 +70,11 @@ public class BoardServiceImplements implements BoardService {
 	public int addReply(Reply re) {
 		return dao.addReply(sst, re);
 	}
+	// 댓글 추가될 때마다 댓글 수 증가
+	@Override
+	public int replyPlus(Reply re) {
+		return dao.replyPlus(sst, re);
+	}
 	// 해당 게시글에 달린 전체 댓글 보여주기
 	@Override
 	public List<Reply> showReplies(int boardNo) {
@@ -84,5 +89,10 @@ public class BoardServiceImplements implements BoardService {
 	@Override
 	public int deleteReply(Reply re) {
 		return dao.deleteReply(sst, re);
+	}
+	// 댓글 삭제될 때마다 댓글 수 감소
+	@Override
+	public int replyMinus(Reply re) {
+		return dao.replyMinus(sst, re);
 	}
 }

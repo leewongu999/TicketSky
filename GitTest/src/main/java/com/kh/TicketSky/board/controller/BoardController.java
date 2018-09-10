@@ -9,6 +9,8 @@ import com.kh.TicketSky.board.model.service.BoardService;
 import com.kh.TicketSky.board.model.vo.*;
 import com.kh.TicketSky.common.*;
 
+import oracle.net.aso.b;
+
 @Controller
 public class BoardController {
 /*	private Logger logger = LoggerFactory.getLogger(BoardController.class);*/
@@ -32,13 +34,11 @@ public class BoardController {
 		request.setAttribute("list", list);
 		request.setAttribute("totalContents", totalContents);
 		request.setAttribute("pageBar", pageBar);
-		
 		return "community/board";
 	}
 	
 	@RequestMapping("/community/replies")
-	public String replies(int boardNo, HttpServletRequest request) {
-		int totalReplies;
+	public String replies(int boardNo, int totalReplies, HttpServletRequest request) {
 		try {
 			boardNo = Integer.parseInt(request.getParameter("boardNo"));
 			totalReplies = service.selectTotalReplies(boardNo);
@@ -46,6 +46,8 @@ public class BoardController {
 			boardNo = 1;
 			totalReplies = 0;
 		}
+		System.out.println("게시글 번호 : "+boardNo);
+		System.out.println("댓글 수 : "+totalReplies);
 		request.setAttribute("totalReplies", totalReplies);
 		return "community/board";
 	}
@@ -55,7 +57,8 @@ public class BoardController {
 		request.setAttribute("visits", service.addVisits(service.selectOne(boardNo)));
 		request.setAttribute("board", service.selectOne(boardNo));
 		request.setAttribute("replies", service.showReplies(boardNo));
-		request.setAttribute("totalReplies", service.selectTotalReplies(boardNo));
+		int totalReplies = service.selectTotalReplies(boardNo);
+		request.setAttribute("totalReplies", totalReplies);
 		return "community/comboardView";
 	}
 	
@@ -201,9 +204,10 @@ public class BoardController {
 		// 아래의 줄 설명
 		// Reply 객체에서 두 번째 요소(String형)는 Member 객체에서 가져와야 한다.
 		// 여기서는 임의의 값을 넣었기 때문에, 나중에 다른 것과 합칠 때에는 이 입력한 값을 지우고 m.getUserId()와 같이 바꿔주세요.
-		Reply re = new Reply(0, "유병승", replyContent, null, boardNo);
+		Reply re = new Reply(0, "peterhyse92", replyContent, null, boardNo);
 		
 		int result = service.addReply(re);
+		int result2 = service.replyPlus(re);
 		if(result>0) {
 			msg = "댓글이 정상적으로 달렸습니다.";
 			loc = "/community/comboardView?boardNo="+re.getBoardNo();
@@ -217,7 +221,7 @@ public class BoardController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/community/delReply")
+	@RequestMapping("/community/replyDelete")
 	public String deleteOne(Reply re, HttpServletRequest request) {
 		int replyNo;
 		int bNo;
@@ -228,8 +232,9 @@ public class BoardController {
 			replyNo = 1;
 			bNo = 1;
 		}
-		request.setAttribute("replyNo", replyNo);
-		request.setAttribute("bNo", bNo);
+		re.setReplyNo(replyNo);
+		re.setBoardNo(bNo);
+		request.setAttribute("reply", re);
 		return "community/replyDelete";
 	}
 	
@@ -244,6 +249,8 @@ public class BoardController {
 			re.setBoardNo(1);
 		}
 		int result = service.deleteReply(re);
+		System.out.println("댓글 고유 번호 : "+re.getReplyNo());
+		System.out.println("댓글이 달린 게시글 번호 : "+re.getBoardNo());
 		if(result>0) {
 			msg = "댓글이 정상적으로 삭제되었습니다.";
 		}else {

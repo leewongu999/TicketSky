@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.TicketSky.board.model.vo.Reply"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -7,8 +7,7 @@
 	<jsp:param value="댓글 삭제" name="title"/>
 </jsp:include>
 <%
-	int replyNo = Integer.parseInt(String.valueOf(request.getAttribute("replyNo")));
-	int bNo = Integer.parseInt(String.valueOf(request.getAttribute("bNo")));
+	Reply re = (Reply)request.getAttribute("reply");
 %>
 <style>
     section{
@@ -35,8 +34,8 @@
 	                <table class="table">
 	                    <tr>
 	                        <th>
-	                        	<input type="hidden" name='deleteReplyNo' style="width:60px;text-align:center;" value='<%=replyNo%>' readonly/>
-	                        	<input type="hidden" name='replyBoardNo' style="width:60px;text-align:center;" value='<%=bNo%>' readonly/>
+	                        	<input type="hidden" name='deleteReplyNo' style="width:60px;text-align:center;" value='<%=re.getReplyNo()%>' readonly/>
+	                        	<input type="hidden" name='replyBoardNo' style="width:60px;text-align:center;" value='<%=re.getBoardNo()%>' readonly/>
 	                        	<br>
 	                        	<strong>
 	                        		한 번 삭제되면 다시 복구할 수 없습니다.<br>정말로 삭제하시겠습니까?

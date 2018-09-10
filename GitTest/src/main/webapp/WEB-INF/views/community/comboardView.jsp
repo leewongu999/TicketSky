@@ -6,8 +6,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html;charset=UTF-8");
-	Board b = (Board)request.getAttribute("board");
 	int visits = Integer.parseInt(String.valueOf(request.getAttribute("visits")));
+	Board b = (Board)request.getAttribute("board");
 	List<Reply> replies = (List<Reply>)request.getAttribute("replies");
 	int totalReplies = Integer.parseInt(String.valueOf(request.getAttribute("totalReplies")));
 %>
@@ -131,20 +131,25 @@
         	<section class='new_arrivals_area section-padding-80 clearfix'>
         	<div class="container">
         		<h5>댓글(<%=totalReplies%>)</h5>
-	        	<form method="post" action="${path}/community/delReply">
-		        	<table id='xet_board' class='boardList'>
-		            <%for(Reply re : replies){%>
-		            	<input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
-				        <input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
-		            	<tr>
-				            <td><%=re.getUserId()%></td>
-				            <td><%=re.getComments()%></td>
-				            <td><%=re.getWriteDate()%></td>
-				            <td><input type="submit" name="deleteReply" class="xet_btn medium" value="삭제"/></td>
-			            </tr>
-			        <%}%>
-			        </table>
-		        </form>
+	        	<table id='xet_board' class='boardList'>
+		        <%for(Reply re : replies){%>
+		        	<form method='post' action="${path}/community/replyDelete">
+			            <input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
+					    <input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
+			            <tr>
+					      <td><%=re.getUserId()%></td>
+					      <td><%=re.getComments()%></td>
+					      <td><%=re.getWriteDate()%></td>
+					      <td><input type="submit" name="deleteReply" class="xet_btn medium" value="삭제" onclick="fn_delReply()"/></td>
+				        </tr>
+			        </form>
+			        <script>
+				        function fn_delReply(){
+		                	location.href="${path}/community/replyDelete?replyNo=<%=re.getReplyNo()%>";
+		                }
+			        </script>
+			    <%}%>
+			    </table>
 	        </div>
 	        </section>
 	    <%}%>

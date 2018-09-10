@@ -59,6 +59,10 @@
 		INSERT INTO community_reply VALUES(community_reply_SEQ.nextval,
 		#{userId, jdbcType=VARCHAR},#{comments, jdbcType=VARCHAR},sysdate,#{boardNo, jdbcType=NUMERIC})
 	</insert>
+	<!-- 댓글이 하나 추가되면 댓글 수를 1 증가시켜야 한다. -->
+	<update id="replyPlus" parameterType="reply">
+		UPDATE freeboard SET countReplies=countReplies+1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
+	</update>
 	<!-- 해당 게시글에 달린 댓글을 모두 구한다. -->
 	<select id="showReplies" resultType="reply" parameterType="_int">
 		SELECT * FROM community_reply WHERE boardNo=#{boardNo} ORDER BY writeDate ASC
@@ -71,4 +75,8 @@
 	<delete id="deleteReply" parameterType="reply">
 		DELETE FROM community_reply WHERE replyNo=#{replyNo, jdbcType=NUMERIC}
 	</delete>
+	<!-- 댓글이 하나 삭제되면 댓글 수를 1 감소시켜야 한다. -->
+	<update id="replyMinus" parameterType="reply">
+		UPDATE freeboard SET countReplies=countReplies-1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
+	</update>
 </mapper>

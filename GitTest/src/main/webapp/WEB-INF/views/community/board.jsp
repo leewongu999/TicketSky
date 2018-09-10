@@ -76,26 +76,26 @@
                 <tbody>
                 	<form method="post" action="${path}/community/replies">
 	                	<%for(Board b : list){%>
-	                	<input type="hidden" name="boardNo" value="<%=b.getBoardNo()%>"/>
-	                    <tr>
-	                        <td><%=b.getBoardNo()%></td>
-	                        <td>	<!-- 첨부 파일이 있을 때 다운로드 할 수 있는 아이콘을 추가한다. -->
-		                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
-			                        <%=b.getBoardTitle()%>
-			                    </a>
-		                        <%if(b.getOriginalFileName()!=null){%>
-			                        <i class='fileIcon'>
-			                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
-			                        </i>
-			                    <%}%>
-			                    <span style="font-size:10px;color:red;">
-			                    	<strong>(<%=b.getCountReplies()%>)</strong>
-			                    </span>
-	                        </td>
-	                        <td><%=b.getUserId()%></td>
-	                        <td><%=b.getWriteDate()%></td>
-	                        <td><%=b.getVisits()%></td>
-	                    </tr>
+		                	<input type="hidden" name="boardNo" value="<%=b.getBoardNo()%>"/>
+		                    <tr>
+		                        <td><%=b.getBoardNo()%></td>
+		                        <td>	<!-- 첨부 파일이 있을 때 다운로드 할 수 있는 아이콘을 추가한다. -->
+			                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
+				                        <%=b.getBoardTitle()%>
+				                    </a>
+			                        <%if(b.getOriginalFileName()!=null){%>
+				                        <i class='fileIcon'>
+				                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
+				                        </i>
+				                    <%}%>
+				                    <span style="font-size:10px;color:red;">
+				                    	<strong>(<%=b.getCountReplies()%>)</strong>
+				                    </span>
+		                        </td>
+		                        <td><%=b.getUserId()%></td>
+		                        <td><%=b.getWriteDate()%></td>
+		                        <td><%=b.getVisits()%></td>
+		                    </tr>
 	                    <%}%>
                     </form>
                 </tbody>
