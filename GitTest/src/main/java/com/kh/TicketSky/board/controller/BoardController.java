@@ -218,11 +218,27 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/delReply")
+	public String deleteOne(Reply re, HttpServletRequest request) {
+		int replyNo;
+		int bNo;
+		try {
+			replyNo = Integer.parseInt(request.getParameter("replyNo"));
+			bNo = Integer.parseInt(request.getParameter("bNo"));
+		}catch(NumberFormatException e) {
+			replyNo = 1;
+			bNo = 1;
+		}
+		request.setAttribute("replyNo", replyNo);
+		request.setAttribute("bNo", bNo);
+		return "community/replyDelete";
+	}
+	
+	@RequestMapping("/community/delReplyEnd")
 	public String deleteReply(Reply re, HttpServletRequest request) {
 		String msg = "";
 		try {
-			re.setReplyNo(Integer.parseInt(request.getParameter("replyNo")));
-			re.setBoardNo(Integer.parseInt(request.getParameter("bNo")));
+			re.setReplyNo(Integer.parseInt(request.getParameter("deleteReplyNo")));
+			re.setBoardNo(Integer.parseInt(request.getParameter("replyBoardNo")));
 		}catch(NumberFormatException e) {
 			re.setReplyNo(1);
 			re.setBoardNo(1);
