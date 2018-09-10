@@ -1,6 +1,6 @@
 package com.kh.ticketsky.performance.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Performance {
 
@@ -11,7 +11,7 @@ public class Performance {
 	private Date ticketOpenDate;
 	private Date startDate;
 	private Date endDate;
-	private String categoryNo;
+	private int categoryNo;
 	private Date regDate;
 	private String userId;
 	private String companyName;
@@ -22,8 +22,9 @@ public class Performance {
 	private String performContent;
 	private String major;
 	private String minor;
+	
 	public Performance(int performNo, String performName, String placeName, String placeAddress, Date ticketOpenDate,
-			Date startDate, Date endDate, String categoryNo, Date regDate, String userId, String companyName,
+			Date startDate, Date endDate, int categoryNo, Date regDate, String userId, String companyName,
 			String companyPhoneNum, String performTime, String performGrade, String performConfirm,
 			String performContent, String major, String minor) {
 		super();
@@ -88,10 +89,10 @@ public class Performance {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public String getCategoryNo() {
+	public int getCategoryNo() {
 		return categoryNo;
 	}
-	public void setCategoryNo(String categoryNo) {
+	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
 	}
 	public Date getRegDate() {
@@ -154,7 +155,5 @@ public class Performance {
 	public void setMinor(String minor) {
 		this.minor = minor;
 	}
-	
-	
 	
 }

@@ -60,7 +60,7 @@ body
 div
 {
 	display: block;
-	position: relative;
+	/* position: relative; */
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1318,7 +1318,7 @@ section
 }
 #review_form > div
 {
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 }
 #review_form div:nth-child(2) h1
 {
@@ -1371,6 +1371,22 @@ section
 	cursor: pointer;
 }
 .user_star_rating li i
+{
+	color: #f5c136;
+	font-size: 18px;
+}
+.user_upStar_rating
+{
+	display: inline-block;
+	margin-left: 18px;
+}
+.user_upStar_rating li
+{
+	display: inline-block;
+	margin-right: -3px;
+	cursor: pointer;
+}
+.user_upStar_rating li i
 {
 	color: #f5c136;
 	font-size: 18px;

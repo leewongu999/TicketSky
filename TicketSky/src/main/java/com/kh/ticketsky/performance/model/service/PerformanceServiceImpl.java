@@ -42,10 +42,46 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public Performance performSelectOne(int no) {
-		Performance p = dao.performSelectOne(sqlSession, no);
-		return p;
+	public Map<String, Object> performSelectOne(int no) {
+		Map<String, Object> map = dao.performSelectOne(sqlSession, no);
+		return map;
 	}
+
+	@Override
+	public List<Map<String, Object>> performReview(int no) {
+		List<Map<String,Object>> list = dao.performReview(sqlSession, no);
+		return list;
+	}
+
+	@Override
+	public int performReviewInsert(Map<String, Object> map) {
+		int result = dao.performReviewInsert(sqlSession, map);
+		return result;
+	}
+
+	@Override
+	public int performReviewDelete(int reviewNo) {
+
+		int result = dao.performReviewDelete(sqlSession, reviewNo);
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> performReviewOne(int reviewNo) {
+		Map<String, Object> map = dao.performReviewOne(sqlSession, reviewNo);
+		return map;
+	}
+
+	@Override
+	public int performReviewUpdateEnd(Map<String, Object> map) {
+
+		int result = dao.performReviewUpdateEnd(sqlSession, map);
+		return result;
+	}
+
+	
+
+	
 
 	
 

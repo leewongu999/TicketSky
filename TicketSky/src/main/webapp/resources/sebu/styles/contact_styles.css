@@ -1139,6 +1139,22 @@ textarea:hover
 	color: #f5c136;
 	font-size: 18px;
 }
+.user_upStar_rating
+{
+	display: inline-block;
+	margin-left: 18px;
+}
+.user_upStar_rating li
+{
+	display: inline-block;
+	margin-right: -3px;
+	cursor: pointer;
+}
+.user_upStar_rating li i
+{
+	color: #f5c136;
+	font-size: 18px;
+}
 .review_submit_btn
 {
 	width: 170px;

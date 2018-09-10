@@ -8,6 +8,7 @@
 
 <jsp:include page = "/WEB-INF/views/common/header.jsp"/>
 
+	
 
 <script>
 	
@@ -16,11 +17,11 @@
 		
 		location.href = '${path}/performance/performanceSelectList.do?category=${category}&subCategory='+a;
 	}
-	
 	function fn_performAll()
 	{
 		location.href='${path}/performance/performanceAllList.do?category=${category}';
 	}
+	
 </script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -30,7 +31,7 @@
                 <div class="col-12">
                     <div class="section-heading text-center">
                         <br>
-                        <h2> ${category } </h2>
+                        <h2>${category } </h2>
                         <br>
                         <div class="btn-group" role="group" aria-label="...">
                          	<button type="button" class="btn btn-default" onclick="fn_performAll()" >전체</button>
@@ -82,19 +83,20 @@
             <br>
             <!-- Page Heading -->
             <div class="row">
-            <c:forEach items="${allList}" var="p">
+            <c:forEach items="${allList}" var="l">
             	 <div class="col-lg-3 col-sm-6 portfolio-item">
                     <div class="card h-100">
-                      <a href="${path }/performance/performanceView.do?no=${p.PERFORMNO}" style='text-decoration:none;'><img class="card-img-top" src="${path}/resources/img/product-img/${p.ORICONTENTIMG}" alt="" style='height : 310px;'></a>
+                      <a href="${path }/performance/performanceView.do?no=${l.PERFORMNO}" style='text-decoration:none;'><img class="card-img-top" src="${path}/resources/img/product-img/${l.ORICONTENTIMG}" alt="" style='height : 310px;'></a>
                       <div class="card-body">
                         <h4 class="card-title">
                             <strong>
-                                <a href="${path }/performance/performanceView.do?no=${p.PERFORMNO}">${p.PERFORMNAME }</a>
+                                <a href="${path }/performance/performanceView.do?no=${l.PERFORMNO}">${l.PERFORMNAME }</a>
                             </strong>
                         </h4>
                         <p class="card-text" style='font-size:12px;'> 
-                            ${p.STARTDATE }~${p.ENDDATE } <br>
-                            <strong style='font-size:15px;'>${p.PLACENAME }</strong>
+                        <fmt:formatDate value="${l.STARTDATE }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${l.ENDDATE }" pattern="yyyy-MM-dd"/>
+                        <br>
+                            <strong style='font-size:15px;'>${l.PLACENAME }</strong>
                         </p>
                       </div>
                     </div>
@@ -108,19 +110,19 @@
             <br>
             <!-- Page Heading -->
             <div class="row">
-                <c:forEach items="${allList}" var="b">
+                <c:forEach items="${allList}" var="l">
             	 <div class="col-lg-3 col-sm-6 portfolio-item">
                     <div class="card h-100">
-                      <a href="${path }/performance/performanceView.do?no=${b.PERFORMNO}" style='text-decoration:none;'><img class="card-img-top" src="${path}/resources/img/product-img/${b.ORICONTENTIMG}" alt="" style='height : 310px;'></a>
+                      <a href="${path }/performance/performanceView.do?no=${l.PERFORMNO}" style='text-decoration:none;'><img class="card-img-top" src="${path}/resources/img/product-img/${l.ORICONTENTIMG}" alt="" style='height : 310px;'></a>
                       <div class="card-body">
                         <h4 class="card-title">
                             <strong>
-                                <a href="${path }/performance/performanceView.do?no=${b.PERFORMNO}">${b.PERFORMNAME }</a>
+                                <a href="${path }/performance/performanceView.do?no=${l.PERFORMNO}">${l.PERFORMNAME }</a>
                             </strong>
                         </h4>
                         <p class="card-text" style='font-size:12px;'> 
-                            ${b.STARTDATE }~${b.ENDDATE } <br>
-                            <strong style='font-size:15px;'>${b.PLACENAME }</strong>
+                            <fmt:formatDate value="${l.STARTDATE }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${l.ENDDATE }" pattern="yyyy-MM-dd"/><br>
+                            <strong style='font-size:15px;'>${l.PLACENAME }</strong>
                         </p>
                       </div>
                     </div>
@@ -128,8 +130,7 @@
             </c:forEach>
             </div>
         </div>
-        
-        
+             
          <!-- Pagination -->
          <br><br>
          <div id='pageBar1' align="center">

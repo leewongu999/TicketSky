@@ -8,9 +8,22 @@
 
 <jsp:include page = "/WEB-INF/views/common/header.jsp"/>
 	
+	
+
+	<script>
+	function fn_performSelect(a)
+	{
+		
+		location.href = '${path}/performance/performanceSelectList.do?category=${category}&subCategory='+a;
+	}
+	
+	function fn_performAll()
+	{
+		location.href='${path}/performance/performanceAllList.do?category=${category}';
+	}
+	</script>
 	<!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
     <section class="new_arrivals_area section-padding-80 clearfix">
         
         <div class="container">
@@ -18,7 +31,7 @@
                 <div class="col-12">
                     <div class="section-heading text-center">
                         <br>
-                        <h2> 뮤지컬 </h2>
+                        <h2> ${category }</h2>
                         <br>
                         <div class="btn-group" role="group" aria-label="...">
                          	<button type="button" class="btn btn-default" onclick="fn_performAll()" >전체</button>
@@ -54,7 +67,8 @@
                             </strong>
                         </h4>
                         <p class="card-text" style='font-size:12px;'> 
-                            ${s.STARTDATE }~${s.ENDDATE } <br>
+                        	<fmt:formatDate value="${s.STARTDATE }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${s.ENDDATE }" pattern="yyyy-MM-dd"/>
+                            <br>
                             <strong style='font-size:15px;'>${s.PLACENAME }</strong>
                         </p>
                       </div>

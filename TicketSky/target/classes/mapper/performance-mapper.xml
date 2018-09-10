@@ -13,30 +13,33 @@
   <select id = "performSelectList" parameterType="map" resultMap="performMap">
   	select * from performinfo join category on(performinfo.categoryno = category.categoryno) join performContent on(performinfo.performno = performcontent.performno) where major = #{category} and minor = #{subCategory}
   </select>
-  <select id ="performSelectOne" parameterType="_int" resultType="com.kh.ticketsky.performance.model.vo.Performance">
-  	select 
-  		performNo as performNo, 
-  		performname as performName, 
-  		placename as placeName,
-  		placeAddress as placeAddress,
-		ticketopendate as ticketOpenDate, 
-		startDate as startDate, 
-		endDate as endDate, 
-		performinfo.categoryNo as categoryNo,
-		regDate as regDate, 
-		userid as userId, 
-		companyName as companyName, 
-		companyPhoneNum as companyPhoneNum,
-		performTime as performTime, 
-		performGrade as performGrade, 
-		performConfirm as performConfirm, 
-		performContent as performContent, 
-		category.major as major,
-		category.minor as minor 
-		from performinfo 
-		join category on(performinfo.categoryno = category.categoryno)
-		where performNo=#{no}
+  
+  <select id ="performSelectOne" parameterType="_int" resultType="map">
+  	select * from performinfo 
+        join category on(performinfo.categoryno = category.categoryno)
+        join performContent on(performinfo.performno = performcontent.performno) 
+		where performinfo.performNo=#{no}
   </select>
+  
+  <select id="performReview" parameterType="_int" resultMap="performMap">
+  	select * from PERFORMANCEREVIEW where performno=#{no} order by reviewDate desc
+  </select>
+  
+  <insert id="performReviewInsert" parameterType="map">
+  	insert into PERFORMANCEREVIEW values(seq_review.nextval, 'ohoh', #{review}, ${no}, #{score}, 0, sysdate)
+  </insert>
+  
+  <delete id="performReviewDelete" parameterType="_int">
+  	delete from performanceReview where reviewNo = #{reviewNo}
+  </delete>
+  
+  <select id="performReviewOne" parameterType="_int" resultType="map">
+  	select * from performanceReview where reviewNo = #{reviewNo}
+  </select>
+  
+  <update id="performReviewUpdateEnd" parameterType="map">
+  	update performanceReview set reviewcontent = #{reviewUp_message}, performscore = #{starUpdateScore}  where reviewno= #{reviewNo}
+  </update>
 </mapper>
 
 

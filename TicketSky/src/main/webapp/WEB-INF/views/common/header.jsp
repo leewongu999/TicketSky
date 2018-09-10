@@ -51,7 +51,7 @@
                             <li><a href="${path }/performance/performanceAllList.do?category=뮤지컬"> 뮤지컬 </a>
                                 <ul class="dropdown">
                                     <li><a href="${path }/performance/performanceAllList.do?category=뮤지컬"> 전체 </a></li>
-                                    <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=오리지널/내한공연"> 오리지널/내한공연 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=오리지날/내한공연"> 오리지날/내한공연 </a></li>
                                     <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=라이선스"> 라이선스 </a></li>
                                     <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=창작뮤지컬"> 창작뮤지컬 </a></li>
                                     <li><a href="${path }/performance/performanceSelectList.do?category=뮤지컬&subCategory=넌버별퍼포먼스"> 넌버별퍼포먼스 </a></li>
@@ -98,7 +98,7 @@
             <div class="header-meta d-flex clearfix justify-content-end">
                 <!-- Search Area -->
                 <div class="search-area">
-                    <form action="#" method="post">
+                    <form action="http://www.naver.com" method="post">
                         <input type="search" name="search" id="headerSearch" placeholder="검색">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>

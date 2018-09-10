@@ -31,18 +31,41 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	}
 
 	@Override
-	public Performance performSelectOne(SqlSessionTemplate sqlSession, int no) {
-
-		return sqlSession.selectOne("performance.performSelectOne", no);
+	public Map<String, Object> performSelectOne(SqlSessionTemplate sqlSession, int no) {
+		
+		return sqlSession.selectOne("performance.performSelectOne",no);
+		
 	}
 
+	@Override
+	public List<Map<String, Object>> performReview(SqlSessionTemplate sqlSession, int no) {
 
+		return sqlSession.selectList("performance.performReview", no);
+	}
 
+	@Override
+	public int performReviewInsert(SqlSessionTemplate sqlSession, Map<String, Object> map) {
 	
-	
-	
-	
+		return sqlSession.insert("performance.performReviewInsert", map);
+	}
 
-	
+	@Override
+	public int performReviewDelete(SqlSessionTemplate sqlSession, int reviewNo) {
+
+		return sqlSession.delete("performance.performReviewDelete", reviewNo);
+	}
+
+	@Override
+	public Map<String, Object> performReviewOne(SqlSessionTemplate sqlSession, int reviewNo) {
+
+		return sqlSession.selectOne("performance.performReviewOne",reviewNo);
+	}
+
+	@Override
+	public int performReviewUpdateEnd(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+
+		return sqlSession.update("performance.performReviewUpdateEnd", map);
+	}
+
 	
 }

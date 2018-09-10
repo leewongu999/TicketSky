@@ -39,21 +39,29 @@
 	</style>
 	<script>
 		$(function(){
-			$('.user_star_rating').children().on('click',function(){
-				console.log($(this).children().attr('aa'));
+			$('#star_score').children().on('click',function(){
+				var starScore = $(this).children().attr('name');
+				console.log($(this).children());
+				$('#starScore').val(starScore);
+				
 			});
 		});
-
+		function fn_review_validate()
+		{
+			var review=$("#review_message");
+			if(review.val().trim().length>=10)
+			{
+				return true;
+			}
+			else
+			{
+				alert("리뷰는 10글자 이상");
+				review.val("");
+				review.focus();
+				return false;
+			}
+		} 
 	</script>
-
-
-
-	<div class="fs_menu_overlay"></div>
-
-	<!-- Hamburger Menu -->
-
-	
-
 	<div class="container single_product_container">
 		<div class="row">
 			<div class="col">
@@ -63,8 +71,8 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="${path }/">Ticketsky</a></li>
-						<li><a href="${path }/performance/perforAllList.do?category=${major}"><i class="fa fa-angle-right" aria-hidden="true"></i>${p.major }</a></li>
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>${p.performName }</a></li>
+						<li><a href="${path }/performance/performanceAllList.do?category=${MAJOR}"><i class="fa fa-angle-right" aria-hidden="true"></i>${MAJOR }</a></li>
+						<li class="active"><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>${PERFORMNAME }</a></li>
 					</ul>
 				</div>
 
@@ -76,7 +84,7 @@
 			<div class="col-lg-5" style='margin:auto;'>
 				<div class="single_product_pics">
 					<div class="row" >
-						<img id='sebuimg' src="${path}/resources/img/product-img/barnum1.jpg" alt=""  />
+						<img id='sebuimg' src="${path}/resources/img/product-img/${ORICONTENTIMG}" alt=""  />
 					</div>
 				</div>
 			</div>
@@ -93,12 +101,12 @@
 							</ul>
 						</span>
 						<h3>
-							위대한 쇼맨
+							${PERFORMNAME }
 						</h3>
-						<p><strong>장소</strong>&nbsp;&nbsp;&nbsp;&nbsp;충무아트센터 대극장</p>
-						<p><strong>기간</strong>&nbsp;&nbsp;&nbsp;&nbsp;2018.09.20~2018.10.10</p>
-						<p><strong>관람시간</strong>&nbsp;&nbsp;&nbsp;&nbsp;160분</p>
-						<p><strong>관람등급</strong>&nbsp;&nbsp;&nbsp;&nbsp;만 7세이상</p>
+						<p><strong>장소</strong>&nbsp;&nbsp;&nbsp;&nbsp;${PLACENAME }</p>
+						<p><strong>기간</strong>&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${ENDDATE }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${ENDDATE }" pattern="yyyy-MM-dd"/></p>
+						<p><strong>관람시간</strong>&nbsp;&nbsp;&nbsp;&nbsp;${PERFORMTIME }</p>
+						<p><strong>관람등급</strong>&nbsp;&nbsp;&nbsp;&nbsp;${PERFORMGRADE }</p>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center" style='margin-right:15%; margin-bottom:15px;'>
 						<!-- <span class="ti-truck"></span> -->
@@ -134,6 +142,7 @@
 							<li class="tab active" data-active-tab="tab_1"><span>상세정보</span></li>
 							<li class="tab" data-active-tab="tab_2"><span>공연장정보</span></li>
 							<li class="tab" data-active-tab="tab_3"><span>관람후기</span></li>
+							<li class="tab" data-active-tab="tab_4"><span>Q&A</span></li>
 						</ul>
 					</div>
 				</div>
@@ -180,11 +189,12 @@
 								</div>
 								<div class="tab_text_block" style='margin-bottom:10px;'>
 									<p>[공연장 정보]</p>
-									<p>장소 : 충무아트센터 대극장</p>
-									<p>주소 : 서울특별시 중구 동대문역사문화공원역 옆</p>
-									<p>대표번호 : 02-2056-5787</p>
+									<p>장소 : ${PLACENAME }</p>
+									<p>주소 : ${PLACEADDRESS }</p>
+									<p>대표번호 : ${COMPANYPHONENUM}</p>
 								</div>
 								<br>
+								
 							</div>
 							<div id="map" style="width:100%;height:350px; margin-left:16.5%; margin-right:11%"></div>
 								<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2ce19947ed179f0c460473a072a402ed&libraries=services"></script>
@@ -204,7 +214,7 @@
 								
 								// 주소로 좌표를 검색합니다
 								
-								geocoder.addressSearch('서울 중구 퇴계로 387 충무아트홀', function(result, status) {
+								geocoder.addressSearch('${PLACEADDRESS}', function(result, status) {
 								
 								    // 정상적으로 검색이 완료됐으면 
 								    
@@ -231,10 +241,14 @@
 								        map.setCenter(coords);
 								    } 
 								});    
-								</script>
+								</script> 
+								
 							</div>
+							
 						</div>
+						
 					</div>
+					
 
 					<!-- Tab Reviews -->
 
@@ -245,22 +259,24 @@
 								<h4>Reviews (2)</h4>
 							</div>
 							<div class=" add_review_col">
-
+								
 								<div class="add_review">
-									<form id="review_form" action="post">
-										<div>							
+									<form id="review_form" action="${path }/performance/performReviewInsert.do?no=${PERFORMNO}" method="post" onsubmit="return fn_review_validate();">
+										<div style='margin-top:30px;'>							
 										<h1>&nbsp;&nbsp;
 											ID : admin 
-											<ul class="user_star_rating">
-												<li><i class="fa fa-star" aria-hidden="true" ></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true" onclick = 'ff()'></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+											<ul id='star_score' class="user_star_rating">
+												<li><i class="fa fa-star" name='1' aria-hidden="true" ></i></li>
+												<li><i class="fa fa-star-o" name='2' aria-hidden="true"></i></li>
+												<li><i class="fa fa-star-o" name='3' aria-hidden="true"></i></li>
+												<li><i class="fa fa-star-o" name='4' aria-hidden="true"></i></li>
+												<li><i class="fa fa-star-o" name='5' aria-hidden="true"></i></li>
 											</ul>
+											
+											<input type='hidden' id='starScore' name='starScore' value='1'/>
 										</h1>
 											<span></span>
-											<textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="5" required data-error="Please, leave us a review."></textarea>
+											<textarea id="review_message" class="input_review" name="review"  placeholder="Your Review" rows="5" required data-error="Please, leave us a review."></textarea>
 										</div>
 										<div class="text-left text-sm-right">
 											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">확인</button>
@@ -271,96 +287,202 @@
 							</div>
 							<!-- User Reviews -->
 
-							<div class="">
-								
-
-								<!-- User Review -->
-								<hr>
-								<div class="user_review_container d-flex flex-column flex-sm-row">
-									<div>
-										<div class="review_date">27 Aug 2016</div>
-										<div class="user_name">
-											Brandon William
-											<span>
-												<ul class="star_rating">
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-												</ul>
-											</span>
-										</div>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									</div>
-								</div>
-								<hr>
-								<div class="user_review_container d-flex flex-column flex-sm-row">
-									<div>
-										<div class="review_date">27 Aug 2016</div>
-										<div class="user_name">
-											Brandon William
-											<span>
-												<ul class="star_rating">
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star" aria-hidden="true"></i></li>
-													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-												</ul>
-											</span>
-										</div>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									</div>
-								</div>
-								<!-- User Review -->
-								<hr>
-								<div class="user_review_container d-flex flex-column flex-sm-row">
-										<div>
-											<div class="review_date">27 Aug 2016</div>
-											<div class="user_name">
-												Brandon William
-												<span>
-													<ul class="star_rating">
-														<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														<li><i class="fa fa-star" aria-hidden="true"></i></li>
-														<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-													</ul>
-												</span>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-										</div>
-									</div>
+							<div>
+								<c:forEach items="${reviewList}" var="r" varStatus="status">
+								<c:if test="${status.index==0 }">
 									<hr>
-									<div class="user_review_container d-flex flex-column flex-sm-row">
-											<div>
-												<div class="review_date">27 Aug 2016</div>
-												<div class="user_name">
-													Brandon William
-													<span>
-														<ul class="star_rating">
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star" aria-hidden="true"></i></li>
-															<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-														</ul>
-													</span>
-												</div>
-												<form id="reviewUp_form" action="post"></form>
-												<textarea id="reviewUp_message" class="input_review" name="message"  placeholder="Your Review" rows="5" cols="160" required data-error="Please, leave us a review."></textarea>
-												<div class="text-left text-sm-right">
-													<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">수정</button>
-													<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">뒤로</button>
-												</div>
-											</div>
+								</c:if>
+									<div id='review_${r.REVIEWNO }' class="user_review_container flex-column flex-sm-row">
+										<div style='float:right;'>
+											<button class='red_button review_submit_btn trans_30' onclick = 'fn_review_update(${r.REVIEWNO},${r.PERFORMNO })' style='width:50px; height:20px; background-color:#E4E4E4'>수정</button>
+											<button class='red_button review_submit_btn trans_30' onclick ='fn_review_delete(${r.PERFORMNO},${r.REVIEWNO })' style='width:50px; height:20px; background-color:#E4E4E4'>삭제</button>
 										</div>
+									<div>
+										<div class="review_date">
+											<fmt:formatDate value="${r.REVIEWDATE }" pattern="yyyy-MM-dd"/><br>
+										</div>
+										<div class="user_name">
+											${r.USERID }
+											<script>
+												$(function(){
+													var score=${r.PERFORMSCORE};
+													switch(score)
+													{
+													case 1: break;
+													case 2: 
+														$('.re_${r.REVIEWNO}').children().eq(1).children().attr('class','fa fa-star');
+														break;
+													case 3: 
+														$('.re_${r.REVIEWNO}').children().eq(1).children().attr('class','fa fa-star');
+														$('.re_${r.REVIEWNO}').children().eq(2).children().attr('class','fa fa-star');
+														break;
+													case 4: 
+														$('.re_${r.REVIEWNO}').children().eq(1).children().attr('class','fa fa-star');
+														$('.re_${r.REVIEWNO}').children().eq(2).children().attr('class','fa fa-star');
+														$('.re_${r.REVIEWNO}').children().eq(3).children().attr('class','fa fa-star');
+														break;
+													case 5: 
+														$('.re_${r.REVIEWNO}').children().eq(1).children().attr('class','fa fa-star');
+														$('.re_${r.REVIEWNO}').children().eq(2).children().attr('class','fa fa-star');
+														$('.re_${r.REVIEWNO}').children().eq(3).children().attr('class','fa fa-star');
+														$('.re_${r.REVIEWNO}').children().eq(4).children().attr('class','fa fa-star');
+														break;
+													default : break;
+													}
+												});
+											</script>
+											<span>
+												<ul class="star_rating re_${r.REVIEWNO}">
+													<li><i class="fa fa-star" name='1' aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" name='2' aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" name='3' aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" name='4' aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" name='5' aria-hidden="true"></i></li>
+												</ul>
+											</span>
+										</div>
+										<div>
+											<p>${r.REVIEWCONTENT }</p>
+										</div>
+									</div>
+								</div>
+								<c:if test='${!status.last }'>
+									<hr>
+								</c:if>
+								</c:forEach>
+								<script>
+										function fn_review_delete(a,b)
+										{
+											var bool = confirm("정말로 삭제하시겠습니까??");
+											if(bool)
+											{
+												location.href='${path}/performance/performReviewDelete.do?no='+a+'&reviewNo='+b;
+											}
+											else
+											{
+												return;		
+											}
+										}
+										function fn_review_update(no,pNo)
+										{
+											var re = {reviewNo : no,
+													performNo : pNo};
+											 $.ajax({
+												url : "${path}/performance/performReviewUpdate.do",
+												data : re,
+												dataType : "html",
+												success : function(data)
+												{
+													$('#review_'+no).html(data);
+													
+													$('#review_cancel').on("click",function(){
+														
+														var up_reviewNo = $('#up_reviewNo').val();
+														var canRe = {reviewNo : up_reviewNo};
+														$.ajax({
+															url : "${path}/performance/performReviewUpdateCancel.do",
+															data : canRe,
+															dataType : "html",
+															success : function(data)
+															{
+																$('#review_'+no).html(data);
+															}
+														});
+													});
+													
+													$('#review_update_submit').on("click",function(){
+														
+														var upBool = confirm("수정 하시겠습니까?");
+														if(upBool)
+														{  
+															var review=$("#reviewUp_message");
+															var bool=false;
+															if(review.val().trim().length>=10)
+															{															
+																bool=true;
+															}
+															else
+															{
+																alert("리뷰는 10글자 이상");
+																review.val("");
+																review.focus();
+																bool=false;
+															}
+															if(bool)
+															{
+																var upRe = {reviewNo : $('#up_reviewNo').val(),
+																		reviewUp_message : $('#reviewUp_message').val(),
+																		starUpdateScore : $('#starUpdateScore').val()
+																		};
+																$.ajax({
+																	url : "${path}/performance/performReviewUpdateEnd.do",
+																	data : upRe,
+																	dataType : "html",
+																	success : function(data)
+																	{
+																		$('#review_'+no).html(data);
+																	}
+																});
+															}
+															else{return}
+														}else{return}
+													});
+												}
+											});
+										}
+								</script>
 							</div>
 						</div>
 					</div>
+					
+					<div id="tab_4" class="tab_container" style='margin-left: 10%; margin-right: 10%;' >
+						<div class="col w-100" >
+							<!-- Add Review -->
+							<div class="tab_title reviews_title" style='margin-bottom:-5%;' >
+								<h4>Reviews (2)</h4>
+							</div>
+							<div class=" add_review_col">
+								<div class="add_review">
+									
+									<form id="review_form1" method='post'>
+										<div>
+										<h1>&nbsp;&nbsp;
+											ID : admin 
+										</h1>
+											<span></span>
+											<textarea id="review_message1" class="input_review" name="review"  placeholder="Your Review" rows="5" required data-error="Please, leave us a review."></textarea>
+										</div>
+										<div class="text-left text-sm-right">
+											<button id="review_submit1" type="submit" class="red_button review_submit_btn trans_300" value="Submit">확인</button>
+										</div>
+									</form>
+								</div>
 
+							</div>
+							<!-- User Reviews -->
+
+							<div>
+								<c:forEach items="${reviewList}" var="r" varStatus="s">
+									<hr>
+									<div class="user_review_container d-flex flex-column flex-sm-row">
+									<div>
+										<div class="review_date">
+											<fmt:formatDate value="${r.REVIEWDATE }" pattern="yyyy년MM월dd일  E요일"/><br>
+											
+										</div>
+										<div class="user_name">
+											${r.USERID }
+										</div>
+										<p>${r.REVIEWCONTENT }</p>
+									</div>
+								</div>
+								
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+					
+					
 				</div>
 			</div>
 		</div>

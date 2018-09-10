@@ -13,7 +13,21 @@ public interface PerformanceService {
 
 	List<Map<String, String>> performSelectList(Map<String, String> map);
 
-	Performance performSelectOne(int no);
+	Map<String, Object> performSelectOne(int no);
+
+	List<Map<String, Object>> performReview(int no);
+
+	int performReviewInsert(Map<String, Object> map);
+
+	int performReviewDelete(int reviewNo);
+
+	Map<String, Object> performReviewOne(int reviewNo);
+
+	int performReviewUpdateEnd(Map<String, Object> map);
+
+	
+
+	
 
 	
 
