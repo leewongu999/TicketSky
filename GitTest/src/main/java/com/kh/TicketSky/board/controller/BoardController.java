@@ -269,7 +269,7 @@ public class BoardController {
 			boardNo = 1;
 		}
 		request.setAttribute("reportBoardNo", boardNo);
-		return "community/comboardReport";
+		return "community/report";
 	}
 	
 	@RequestMapping("/community/replyReport")
@@ -281,7 +281,7 @@ public class BoardController {
 			replyNo = 1;
 		}
 		request.setAttribute("reportReplyNo", replyNo);
-		return "community/comboardReport";
+		return "community/report";
 	}
 	
 	@RequestMapping("/community/reportReplyEnd")
