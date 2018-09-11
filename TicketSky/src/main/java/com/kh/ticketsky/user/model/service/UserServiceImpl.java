@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public List<Map<String, String>> selectSellerStatusUserId(Map<String, String> map) {
+		return dao.selectSellerStatusUserId(sqlSession,map);
+	}
+
+	@Override
 	public List<Map<String, String>> selectReserveList(int cPage, int numPerPage, Map<String, String> map) {
 		return dao.selectReserveList(sqlSession,cPage,numPerPage,map);
 	}

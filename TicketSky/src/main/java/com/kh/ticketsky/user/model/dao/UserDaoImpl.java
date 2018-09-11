@@ -23,6 +23,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public List<Map<String, String>> selectSellerStatusUserId(SqlSessionTemplate sqlSession, Map<String, String> map) {
+		return sqlSession.selectList("seller.selectSellerStatusUserId",map);
+	}
+
+	@Override
 	public List<Map<String, String>> selectMyPlayList(SqlSessionTemplate sqlSession, int cPage, int numPerPage,
 			Map<String, String> map) {
 		RowBounds row=new RowBounds((cPage-1)*numPerPage,numPerPage);

@@ -37,4 +37,6 @@ public interface UserService {
 
 	int selectReserveListCount(Map<String, String> map);
 
+	List<Map<String, String>> selectSellerStatusUserId(Map<String, String> map);
+
 }

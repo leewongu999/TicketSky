@@ -69,23 +69,20 @@
                               </tr>
                           </thead>
                           <tbody>
-
+                          	<c:set var="totalAmount" value="0"></c:set>
+							<c:forEach items="${totalAcountList }" var="total">
           		               	<tr>
-          			                <td><a href="${path }/ticketsky/user/sellerStatusInfo">오즈의 마법사</a></td>
-                                <td>70,000원</td>
-          			                <td>240매</td>
-          			                <td>16,800,000원</td>
+          			                <td><a href="${path }/ticketsky/user/sellerStatusInfo">${total.PERFORMNAME }</a></td>
+                                <td><fmt:formatNumber value="${total.ORIPRICE }" pattern="#,###" />원</td>
+          			                <td>${total.SELLCOUNT }</td>
+          			                <td><fmt:formatNumber value="${total.AMOUNT }" pattern="#,###" />원</td>
+          			                <c:set var="totalAmount" value="${totalAmount + total.AMOUNT }" ></c:set>
           			            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2,800,000원</td>
-                          </tr>
+          			        </c:forEach>
                           <tfoot>
                             <tr>
                               <td colspan="3">합계</td>
-                              <td>19,600,000원</td>
+                              <td id="totalAmount"><fmt:formatNumber value="${totalAmount }" pattern="#,###" />원</td>
                             </tr>
                           </tfoot>
           		             </tbody>
@@ -178,6 +175,9 @@
     <!-- jQuery -->
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+
+	<script>
+	</script>
     <script type="text/javascript">
       $(function(){
         //-------------

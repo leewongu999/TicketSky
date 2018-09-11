@@ -41,4 +41,6 @@ public interface UserDao {
 
 	int selectReserveListCount(SqlSessionTemplate sqlSession, Map<String, String> map);
 
+	List<Map<String, String>> selectSellerStatusUserId(SqlSessionTemplate sqlSession, Map<String, String> map);
+
 }

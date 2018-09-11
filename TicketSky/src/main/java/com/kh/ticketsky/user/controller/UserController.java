@@ -272,13 +272,23 @@ public class UserController {
 	
 	/* 판매자 - 판매 통계 페이지 */
 	@RequestMapping("/user/sellerStatus")
-	public String sellerStatus() {
+	public String sellerStatus(HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		String userId = m.getUserId();
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		List<Map<String,String>> totalAcountList = service.selectSellerStatusUserId(map); // 총매출 리스트
+		
+		System.out.println(totalAcountList);
+		model.addAttribute("totalAcountList",totalAcountList);
 		return "seller/sellerStatus";
 	}
 	
 	/* 판매자 - 판매 상세 통계 */
 	@RequestMapping("/user/sellerStatusInfo")
-	public String sellerStatusInfo() {
+	public String sellerStatusInfo(HttpSession session, Model model) {
+		
 		return "seller/sellerStatusInfo";
 	}
 	
