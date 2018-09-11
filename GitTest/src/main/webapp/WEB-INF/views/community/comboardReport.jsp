@@ -27,7 +27,7 @@
 	<section class='height-800'>
         <div class='container'>
             <div class='text-center'>
-                <h2>관리자에게 신고(댓글 또는 게시글)</h2>
+                <h2>관리자에게 신고</h2>
             </div>
             <br><br><br>
             <form method='post' action='${path}/community/reportEnd'>
@@ -39,16 +39,32 @@
 	                </strong>
 	                <table class="table">
 	                	<tr>
-	                		<td></td>
+	                		<th>작성자</th>
+	                		<td>
+	                			<input type="text" name="userID" class='form-control' value=<%="userId"%> readonly/>
+	                		</td>
+	                	</tr>
+	                	<tr>
+	                		<td colspan='2'>
+	                			<input type="text" id="reason" name="reportReason" class="form-control" placeholder="짤막하게 입력하시오."/>
+	                		</td>
 	                	</tr>
 	                </table>
 	                <br><br>
 	                <input type="submit" class="xet_btn medium" value="확인" name='confirm' onclick='return fn_confirm()'/>
 	                <input type="reset" class="xet_btn medium" value="취소" name='cancel' onclick='fn_back()'/>
+	                <br>
+	                <p>위에 취소 버튼을 누르시면 게시판 1페이지로 이동합니다.</p>
 	            </div>
 	            <script>
 	            	function fn_confirm(){
-	            		return true;
+	            		if($("input#reason").val()==null || $('input#reason').text().trim().length==0){
+	            			alert("신고사항을 입력하시오.");
+	            			return false;
+	            		}
+	            		else{
+	            			return true;
+	            		}
 	            	}
 	                function fn_back(){
 	                    location.href="${path}/community/board?cPage=1";

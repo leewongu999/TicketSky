@@ -9,8 +9,6 @@ import com.kh.TicketSky.board.model.service.BoardService;
 import com.kh.TicketSky.board.model.vo.*;
 import com.kh.TicketSky.common.*;
 
-import oracle.net.aso.b;
-
 @Controller
 public class BoardController {
 /*	private Logger logger = LoggerFactory.getLogger(BoardController.class);*/
@@ -272,15 +270,8 @@ public class BoardController {
 		}
 		rpt = new Report();
 		rpt.setBoardNo(boardNo);
-		int result = service.reportBoard(boardNo);
-		if(result>0) {
-			request.setAttribute("reportBoard", rpt);
-			return "common/comboardReport";
-		}else {
-			String msg = "제대로 신고가 이루어지지 않았습니다.";
-			request.setAttribute("msg", msg);
-			return "common/msg";
-		}
+		request.setAttribute("reportBoard", rpt);
+		return "community/comboardReport";
 	}
 	
 	@RequestMapping("/community/replyReport")
@@ -293,14 +284,12 @@ public class BoardController {
 		}
 		rpt = new Report();
 		rpt.setReplyNo(replyNo);
-		int result = service.reportReply(replyNo);
-		if(result>0) {
-			request.setAttribute("reportReply", rpt);
-			return "common/comboardReport";
-		}else {
-			String msg = "제대로 신고가 이루어지지 않았습니다.";
-			request.setAttribute("msg", msg);
-			return "common/msg";
-		}
+		request.setAttribute("reportReply", rpt);
+		return "community/comboardReport";
+	}
+	
+	@RequestMapping("/community/reportEnd")
+	public String reportConfirm(HttpServletRequest request) {
+		return "common/msg";
 	}
 }

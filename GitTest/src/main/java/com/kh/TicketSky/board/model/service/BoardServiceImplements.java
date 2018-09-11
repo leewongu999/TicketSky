@@ -3,9 +3,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kh.TicketSky.board.model.dao.BoardDAO;
-import com.kh.TicketSky.board.model.vo.Board;
-import com.kh.TicketSky.board.model.vo.Reply;
-import com.kh.TicketSky.board.model.vo.Report;
+import com.kh.TicketSky.board.model.vo.*;
 
 import java.util.*;
 
@@ -100,12 +98,12 @@ public class BoardServiceImplements implements BoardService {
 	// 4. 게시글 또는 댓글 신고 관련
 	// 게시글 신고
 	@Override
-	public int reportBoard(int boardNo) {
-		return dao.reportBoard(sst, boardNo);
+	public int reportBoard(Report rpt) {
+		return dao.reportBoard(sst, rpt);
 	}
 	// 댓글 신고
 	@Override
-	public int reportReply(int replyNo) {
-		return dao.reportReply(sst, replyNo);
+	public int reportReply(Report rpt) {
+		return dao.reportReply(sst, rpt);
 	}
 }

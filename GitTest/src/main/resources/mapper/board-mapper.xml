@@ -82,11 +82,19 @@
 	
 	<!-- 게시글 또는 댓글 신고 관련 -->
 	<!-- 게시글 신고 -->
-	<insert id="reportBoard" parameterType="_int">
-		INSERT INTO report_review VALUES(report_reivew_seq.nextval, null, null, 0, null, sysdate, #{boardNo}, 0)
+	<insert id="reportBoard" parameterType="report">
+		INSERT INTO report_review VALUES(report_reivew_seq.nextval,
+										#{reportReason, jdbcType=VARCHAR},
+										#{userId, jdbcType=VARCHAR},
+										report_review_replyNo_SEQ.nextval,
+										DEFAULT, sysdate, #{boardNo, jdbcType=NUMERIC}, 0)
 	</insert>
 	<!-- 댓글 신고 -->
-	<insert id="reportReply" parameterType="_int">
-		INSERT INTO report_review VALUES(report_review_seq.nextval, null, null, 0, null, sysdate, 0, #{replyNo})
+	<insert id="reportReply" parameterType="report">
+		INSERT INTO report_review VALUES(report_review_seq.nextval,
+										#{reportReason, jdbcType=VARCHAR},
+										#{userId, jdbcType=VARCHAR},
+										report_review_replyNo_SEQ.nextval,
+										DEFAULT, sysdate, 0, #{replyNo, jdbcType=NUMERIC})
 	</insert>
 </mapper>

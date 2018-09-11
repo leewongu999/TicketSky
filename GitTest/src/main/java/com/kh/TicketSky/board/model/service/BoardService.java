@@ -25,6 +25,6 @@ public interface BoardService {
 	int replyMinus(Reply re);										// 댓글 삭제에 따른 댓글 수 감소
 	
 	// 4. 게시글 또는 댓글 신고 관련
-	int reportBoard(int boardNo);									// 게시글 신고
-	int reportReply(int replyNo);									// 댓글 신고
+	int reportBoard(Report rpt);									// 게시글 신고
+	int reportReply(Report rpt);									// 댓글 신고
 }
