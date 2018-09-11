@@ -15,6 +15,9 @@
 	<jsp:param value="게시글" name="title"/>
 </jsp:include>
 <style>
+	form:nth-child(1), form:nth-child(2){
+		display:inline-block;
+	}
 	h5{
         float:left;
     }
@@ -79,13 +82,16 @@
                 </table>
                 <hr>
                 <div id="buttons">
-                	<form method='post' action="${path}/community/comboardUpdate">
-                		<input type="hidden" name="title" value="<%=b.getBoardTitle()%>"/>
-                		<input type="hidden" name="userID" value="<%=b.getUserId()%>"/>
-                    	<input type='button' class='xet_btn medium' value='수정' name='update' onclick='fn_update()'/>
-                    	<input type='button' class='xet_btn medium' value='삭제' name='delete' onclick='fn_delete()'/>
-	                    <input type='button' class='xet_btn medium' value='이 게시글 신고' name='report' onclick='fn_report()'/>
-                    </form>
+	                <form method='post' action="${path}/community/comboardUpdate">
+	                	<input type="hidden" name="title" value="<%=b.getBoardTitle()%>"/>
+	                	<input type="hidden" name="userID" value="<%=b.getUserId()%>"/>
+	                    <input type='button' class='xet_btn medium' value='수정' name='update' onclick='fn_update()'/>
+	                    <input type='button' class='xet_btn medium' value='삭제' name='delete' onclick='fn_delete()'/>
+	                </form>
+	                <form method='post' action="${path}/community/comboardReport">
+	                    <input type="hidden" name="boardNo" value="<%=b.getBoardNo()%>"/>
+		                <input type='button' class='xet_btn medium' value='이 게시글 신고' name='reportBoard' onclick='fn_reportBoard()'/>
+	                </form>
                 </div>
                 <hr>
                 <form method='post' action="${path}/community/comboardReply">
@@ -108,8 +114,8 @@
                     function fn_delete(){
                         location.href="${path}/community/comboardDelete?boardNo=<%=b.getBoardNo()%>";
                     }
-                    function fn_report(){
-                        location.href="${path}/community/comboardReport.do";
+                    function fn_reportBoard(){
+                        location.href="${path}/community/comboardReport?boardNo=<%=b.getBoardNo()%>";
                     }
                     function fn_reply(){
                     	if($('#reply').val()==''){
@@ -133,20 +139,27 @@
         		<h5>댓글(<%=totalReplies%>)</h5>
 	        	<table id='xet_board' class='boardList'>
 		        <%for(Reply re : replies){%>
-		        	<form method='post' action="${path}/community/replyDelete">
-			            <input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
-					    <input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
 			            <tr>
 					      <td><%=re.getUserId()%></td>
 					      <td><%=re.getComments()%></td>
 					      <td><%=re.getWriteDate()%></td>
-					      <td><input type="submit" name="deleteReply" class="xet_btn medium" value="삭제" onclick="fn_delReply()"/></td>
+					      <form method='post' action="${path}/community/replyDelete">
+					          <input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
+							  <input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
+						      <td><input type="submit" name="deleteReply" class="xet_btn medium" value="삭제" onclick="fn_delReply()"/></td>
+					      </form>
+					      <form method='post' action="${path}/community/replyReport">
+					      	<input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
+					      	<td><input type="button" name="reportReply" class="xet_btn medium" value="신고" onclick="fn_reportReply()"/></td>
+					      </form>
 				        </tr>
-			        </form>
 			        <script>
 				        function fn_delReply(){
 		                	location.href="${path}/community/replyDelete?replyNo=<%=re.getReplyNo()%>";
 		                }
+				        function fn_reportReply(){
+				        	location.href="${path}/community/comboardReport?replyNo=<%=re.getReplyNo()%>";
+				        }
 			        </script>
 			    <%}%>
 			    </table>

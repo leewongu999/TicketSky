@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.kh.TicketSky.board.model.dao.BoardDAO;
 import com.kh.TicketSky.board.model.vo.Board;
 import com.kh.TicketSky.board.model.vo.Reply;
+import com.kh.TicketSky.board.model.vo.Report;
 
 import java.util.*;
 
@@ -94,5 +95,17 @@ public class BoardServiceImplements implements BoardService {
 	@Override
 	public int replyMinus(Reply re) {
 		return dao.replyMinus(sst, re);
+	}
+	
+	// 4. 게시글 또는 댓글 신고 관련
+	// 게시글 신고
+	@Override
+	public int reportBoard(int boardNo) {
+		return dao.reportBoard(sst, boardNo);
+	}
+	// 댓글 신고
+	@Override
+	public int reportReply(int replyNo) {
+		return dao.reportReply(sst, replyNo);
 	}
 }

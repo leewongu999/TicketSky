@@ -79,4 +79,14 @@
 	<update id="replyMinus" parameterType="reply">
 		UPDATE freeboard SET countReplies=countReplies-1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
+	
+	<!-- 게시글 또는 댓글 신고 관련 -->
+	<!-- 게시글 신고 -->
+	<insert id="reportBoard" parameterType="_int">
+		INSERT INTO report_review VALUES(report_reivew_seq.nextval, null, null, 0, null, sysdate, #{boardNo}, 0)
+	</insert>
+	<!-- 댓글 신고 -->
+	<insert id="reportReply" parameterType="_int">
+		INSERT INTO report_review VALUES(report_review_seq.nextval, null, null, 0, null, sysdate, 0, #{replyNo})
+	</insert>
 </mapper>

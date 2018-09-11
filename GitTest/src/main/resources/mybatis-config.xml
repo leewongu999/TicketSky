@@ -4,5 +4,6 @@
 	<typeAliases>
 		<typeAlias type="com.kh.TicketSky.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.TicketSky.board.model.vo.Reply" alias="reply"/>
+		<typeAlias type="com.kh.TicketSky.board.model.vo.Report" alias="report"/>
 	</typeAliases>
 </configuration>

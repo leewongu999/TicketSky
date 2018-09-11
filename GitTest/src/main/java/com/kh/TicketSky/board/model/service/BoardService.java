@@ -18,9 +18,13 @@ public interface BoardService {
 	
 	// 3. 댓글 관련
 	int addReply(Reply re);											// 댓글 달기
-	int replyPlus(Reply re);											// 댓글 추가에 따른 댓글 수 증가
+	int replyPlus(Reply re);										// 댓글 추가에 따른 댓글 수 증가
 	List<Reply> showReplies(int boardNo);							// 해당 게시글에 달린 전체 댓글
 	int selectTotalReplies(int boardNo);							// 해당 게시글에 달린 전체 댓글의 수
 	int deleteReply(Reply re);										// 댓글 삭제
 	int replyMinus(Reply re);										// 댓글 삭제에 따른 댓글 수 감소
+	
+	// 4. 게시글 또는 댓글 신고 관련
+	int reportBoard(int boardNo);									// 게시글 신고
+	int reportReply(int replyNo);									// 댓글 신고
 }

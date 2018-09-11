@@ -88,4 +88,16 @@ public class BoardDAOImplements implements BoardDAO {
 	public int replyMinus(SqlSessionTemplate sst, Reply re) {
 		return sst.update("board.replyMinus", re);
 	}
+	
+	// 4. 게시글 또는 댓글 신고
+	// 게시글 신고
+	@Override
+	public int reportBoard(SqlSessionTemplate sst, int boardNo) {
+		return sst.insert("board.reportBoard", boardNo);
+	}
+	// 댓글 신고
+	@Override
+	public int reportReply(SqlSessionTemplate sst, int replyNo) {
+		return sst.insert("board.reportReply", replyNo);
+	}
 }

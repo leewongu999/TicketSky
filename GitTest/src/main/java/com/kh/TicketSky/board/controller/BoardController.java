@@ -204,11 +204,11 @@ public class BoardController {
 		// 아래의 줄 설명
 		// Reply 객체에서 두 번째 요소(String형)는 Member 객체에서 가져와야 한다.
 		// 여기서는 임의의 값을 넣었기 때문에, 나중에 다른 것과 합칠 때에는 이 입력한 값을 지우고 m.getUserId()와 같이 바꿔주세요.
-		Reply re = new Reply(0, "peterhyse92", replyContent, null, boardNo);
+		Reply re = new Reply(0, "관리자", replyContent, null, boardNo);
 		
-		int result = service.addReply(re);
+		int result1 = service.addReply(re);
 		int result2 = service.replyPlus(re);
-		if(result>0) {
+		if(result1>0 && result2>0) {
 			msg = "댓글이 정상적으로 달렸습니다.";
 			loc = "/community/comboardView?boardNo="+re.getBoardNo();
 		}else {
@@ -248,10 +248,11 @@ public class BoardController {
 			re.setReplyNo(1);
 			re.setBoardNo(1);
 		}
-		int result = service.deleteReply(re);
+		int result1 = service.deleteReply(re);
 		System.out.println("댓글 고유 번호 : "+re.getReplyNo());
 		System.out.println("댓글이 달린 게시글 번호 : "+re.getBoardNo());
-		if(result>0) {
+		int result2 = service.replyMinus(re);
+		if(result1>0 && result2>0) {
 			msg = "댓글이 정상적으로 삭제되었습니다.";
 		}else {
 			msg = "댓글 삭제가 실패하였습니다.";
@@ -259,5 +260,47 @@ public class BoardController {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", "/community/board");
 		return "common/msg";
+	}
+	
+	@RequestMapping("/community/comboardReport")
+	public String reportBoard(Report rpt, HttpServletRequest request) {
+		int boardNo;
+		try {
+			boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		}catch(NumberFormatException e) {
+			boardNo = 1;
+		}
+		rpt = new Report();
+		rpt.setBoardNo(boardNo);
+		int result = service.reportBoard(boardNo);
+		if(result>0) {
+			request.setAttribute("reportBoard", rpt);
+			return "common/comboardReport";
+		}else {
+			String msg = "제대로 신고가 이루어지지 않았습니다.";
+			request.setAttribute("msg", msg);
+			return "common/msg";
+		}
+	}
+	
+	@RequestMapping("/community/replyReport")
+	public String reportReply(Report rpt, HttpServletRequest request) {
+		int replyNo;
+		try {
+			replyNo = Integer.parseInt(request.getParameter("replyNo"));
+		}catch(NumberFormatException e) {
+			replyNo = 1;
+		}
+		rpt = new Report();
+		rpt.setReplyNo(replyNo);
+		int result = service.reportReply(replyNo);
+		if(result>0) {
+			request.setAttribute("reportReply", rpt);
+			return "common/comboardReport";
+		}else {
+			String msg = "제대로 신고가 이루어지지 않았습니다.";
+			request.setAttribute("msg", msg);
+			return "common/msg";
+		}
 	}
 }
