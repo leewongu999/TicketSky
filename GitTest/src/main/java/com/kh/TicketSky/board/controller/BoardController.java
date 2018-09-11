@@ -289,7 +289,29 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/reportEnd")
-	public String reportConfirm(HttpServletRequest request) {
+	public String reportConfirm(Report rpt, HttpServletRequest request) {
+		String msg = "";
+		int boardRPT = Integer.parseInt(request.getParameter("boardRPT"));
+		int replyRPT = Integer.parseInt(request.getParameter("replyRPT"));
+		String userID = request.getParameter("userID");
+		String reportReason = request.getParameter("reportReason");
+		rpt = new Report(0, reportReason, userID, 0, null, null, boardRPT, replyRPT);
+		int result1 = service.reportBoard(rpt);
+		int result2 = service.reportReply(rpt);
+		
+		// 신고 분류가 게시글, 댓글로 나뉘어 있기 때문에 따로따로 설정했다. 다만 신고 처리는 동일하다.
+		if(result1>0) {
+			msg = "게시글 신고를 관리자에게 보냈습니다.";
+		}else {
+			msg = "신고가 제대로 이루어지지 않았습니다.";
+		}
+		if(result2>0) {
+			msg = "댓글 신고를 관리자에게 보냈습니다.";
+		}else {
+			msg = "신고가 제대로 이루어지지 않았습니다.";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/community/board?cPage=1");
 		return "common/msg";
 	}
 }
