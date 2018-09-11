@@ -202,7 +202,7 @@ public class BoardController {
 		// 아래의 줄 설명
 		// Reply 객체에서 두 번째 요소(String형)는 Member 객체에서 가져와야 한다.
 		// 여기서는 임의의 값을 넣었기 때문에, 나중에 다른 것과 합칠 때에는 이 입력한 값을 지우고 m.getUserId()와 같이 바꿔주세요.
-		Reply re = new Reply(0, "관리자", replyContent, null, boardNo);
+		Reply re = new Reply(0, "peterhyse92", replyContent, null, boardNo);
 		
 		int result1 = service.addReply(re);
 		int result2 = service.replyPlus(re);
@@ -261,52 +261,69 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/comboardReport")
-	public String reportBoard(Report rpt, HttpServletRequest request) {
+	public String reportBoard(HttpServletRequest request) {
 		int boardNo;
 		try {
 			boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		}catch(NumberFormatException e) {
 			boardNo = 1;
 		}
-		rpt = new Report();
-		rpt.setBoardNo(boardNo);
-		request.setAttribute("reportBoard", rpt);
+		request.setAttribute("reportBoardNo", boardNo);
 		return "community/comboardReport";
 	}
 	
 	@RequestMapping("/community/replyReport")
-	public String reportReply(Report rpt, HttpServletRequest request) {
+	public String reportReply(HttpServletRequest request) {
 		int replyNo;
 		try {
 			replyNo = Integer.parseInt(request.getParameter("replyNo"));
 		}catch(NumberFormatException e) {
 			replyNo = 1;
 		}
-		rpt = new Report();
-		rpt.setReplyNo(replyNo);
-		request.setAttribute("reportReply", rpt);
+		request.setAttribute("reportReplyNo", replyNo);
 		return "community/comboardReport";
 	}
 	
-	@RequestMapping("/community/reportEnd")
-	public String reportConfirm(Report rpt, HttpServletRequest request) {
+	@RequestMapping("/community/reportReplyEnd")
+	public String reportReplyConfirm(Report rpt, int replyRPT, HttpServletRequest request) {
 		String msg = "";
-		int boardRPT = Integer.parseInt(request.getParameter("boardRPT"));
-		int replyRPT = Integer.parseInt(request.getParameter("replyRPT"));
+		try {
+			replyRPT = Integer.parseInt(request.getParameter("replyRPT"));
+		}catch(NumberFormatException e) {
+			replyRPT = 1;
+		}
 		String userID = request.getParameter("userID");
 		String reportReason = request.getParameter("reportReason");
-		rpt = new Report(0, reportReason, userID, 0, null, null, boardRPT, replyRPT);
-		int result1 = service.reportBoard(rpt);
-		int result2 = service.reportReply(rpt);
+		rpt = new Report(0, reportReason, userID, 0, null, null, 0, replyRPT);
+		int result = service.reportReply(rpt);
+		System.out.println(replyRPT);
 		
-		// 신고 분류가 게시글, 댓글로 나뉘어 있기 때문에 따로따로 설정했다. 다만 신고 처리는 동일하다.
-		if(result1>0) {
-			msg = "게시글 신고를 관리자에게 보냈습니다.";
+		if(result>0) {
+			msg = "댓글 신고를 관리자에게 보냈습니다.";
 		}else {
 			msg = "신고가 제대로 이루어지지 않았습니다.";
 		}
-		if(result2>0) {
-			msg = "댓글 신고를 관리자에게 보냈습니다.";
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/community/board?cPage=1");
+		return "common/msg";
+	}
+	
+	@RequestMapping("/community/reportBoardEnd")
+	public String reportBoardConfirm(Report rpt, int boardRPT, HttpServletRequest request) {
+		String msg = "";
+		try {
+			boardRPT = Integer.parseInt(request.getParameter("boardRPT"));
+		}catch(NumberFormatException e) {
+			boardRPT = 1;
+		}
+		String userID = request.getParameter("userID");
+		String reportReason = request.getParameter("reportReason");
+		rpt = new Report(0, reportReason, userID, 0, null, null, boardRPT, 0);
+		int result = service.reportBoard(rpt);
+		System.out.println(boardRPT);
+		
+		if(result>0) {
+			msg = "게시글 신고를 관리자에게 보냈습니다.";
 		}else {
 			msg = "신고가 제대로 이루어지지 않았습니다.";
 		}

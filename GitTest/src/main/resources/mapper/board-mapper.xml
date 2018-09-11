@@ -83,18 +83,14 @@
 	<!-- 게시글 또는 댓글 신고 관련 -->
 	<!-- 게시글 신고 -->
 	<insert id="reportBoard" parameterType="report">
-		INSERT INTO report_review VALUES(report_reivew_seq.nextval,
-										#{reportReason, jdbcType=VARCHAR},
-										#{userId, jdbcType=VARCHAR},
-										report_review_replyNo_SEQ.nextval,
-										DEFAULT, sysdate, #{boardNo, jdbcType=NUMERIC}, 0)
+		INSERT INTO report_review(reportNo, reportReason, userId, reviewNo, reportConfirm, reportDate, boardNo)
+		VALUES(report_review_seq.nextval, #{reportReason, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR},
+			report_review_replyNo_SEQ.nextval, DEFAULT, sysdate, #{boardNo, jdbcType=NUMERIC})
 	</insert>
 	<!-- 댓글 신고 -->
 	<insert id="reportReply" parameterType="report">
-		INSERT INTO report_review VALUES(report_review_seq.nextval,
-										#{reportReason, jdbcType=VARCHAR},
-										#{userId, jdbcType=VARCHAR},
-										report_review_replyNo_SEQ.nextval,
-										DEFAULT, sysdate, 0, #{replyNo, jdbcType=NUMERIC})
+		INSERT INTO report_review(reportNo, reportReason, userId, reviewNo, reportConfirm, reportDate, replyNo)
+		VALUES(report_review_seq.nextval, #{reportReason, jdbcType=VARCHAR}, #{userId, jdbcType=VARCHAR},
+			report_review_replyNo_SEQ.nextval, DEFAULT, sysdate, #{replyNo, jdbcType=NUMERIC})
 	</insert>
 </mapper>

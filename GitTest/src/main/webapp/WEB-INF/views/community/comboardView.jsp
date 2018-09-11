@@ -90,7 +90,7 @@
 	                </form>
 	                <form method='post' action="${path}/community/comboardReport">
 	                    <input type="hidden" name="boardNo" value="<%=b.getBoardNo()%>"/>
-		                <input type='button' class='xet_btn medium' value='이 게시글 신고' name='reportBoard' onclick='fn_reportBoard()'/>
+		                <input type='submit' class='xet_btn medium' value='이 게시글 신고' name='reportBoard'/>
 	                </form>
                 </div>
                 <hr>
@@ -113,9 +113,6 @@
                     }
                     function fn_delete(){
                         location.href="${path}/community/comboardDelete?boardNo=<%=b.getBoardNo()%>";
-                    }
-                    function fn_reportBoard(){
-                        location.href="${path}/community/comboardReport?boardNo=<%=b.getBoardNo()%>";
                     }
                     function fn_reply(){
                     	if($('#reply').val()==''){
@@ -150,16 +147,13 @@
 					      </form>
 					      <form method='post' action="${path}/community/replyReport">
 					      	<input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
-					      	<td><input type="button" name="reportReply" class="xet_btn medium" value="신고" onclick="fn_reportReply()"/></td>
+					      	<td><input type="submit" name="reportReply" class="xet_btn medium" value="신고""/></td>
 					      </form>
 				        </tr>
 			        <script>
 				        function fn_delReply(){
 		                	location.href="${path}/community/replyDelete?replyNo=<%=re.getReplyNo()%>";
 		                }
-				        function fn_reportReply(){
-				        	location.href="${path}/community/comboardReport?replyNo=<%=re.getReplyNo()%>";
-				        }
 			        </script>
 			    <%}%>
 			    </table>
