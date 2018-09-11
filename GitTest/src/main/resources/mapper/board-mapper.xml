@@ -86,7 +86,7 @@
 		INSERT INTO report_review_freeboard VALUES(report_review_seq.nextval,
 													#{reportReason, jdbcType=VARCHAR},
 													#{userId, jdbcType=VARCHAR},
-													report_review_replyNo_SEQ.nextval,
+													report_review_boardNo_SEQ.nextval,
 													DEFAULT, sysdate, #{boardNo, jdbcType=NUMERIC})
 	</insert>
 	<!-- 댓글 신고 -->
