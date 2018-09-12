@@ -140,6 +140,7 @@
 					      <td><%=re.getUserId()%></td>
 					      <td><%=re.getComments()%></td>
 					      <td><%=re.getWriteDate()%></td>
+					      <%if(!re.getUserId().equals("관리자") && !re.getUserId().equals("admin")){%>
 					      <form method='post' action="${path}/community/replyDelete">
 					          <input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
 							  <input type="hidden" name="bNo" value="<%=re.getBoardNo()%>"/>
@@ -149,6 +150,10 @@
 					      	<input type="hidden" name="replyNo" value="<%=re.getReplyNo()%>"/>
 					      	<td><input type="submit" name="reportReply" class="xet_btn medium" value="신고""/></td>
 					      </form>
+					      <%}else{%>
+					      <td></td>
+					      <td></td>
+					      <%}%>
 				        </tr>
 			        <script>
 				        function fn_delReply(){

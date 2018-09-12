@@ -1,5 +1,4 @@
 package com.kh.TicketSky.board.model.vo;
-
 import java.sql.Date;
 
 public class ReportReply extends Report{
@@ -11,7 +10,7 @@ public class ReportReply extends Report{
 
 	public ReportReply(int reportNo, String reportReason, String userId, int reviewNo, String reportConfirm,
 			Date reportDate, int replyNo) {
-		super();
+		super(reportNo, reportReason, userId, reviewNo, reportConfirm, reportDate);
 		this.replyNo = replyNo;
 	}
 
