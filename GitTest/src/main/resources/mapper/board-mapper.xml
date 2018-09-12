@@ -35,6 +35,10 @@
 	<update id="addVisit" parameterType="board">
 		UPDATE freeboard SET visits=visits+1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
+	<!-- 마지막 게시글 번호 -->
+	<select id="maxBoardNo" resultType="_int">
+		SELECT MAX(boardNo) FROM freeboard
+	</select>
 	
 	<!-- 게시글 검색 관련 -->
 	<!-- 검색한 게시글만 출력한다. -->
@@ -79,6 +83,10 @@
 	<update id="replyMinus" parameterType="reply">
 		UPDATE freeboard SET countReplies=countReplies-1 WHERE boardNo=#{boardNo, jdbcType=NUMERIC}
 	</update>
+	<!-- 마지막 댓글 번호 -->
+	<select id="maxReplyNo" resultType="_int">
+		SELECT MAX(replyNo) FROM community_reply
+	</select>
 	
 	<!-- 게시글 또는 댓글 신고 관련 -->
 	<!-- 게시글 신고 -->

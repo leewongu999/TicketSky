@@ -50,6 +50,11 @@ public class BoardServiceImplements implements BoardService {
 	public int addVisits(Board b) {
 		return dao.addVisits(sst, b);
 	}
+	// 최근 게시글 번호
+	@Override
+	public int maxBoardNo() {
+		return dao.maxBoardNo(sst);
+	}
 	
 	// 2. 검색 조건을 만족하는 게시글 관련
 	// 검색 조건을 만족하는 게시글만 출력
@@ -93,6 +98,11 @@ public class BoardServiceImplements implements BoardService {
 	@Override
 	public int replyMinus(Reply re) {
 		return dao.replyMinus(sst, re);
+	}
+	// 최근 댓글 번호
+	@Override
+	public int maxReplyNo() {
+		return dao.maxReplyNo(sst);
 	}
 	
 	// 4. 게시글 또는 댓글 신고 관련

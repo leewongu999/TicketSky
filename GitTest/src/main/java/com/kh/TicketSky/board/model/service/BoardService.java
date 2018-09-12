@@ -11,6 +11,7 @@ public interface BoardService {
 	int deleteBoard(Board b);										// 해당 게시글 삭제
 	Board selectOne(int boardNo);									// 해당 게시글 조회
 	int addVisits(Board b);											// 해당 게시글 조회수
+	int maxBoardNo();												// 최근 게시글 번호
 	
 	// 2. 검색 조건을 만족하는 게시글 관련
 	List<Map<String,Object>> selectSearch(Map<String,Object> map);	// 검색 조건을 만족하는 게시글만 출력
@@ -23,6 +24,7 @@ public interface BoardService {
 	int selectTotalReplies(int boardNo);							// 해당 게시글에 달린 전체 댓글의 수
 	int deleteReply(Reply re);										// 댓글 삭제
 	int replyMinus(Reply re);										// 댓글 삭제에 따른 댓글 수 감소
+	int maxReplyNo();												// 최근 댓글 번호
 	
 	// 4. 게시글 또는 댓글 신고 관련
 	int reportBoard(Report rpt);									// 게시글 신고

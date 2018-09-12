@@ -44,6 +44,11 @@ public class BoardDAOImplements implements BoardDAO {
 	public int addVisits(SqlSessionTemplate sst, Board b) {
 		return sst.update("board.addVisit", b);
 	}
+	// 마지막 게시글 번호
+	@Override
+	public int maxBoardNo(SqlSessionTemplate sst) {
+		return sst.selectOne("board.maxBoardNo");
+	}
 	
 	// 2. 검색 조건을 만족하는 게시글 관련
 	// 검색 조건을 만족하는 게시글만 출력
@@ -87,6 +92,11 @@ public class BoardDAOImplements implements BoardDAO {
 	@Override
 	public int replyMinus(SqlSessionTemplate sst, Reply re) {
 		return sst.update("board.replyMinus", re);
+	}
+	// 마지막 댓글 번호
+	@Override
+	public int maxReplyNo(SqlSessionTemplate sst) {
+		return sst.selectOne("board.maxReplyNo");
 	}
 	
 	// 4. 게시글 또는 댓글 신고

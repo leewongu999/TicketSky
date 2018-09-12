@@ -8,15 +8,13 @@ public class Report {
 	private int reviewNo;
 	private String reportConfirm;
 	private Date reportDate;
-	private int boardNo;
-	private int replyNo;
 	
 	public Report() {
 		
 	}
 
 	public Report(int reportNo, String reportReason, String userId, int reviewNo, String reportConfirm,
-			Date reportDate, int boardNo, int replyNo) {
+			Date reportDate) {
 		super();
 		this.reportNo = reportNo;
 		this.reportReason = reportReason;
@@ -24,8 +22,6 @@ public class Report {
 		this.reviewNo = reviewNo;
 		this.reportConfirm = reportConfirm;
 		this.reportDate = reportDate;
-		this.boardNo = boardNo;
-		this.replyNo = replyNo;
 	}
 
 	public int getReportNo() {
@@ -76,26 +72,9 @@ public class Report {
 		this.reportDate = reportDate;
 	}
 
-	public int getBoardNo() {
-		return boardNo;
-	}
-
-	public void setBoardNo(int boardNo) {
-		this.boardNo = boardNo;
-	}
-
-	public int getReplyNo() {
-		return replyNo;
-	}
-
-	public void setReplyNo(int replyNo) {
-		this.replyNo = replyNo;
-	}
-
 	@Override
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reportReason=" + reportReason + ", userId=" + userId + ", reviewNo="
-				+ reviewNo + ", reportConfirm=" + reportConfirm + ", reportDate=" + reportDate + ", boardNo=" + boardNo
-				+ ", replyNo=" + replyNo + "]";
+				+ reviewNo + ", reportConfirm=" + reportConfirm + ", reportDate=" + reportDate + "]";
 	}
 }

@@ -200,9 +200,10 @@ public class BoardController {
 			boardNo = 1;
 		}
 		// 아래의 줄 설명
-		// Reply 객체에서 두 번째 요소(String형)는 Member 객체에서 가져와야 한다.
+		// Reply 객체에서 두 번째 인자(String형)는 Member 클래스에서 가져와야 한다.
 		// 여기서는 임의의 값을 넣었기 때문에, 나중에 다른 것과 합칠 때에는 이 입력한 값을 지우고 m.getUserId()와 같이 바꿔주세요.
-		Reply re = new Reply(0, "peterhyse92", replyContent, null, boardNo);
+		// 그리고 그 클래스를 import하는 것도 잊지 마세요.
+		Reply re = new Reply(0, "userId", replyContent, null, boardNo);
 		
 		int result1 = service.addReply(re);
 		int result2 = service.replyPlus(re);
@@ -268,7 +269,10 @@ public class BoardController {
 		}catch(NumberFormatException e) {
 			boardNo = 1;
 		}
+		int maxBoardNo = service.maxBoardNo();
+		System.out.println("신고할 게시글 번호 : "+boardNo);
 		request.setAttribute("reportBoardNo", boardNo);
+		request.setAttribute("maxBNo", maxBoardNo);
 		return "community/report";
 	}
 	
@@ -280,6 +284,9 @@ public class BoardController {
 		}catch(NumberFormatException e) {
 			replyNo = 1;
 		}
+		int maxReplyNo = service.maxReplyNo();
+		System.out.println("신고할 댓글 번호 : "+replyNo);
+		request.setAttribute("maxRNo", maxReplyNo);
 		request.setAttribute("reportReplyNo", replyNo);
 		return "community/report";
 	}
@@ -294,7 +301,7 @@ public class BoardController {
 		}
 		String userID = request.getParameter("userID");
 		String reportReason = request.getParameter("reportReason");
-		rpt = new Report(0, reportReason, userID, 0, null, null, 0, replyRPT);
+		rpt = new ReportReply(0, reportReason, userID, 0, null, null, replyRPT);
 		int result = service.reportReply(rpt);
 		System.out.println(replyRPT);
 		
@@ -318,7 +325,7 @@ public class BoardController {
 		}
 		String userID = request.getParameter("userID");
 		String reportReason = request.getParameter("reportReason");
-		rpt = new Report(0, reportReason, userID, 0, null, null, boardRPT, 0);
+		rpt = new ReportBoard(0, reportReason, userID, 0, null, null, boardRPT);
 		int result = service.reportBoard(rpt);
 		System.out.println(boardRPT);
 		
