@@ -25,6 +25,6 @@ public interface BoardDAO {
 	int replyMinus(SqlSessionTemplate sst, Reply re);								// 댓글 삭제될 때마다 댓글 수 감소
 	int maxReplyNo(SqlSessionTemplate sst);											// 최근 댓글 번호
 	// 4. 게시글 또는 댓글 신고 관련
-	int reportBoard(SqlSessionTemplate sst, Report rpt);							// 게시글 신고
-	int reportReply(SqlSessionTemplate sst, Report rpt);							// 댓글 신고
+	int reportBoard(SqlSessionTemplate sst, ReportBoard rBoard);					// 게시글 신고
+	int reportReply(SqlSessionTemplate sst, ReportReply rReply);					// 댓글 신고
 }

@@ -108,12 +108,12 @@ public class BoardServiceImplements implements BoardService {
 	// 4. 게시글 또는 댓글 신고 관련
 	// 게시글 신고
 	@Override
-	public int reportBoard(Report rpt) {
-		return dao.reportBoard(sst, rpt);
+	public int reportBoard(ReportBoard rBoard) {
+		return dao.reportBoard(sst, rBoard);
 	}
 	// 댓글 신고
 	@Override
-	public int reportReply(Report rpt) {
-		return dao.reportReply(sst, rpt);
+	public int reportReply(ReportReply rReply) {
+		return dao.reportReply(sst, rReply);
 	}
 }

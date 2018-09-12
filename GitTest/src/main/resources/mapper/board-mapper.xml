@@ -90,16 +90,16 @@
 	
 	<!-- 게시글 또는 댓글 신고 관련 -->
 	<!-- 게시글 신고 -->
-	<insert id="reportBoard" parameterType="report">
-		INSERT INTO report_review_freeboard VALUES(report_review_seq.nextval,
+	<insert id="reportBoard" parameterType="rptBoard">
+		INSERT INTO report_review_freeboard VALUES(report_review_FB_SEQ.nextval,
 													#{reportReason, jdbcType=VARCHAR},
 													#{userId, jdbcType=VARCHAR},
 													report_review_boardNo_SEQ.nextval,
 													DEFAULT, sysdate, #{boardNo, jdbcType=NUMERIC})
 	</insert>
 	<!-- 댓글 신고 -->
-	<insert id="reportReply" parameterType="report">
-		INSERT INTO report_review_reply VALUES(report_review_seq.nextval,
+	<insert id="reportReply" parameterType="rptReply">
+		INSERT INTO report_review_reply VALUES(report_review_RE_SEQ.nextval,
 												#{reportReason, jdbcType=VARCHAR},
 												#{userId, jdbcType=VARCHAR},
 												report_review_replyNo_SEQ.nextval,

@@ -87,7 +87,7 @@
 		                        </i>
 		                    </c:if>
                         </td>
-                        <td><%="userId"%></td>
+                        <td><c:out value="${b['USERID']}"/></td>
                         <td><c:out value="${b['WRITEDATE']}"/></td>
                         <td><c:out value="${b['VISITS']}"/></td>
                     </tr>

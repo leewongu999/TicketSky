@@ -273,7 +273,7 @@ public class BoardController {
 		System.out.println("신고할 게시글 번호 : "+boardNo);
 		request.setAttribute("reportBoardNo", boardNo);
 		request.setAttribute("maxBNo", maxBoardNo);
-		return "community/report";
+		return "community/reportBoard";
 	}
 	
 	@RequestMapping("/community/replyReport")
@@ -288,11 +288,11 @@ public class BoardController {
 		System.out.println("신고할 댓글 번호 : "+replyNo);
 		request.setAttribute("maxRNo", maxReplyNo);
 		request.setAttribute("reportReplyNo", replyNo);
-		return "community/report";
+		return "community/reportReply";
 	}
 	
 	@RequestMapping("/community/reportReplyEnd")
-	public String reportReplyConfirm(Report rpt, int replyRPT, HttpServletRequest request) {
+	public String reportReplyConfirm(ReportReply rReply, int replyRPT, HttpServletRequest request) {
 		String msg = "";
 		try {
 			replyRPT = Integer.parseInt(request.getParameter("replyRPT"));
@@ -301,8 +301,8 @@ public class BoardController {
 		}
 		String userID = request.getParameter("userID");
 		String reportReason = request.getParameter("reportReason");
-		rpt = new ReportReply(0, reportReason, userID, 0, null, null, replyRPT);
-		int result = service.reportReply(rpt);
+		rReply = new ReportReply(0, reportReason, userID, 0, null, null, replyRPT);
+		int result = service.reportReply(rReply);
 		System.out.println(replyRPT);
 		
 		if(result>0) {
@@ -316,7 +316,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/community/reportBoardEnd")
-	public String reportBoardConfirm(Report rpt, int boardRPT, HttpServletRequest request) {
+	public String reportBoardConfirm(ReportBoard rBoard, int boardRPT, HttpServletRequest request) {
 		String msg = "";
 		try {
 			boardRPT = Integer.parseInt(request.getParameter("boardRPT"));
@@ -325,8 +325,8 @@ public class BoardController {
 		}
 		String userID = request.getParameter("userID");
 		String reportReason = request.getParameter("reportReason");
-		rpt = new ReportBoard(0, reportReason, userID, 0, null, null, boardRPT);
-		int result = service.reportBoard(rpt);
+		rBoard = new ReportBoard(0, reportReason, userID, 0, null, null, boardRPT);
+		int result = service.reportBoard(rBoard);
 		System.out.println(boardRPT);
 		
 		if(result>0) {

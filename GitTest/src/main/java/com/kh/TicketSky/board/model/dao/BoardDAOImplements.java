@@ -102,12 +102,12 @@ public class BoardDAOImplements implements BoardDAO {
 	// 4. 게시글 또는 댓글 신고
 	// 게시글 신고
 	@Override
-	public int reportBoard(SqlSessionTemplate sst, Report rpt) {
-		return sst.insert("board.reportBoard", rpt);
+	public int reportBoard(SqlSessionTemplate sst, ReportBoard rBoard) {
+		return sst.insert("board.reportBoard", rBoard);
 	}
 	// 댓글 신고
 	@Override
-	public int reportReply(SqlSessionTemplate sst, Report rpt) {
-		return sst.insert("board.reportReply", rpt);
+	public int reportReply(SqlSessionTemplate sst, ReportReply rReply) {
+		return sst.insert("board.reportReply", rReply);
 	}
 }

@@ -27,6 +27,6 @@ public interface BoardService {
 	int maxReplyNo();												// 최근 댓글 번호
 	
 	// 4. 게시글 또는 댓글 신고 관련
-	int reportBoard(Report rpt);									// 게시글 신고
-	int reportReply(Report rpt);									// 댓글 신고
+	int reportBoard(ReportBoard rBoard);							// 게시글 신고
+	int reportReply(ReportReply rReply);							// 댓글 신고
 }
