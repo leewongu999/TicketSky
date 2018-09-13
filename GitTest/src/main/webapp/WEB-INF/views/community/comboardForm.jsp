@@ -45,7 +45,7 @@
                             	<!-- 아래의 input 태그의 value 속성은 Member 객체에서 가져와야 한다.
                             	여기서는 임의의 값을 넣었으므로, 나중에 다른 것과 합칠 때 value 속성의 값을 지우기 바랍니다.
                             	단, System.out.println()과 같은 기능을 하는 태그까지 지우지 말고 그 안의 값만 지울 것. -->
-                                <input type="text" class="form-control" name="userID" value="<%="dongmakgol0110"%>" readonly/>
+                                <input type="text" class="form-control" name="userID" value="<%="userId"%>" readonly/>
                             </td>
                         </tr>
                         <tr>

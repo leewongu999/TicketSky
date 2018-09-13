@@ -98,6 +98,15 @@
 			                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
 			                        </i>
 			                    </c:if>
+			                    <!-- 오늘의 날짜와 동일할 때 조건문.
+										여기서는 '오늘 올린 게시글은 하루 종일 새 게시글임을 알리는 아이콘을 띄우도록' 설정했다.
+										클릭하고 난 후에도 다음 날까지 아이콘이 사라지지 않게 구현하여
+										기존의 여러 사이트에 있는 게시판과 차별화를 두었다. -->
+								<c:if test="${b['WRITEDATE'] eq SYSDATE}">
+									<i class='fileIcon'>
+ 				                        <img src="${path}/resources/img/core-img/newboardicon.PNG"/>
+ 				                    </i>
+								</c:if>
 	                        </td>
 	                        <td><c:out value="${b['USERID']}"/></td>
 	                        <td><c:out value="${b['WRITEDATE']}"/></td>
@@ -111,8 +120,6 @@
         </div>
     </section>
     <section class='new_arrivals_area section-padding-80 clearfix'>
-    	<div>
-            <%=pageBar%>
-        </div>
+    	<div><%=pageBar%></div>
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

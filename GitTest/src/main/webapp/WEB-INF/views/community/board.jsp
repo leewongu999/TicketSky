@@ -131,8 +131,6 @@
         </div>
     </section>
     <section class='new_arrivals_area section-padding-80 clearfix'>
-    	<div>
-            <%=pageBar%>
-        </div>
+    	<div><%=pageBar%></div>
     </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
