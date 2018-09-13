@@ -1,5 +1,8 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.logging.SimpleFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="com.kh.TicketSky.common.Page,com.kh.TicketSky.board.model.vo.Board, java.util.*"%>
+	import="com.kh.TicketSky.common.Page,com.kh.TicketSky.board.model.vo.Board, 
+	java.util.List, java.util.Calendar, java.sql.Date, java.text.SimpleDateFormat"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -7,6 +10,10 @@
 	int totalContents = Integer.parseInt(String.valueOf(request.getAttribute("totalContents")));
 	String pageBar = (String)request.getAttribute("pageBar");
 	List<Board> list = (List<Board>)request.getAttribute("list");
+	Calendar calGetter = Calendar.getInstance();
+	int year = Calendar.YEAR;
+	int month = (Calendar.MONTH)+1;		// 0에서 11까지의 범위. 달력 환산은 1을 더해줘야 한다.
+	int date = Calendar.DATE;
 %>
 <style>
     a.boardtitle{
@@ -83,6 +90,12 @@
 			                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
 				                        <%=b.getBoardTitle()%>
 				                    </a>
+				                    <!-- 오늘의 날짜와 동일하면 -->
+				                    <%if(String.valueOf(b.getWriteDate()).equals(year+"-"+month+"-"+date)){%>
+ 				                        <i class='fileIcon'>
+				                        	<img src="${path}/resources/img/core-img/newboardicon.PNG"/>
+				                        </i>
+				                    <%}%>
 			                        <%if(b.getOriginalFileName()!=null){%>
 				                        <i class='fileIcon'>
 				                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
