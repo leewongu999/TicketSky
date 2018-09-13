@@ -203,7 +203,7 @@ public class BoardController {
 		// Reply 객체에서 두 번째 인자(String형)는 Member 클래스에서 가져와야 한다.
 		// 여기서는 임의의 값을 넣었기 때문에, 나중에 다른 것과 합칠 때에는 이 입력한 값을 지우고 m.getUserId()와 같이 바꿔주세요.
 		// 그리고 그 클래스를 import하는 것도 잊지 마세요.
-		Reply re = new Reply(0, "peterhyse92", replyContent, null, boardNo);
+		Reply re = new Reply(0, "관리자", replyContent, null, boardNo);
 		
 		int result1 = service.addReply(re);
 		int result2 = service.replyPlus(re);

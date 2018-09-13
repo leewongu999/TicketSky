@@ -49,11 +49,21 @@
 		            	<option value="boardNo" ${"boardnum" eq param.item?"selected":""}>글 번호</option>
 		            </select>
 			        <div style="float:left;">
-			            <input type='search' name="searchKeyword" class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
+			            <input type='search' id="searchText" name="searchKeyword" class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
 			        </div>
 			        <div style="float:left;">
 			            <input type="submit" class="xet_btn large" value="검색"/>
 			        </div>
+			        <script>
+			        	function fn_search(){
+			        		if($('input#searchText').val()=='' || $.trim($('input#searchText').val()).length==0){
+			        			alert("내용을 입력하지 않으면 검색되지 않습니다.");
+			        			return false;
+			        		}
+			        		else
+			        			return true;
+			        	}
+			        </script>
 	        	</form>
 	        </div>
 	        <div style="float:right;">
@@ -74,24 +84,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                	<c:forEach var="b" items="${bList}">
-                    <tr>
-                        <td><c:out value="${b['BOARDNO']}"/></td>
-                        <td>	<!-- 첨부 파일이 있을 때 다운로드 할 수 있는 아이콘을 추가한다. -->
-	                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<c:out value="${b['BOARDNO']}"/>'>
-		                        <c:out value="${b['BOARDTITLE']}"/>
-		                    </a>
-		                    <c:if test="${not empty b['ORIGINALFILENAME']}">
-		                        <i class='fileIcon'>
-		                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
-		                        </i>
-		                    </c:if>
-                        </td>
-                        <td><c:out value="${b['USERID']}"/></td>
-                        <td><c:out value="${b['WRITEDATE']}"/></td>
-                        <td><c:out value="${b['VISITS']}"/></td>
-                    </tr>
-                    </c:forEach>
+	                <form method="post" action="${path}/community/replies">
+	                	<c:forEach var="b" items="${bList}">
+	                	<input type="hidden" name="boardNo" value='<c:out value="${b['BOARDNO']}"/>'/>
+	                    <tr>
+	                        <td><c:out value="${b['BOARDNO']}"/></td>
+	                        <td>	<!-- 첨부 파일이 있을 때 다운로드 할 수 있는 아이콘을 추가한다. -->
+		                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<c:out value="${b['BOARDNO']}"/>'>
+			                        <c:out value="${b['BOARDTITLE']}"/>
+			                    </a>
+			                    <c:if test="${not empty b['ORIGINALFILENAME']}">
+			                        <i class='fileIcon'>
+			                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
+			                        </i>
+			                    </c:if>
+	                        </td>
+	                        <td><c:out value="${b['USERID']}"/></td>
+	                        <td><c:out value="${b['WRITEDATE']}"/></td>
+	                        <td><c:out value="${b['VISITS']}"/></td>
+	                    </tr>
+	                    </c:forEach>
+	                </form>
                 </tbody>
             </table>
             <hr>

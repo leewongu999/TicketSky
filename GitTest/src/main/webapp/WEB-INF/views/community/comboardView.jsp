@@ -115,7 +115,7 @@
                         location.href="${path}/community/comboardDelete?boardNo=<%=b.getBoardNo()%>";
                     }
                     function fn_reply(){
-                    	if($('#reply').val()==''){
+                    	if($('#reply').val()=='' || $.trim($('#reply').val()).length==0){
                     		alert("댓글 내용을 입력하세요.");
                     		return false;
                     	}

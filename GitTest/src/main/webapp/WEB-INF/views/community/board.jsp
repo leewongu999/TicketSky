@@ -1,8 +1,9 @@
+<%@page import="java.sql.ResultSet"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.logging.SimpleFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="com.kh.TicketSky.common.Page,com.kh.TicketSky.board.model.vo.Board, 
-	java.util.List, java.util.Calendar, java.sql.Date, java.text.SimpleDateFormat"%>
+	java.util.*, java.sql.Date, java.text.SimpleDateFormat"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -11,9 +12,9 @@
 	String pageBar = (String)request.getAttribute("pageBar");
 	List<Board> list = (List<Board>)request.getAttribute("list");
 	Calendar calGetter = Calendar.getInstance();
-	int year = Calendar.YEAR;
-	int month = (Calendar.MONTH)+1;		// 0에서 11까지의 범위. 달력 환산은 1을 더해줘야 한다.
-	int date = Calendar.DATE;
+	int year = calGetter.get(Calendar.YEAR);
+	int month = calGetter.get(Calendar.MONTH)+1;	// 0에서 11까지의 범위. 달력 환산은 1을 더해줘야 한다.
+	int date = calGetter.get(Calendar.DATE);
 %>
 <style>
     a.boardtitle{
@@ -56,11 +57,21 @@
 		                <option value="boardNo" ${"boardNo" eq param.item?"selected":""}>글 번호</option>
 		            </select>
 			        <div style="float:left;">
-			            <input type='search' name="searchKeyword" class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
+			            <input type='search' id="searchText" name="searchKeyword" class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
 			        </div>
 			        <div style="float:left;">
-			            <input type="submit" class="xet_btn large" value="검색"/>
+			            <input type="submit" class="xet_btn large" value="검색" onclick="return fn_search()"/>
 			        </div>
+			        <script>
+			        	function fn_search(){
+			        		if($('input#searchText').val()=='' || $.trim($('input#searchText').val()).length==0){
+			        			alert("내용을 입력하지 않으면 검색되지 않습니다.");
+			        			return false;
+			        		}
+			        		else
+			        			return true;
+			        	}
+			        </script>
 	        	</form>
 	        </div>
 	        <div style="float:right;">
@@ -90,16 +101,19 @@
 			                        <a class='boardtitle' href='${path}/community/comboardView?boardNo=<%=b.getBoardNo()%>'>
 				                        <%=b.getBoardTitle()%>
 				                    </a>
-				                    <!-- 오늘의 날짜와 동일하면 -->
-				                    <%if(String.valueOf(b.getWriteDate()).equals(year+"-"+month+"-"+date)){%>
- 				                        <i class='fileIcon'>
-				                        	<img src="${path}/resources/img/core-img/newboardicon.PNG"/>
-				                        </i>
-				                    <%}%>
-			                        <%if(b.getOriginalFileName()!=null){%>
+				                    <%if(b.getOriginalFileName()!=null){%>
 				                        <i class='fileIcon'>
 				                        	<img src="${path}/resources/img/core-img/다운로드.png"/>
 				                        </i>
+				                    <%}%>
+				                    <!-- 오늘의 날짜와 동일할 때 조건문.
+										여기서는 '오늘 올린 게시글은 하루 종일 새 게시글임을 알리는 아이콘을 띄우도록' 설정했다.
+										클릭하고 난 후에도 다음 날까지 아이콘이 사라지지 않게 구현하여
+										기존의 여러 사이트에 있는 게시판과 차별화를 두었다. -->
+				                    <%if(b.getWriteDate().equals(java.sql.Date.valueOf(year+"-"+month+"-"+date))){%>
+ 				                        <i class='fileIcon'>
+ 				                        	<img src="${path}/resources/img/core-img/newboardicon.PNG"/>
+ 				                        </i>
 				                    <%}%>
 				                    <span style="font-size:10px;color:red;">
 				                    	<strong>(<%=b.getCountReplies()%>)</strong>
