@@ -119,4 +119,20 @@ public class UserServiceImpl implements UserService {
 	public Member selectOne(String userId) {
 		return dao.selectOne(sqlSession, userId);
 	}
+	
+	
+	
+	
+	@Override
+	   public int findPassword(Member m) 
+	   {
+	      return dao.findPassword(sqlSession,m);
+	   }
+
+	   @Override
+	   public Member selectId(Map<String, String> map) 
+	   {
+	      return dao.selectId(sqlSession,map);
+	   }
+	
 }

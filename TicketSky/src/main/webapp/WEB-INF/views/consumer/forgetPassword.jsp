@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
+<c:set value="${pageContext.request.contextPath}" var="path"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,39 +33,49 @@
 <body>
   <div class="container">
     <div class="login-form">
-        <form action="/examples/actions/confirmation.php" method="post">
+        <form action="${pageContext.request.contextPath}/user/findId" method="post">
             <h4 class="text-left">아이디 찾기</h4>
             <hr>
             <div class="form-group">
-            	<div class="input-group">
+               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="이름 (ex. 홍길동)" required="required">
+                <input type="text" class="form-control" name="userName" placeholder="이름 (ex. 홍길동)" required="required">
               </div>
             </div>
-  		      <div class="form-group">
+              <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="password" class="form-control" name="password" placeholder="이메일을 입력하세요." required="required">
+                <input type="email" class="form-control" name="email" placeholder="이메일을 입력하세요." required="required">
               </div>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary login-btn btn-block">인증번호 받기</button>
+              <button type="submit" class="btn btn-primary login-btn btn-block"> 아이디 찾기 </button>
             </div>
           </form>
+          
+          
           <br>
-          <form class="" action="${path }/ticketsky/user/findPassword" method="post">
+          
+          
+          <form class="" action="${path }/user/findPassword" method="post">
             <h4 class="text-left">비밀번호 찾기</h4>
             <hr>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="아이디" required="required">
+                <input type="text" class="form-control" name="userId" placeholder="아이디" required="required">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" name="userName" placeholder="이름" required="required">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="password" class="form-control" name="password" placeholder="이메일을 입력하세요." required="required">
+                <input type="email" class="form-control" name="email" placeholder="이메일을 입력하세요." required="required">
               </div>
             </div>
             <div class="form-group">

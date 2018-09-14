@@ -41,6 +41,7 @@
 			<exclude-mapping path="/user/*EnrollEnd"/>
 			<exclude-mapping path="/user/checkDuplicate.do"/>
 			<exclude-mapping path="/user/findPassword"/>
+			<exclude-mapping path="/user/findId"/>
 			<beans:bean id="loginCheckInterceptor" class="com.kh.ticketsky.common.interceptor.LogginCheckInterceptor">
 			</beans:bean>
 		</interceptor>

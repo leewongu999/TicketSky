@@ -121,5 +121,23 @@ public class UserDaoImpl implements UserDao {
 	public Member selectOne(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.selectOne("member.selectOne", userId);
 	}
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	   public int findPassword(SqlSessionTemplate sqlSession, Member m)
+	   {
+	      return sqlSession.update("member.findPassword",m);
+	   }
+
+	   @Override
+	   public Member selectId(SqlSessionTemplate sqlSession, Map<String, String> map) 
+	   {
+	      return sqlSession.selectOne("member.selectId",map);
+	   } 
 
 }

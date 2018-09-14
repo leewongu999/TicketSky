@@ -681,49 +681,129 @@ public class UserController {
 		return mv;
 	}
 	
-	/* 비밀번호 찾기 ------------------------(진석이형) */
-	   @RequestMapping(value="/user/findPassword", method= {RequestMethod.POST,RequestMethod.GET})
-	   public ModelAndView findPassword(String userName, String email, HttpServletResponse response,HttpServletRequest request) throws Exception
+	
+	
+	
+	
+	
+	
+	
+	/* 아이디 찾기 */
+	
+	   @RequestMapping(value="/user/findId", method= {RequestMethod.POST,RequestMethod.GET})
+	   public ModelAndView findId(String userName, String email, HttpServletResponse response,HttpServletRequest request) throws Exception
 	   {
 	      ModelAndView mv=new ModelAndView();
 	      //객체를 String, model로 나뉜걸 같이 쓰는게 ModelAndView 이다.
+
+	      Map<String,String> map = new HashMap<String,String>();
+	      map.put("userName", userName);
+	      map.put("email", email);
+	      System.out.println(map.get("email"));
+	      System.out.println(map.get("userName"));
 	      
-	      Member m = service.selectOne("kdf321");
+	      Member m = service.selectId(map);
 	      
 	      String msg="";
 	      String loc="";
 	      String userChk = "";
 	      
-	      if(/*m.getUserName().equals(userName) && m.getEmail().equals(email)*/true)
+	      if(m.getUserName().equals(userName)&&m.getEmail().equals(email))
+	      {
+	         msg="회원님의 아이디는 "+m.getUserId()+"입니다";
+	            loc = "/user/forgetPassword";
+
+	      }
+	      else
+	      {
+	         msg =" 일치하는 정보가 없습니다"; 
+	            loc = "/user/forgetPassword";
+	      }
+	      
+	      mv.addObject("msg",msg);
+	      mv.addObject("loc",loc);
+	      mv.addObject("userChk",userChk);
+	      mv.setViewName("common/msg");
+	      return mv;
+	   }
+	
+	
+	/*비밀번호 찾기 - 진석이형*/
+	
+	@RequestMapping(value="/user/findPassword", method= {RequestMethod.POST,RequestMethod.GET})
+	   public ModelAndView findPassword(String userId,String userName, String email, HttpServletResponse response,HttpServletRequest request) throws Exception
+	   {
+	      ModelAndView mv=new ModelAndView();
+	      //객체를 String, model로 나뉜걸 같이 쓰는게 ModelAndView 이다.
+
+	      Map<String,String> map = new HashMap<String,String>();
+	      map.put("userId", userId);
+	      map.put("userName", userName);
+	      map.put("email", email);
+	      
+	      Member m = service.selectId(map);
+	      
+	      String msg="";
+	      String loc="";
+	      String userChk = "";
+	      int temp = (int)(Math.random()*1000000); 
+	      String temp2 = String.valueOf(temp);
+	      System.out.println(temp2);
+	      
+	      // 비밀 번호 가져옴 ->  바꿈  -> 바꾼걸 인코딩해서 업데이트 
+	      
+	      if(m.getUserName().equals(userName)&&m.getEmail().equals(email))
 	      {
 	          String setfrom = "TicketSky7@gmail.com";  //이메일을 보낼 주소     
 	         
 	          try 
 	          {
-	             
+	            
 	            MimeMessage message = mailSender.createMimeMessage();
-	            MimeMessageHelper messageHelper 
-	                              = new MimeMessageHelper(message, true, "UTF-8");
-	       
+	            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	            
+	            //난수로 비밀번호를 변경 
+	            m.setPassword(temp2);
+	            
+	            System.out.println("암호화 전 비밀번호 : "+temp2);
+	           
 	            messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
 	            messageHelper.setTo(m.getEmail());     // 받는사람 이메일
-	            messageHelper.setSubject("요청하신 비밀번호입니다."); // 메일제목은 생략이 가능하다
-	            messageHelper.setText("비밀번호 "+m.getPassword());  // 메일 내용
+	            messageHelper.setSubject("TicketSky에서 요청하신 비밀번호입니다. ."); // 메일제목은 생략이 가능하다
+	            messageHelper.setText("변경된 비밀번호는 [ "+temp2+" ] 입니다");  // 메일 내용
 	           
 	            mailSender.send(message);
 	            
-	            msg = "입력하신 메일 주소로 비밀번호를 발송하였습니다";
+	            //변경한 비밀번호를 문자로 변경
+	            
+	            String enPw = bcryptPasswordEncoder.encode(temp2);
+	            
+	            m.setPassword(enPw);
+	            
+	            int result = service.findPassword(m);
+	            System.out.println("result : "+result);
+	            
+	            if(result>0)
+	            {
+	               msg = "입력하신 메일 주소로 변경된 비밀번호를 발송하였습니다";
+	               loc = "/user/forgetPassword";
+	            }
+	            else
+	            {
+	               msg = "일치하는 회원정보가 없습니다.";
+	               loc = "/user/forgetPassword";
+	            }
 	          }
-	          
 	          catch(Exception e)
 	          {
 	             e.printStackTrace();
 	          }
-	          
+
 	      }
 	      else
 	      {
-	         msg =" (임시)false임니당 "; 
+	         msg =" 일치하는 회원 정보가 없습니다.";
+	         loc = "/user/forgetPassword";
 	      }
 	      
 	      mv.addObject("msg",msg);

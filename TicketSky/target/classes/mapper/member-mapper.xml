@@ -59,5 +59,16 @@
         	 AND ${searchType} like '%'||#{searchTitle}||'%'
      	 </if>   
   </select>
+  
+  
+  <select id="selectId" resultMap="memberMap" parameterType="map">
+       select * from member join consumerrating on(member.ratingCode = consumerrating.ratingCode) where userName = #{userName} and email = #{email}
+    </select>
+  <select id="selectUser" resultMap="memberMap" parameterType="map">
+       select * from member join consumerrating on(member.ratingCode = consumerrating.ratingCode) where userid=#{userId} and userName = #{userName} and email = #{email}
+    </select>
+    <update id="findPassword" parameterType="member" >
+       update member set password = #{password} where userId=#{userId}
+    </update>
 </mapper>
 
