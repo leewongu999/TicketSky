@@ -146,6 +146,7 @@
     </div>
     </section>
     
+    
     <script>
 $(function(){
 	if("${memberLoggedIn.separator}" == "C") // 구매자 이면
