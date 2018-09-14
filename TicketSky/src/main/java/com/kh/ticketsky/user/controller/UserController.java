@@ -95,21 +95,6 @@ public class UserController {
 		model.addAttribute("date",date);
 		return "consumer/reserveList";
 		
-		/*Map<String,String> map = new HashMap<String,String>();
-		map.put("searchType", searchType);
-		map.put("searchTitle", searchTitle);
-		int numPerPage = 10;
-		List<Member> list = service.selectConsumerList(cPage, numPerPage,map);
-
-		int totalCount = service.selectConsumerTotalCount(map);
-		String pageBar = new Page().getPage(cPage, numPerPage, totalCount, req.getRequestURI());
-		
-		
-		model.addAttribute("list",list);
-		model.addAttribute("totalCount",totalCount);
-		model.addAttribute("pageBar",pageBar);
-		
-		return "admin/consumerList";*/
 	}
 	
 	/* 구매자 - 리뷰관리 페이지 */
@@ -287,7 +272,6 @@ public class UserController {
 			searchdate = year + "-" + month;
 		}
 		
-		
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("performNo", performNo);
 		map.put("userId", userId);
@@ -298,6 +282,10 @@ public class UserController {
 		List<Map<String,String>> monthStatusList = service.selectSellerMonthStatus(map); // 월별 차트 리스트
 		
 		System.out.println(totalAcountList);
+		System.out.println(genderStatusList);
+		System.out.println(ageStatusList);
+		System.out.println(monthStatusList);
+		model.addAttribute("performNo",performNo);
 		model.addAttribute("totalAcountList",totalAcountList);
 		model.addAttribute("genderStatusList",genderStatusList);
 		model.addAttribute("ageStatusList",ageStatusList);
@@ -307,7 +295,7 @@ public class UserController {
 	
 	/* 판매자 - 판매 상세 통계 */
 	@RequestMapping("/user/sellerStatusInfo")
-	public String sellerStatusInfo(String performNo,
+	public String sellerStatusInfo(@RequestParam(value="performNo", required=false, defaultValue="1") String performNo,
 			@RequestParam(value="year", required=false, defaultValue="") String year,
 			@RequestParam(value="month", required=false, defaultValue="") String month, HttpSession session, Model model) {
 		Member m = (Member)session.getAttribute("memberLoggedIn");
@@ -320,6 +308,8 @@ public class UserController {
 		}else {
 			searchdate = year + "-" + month;
 		}
+		System.out.println("searchdate : " + searchdate);
+
 		
 		
 		Map<String,String> map = new HashMap<String, String>();
@@ -331,7 +321,11 @@ public class UserController {
 		List<Map<String,String>> genderStatusList = service.selectSellerGenderStatus(map); // 성별 차트 리스트
 		List<Map<String,String>> ageStatusList = service.selectSellerAgeStatus(map); // 연령별 차트 리스트
 		List<Map<String,String>> monthStatusList = service.selectSellerMonthStatus(map); // 월별 차트 리스트
+		System.out.println(monthAcountList);
+		System.out.println(genderStatusList);
+		System.out.println(ageStatusList);
 		System.out.println(monthStatusList);
+		model.addAttribute("performNo",performNo);
 		model.addAttribute("monthAcountList",monthAcountList);
 		model.addAttribute("genderStatusList",genderStatusList);
 		model.addAttribute("ageStatusList",ageStatusList);
@@ -622,6 +616,7 @@ public class UserController {
 		}
 		else
 		{
+			System.out.println(bcryptPasswordEncoder.encode("321"));
 			if(bcryptPasswordEncoder.matches(password, m.getPassword())){
 				//위에 조건문은 Encoder가 매칭 메소드에서 내가 적은 비밀번호와 디비에있는 비밀번호를 써주면
 				//맞는지 비교해줌.

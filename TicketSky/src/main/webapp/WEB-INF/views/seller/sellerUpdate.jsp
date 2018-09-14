@@ -122,7 +122,7 @@
             </div>
           </form>
       </div> <!-- container -->
-    </div>
+    </div>    </section>
     
 	<script>
 		$(function(){

@@ -28,7 +28,7 @@
     	                        <form class="form-inline pull-right" action="${path }/ticketsky/user/sellerStatusInfo">
                                 <label for="">월 별 조회</label>
                                 &nbsp;&nbsp;
-								<input type="hidden" name="performNo" value="${perfromNo }">
+								<input type="hidden" name="performNo" value="${performNo }">
                                 <select id="searchSelectBox2" name="year" class="form-control input-sm">
                              <%Calendar mon = Calendar.getInstance();
                                 String year = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());

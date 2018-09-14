@@ -38,7 +38,7 @@
       }
 
     </style>
-
+ <section class="new_arrivals_area clearfix" style="padding-top:80px;">
 <!-- ##### Shop Grid Area Start ##### -->
           <div class="container">
               <div class="row">

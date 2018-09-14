@@ -142,13 +142,13 @@
 				  <input type="radio" name="categoryNo" value="1"> 뮤지컬
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="categoryNo" value="2"> 연극
+				  <input type="radio" name="categoryNo" value="5"> 연극
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="categoryNo" value="3"> 콘서트
+				  <input type="radio" name="categoryNo" value="9"> 콘서트
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="categoryNo"  value="4"> 클래식/무용
+				  <input type="radio" name="categoryNo"  value="15"> 클래식/무용
 				</label>
               </div>
             </div>

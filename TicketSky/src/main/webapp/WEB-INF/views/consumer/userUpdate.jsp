@@ -144,6 +144,7 @@
           </form>
       </div> <!-- container -->
     </div>
+    </section>
     
     <script>
 $(function(){

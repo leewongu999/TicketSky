@@ -22,50 +22,7 @@
       }
     </style>
     
-   <!-- ##### Single Widget ##### -->
-                          <%-- <div class="widget catagory mb-50">
-                              <!-- Widget Title -->
-                              <h6 class="widget-title mb-30">예매관리</h6>
-                              <!--  예매관리  -->
-                              <div class="catagories-menu">
-                                  <ul id="menu-content2" class="menu-content collapse show">
-                                      <!-- Single Item -->
-                                      <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/reserveList">예매확인/취소</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                          <!-- ##### Single Widget ##### -->
-                          <div class="widget price mb-50">
-                              <!-- Widget Title -->
-                              <h6 class="widget-title mb-30">활동관리</h6>
-                              <!--  활동관리  -->
-                              <div class="catagories-menu">
-                                  <ul id="menu-content2" class="menu-content collapse show">
-                                      <!-- Single Item -->
-                                      <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/reviewManage">리뷰관리</a>
-                                          <a href="${path }/user/inquiryManage">문의내역</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                          <!-- ##### Single Widget ##### -->
-                          <div class="widget price mb-50">
-                              <!-- Widget Title -->
-                              <h6 class="widget-title mb-30">회원정보관리</h6>
-                              <!--  활동관리  -->
-                              <div class="catagories-menu">
-                                  <ul id="menu-content2" class="menu-content collapse show">
-                                      <!-- Single Item -->
-                                      <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/consumerMyPage">회원정보수정</a>
-                                          <a href="${path }/user/userDelete">회원탈퇴</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div> --%>
+ <section class="new_arrivals_area clearfix" style="padding-top:80px;">
 
 <!-- ##### Shop Grid Area Start ##### -->
           <div class="container">
