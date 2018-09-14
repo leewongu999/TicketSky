@@ -3,5 +3,7 @@
 <configuration>
 	<typeAliases>
 			<typeAlias type="com.kh.ticketsky.user.model.vo.Member" alias="member"/>
+			<typeAlias type="com.kh.ticketsky.ranking.model.vo.Perform" alias="Perform"/>
+			<typeAlias type="com.kh.ticketsky.ranking.model.vo.Category" alias="Category"/>
 	</typeAliases>
 </configuration>

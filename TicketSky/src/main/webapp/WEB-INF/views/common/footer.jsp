@@ -44,7 +44,7 @@
     <!-- Bootstrap js -->
     <script src="${path }/resources/js/bootstrap.min.js"></script>
     <!-- Plugins js -->
-    <script src="${path }/resources/js/plugins.js"></script>
+<%--     <script src="${path }/resources/js/plugins.js"></script> --%>
     <!-- Classy Nav js -->
     <script src="${path }/resources/js/classy-nav.min.js"></script>
     <!-- Active js -->
