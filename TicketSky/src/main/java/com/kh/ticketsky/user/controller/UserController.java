@@ -279,9 +279,15 @@ public class UserController {
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("userId", userId);
 		List<Map<String,String>> totalAcountList = service.selectSellerStatusUserId(map); // 총매출 리스트
+		List<Map<String,String>> genderStatusList = service.selectSellerGenderStatus(map); // 성별 차트 리스트
+		List<Map<String,String>> ageStatusList = service.selectSellerAgeStatus(map); // 연령별 차트 리스트
+		List<Map<String,String>> monthStatusList = service.selectSellerMonthStatus(map); // 연령별 차트 리스트
 		
-		System.out.println(totalAcountList);
+		System.out.println(monthStatusList);
 		model.addAttribute("totalAcountList",totalAcountList);
+		model.addAttribute("genderStatusList",genderStatusList);
+		model.addAttribute("ageStatusList",ageStatusList);
+		model.addAttribute("monthStatusList",monthStatusList);
 		return "seller/sellerStatus";
 	}
 	

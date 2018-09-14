@@ -3,6 +3,9 @@
 <mapper namespace="seller">
 	<resultMap type="map" id="playMap"></resultMap>
 	<resultMap type="map" id="statusMap"></resultMap>
+	<resultMap type="map" id="genderStatusMap"></resultMap>
+	<resultMap type="map" id="ageStatusMap"></resultMap>
+	<resultMap type="map" id="monthStatusMap"></resultMap>
 	<select id="selectMyPlayList" parameterType="map"  resultMap="playMap">
 		select * from performInfo where userId = #{userId}
 		<if test="searchType != null and searchType != ''">
@@ -18,4 +21,21 @@
 	<select id="selectSellerStatusUserId" parameterType="map" resultMap="statusMap">
 		select  pi.performno, pi.PERFORMNAME,  oriprice, count(actualprice) SELLCOUNT, sum(actualprice) AMOUNT from purchase p join PERFORMINFO pi on(p.performno = pi.performno) where pi.userid=#{userId} group by pi.performno,pi.performname, oriprice
 	</select>
+	<select id="selectSellerGenderStatus" parameterType="map" resultMap="genderStatusMap">
+		select gender, count(*) cnt from purchase p join PERFORMINFO pi on(p.performno = pi.performno)
+		join member m on(p.userid = m.userid)
+		where pi.userid=#{userId} group by gender
+	</select>
+	<select id="selectSellerAgeStatus" parameterType="map" resultMap="ageStatusMap">
+		select age, count(*) cnt from (select floor((to_char(sysdate,'yyyy') - substr(birthdate,1,4)) /10 ) * 10 age from purchase p join PERFORMINFO pi on(p.performno = pi.performno)
+		join member m on(p.userid = m.userid)
+		where pi.userid=#{userId}) group by age
+	</select>
+	<select id="selectSellerMonthStatus" parameterType="map" resultMap="monthStatusMap">
+	<![CDATA[ 
+		select temp.month month, nvl(t.cnt,0) amount from (select  to_char(purchasedate,'MM') month,sum(actualprice) cnt from purchase p join PERFORMINFO pi on(p.performno = pi.performno)
+	where pi.userid=#{userId} and purchasedate >=EXTRACT(year from sysdate)||'-01-01' and purchasedate < EXTRACT(year from sysdate)+1||'-01-01' group by to_char(purchasedate,'MM')) t right join temp on(t.month = temp.month) order by temp.month 
+	]]>
+	 </select>
+	 
 </mapper>

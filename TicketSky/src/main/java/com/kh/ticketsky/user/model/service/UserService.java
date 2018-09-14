@@ -39,4 +39,10 @@ public interface UserService {
 
 	List<Map<String, String>> selectSellerStatusUserId(Map<String, String> map);
 
+	List<Map<String, String>> selectSellerGenderStatus(Map<String, String> map);
+
+	List<Map<String, String>> selectSellerAgeStatus(Map<String, String> map);
+
+	List<Map<String, String>> selectSellerMonthStatus(Map<String, String> map);
+
 }

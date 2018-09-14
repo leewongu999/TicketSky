@@ -15,6 +15,16 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
+	public List<Map<String, String>> selectSellerAgeStatus(Map<String, String> map) {
+		return dao.selectSellerAgeStatus(sqlSession,map);
+	}
+
+	@Override
+	public List<Map<String, String>> selectSellerMonthStatus(Map<String, String> map) {
+		return dao.selectSellerMonthStatus(sqlSession,map);
+	}
+
+	@Override
 	public int selectReserveListCount(Map<String, String> map) {
 		return dao.selectReserveListCount(sqlSession,map);
 	}
@@ -22,6 +32,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int selectSellerPlayTotalCount(Map<String, String> map) {
 		return dao.selectSellerPlayTotalCount(sqlSession,map);
+	}
+
+	@Override
+	public List<Map<String, String>> selectSellerGenderStatus(Map<String, String> map) {
+		return dao.selectSellerGenderStatus(sqlSession,map);
 	}
 
 	@Override

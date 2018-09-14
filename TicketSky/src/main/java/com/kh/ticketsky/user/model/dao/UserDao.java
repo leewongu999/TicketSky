@@ -43,4 +43,10 @@ public interface UserDao {
 
 	List<Map<String, String>> selectSellerStatusUserId(SqlSessionTemplate sqlSession, Map<String, String> map);
 
+	List<Map<String, String>> selectSellerGenderStatus(SqlSessionTemplate sqlSession, Map<String, String> map);
+
+	List<Map<String, String>> selectSellerAgeStatus(SqlSessionTemplate sqlSession, Map<String, String> map);
+
+	List<Map<String, String>> selectSellerMonthStatus(SqlSessionTemplate sqlSession, Map<String, String> map);
+
 }

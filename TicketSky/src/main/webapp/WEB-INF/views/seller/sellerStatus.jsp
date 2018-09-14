@@ -187,30 +187,60 @@
         var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
         var pieChart       = new Chart(pieChartCanvas)
         var PieData        = [
-          {
-            value    : 700,
-            color    : '#f56954',
-            highlight: '#f56954',
-            label    : '10대'
-          },
-          {
-            value    : 500,
-            color    : '#00a65a',
-            highlight: '#00a65a',
-            label    : '20대'
-          },
-          {
-            value    : 400,
-            color    : '#f39c12',
-            highlight: '#f39c12',
-            label    : '30대'
-          },
-          {
-            value    : 600,
-            color    : '#00c0ef',
-            highlight: '#00c0ef',
-            label    : '40대 이상'
-          }
+        	/*<c:forEach items="${genderStatusList}" var="list">
+        	 {
+                 value    : ${list.CNT},
+                 <c:if test="${list.GENDER == 'M'}">
+                 color    : '#f56954',
+                 highlight: '#f56954',
+                 label    : '남자'
+                 </c:if>
+                 <c:if test="${list.GENDER == 'F'}">
+                 color    : '#00a65a',
+                 highlight: '#00a65a',
+                 label    : '여자'
+                 </c:if>
+               },
+    		</c:forEach>*/
+    		<c:forEach items="${ageStatusList}" var="list" varStatus="a">
+            <c:if test="${list.AGE eq 10}">
+    		  {
+                value    : ${list.CNT},
+                color    : '#f56954',
+                highlight: '#f56954',
+                label    : '10대'
+              },
+            </c:if>
+             <c:if test="${list.AGE eq 20}">
+   		 	 {
+               value    : ${list.CNT},
+               color    : '#00a65a',
+               highlight: '#00a65a',
+               label    : '20대'
+             },
+            </c:if>
+             <c:if test="${list.AGE eq 30}">
+   		 	 {
+               value    : ${list.CNT},
+               color    : '#f39c12',
+               highlight: '#f39c12',
+               label    : '30대'
+             },
+            </c:if>
+             <c:set var="cnt" value='0'/>
+             <c:if test="${list.AGE >= 40}">
+             <c:set var="cnt" value="${cnt + list.CNT}"/>
+             <c:if test="${a.last}">
+   		 	 {
+               value    : ${cnt},
+               color    : '#00c0ef',
+               highlight: '#00c0ef',
+               label    : '40대 이상'
+             },
+             </c:if>
+             
+            </c:if>
+    		</c:forEach>
         ]
         var pieOptions     = {
           //Boolean - Whether we should show a stroke on each segment
@@ -245,21 +275,35 @@
         //- PIE CHART -
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
+        
+        var list = new Array();
+ 
+		<c:forEach items="${genderStatusList}" var="list">
+		 
+		list.push("${list.GENDER}");
+		 
+		list.push("${list.CNT}");
+		
+		</c:forEach>
+		
         var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
         var pieChart2       = new Chart(pieChartCanvas2)
         var PieData2        = [
-          {
-            value    : 700,
-            color    : '#f56954',
-            highlight: '#f56954',
-            label    : '남자'
-          },
-          {
-            value    : 500,
-            color    : '#00a65a',
-            highlight: '#00a65a',
-            label    : '여자'
-          }
+        	<c:forEach items="${genderStatusList}" var="list">
+        	 {
+                 value    : ${list.CNT},
+                 <c:if test="${list.GENDER == 'M'}">
+                 color    : '#f56954',
+                 highlight: '#f56954',
+                 label    : '남자'
+                 </c:if>
+                 <c:if test="${list.GENDER == 'F'}">
+                 color    : '#00a65a',
+                 highlight: '#00a65a',
+                 label    : '여자'
+                 </c:if>
+               },
+    		</c:forEach>
         ]
         var pieOptions2     = {
           //Boolean - Whether we should show a stroke on each segment
@@ -301,7 +345,11 @@
               pointStrokeColor    : 'rgba(60,141,188,1)',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : [240, 800, 400, 270, 650, 550, 400, 300, 150, 700, 900, 400]
+              data                : [
+            	  <c:forEach items="${monthStatusList}" var="list">
+            	  	${list.AMOUNT},
+            	  </c:forEach>
+            	  ]
 
             }
           ]

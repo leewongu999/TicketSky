@@ -13,6 +13,22 @@ import com.kh.ticketsky.user.model.vo.Member;
 public class UserDaoImpl implements UserDao {
 
 	@Override
+	public List<Map<String, String>> selectSellerMonthStatus(SqlSessionTemplate sqlSession, Map<String, String> map) {
+		return sqlSession.selectList("seller.selectSellerMonthStatus",map);
+	}
+
+	@Override
+	public List<Map<String, String>> selectSellerAgeStatus(SqlSessionTemplate sqlSession, Map<String, String> map) {
+		return sqlSession.selectList("seller.selectSellerAgeStatus",map);
+
+	}
+
+	@Override
+	public List<Map<String, String>> selectSellerGenderStatus(SqlSessionTemplate sqlSession, Map<String, String> map) {
+		return sqlSession.selectList("seller.selectSellerGenderStatus",map);
+	}
+
+	@Override
 	public int selectReserveListCount(SqlSessionTemplate sqlSession, Map<String, String> map) {
 		return sqlSession.selectOne("consumer.selectReserveListCount",map);
 	}
