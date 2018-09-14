@@ -69,13 +69,21 @@
             <script>
                 function fn_add(){
                     if($('#title').val()=='' || $('#contents').val()==''){
-                        if($('#title').val()==''){
+                    	// 제목에 관하여
+                        if($('#title').val()=='' || $.trim($('#title').val()).length==0){
                             alert("제목을 입력하세요.");
                             return false;
+                        }else if($.trim($('#title').val()).length>50){
+                        	alert("한글 기준으로 50자를 넘을 수 없습니다(띄어쓰기 포함).");
+                        	return false;
                         }
-                        if($('#contents').val()==''){
+                        // 내용에 관하여
+                        if($('#contents').val()=='' || $.trim($('#contents').val()).length==0){
                             alert("내용을 입력하세요.");
                             return false;
+                        }else if($.trim($('#contents').val()).length>500){
+                        	alert("한글 기준으로 500자를 넘을 수 없습니다(띄어쓰기 포함).");
+                        	return false;
                         }
                     }
                     else

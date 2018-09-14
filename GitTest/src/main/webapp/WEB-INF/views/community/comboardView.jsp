@@ -71,7 +71,7 @@
                         <%if(b.getOriginalFileName()!=null){%>
                         	<a href='#'><%=b.getOriginalFileName()%></a>
                         <%}else{%>
-                        	<%="첨부 파일이 없습니다."%>
+                        	첨부 파일이 없습니다.
                         <%} %>
                         </td>
                     </tr>
@@ -117,6 +117,9 @@
                     function fn_reply(){
                     	if($('#reply').val()=='' || $.trim($('#reply').val()).length==0){
                     		alert("댓글 내용을 입력하세요.");
+                    		return false;
+                    	}else if($.trim($('#reply').val()).length>100){
+                    		alert("한글 기준으로 100자까지 입력할 수 있습니다(띄어쓰기 포함).");
                     		return false;
                     	}
                     	else

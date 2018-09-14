@@ -3,8 +3,9 @@
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<jsp:useBean id="today" class="java.util.Date"/>
+<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" var="today"/>
 <%
-	int totalContents = Integer.parseInt(String.valueOf(request.getAttribute("totalContents")));
 	String pageBar = (String)(request.getAttribute("pageBar"));
 	List<Map<String,Object>> bList = (List<Map<String,Object>>)request.getAttribute("bList");
 %>
@@ -42,14 +43,14 @@
             </div>
             <br><br><br>
             <div style="float:left;">
-	            <form name='search' method='post' action="${path}/community/boardKeyword">
+	            <form name='search' method='post' action="${path}/community/boardKeyword?cPage='<c:out value="${cPage}"/>'">
 		            <select name='item'>
 		                <option value="userId" ${"userId" eq param.item?"selected":""}>작성자</option>
 		                <option value="boardTitle" ${"title" eq param.item?"selected":""}>글 제목</option>
-		            	<option value="boardNo" ${"boardnum" eq param.item?"selected":""}>글 번호</option>
+		            	<option value="boardNo" ${"boardnum" eq param.item?"selected":""}>번호</option>
 		            </select>
 			        <div style="float:left;">
-			            <input type='search' id="searchText" name="searchKeyword" class="form-control boardSearchForm" placeholder="검색할 내용을 입력하시오" value="${searchtext}"/>
+			            <input type="search" id="searchText" name="searchKeyword" class="form-control boardSearchForm" placeholder="${searchKeyword}" value="${searchKeyword}"/>
 			        </div>
 			        <div style="float:left;">
 			            <input type="submit" class="xet_btn large" value="검색"/>
@@ -70,7 +71,7 @@
 	            <input type='button' class="xet_btn medium" id="essay" name="newEssay" value="새 글 쓰기" onclick="location.href='${path}/community/comboardForm'"/>
 	        </div>
 	        <div style="float:right;">
-	            <h4>전체 글(<%=totalContents%>)&nbsp;</h4>
+	            <h4>전체 글(<c:out value="${totalContents}"/>)&nbsp;</h4>
 	        </div>
             <br><br><br>
             <table id='xet_board' class='boardList'>
@@ -102,11 +103,14 @@
 										여기서는 '오늘 올린 게시글은 하루 종일 새 게시글임을 알리는 아이콘을 띄우도록' 설정했다.
 										클릭하고 난 후에도 다음 날까지 아이콘이 사라지지 않게 구현하여
 										기존의 여러 사이트에 있는 게시판과 차별화를 두었다. -->
-								<c:if test="${b['WRITEDATE'] eq SYSDATE}">
+								<c:if test="${b['WRITEDATE'] eq java.sql.Date.valueOf(today)}">
 									<i class='fileIcon'>
  				                        <img src="${path}/resources/img/core-img/newboardicon.PNG"/>
  				                    </i>
 								</c:if>
+								<span style="font-size:10px;color:red;">
+									<strong>(<c:out value="${b['COUNTREPLIES']}"/>)</strong>
+								</span>
 	                        </td>
 	                        <td><c:out value="${b['USERID']}"/></td>
 	                        <td><c:out value="${b['WRITEDATE']}"/></td>

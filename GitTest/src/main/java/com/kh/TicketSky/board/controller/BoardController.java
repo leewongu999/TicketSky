@@ -177,6 +177,7 @@ public class BoardController {
 		map = new HashMap<String, Object>();
 		map.put("item", item);
 		map.put("searchKeyword", searchKeyword);
+		map.put("cPage", cPage);
 		
 		int totalContents = service.selectSearchTotalContents(map);
 		List<Map<String,Object>> bList = service.selectSearch(map);
@@ -185,6 +186,8 @@ public class BoardController {
 		request.setAttribute("bList", bList);
 		request.setAttribute("totalContents", totalContents);
 		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("searchKeyword", searchKeyword);
+		request.setAttribute("cPage", cPage);
 		return "community/boardKeyword";
 	}
 	

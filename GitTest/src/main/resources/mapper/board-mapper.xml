@@ -50,12 +50,8 @@
 		(SELECT RANK() OVER(ORDER BY boardNo DESC) rank, boardNo,
 			   boardTitle, content, userId, visits,
 			   originalfileName, writeDate, countReplies
-		 FROM freeboard
-		 <if test="item != null and item !=''">
-			WHERE ${item} LIKE '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'
-		 </if>)
-		WHERE rank BETWEEN 1+10*(1-1) AND 10+10*(1-1)
-		
+		 FROM freeboard <if test="item != null and item !=''">WHERE ${item} LIKE '%'||#{searchKeyword, jdbcType=VARCHAR}||'%'</if>)
+		WHERE rank BETWEEN 1+10*(#{cPage, jdbcType=NUMERIC}-1) AND 10+10*(#{cPage, jdbcType=NUMERIC}-1)
 	</select>
 	<!-- 검색해서 나온 게시글만의 수를 출력한다. -->
 	<select id='selectSearchOne' parameterType="map" resultType="_int">
