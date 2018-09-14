@@ -42,7 +42,7 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>homecontroller.java</welcome-file>
 	</welcome-file-list>
 	<!-- 한글처리를 위한 문자셋 인코딩 -->
 	<filter>
