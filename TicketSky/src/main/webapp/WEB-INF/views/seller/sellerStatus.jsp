@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -18,30 +19,37 @@
                               <div class="select-group" style="margin">
 
                               </div>
-    	                        <form class="form-inline pull-right" action="">
+    	                        <form class="form-inline pull-right" action="${path }/ticketsky/user/sellerStatus">
                                 <label for="">월 별 조회</label>
                                 &nbsp;&nbsp;
 
-                                <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                    <option value="searchUser">2018</option>
-                                    <option value="searchTitle">2017</option>
-                                    <option value="searchTitle">2016</option>
-                                </select>
+                                <select id="searchSelectBox2" name="year" class="form-control input-sm">
+                             <%Calendar mon = Calendar.getInstance();
+                                String year = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                                mon.add(Calendar.YEAR , -1);
+                                String year2 = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                                mon.add(Calendar.YEAR , -1);
+                                String year3 = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                            	 %>
+                                <option id="option1" value="<%=year %>"><%=year %></option>
+                                <option id="option3" value="<%=year2 %>"><%=year2 %></option>
+                                <option id="option3" value="<%=year3 %>"><%=year3 %></option>
+                            </select>
                                 &nbsp;&nbsp;
-                                <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                    <option value="searchUser">1</option>
-                                    <option value="searchTitle">2</option>
-                                    <option value="searchTitle">3</option>
-                                    <option value="searchTitle">4</option>
-                                    <option value="searchTitle">5</option>
-                                    <option value="searchTitle">6</option>
-                                    <option value="searchTitle">7</option>
-                                    <option value="searchTitle">8</option>
-                                    <option value="searchTitle">9</option>
-                                    <option value="searchTitle">10</option>
-                                    <option value="searchTitle">11</option>
-                                    <option value="searchTitle">12</option>
-                                </select>
+                                <select id="searchSelectBox3" name="month" class="form-control input-sm">
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
                                 &nbsp;&nbsp;
                                 <button type="submit" class="btn btn-primary btn-lg floa">조회</button>
     	                        </form>
@@ -72,7 +80,7 @@
                           	<c:set var="totalAmount" value="0"></c:set>
 							<c:forEach items="${totalAcountList }" var="total">
           		               	<tr>
-          			                <td><a href="${path }/ticketsky/user/sellerStatusInfo">${total.PERFORMNAME }</a></td>
+          			                <td><a href="${path }/ticketsky/user/sellerStatusInfo?performNo=${total.PERFORMNO}">${total.PERFORMNAME }</a></td>
                                 <td><fmt:formatNumber value="${total.ORIPRICE }" pattern="#,###" />원</td>
           			                <td>${total.SELLCOUNT }</td>
           			                <td><fmt:formatNumber value="${total.AMOUNT }" pattern="#,###" />원</td>
@@ -187,21 +195,7 @@
         var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
         var pieChart       = new Chart(pieChartCanvas)
         var PieData        = [
-        	/*<c:forEach items="${genderStatusList}" var="list">
-        	 {
-                 value    : ${list.CNT},
-                 <c:if test="${list.GENDER == 'M'}">
-                 color    : '#f56954',
-                 highlight: '#f56954',
-                 label    : '남자'
-                 </c:if>
-                 <c:if test="${list.GENDER == 'F'}">
-                 color    : '#00a65a',
-                 highlight: '#00a65a',
-                 label    : '여자'
-                 </c:if>
-               },
-    		</c:forEach>*/
+            <c:set var="cnt" value='0'/>
     		<c:forEach items="${ageStatusList}" var="list" varStatus="a">
             <c:if test="${list.AGE eq 10}">
     		  {
@@ -227,7 +221,6 @@
                label    : '30대'
              },
             </c:if>
-             <c:set var="cnt" value='0'/>
              <c:if test="${list.AGE >= 40}">
              <c:set var="cnt" value="${cnt + list.CNT}"/>
              <c:if test="${a.last}">

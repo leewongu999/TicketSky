@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -5,11 +6,16 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/common/sellerAside.jsp"></jsp:include>
+<style>
 
+
+</style>
 
 <div class="col-12 col-md-8 col-lg-9">
                     <div class="row">
-                      <h1>통계 - 오즈의 마법사</h1>
+                    <c:forEach items="${monthAcountList }" var="list" varStatus="a">
+                      <c:if test='${a.first}'><h4>통계 - ${list.PERFORMNAME } </h4></c:if>
+                    </c:forEach>
                     </div>
                     <hr>
 
@@ -19,30 +25,37 @@
                               <div class="select-group" style="margin">
 
                               </div>
-    	                        <form class="form-inline pull-right" action="">
+    	                        <form class="form-inline pull-right" action="${path }/ticketsky/user/sellerStatusInfo">
                                 <label for="">월 별 조회</label>
                                 &nbsp;&nbsp;
-
-                                <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                    <option value="searchUser">2018</option>
-                                    <option value="searchTitle">2017</option>
-                                    <option value="searchTitle">2016</option>
-                                </select>
+								<input type="hidden" name="performNo" value="${perfromNo }">
+                                <select id="searchSelectBox2" name="year" class="form-control input-sm">
+                             <%Calendar mon = Calendar.getInstance();
+                                String year = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                                mon.add(Calendar.YEAR , -1);
+                                String year2 = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                                mon.add(Calendar.YEAR , -1);
+                                String year3 = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                            	 %>
+                                <option id="option1" value="<%=year %>"><%=year %></option>
+                                <option id="option3" value="<%=year2 %>"><%=year2 %></option>
+                                <option id="option3" value="<%=year3 %>"><%=year3 %></option>
+                            </select>
                                 &nbsp;&nbsp;
-                                <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                    <option value="searchUser">1</option>
-                                    <option value="searchTitle">2</option>
-                                    <option value="searchTitle">3</option>
-                                    <option value="searchTitle">4</option>
-                                    <option value="searchTitle">5</option>
-                                    <option value="searchTitle">6</option>
-                                    <option value="searchTitle">7</option>
-                                    <option value="searchTitle">8</option>
-                                    <option value="searchTitle">9</option>
-                                    <option value="searchTitle">10</option>
-                                    <option value="searchTitle">11</option>
-                                    <option value="searchTitle">12</option>
-                                </select>
+                                <select id="searchSelectBox3" name="month" class="form-control input-sm">
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
                                 &nbsp;&nbsp;
                                 <button type="submit" class="btn btn-primary btn-lg floa">조회</button>
     	                        </form>
@@ -70,7 +83,7 @@
                         </table>
                       </div>
                       <div class="row tbodyrow">
-                        <table class="tableTL table table-striped tbody"  style="text-align:center; height:100px;">
+                        <table class="tableTL table table-striped tbody"  style="text-align:center;">
                           <colgroup>
                                 <col width="20%"/>
                                 <col width="20%"/>
@@ -80,91 +93,17 @@
                           </colgroup>
 
                           <tbody>
-
+                          	<c:set var="totalAmount" value="0"></c:set>
+							<c:forEach items="${monthAcountList }" var="list">
           		               	<tr>
-          			                <td><a href="#">오즈의 마법사</a></td>
-                                <td>70,000원</td>
-          			                <td>240매</td>
-                                <td>2018.07.01</td>
-          			                <td>16,800,000원</td>
+          			                <td><a href="#">${list.PERFORMNAME }</a></td>
+                                <td><fmt:formatNumber value="${list.ORIPRICE }" pattern="#,###" />원</td>
+          			                <td><fmt:formatNumber value="${list.SELLCNT }" pattern="#,###" />매</td>
+                                <td>${list.SELLDATE }</td>
+          			                <td><fmt:formatNumber value="${list.TOTALAMOUNT }" pattern="#,###" />원</td>
           			            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
-                            <tr>
-                              <td><a href="#">점프 ( JUMP )</a></td>
-                              <td>70,000원</td>
-                              <td>40매</td>
-                              <td>2018.07.02</td>
-                              <td>2,800,000원</td>
-                            </tr>
+          			            <c:set var="totalAmount" value="${totalAmount + list.TOTALAMOUNT }" ></c:set>
+							</c:forEach>
           		             </tbody>
                          </table>
                        </div>
@@ -179,7 +118,7 @@
                            </colgroup>                           <tfoot>
                              <tr>
                                <td colspan="4">합계</td>
-                               <td>19,600,000원</td>
+                               <td><fmt:formatNumber value="${totalAmount }" pattern="#,###" />원</td>
                              </tr>
                            </tfoot>
                           </table>
@@ -191,7 +130,7 @@
                         <!-- DONUT CHART -->
                         <div class="card card-danger">
                           <div class="card-header">
-                            <h3 class="card-title">연령별 차트</h3>
+                            <h5 class="card-title">연령별 차트</h5>
                           </div>
                           <div class="card-body">
                             <canvas id="pieChart" style=""></canvas>
@@ -205,7 +144,7 @@
                         <!-- DONUT CHART -->
                         <div class="card card-danger">
                           <div class="card-header">
-                            <h3 class="card-title">성별 차트</h3>
+                            <h5 class="card-title">성별 차트</h5>
                           </div>
                           <div class="card-body">
                             <canvas id="pieChart2" style=""></canvas>
@@ -221,7 +160,7 @@
                         <!-- LINE CHART -->
                         <div class="card card-info">
                           <div class="card-header">
-                            <h3 class="card-title">Line Chart</h3>
+                            <h5 class="card-title">월별 차트</h5>
                           </div>
                           <div class="card-body">
                             <div class="chart">
@@ -256,30 +195,45 @@
         var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
         var pieChart       = new Chart(pieChartCanvas)
         var PieData        = [
-          {
-            value    : 700,
-            color    : '#f56954',
-            highlight: '#f56954',
-            label    : '10대'
-          },
-          {
-            value    : 500,
-            color    : '#00a65a',
-            highlight: '#00a65a',
-            label    : '20대'
-          },
-          {
-            value    : 400,
-            color    : '#f39c12',
-            highlight: '#f39c12',
-            label    : '30대'
-          },
-          {
-            value    : 600,
-            color    : '#00c0ef',
-            highlight: '#00c0ef',
-            label    : '40대 이상'
-          }
+        	<c:set var="cnt" value='0'/>
+        		<c:forEach items="${ageStatusList}" var="list" varStatus="a">
+                <c:if test="${list.AGE eq 10}">
+        		  {
+                    value    : ${list.CNT},
+                    color    : '#f56954',
+                    highlight: '#f56954',
+                    label    : '10대'
+                  },
+                </c:if>
+                 <c:if test="${list.AGE eq 20}">
+       		 	 {
+                   value    : ${list.CNT},
+                   color    : '#00a65a',
+                   highlight: '#00a65a',
+                   label    : '20대'
+                 },
+                </c:if>
+                 <c:if test="${list.AGE eq 30}">
+       		 	 {
+                   value    : ${list.CNT},
+                   color    : '#f39c12',
+                   highlight: '#f39c12',
+                   label    : '30대'
+                 },
+                </c:if>
+                 <c:if test="${list.AGE >= 40}">
+                 <c:set var="cnt" value="${cnt + list.CNT}"/>
+                 <c:if test="${a.last}">
+       		 	 {
+                   value    : ${cnt},
+                   color    : '#00c0ef',
+                   highlight: '#00c0ef',
+                   label    : '40대 이상'
+                 },
+                 </c:if>
+                 
+                </c:if>
+        		</c:forEach>
         ]
         var pieOptions     = {
           //Boolean - Whether we should show a stroke on each segment
@@ -317,18 +271,21 @@
         var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d')
         var pieChart2       = new Chart(pieChartCanvas2)
         var PieData2        = [
-          {
-            value    : 700,
-            color    : '#f56954',
-            highlight: '#f56954',
-            label    : '남자'
-          },
-          {
-            value    : 500,
-            color    : '#00a65a',
-            highlight: '#00a65a',
-            label    : '여자'
-          }
+        	<c:forEach items="${genderStatusList}" var="list">
+       	 {
+                value    : ${list.CNT},
+                <c:if test="${list.GENDER == 'M'}">
+                color    : '#f56954',
+                highlight: '#f56954',
+                label    : '남자'
+                </c:if>
+                <c:if test="${list.GENDER == 'F'}">
+                color    : '#00a65a',
+                highlight: '#00a65a',
+                label    : '여자'
+                </c:if>
+              },
+   		</c:forEach>
         ]
         var pieOptions2     = {
           //Boolean - Whether we should show a stroke on each segment
@@ -370,7 +327,11 @@
               pointStrokeColor    : 'rgba(60,141,188,1)',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : [240, 800, 400, 270, 650, 550, 400, 300, 150, 700, 900, 400]
+              data                : [
+            	  <c:forEach items="${monthStatusList}" var="list">
+      	  			${list.AMOUNT},
+      	  		  </c:forEach>
+      	  	]
 
             }
           ]

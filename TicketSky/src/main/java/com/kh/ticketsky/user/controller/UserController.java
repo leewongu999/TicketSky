@@ -1,5 +1,7 @@
 package com.kh.ticketsky.user.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -272,18 +274,30 @@ public class UserController {
 	
 	/* 판매자 - 판매 통계 페이지 */
 	@RequestMapping("/user/sellerStatus")
-	public String sellerStatus(HttpSession session, Model model) {
+	public String sellerStatus(@RequestParam(value="performNo", required=false, defaultValue="") String performNo,
+			@RequestParam(value="year", required=false, defaultValue="") String year,
+			@RequestParam(value="month", required=false, defaultValue="") String month,HttpSession session, Model model) {
 		Member m = (Member)session.getAttribute("memberLoggedIn");
 		String userId = m.getUserId();
+		String searchdate = "";
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM");
+		if(year.equals("") || month.equals("")) {
+			searchdate =sd.format(new Date());
+		}else {
+			searchdate = year + "-" + month;
+		}
+		
 		
 		Map<String,String> map = new HashMap<String, String>();
+		map.put("performNo", performNo);
 		map.put("userId", userId);
+		map.put("searchdate", searchdate);
 		List<Map<String,String>> totalAcountList = service.selectSellerStatusUserId(map); // 총매출 리스트
 		List<Map<String,String>> genderStatusList = service.selectSellerGenderStatus(map); // 성별 차트 리스트
 		List<Map<String,String>> ageStatusList = service.selectSellerAgeStatus(map); // 연령별 차트 리스트
-		List<Map<String,String>> monthStatusList = service.selectSellerMonthStatus(map); // 연령별 차트 리스트
+		List<Map<String,String>> monthStatusList = service.selectSellerMonthStatus(map); // 월별 차트 리스트
 		
-		System.out.println(monthStatusList);
+		System.out.println(totalAcountList);
 		model.addAttribute("totalAcountList",totalAcountList);
 		model.addAttribute("genderStatusList",genderStatusList);
 		model.addAttribute("ageStatusList",ageStatusList);
@@ -293,7 +307,35 @@ public class UserController {
 	
 	/* 판매자 - 판매 상세 통계 */
 	@RequestMapping("/user/sellerStatusInfo")
-	public String sellerStatusInfo(HttpSession session, Model model) {
+	public String sellerStatusInfo(String performNo,
+			@RequestParam(value="year", required=false, defaultValue="") String year,
+			@RequestParam(value="month", required=false, defaultValue="") String month, HttpSession session, Model model) {
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		String userId = m.getUserId();
+		String searchdate = "";
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM");
+		if(year.equals("") || month.equals("")) {
+			searchdate =sd.format(new Date());
+			System.out.println(searchdate);
+		}else {
+			searchdate = year + "-" + month;
+		}
+		
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("performNo", performNo);
+		map.put("userId", userId);
+		map.put("searchdate", searchdate);
+		
+		List<Map<String,String>> monthAcountList = service.selectSellermonthAcount(map); // 총매출 리스트
+		List<Map<String,String>> genderStatusList = service.selectSellerGenderStatus(map); // 성별 차트 리스트
+		List<Map<String,String>> ageStatusList = service.selectSellerAgeStatus(map); // 연령별 차트 리스트
+		List<Map<String,String>> monthStatusList = service.selectSellerMonthStatus(map); // 월별 차트 리스트
+		System.out.println(monthStatusList);
+		model.addAttribute("monthAcountList",monthAcountList);
+		model.addAttribute("genderStatusList",genderStatusList);
+		model.addAttribute("ageStatusList",ageStatusList);
+		model.addAttribute("monthStatusList",monthStatusList);
 		
 		return "seller/sellerStatusInfo";
 	}

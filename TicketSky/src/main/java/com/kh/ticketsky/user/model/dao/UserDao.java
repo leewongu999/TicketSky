@@ -49,4 +49,6 @@ public interface UserDao {
 
 	List<Map<String, String>> selectSellerMonthStatus(SqlSessionTemplate sqlSession, Map<String, String> map);
 
+	List<Map<String, String>> selectSellermonthAcount(SqlSessionTemplate sqlSession, Map<String, String> map);
+
 }

@@ -45,4 +45,6 @@ public interface UserService {
 
 	List<Map<String, String>> selectSellerMonthStatus(Map<String, String> map);
 
+	List<Map<String, String>> selectSellermonthAcount(Map<String, String> map);
+
 }

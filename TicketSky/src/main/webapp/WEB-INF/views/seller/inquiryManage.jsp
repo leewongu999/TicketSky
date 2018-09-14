@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -24,10 +25,17 @@
                                 <option value="searchTitle">관람일</option>
                             </select>
                             &nbsp;&nbsp;
-                            <select id="searchSelectBox" name="searchType" class="form-control input-sm">
-                                <option value="searchUser">2018</option>
-                                <option value="searchTitle">2017</option>
-                                <option value="searchTitle">2016</option>
+                            <select id="searchSelectBox2" name="year" class="form-control input-sm">
+                             <%Calendar mon = Calendar.getInstance();
+                                String year = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                                mon.add(Calendar.YEAR , -1);
+                                String year2 = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                                mon.add(Calendar.YEAR , -1);
+                                String year3 = new java.text.SimpleDateFormat("yyyy").format(mon.getTime());
+                            	 %>
+                                <option id="option1" value="<%=year %>"><%=year %></option>
+                                <option id="option3" value="<%=year2 %>"><%=year2 %></option>
+                                <option id="option3" value="<%=year3 %>"><%=year3 %></option>
                             </select>
                             &nbsp;&nbsp;
                             <select id="searchSelectBox" name="searchType" class="form-control input-sm">
