@@ -151,11 +151,17 @@ public class UserController {
 		int result = service.updateConsumer(m);
 		if(result>0){
 			msg="회원정보가 변경되었습니다.";
-			loc="/user/consumerList";
+			if(m.getSeparator().equals("C"))
+				loc="/user/consumerList";
+			else if(m.getSeparator().equals("S"))
+				loc="/user/sellerList";
 		}
 		else {
 			msg="회원정보 수정이 실패하였습니다.";
-			loc="/user/consumerList";
+			if(m.getSeparator().equals("C"))
+				loc="/user/consumerList";
+			else if(m.getSeparator().equals("S"))
+				loc="/user/sellerList";
 		}
 		
 		model.addAttribute("msg",msg);

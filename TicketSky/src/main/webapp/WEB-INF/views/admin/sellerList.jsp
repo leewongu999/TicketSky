@@ -44,7 +44,6 @@
                               <th scope="col">아이디</th>
                               <th scope="col">회원명</th>
                               <th scope="col">이메일</th>
-                              <th scope="col">회원등급</th>
                               <th scope="col">가입일</th>
                               <th scope="col">비고</th>
                           </tr>
@@ -55,7 +54,6 @@
       			                <td><a href="${path }/ticketsky/user/adminUserUpdate?userId=${m.userId}">${m.userId }</a></td>
       			                <td>${m.userName }</td>
                             <td>${m.email }</td>
-      			                <td>${m.ratingName }</td>
       			                <td><fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd"/></td>
       			                <td> <button type="button" class="btn btn-sm btn-danger" name="button" onclick="fn_delete('${m.userId}');">삭제</button> </td>
       			            </tr>

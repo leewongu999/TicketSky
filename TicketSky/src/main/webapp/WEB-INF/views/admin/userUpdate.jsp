@@ -30,6 +30,7 @@
         </div>
         <hr>
         <form class="form-horizontal" id="enrollform" action="${path }/user/adminUserUpdateEnd" method="post" onsubmit="return fn_enroll_validate();">
+        	<input type="hidden" name="separator" value="${m.separator }">
           <div class="form-group" >
             <label for="inputEmail" class="col-xs-2 control-label">아이디</label>
             <div class="col-xs-9">
@@ -78,7 +79,7 @@
 
             </div>
             
-            <div class="form-group">
+            <div class="form-group " hidden>
               <label for="inputNumber" class="col-xs-2 control-label">관심카테고리</label>
               <div class="col-xs-9">
                 <label class="radio-inline">
@@ -106,6 +107,7 @@
           </form>
       </div> <!-- container -->
     </div>
+    </section>
     
     <script>
 $(function(){
