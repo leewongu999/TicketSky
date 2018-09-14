@@ -3,6 +3,5 @@
 <configuration>
 	<typeAliases>
 			<typeAlias type="com.kh.ticketsky.user.model.vo.Member" alias="member"/>
-	
 	</typeAliases>
 </configuration>

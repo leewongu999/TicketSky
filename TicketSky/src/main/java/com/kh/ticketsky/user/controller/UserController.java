@@ -414,11 +414,10 @@ public class UserController {
 
 	/* 사용자 - 회원탈퇴 */
 	@RequestMapping("/user/userDelete.do")
-	public String userDelete(String password, Model model,HttpSession session) {
+	public String userDelete(@RequestParam(value="password", required=false, defaultValue="") String password, Model model,HttpSession session) {
 		String msg="";
 		String loc="";
 		String deleteChk="";
-		System.out.println(password);
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
 		String snsLoginChk = (String)session.getAttribute("snsLoginChk"); 
 		if(bcryptPasswordEncoder.matches(password, memberLoggedIn.getPassword())){ // 현재 비밀번호가 일치하면

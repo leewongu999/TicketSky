@@ -62,5 +62,157 @@ public class Page {
 		pageBar+="</script>";
 		return pageBar;
 	}
+	
+	public static String getPage(String category, String subCategory, int cPage, int numPerPage, int totalContents, String url)
+	{
+		String pageBar="";
+		int pageBarSize=5;
+		
+		int totalPage=(int)Math.ceil((double)totalContents/numPerPage);
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		pageBar+="<script src='http://code.jquery.com/jquery-latest.min.js'></script>";
+		pageBar+="<ul class='pagination justify-content-center pagination-sm'>";
+		
+		if(pageNo==1)
+		{
+			pageBar+="<li>";
+			pageBar+="<a aria-label='Previous'>";
+			pageBar+="<span aria-hidden='true'>&laquo;</span></a>";
+			pageBar+="</li>";
+		}
+		else
+		{
+			pageBar+="<li>";
+			pageBar+="<a href='javascript:fn_paging("+(pageNo-1)+")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>";
+			pageBar+="</li>";		
+		}
+
+		while(!(pageNo>pageEnd || pageNo>totalPage))
+		{
+			if(cPage==pageNo)
+			{
+				pageBar+="<li>";
+				pageBar+="<a>"+pageNo+"</a>";
+				pageBar+="</li>";
+			}
+			else
+			{
+				pageBar+="<li>";
+				pageBar+="<a href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+				pageBar+="</li>";
+			}
+			pageNo++;
+		}
+		
+//	    <li>
+//	      <a href="#" aria-label="Next">
+//	        <span aria-hidden="true">&raquo;</span>
+//	      </a>
+//	    </li>
+		
+		if(pageNo>totalPage)
+		{
+			pageBar+="<li>";
+			pageBar+="<a aria-label='Next'>";
+			pageBar+="<span aria-hidden='true'>&raquo;</span>";
+			pageBar+="</li>";
+		}
+		else
+		{
+			pageBar+="<li>";
+			pageBar+="<a href='javascript:fn_paging("+pageNo+")'><span aria-hidden='true'>&raquo;</span></a>";
+			pageBar+="</li>";
+		}
+		pageBar+="</ul>";
+		/*pageBar+="<script>";
+		pageBar+="function fn_paging(cPage,numPerPage){";
+		pageBar+="location.href='"+url+"?cPage='+cPage+'&category="+category+"&subCategory="+subCategory+"'";
+		pageBar+="}";
+		pageBar+="</script>";*/
+		
+		return pageBar;
+	}
+	public static String getPage(int no, int cPage, int numPerPage, int totalContents, String url)
+	{
+		String pageBar="";
+		int pageBarSize=5;
+		
+		int totalPage=(int)Math.ceil((double)totalContents/numPerPage);
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		
+		pageBar+="<script src='http://code.jquery.com/jquery-latest.min.js'></script>";
+		pageBar+="<ul class='pagination justify-content-center pagination-sm'>";
+		
+		if(pageNo==1)
+		{
+			pageBar+="<li>";
+			pageBar+="<a aria-label='Previous'>";
+			pageBar+="<span aria-hidden='true'>&laquo;</span></a>";
+			pageBar+="</li>";
+		}
+		else
+		{
+			pageBar+="<li>";
+			pageBar+="<a href='javascript:fn_paging("+(pageNo-1)+")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>";
+			pageBar+="</li>";		
+		}
+
+		while(!(pageNo>pageEnd || pageNo>totalPage))
+		{
+			if(cPage==pageNo)
+			{
+				pageBar+="<li>";
+				pageBar+="<a>"+pageNo+"</a>";
+				pageBar+="</li>";
+			}
+			else
+			{
+				pageBar+="<li>";
+				pageBar+="<a href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+				pageBar+="</li>";
+			}
+			pageNo++;
+		}
+		
+//	    <li>
+//	      <a href="#" aria-label="Next">
+//	        <span aria-hidden="true">&raquo;</span>
+//	      </a>
+//	    </li>
+		
+		if(pageNo>totalPage)
+		{
+			pageBar+="<li>";
+			pageBar+="<a aria-label='Next'>";
+			pageBar+="<span aria-hidden='true'>&raquo;</span>";
+			pageBar+="</li>";
+		}
+		else
+		{
+			pageBar+="<li>";
+			pageBar+="<a href='javascript:fn_paging("+pageNo+")'><span aria-hidden='true'>&raquo;</span></a>";
+			pageBar+="</li>";
+		}
+		pageBar+="</ul>";
+		/*pageBar+="<script>";
+		pageBar+="var re = {cPage :"+cPage+", no : "+no+"};";
+		pageBar+="function fn_paging(cPage,numPerPage){";*/
+		/*pageBar+="$.ajax({";
+		pageBar+="url :'"+url+"',";
+		pageBar+="data : re ,";
+		pageBar+="dataType : 'json',";
+		pageBar+="success : function(data)";
+		pageBar+="{";
+		pageBar+="";*/
+		/*pageBar+="location.href='"+url+"?cPage='+cPage+'&no="+no+"'";
+		pageBar+="}";
+		pageBar+="</script>";*/
+		return pageBar;
+	}
+	
 
 }

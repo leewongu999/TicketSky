@@ -5,8 +5,12 @@
 <c:set value="${pageContext.request.contextPath}" var="path"/>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<c:if test="${memberLoggedIn.separator eq 'S' }">
 <jsp:include page="/WEB-INF/views/common/sellerAside.jsp"></jsp:include>
-
+</c:if>
+<c:if test="${memberLoggedIn.separator eq 'A' }">
+<jsp:include page="/WEB-INF/views/common/adminAside.jsp"></jsp:include>
+</c:if>
 
 
 	<style media="screen">

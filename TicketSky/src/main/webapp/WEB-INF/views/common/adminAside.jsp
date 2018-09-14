@@ -75,20 +75,7 @@
                                   </ul>
                               </div>
                           </div>
-                           <!-- ##### Single Widget ##### -->
-                          <div class="widget price mb-50">
-                              <!-- Widget Title -->
-                              <h6 class="widget-title mb-30">통계</h6>
-                              <!--  활동관리  -->
-                              <div class="catagories-menu">
-                                  <ul id="menu-content2" class="menu-content collapse show">
-                                      <!-- Single Item -->
-                                      <li data-toggle="collapse" data-target="#clothing">
-                                          <a href="${path }/user/consumerMyPage">판매 통계</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
+                           
                           <!-- ##### Single Widget ##### -->
                           <div class="widget price mb-50">
                               <!-- Widget Title -->
