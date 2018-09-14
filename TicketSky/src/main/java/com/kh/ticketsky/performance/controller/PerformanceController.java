@@ -1,11 +1,10 @@
 package com.kh.ticketsky.performance.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.ticketsky.common.Page;
 import com.kh.ticketsky.performance.model.service.PerformanceService;
 
 
@@ -41,36 +42,49 @@ public class PerformanceController {
 
 	}
 	@RequestMapping("/performance/performanceSelectList.do")
-	public String performanceSelectList(String category, String subCategory, Model model)
+	public String performanceSelectList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
+			String category, String subCategory, Model model, HttpServletRequest req)
 	{
 		Map<String,String> map = new HashMap<String, String>();
+		int numPerPage = 8;
 		
 		map.put("category", category);
 		map.put("subCategory", subCategory);
 		
-		List<Map<String,String>> list = service.performSelectList(map);
+		List<Map<String,String>> list = service.performSelectList(map, cPage, numPerPage);
 		List<Map<String,String>> categoryList = service.categoryList(category);
+	
+		int totalCount = service.performSelectTotalCount(map);
+		String pageBar = new Page().getPage(category, subCategory,cPage, numPerPage, totalCount, req.getRequestURI());
 		
 		model.addAttribute("category", category);
 		model.addAttribute("subCategory",subCategory);
 		model.addAttribute("selectList", list);		
 		model.addAttribute("categoryList",categoryList);
-		
+		model.addAttribute("pageBar", pageBar);
+		model.addAttribute("totalCount", totalCount);
 		
 		return "performance/performanceSelectList";
 		
 	}
 	
 	@RequestMapping("/performance/performanceView.do")
-	public ModelAndView performanceView(ModelAndView mv, int no) {
+	public ModelAndView performanceView(@RequestParam(value="cPage", required=false, defaultValue="1")int cPage, 
+			ModelAndView mv, int no, HttpServletRequest req) {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
-		List<Map<String,Object>> reviewList = service.performReview(no);
+		int numPerPage = 5;
+		List<Map<String,Object>> reviewList = service.performReview(no, cPage, numPerPage);
+		
+		int reviewTotalCount = service.performReviewTotalCount(no);
+		String pageBar = new Page().getPage(no, cPage, numPerPage, reviewTotalCount, req.getRequestURI());
 		
 		map= service.performSelectOne(no);
 		
+		mv.addObject("reviewTotalCount", reviewTotalCount);
 		mv.addObject("reviewList", reviewList);
 		mv.addAllObjects(map);
+		mv.addObject("pageBar", pageBar);
 		mv.addObject("no", no);
 		mv.setViewName("performance/performanceView");
 		
@@ -127,7 +141,6 @@ public class PerformanceController {
 	@RequestMapping("/performance/performReviewUpdateEnd.do")
 	public String performReviewUpdateEnd(Model model, int reviewNo, int starUpdateScore, String reviewUp_message)
 	{
-		System.out.println(reviewNo+ starUpdateScore +reviewUp_message);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("reviewNo", reviewNo);
 		map.put("reviewUp_message", reviewUp_message);
@@ -140,7 +153,21 @@ public class PerformanceController {
 		
 		return "/performance/reviewForm";
 		
+	} 
+
+	@RequestMapping("/performance/performReviewPaging.do")
+	public ModelAndView performReviewPaging(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage, int no, ModelAndView mv, HttpServletRequest req) throws Exception
+	{
+		int numPerPage = 5;
+		List<Map<String,Object>> reviewList = service.performReview(no, cPage, numPerPage);
+		int reviewTotalCount = service.performReviewTotalCount(no);
+		String pageBar = new Page().getPage(no, cPage, numPerPage, reviewTotalCount, req.getRequestURI());
+		
+		mv.addObject("reviewList", reviewList);
+		mv.addObject("pageBar", pageBar);
+		mv.setViewName("/performance/reviewPaging");
+		return mv;
 	}
-	
 	
 }

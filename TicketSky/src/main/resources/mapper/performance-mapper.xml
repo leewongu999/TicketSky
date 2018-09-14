@@ -8,16 +8,16 @@
   	select * from category where major = #{category}
   </select>
   <select id="performAllList" parameterType="string" resultMap="performMap">
-  	select * from performinfo join category on(performinfo.categoryno = category.categoryno) join performContent on(performinfo.performno = performcontent.performno) where major = #{category}
+  	select * from performinfo join category on(performinfo.categoryno = category.categoryno)left join performContent on(performinfo.performno = performcontent.performno) where major = #{category}
   </select>
   <select id = "performSelectList" parameterType="map" resultMap="performMap">
-  	select * from performinfo join category on(performinfo.categoryno = category.categoryno) join performContent on(performinfo.performno = performcontent.performno) where major = #{category} and minor = #{subCategory}
+  	select * from performinfo join category on(performinfo.categoryno = category.categoryno)left join performContent on(performinfo.performno = performcontent.performno) where major = #{category} and minor = #{subCategory}
   </select>
   
   <select id ="performSelectOne" parameterType="_int" resultType="map">
   	select * from performinfo 
         join category on(performinfo.categoryno = category.categoryno)
-        join performContent on(performinfo.performno = performcontent.performno) 
+        left join performContent on(performinfo.performno = performcontent.performno) 
 		where performinfo.performNo=#{no}
   </select>
   
@@ -40,6 +40,15 @@
   <update id="performReviewUpdateEnd" parameterType="map">
   	update performanceReview set reviewcontent = #{reviewUp_message}, performscore = #{starUpdateScore}  where reviewno= #{reviewNo}
   </update>
+  <select id="performSelectTotalCount" parameterType="map" resultType="_int">
+  	select count(*) cnt from performinfo
+  	join category on(performinfo.categoryNo = category.categoryNo)
+	where major = #{category} and minor = #{subCategory}
+  </select>
+  
+  <select id="performReviewTotalCount" parameterType="_int" resultType="_int">
+  	select count(*) cnt from performanceReview where performNo = #{no}
+  </select>
 </mapper>
 
 

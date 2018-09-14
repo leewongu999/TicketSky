@@ -61,9 +61,9 @@
                                 <ul class="dropdown">
                                     <li><a href="${path }/performance/performanceAllList.do?category=연극"> 전체 </a></li>
                                     <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱">로맨틱 </a></li>
-                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱"> 코미디 </a></li>
-                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱"> 드라마 </a></li>
-                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=로맨틱"> 스릴러 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=코미디"> 코미디 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=드라마"> 드라마 </a></li>
+                                    <li><a href="${path }/performance/performanceSelectList.do?category=연극&subCategory=스릴러"> 스릴러 </a></li>
                                 </ul>
                             </li>
                             <li><a href="${path }/performance/performanceAllList.do?category=콘서트"> 콘서트 </a>

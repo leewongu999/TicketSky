@@ -3,10 +3,9 @@ package com.kh.ticketsky.performance.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-
-import com.kh.ticketsky.performance.model.vo.Performance;
 
 @Repository
 public class PerformanceDaoImpl implements PerformanceDao {
@@ -25,9 +24,11 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	}
 
 	@Override
-	public List<Map<String, String>> performSelectList(SqlSessionTemplate sqlSession, Map<String, String> map) {
+	public List<Map<String, String>> performSelectList(SqlSessionTemplate sqlSession, Map<String, String> map,int cPage, int numPerPage) {
 		
-		return sqlSession.selectList("performance.performSelectList",map);
+		RowBounds row = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		
+		return sqlSession.selectList("performance.performSelectList",map,row);
 	}
 
 	@Override
@@ -38,9 +39,11 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	}
 
 	@Override
-	public List<Map<String, Object>> performReview(SqlSessionTemplate sqlSession, int no) {
+	public List<Map<String, Object>> performReview(SqlSessionTemplate sqlSession, int no, int cPage, int numPerPage) {
 
-		return sqlSession.selectList("performance.performReview", no);
+		RowBounds row = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		
+		return sqlSession.selectList("performance.performReview", no, row);
 	}
 
 	@Override
@@ -67,5 +70,17 @@ public class PerformanceDaoImpl implements PerformanceDao {
 		return sqlSession.update("performance.performReviewUpdateEnd", map);
 	}
 
+	@Override
+	public int performSelectTotalCount(SqlSessionTemplate sqlSession, Map<String, String> map) {
+
+		return sqlSession.selectOne("performance.performSelectTotalCount",map);
+	}
+
+	@Override
+	public int performReviewTotalCount(SqlSessionTemplate sqlSession, int no) {
+
+		return sqlSession.selectOne("performance.performReviewTotalCount", no);
+	}
+	
 	
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ticketsky.performance.model.dao.PerformanceDao;
-import com.kh.ticketsky.performance.model.vo.Performance;
 
 @Service
 public class PerformanceServiceImpl implements PerformanceService {
@@ -31,12 +30,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		List<Map<String,String>> list= dao.performAllList(sqlSession, category);
 		return list;
 	}
-
-
+	
 	@Override
-	public List<Map<String, String>> performSelectList(Map<String, String> map) {
+	public List<Map<String, String>> performSelectList(Map<String, String> map,int cPage, int numPerPage) {
 		
-		List<Map<String,String>> list = dao.performSelectList(sqlSession,map);
+		List<Map<String,String>> list = dao.performSelectList(sqlSession,map,cPage,numPerPage);
 		
 		return list;
 	}
@@ -48,8 +46,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public List<Map<String, Object>> performReview(int no) {
-		List<Map<String,Object>> list = dao.performReview(sqlSession, no);
+	public List<Map<String, Object>> performReview(int no, int cPage, int numPerPage) {
+		List<Map<String,Object>> list = dao.performReview(sqlSession, no, cPage, numPerPage);
 		return list;
 	}
 
@@ -78,6 +76,20 @@ public class PerformanceServiceImpl implements PerformanceService {
 		int result = dao.performReviewUpdateEnd(sqlSession, map);
 		return result;
 	}
+
+	@Override
+	public int performSelectTotalCount(Map<String, String> map) {
+
+		return dao.performSelectTotalCount(sqlSession,map);
+	}
+
+	@Override
+	public int performReviewTotalCount(int no) {
+
+		return dao.performReviewTotalCount(sqlSession,no);
+	}
+
+	
 
 	
 

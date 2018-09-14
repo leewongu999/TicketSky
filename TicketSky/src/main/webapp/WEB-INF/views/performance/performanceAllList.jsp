@@ -23,7 +23,7 @@
 	}
 	
 </script>
-<!-- 합쳐지고 최소화된 최신 CSS -->
+	<!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <section class="new_arrivals_area section-padding-80 clearfix">
         <div class="container">
@@ -38,41 +38,39 @@
                          	<c:forEach items="${categoryList}" var="c">
                             	<button type="button" class="btn btn-default" onclick="fn_performSelect('${c.MINOR}')" >${c.MINOR }</button>
                             </c:forEach>
-                            
-                            
                         </div>
                         <br>
                         <br><br>
                         <!-- <img src="${path}/resources/img/musical.jpg" align='center'/> -->
                         <div id="demo" class="carousel slide" data-ride="carousel">
 
-                                <!-- Indicators -->
-                                <ul class="carousel-indicators">
-                                  <li data-target="#demo" data-slide-to="0" class="active"></li>
-                                  <li data-target="#demo" data-slide-to="1"></li>
-                                  <li data-target="#demo" data-slide-to="2"></li>
-                                </ul>
-                              
-                                <!-- The slideshow -->
-                                <div class="carousel-inner">
-                                  <div class="carousel-item active">
-                                    <img src="${path}/resources/img/product-img/show1.jpg" alt="Los Angeles">
-                                  </div>
-                                  <div class="carousel-item">
-                                    <img src="${path}/resources/img/product-img/show2.jpg" alt="Chicago">
-                                  </div>
-                                  <div class="carousel-item">
-                                    <img src="${path}/resources/img/product-img/show3.jpg" alt="New York">
-                                  </div>
-                                </div>
-                                <!-- Left and right controls -->
-                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                                  <span class="carousel-control-prev-icon"></span>
-                                </a>
-                                <a class="carousel-control-next" href="#demo" data-slide="next">
-                                  <span class="carousel-control-next-icon"></span>
-                                </a>
-                              </div>
+	                        <!-- Indicators -->
+	                        <ul class="carousel-indicators">
+	                          <li data-target="#demo" data-slide-to="0" class="active"></li>
+	                          <li data-target="#demo" data-slide-to="1"></li>
+	                          <li data-target="#demo" data-slide-to="2"></li>
+	                        </ul>
+	                      
+	                        <!-- The slideshow -->
+	                        <div class="carousel-inner">
+	                          <div class="carousel-item active">
+	                            <img src="${path}/resources/img/product-img/show1.jpg" alt="Los Angeles">
+	                          </div>
+	                          <div class="carousel-item">
+	                            <img src="${path}/resources/img/product-img/show2.jpg" alt="Chicago">
+	                          </div>
+	                          <div class="carousel-item">
+	                            <img src="${path}/resources/img/product-img/show3.jpg" alt="New York">
+	                          </div>
+	                        </div>
+	                        <!-- Left and right controls -->
+	                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+	                          <span class="carousel-control-prev-icon"></span>
+	                        </a>
+	                        <a class="carousel-control-next" href="#demo" data-slide="next">
+	                          <span class="carousel-control-next-icon"></span>
+	                        </a>
+                    	</div>
                     </div>
                 </div>
             </div>
@@ -86,7 +84,10 @@
             <c:forEach items="${allList}" var="l">
             	 <div class="col-lg-3 col-sm-6 portfolio-item">
                     <div class="card h-100">
-                      <a href="${path }/performance/performanceView.do?no=${l.PERFORMNO}" style='text-decoration:none;'><img class="card-img-top" src="${path}/resources/img/product-img/${l.ORICONTENTIMG}" alt="" style='height : 310px;'></a>
+                    
+                      	<a href="${path }/performance/performanceView.do?no=${l.PERFORMNO}" style='text-decoration:none;'><img class="card-img-top" src="${path}/resources/img/product-img/${l.ORICONTENTIMG}" alt="" style='height : 310px;'></a>
+                    
+                    
                       <div class="card-body">
                         <h4 class="card-title">
                             <strong>
@@ -133,7 +134,7 @@
              
          <!-- Pagination -->
          <br><br>
-         <div id='pageBar1' align="center">
+         <!-- <div id='pageBar1' align="center">
         	<ul class="pagination">
 			    <li>
 			      <a href="#" aria-label="Previous">
@@ -151,6 +152,6 @@
 			      </a>
 			    </li>
 			  </ul>
-        	</div>
+        	</div> -->
        </section>
 <jsp:include page = "/WEB-INF/views/common/footer.jsp"/>

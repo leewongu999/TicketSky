@@ -17,7 +17,7 @@
 	<script src="${path}/resources/sebu/plugins/easing/easing.js"></script>
 	<script src="${path}/resources/sebu/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 	<script src="${path}/resources/sebu/js/single_custom.js"></script>
-
+	
 	<!-- 합쳐지고 최소화된 최신 CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="${path}/resources/sebu/styles/bootstrap4/bootstrap.min.css">
@@ -242,21 +242,114 @@
 								    } 
 								});    
 								</script> 
-								
 							</div>
-							
-						</div>
-						
+						</div>						
 					</div>
 					
 
 					<!-- Tab Reviews -->
-
+					<script>
+						var performNo = ${no};
+						function fn_paging(cPage,numPerPage){
+							$.ajax({
+								url : "${path}/performance/performReviewPaging.do",
+								data : {no : performNo,
+									cPage : cPage}										
+								,
+								dataType : "html",
+								success : function(data)
+								{
+									
+									var reviewForm = $("#reviewList");
+									reviewForm.html(data);
+								}
+							});
+						};
+						function fn_review_delete(a,b)
+						{
+							var bool = confirm("정말로 삭제하시겠습니까??");
+							if(bool)
+							{
+								location.href='${path}/performance/performReviewDelete.do?no='+a+'&reviewNo='+b;
+							}
+							else
+							{
+								return;		
+							}
+						}
+						function fn_review_update(no,pNo)
+						{
+							var re = {reviewNo : no,
+									performNo : pNo};
+							 $.ajax({
+								url : "${path}/performance/performReviewUpdate.do",
+								data : re,
+								dataType : "html",
+								success : function(data)
+								{
+									$('#review_'+no).html(data);
+									$('#review_cancel').on("click",function(){
+										
+										var up_reviewNo = $('#up_reviewNo').val();
+										var canRe = {reviewNo : up_reviewNo};
+										$.ajax({
+											url : "${path}/performance/performReviewUpdateCancel.do",
+											data : canRe,
+											dataType : "html",
+											success : function(data)
+											{
+												$('#review_'+no).html(data);
+												
+											}
+										});
+									});
+									
+									$('#review_update_submit').on("click",function(){
+										
+										var upBool = confirm("수정 하시겠습니까?");
+										if(upBool)
+										{  
+											var review=$("#reviewUp_message");
+											var bool=false;
+											if(review.val().trim().length>=10)
+											{															
+												bool=true;
+											}
+											else
+											{
+												alert("리뷰는 10글자 이상");
+												review.val("");
+												review.focus();
+												bool=false;
+											}
+											if(bool)
+											{
+												var upRe = {reviewNo : $('#up_reviewNo').val(),
+														reviewUp_message : $('#reviewUp_message').val(),
+														starUpdateScore : $('#starUpdateScore').val()
+														};
+												$.ajax({
+													url : "${path}/performance/performReviewUpdateEnd.do",
+													data : upRe,
+													dataType : "html",
+													success : function(data)
+													{
+														$('#review_'+no).html(data);
+													}
+												});
+											}
+											else{return}
+										}else{return}
+									});
+								}
+							});
+						}
+					</script>
 					<div id="tab_3" class="tab_container" style='margin-left: 10%; margin-right: 10%;' >
 						<div class="col w-100" >
 							<!-- Add Review -->
 							<div class="tab_title reviews_title" style='margin-bottom:-5%;' >
-								<h4>Reviews (2)</h4>
+								<h4>Reviews (${reviewTotalCount })</h4>
 							</div>
 							<div class=" add_review_col">
 								
@@ -287,19 +380,19 @@
 							</div>
 							<!-- User Reviews -->
 
-							<div>
+							<div id='reviewList'>
 								<c:forEach items="${reviewList}" var="r" varStatus="status">
 								<c:if test="${status.index==0 }">
 									<hr>
 								</c:if>
 									<div id='review_${r.REVIEWNO }' class="user_review_container flex-column flex-sm-row">
 										<div style='float:right;'>
-											<button class='red_button review_submit_btn trans_30' onclick = 'fn_review_update(${r.REVIEWNO},${r.PERFORMNO })' style='width:50px; height:20px; background-color:#E4E4E4'>수정</button>
+											<button class='red_button review_submit_btn trans_30' onclick ='fn_review_update(${r.REVIEWNO},${r.PERFORMNO })' style='width:50px; height:20px; background-color:#E4E4E4'>수정</button>
 											<button class='red_button review_submit_btn trans_30' onclick ='fn_review_delete(${r.PERFORMNO},${r.REVIEWNO })' style='width:50px; height:20px; background-color:#E4E4E4'>삭제</button>
 										</div>
 									<div>
 										<div class="review_date">
-											<fmt:formatDate value="${r.REVIEWDATE }" pattern="yyyy-MM-dd"/><br>
+											<fmt:formatDate value="${r.REVIEWDATE }" pattern="yyyy-MM-dd "/><br>
 										</div>
 										<div class="user_name">
 											${r.USERID }
@@ -348,89 +441,11 @@
 								</div>
 								<c:if test='${!status.last }'>
 									<hr>
-								</c:if>
+								</c:if> 
 								</c:forEach>
-								<script>
-										function fn_review_delete(a,b)
-										{
-											var bool = confirm("정말로 삭제하시겠습니까??");
-											if(bool)
-											{
-												location.href='${path}/performance/performReviewDelete.do?no='+a+'&reviewNo='+b;
-											}
-											else
-											{
-												return;		
-											}
-										}
-										function fn_review_update(no,pNo)
-										{
-											var re = {reviewNo : no,
-													performNo : pNo};
-											 $.ajax({
-												url : "${path}/performance/performReviewUpdate.do",
-												data : re,
-												dataType : "html",
-												success : function(data)
-												{
-													$('#review_'+no).html(data);
-													
-													$('#review_cancel').on("click",function(){
-														
-														var up_reviewNo = $('#up_reviewNo').val();
-														var canRe = {reviewNo : up_reviewNo};
-														$.ajax({
-															url : "${path}/performance/performReviewUpdateCancel.do",
-															data : canRe,
-															dataType : "html",
-															success : function(data)
-															{
-																$('#review_'+no).html(data);
-															}
-														});
-													});
-													
-													$('#review_update_submit').on("click",function(){
-														
-														var upBool = confirm("수정 하시겠습니까?");
-														if(upBool)
-														{  
-															var review=$("#reviewUp_message");
-															var bool=false;
-															if(review.val().trim().length>=10)
-															{															
-																bool=true;
-															}
-															else
-															{
-																alert("리뷰는 10글자 이상");
-																review.val("");
-																review.focus();
-																bool=false;
-															}
-															if(bool)
-															{
-																var upRe = {reviewNo : $('#up_reviewNo').val(),
-																		reviewUp_message : $('#reviewUp_message').val(),
-																		starUpdateScore : $('#starUpdateScore').val()
-																		};
-																$.ajax({
-																	url : "${path}/performance/performReviewUpdateEnd.do",
-																	data : upRe,
-																	dataType : "html",
-																	success : function(data)
-																	{
-																		$('#review_'+no).html(data);
-																	}
-																});
-															}
-															else{return}
-														}else{return}
-													});
-												}
-											});
-										}
-								</script>
+								<div id='pageBar1' align="center">
+				         			${pageBar }<br/>
+				         		</div>
 							</div>
 						</div>
 					</div>
@@ -439,7 +454,7 @@
 						<div class="col w-100" >
 							<!-- Add Review -->
 							<div class="tab_title reviews_title" style='margin-bottom:-5%;' >
-								<h4>Reviews (2)</h4>
+								<h4>Q&A (3)</h4>
 							</div>
 							<div class=" add_review_col">
 								<div class="add_review">
@@ -447,42 +462,73 @@
 									<form id="review_form1" method='post'>
 										<div>
 										<h1>&nbsp;&nbsp;
-											ID : admin 
+											<span>
+												<strong>상품 문의</strong>
+											</span>
 										</h1>
 											<span></span>
 											<textarea id="review_message1" class="input_review" name="review"  placeholder="Your Review" rows="5" required data-error="Please, leave us a review."></textarea>
 										</div>
-										<div class="text-left text-sm-right">
-											<button id="review_submit1" type="submit" class="red_button review_submit_btn trans_300" value="Submit">확인</button>
+										<div class="text-left text-sm-right" style='margin:10px;'>
+											
+											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">확인</button>
 										</div>
 									</form>
 								</div>
-
 							</div>
 							<!-- User Reviews -->
 
 							<div>
-								<c:forEach items="${reviewList}" var="r" varStatus="s">
-									<hr>
-									<div class="user_review_container d-flex flex-column flex-sm-row">
-									<div>
-										<div class="review_date">
-											<fmt:formatDate value="${r.REVIEWDATE }" pattern="yyyy년MM월dd일  E요일"/><br>
-											
-										</div>
-										<div class="user_name">
-											${r.USERID }
-										</div>
-										<p>${r.REVIEWCONTENT }</p>
+								<hr>
+								<div class="user_review_container d-flex flex-column flex-sm-row">
+									<div style='margin:3.8% 0 0 0;'>
+										<div><img src="${path}/resources/img/product-img/Q.png"  style='width:35px; height:30px;' alt=""></div>
 									</div>
+									<div class="review" style='margin-left:-10px;'>
+										<div class="review_date">2018-09-12</div>
+										<div class="user_name">
+											user(<small>djsrnsla</small>)
+											<div style='float:right'>
+												<button class='red_button review_submit_btn trans_30' style='width:50px; height:20px; background-color:#E4E4E4'>답글</button>
+												<button class='red_button review_submit_btn trans_30' style='width:50px; height:20px; background-color:#E4E4E4'>수정</button>
+												<button class='red_button review_submit_btn trans_30' style='width:50px; height:20px; background-color:#E4E4E4'>삭제</button>
+											</div>
+										</div>
+										<p style='width:800px;'>안녕하세요안녕하세요
+										</p>
+										<br>
+										<div>
+										<div class="user_review_container d-flex flex-column flex-sm-row" style='margin-bottom:-20px;'>
+											<div style='margin:3.8% 0 0 0;'>
+												<div><img src="${path}/resources/img/product-img/A.png"  style='width:35px; height:30px;' alt=""></div>
+											</div>
+											<!-- <div style='float:right;'>
+												<button class='red_button review_submit_btn trans_30' style='width:50px; height:20px; background-color:#E4E4E4'>수정</button>
+												<button class='red_button review_submit_btn trans_30' style='width:50px; height:20px; background-color:#E4E4E4'>삭제</button>
+											</div> -->
+												<div class="review" style='margin-left:-10px;'>
+													<div class="review_date">2018-09-12</div>
+													<div class="user_name">
+														admin
+														<div style='float:right; margin-left:500px;'>
+															<button class='red_button review_submit_btn trans_30' style='width:50px; height:20px; background-color:#E4E4E4'>수정</button>
+															<button class='red_button review_submit_btn trans_30' style='width:50px; height:20px; background-color:#E4E4E4'>삭제</button>
+														</div>
+													</div>
+													<p style='width:720px;'>안녕하세요안녕하세요
+													</p>
+													<p>맘스터치 먹고싶다.</p>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+									
 								</div>
-								
-								</c:forEach>
+								<hr>
 							</div>
 						</div>
 					</div>
-					
-					
 				</div>
 			</div>
 		</div>

@@ -77,41 +77,18 @@
                  </c:forEach>
             </div>            
         </div>
-        
-        <!-- Pagination -->
         <br><br>
+        <script>
+        
+		function fn_paging(cPage,numPerPage){
+			location.href="${path}/performance/performanceSelectList.do?cPage="+cPage+"&category=뮤지컬&subCategory=오리지날/내한공연";
+		}
+		
+        </script>
         <div id='pageBar1' align="center">
-       <ul class="pagination justify-content-center ">
-           <li class="page-item">
-             <a class="page-link" href="#" aria-label="Previous">
-               <span aria-hidden="true">&laquo;</span>
-               <span class="sr-only">Previous</span>
-             </a>
-           </li>
-           <li class="page-item">
-             <a class="page-link" href="#">1</a>
-           </li>
-           <li class="page-item">
-             <a class="page-link" href="#">2</a>
-           </li>
-           <li class="page-item">
-             <a class="page-link" href="#">3</a>
-           </li>
-           <li class="page-item">
-               <a class="page-link" href="#">4</a>
-           </li>
-           <li class="page-item">
-               <a class="page-link" href="#">5</a>
-           </li>
-           <li class="page-item">
-             <a class="page-link" href="#" aria-label="Next">
-               <span aria-hidden="true">&raquo;</span>
-               <span class="sr-only">Next</span>
-             </a>
-           </li>
-         </ul>
-       </div>
-    </section>
-
+         	${pageBar }<br/>
+         </div>        
+       </section>
+		
 
 <jsp:include page = "/WEB-INF/views/common/footer.jsp"/>
