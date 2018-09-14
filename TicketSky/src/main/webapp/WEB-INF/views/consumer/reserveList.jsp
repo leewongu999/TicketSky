@@ -94,6 +94,7 @@
                   </div>
               </div>
           </div>
+          </section>
       <!-- ##### Shop Grid Area End ##### -->
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

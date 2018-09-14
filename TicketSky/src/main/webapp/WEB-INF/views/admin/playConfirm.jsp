@@ -14,7 +14,7 @@
                     
                     <div class="row">     
                     	<div class="col-md-5">전체 ${totalCount }</div>     
-	                        <form class="form-inline col-md-6" action="${path }/ticketsky/user/consumerList">
+	                        <form class="form-inline col-md-7" action="${path }/ticketsky/user/consumerList">
                             <select id="searchSelectBox" name="searchType" class="form-control input-sm">
                                 <option value="userName">회원명</option>
                                 <option value="userId">아이디</option>
