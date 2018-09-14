@@ -454,11 +454,10 @@
 						<div class="col w-100" >
 							<!-- Add Review -->
 							<div class="tab_title reviews_title" style='margin-bottom:-5%;' >
-								<h4>Q&A (3)</h4>
+								<h4>Q&A (4)</h4>
 							</div>
 							<div class=" add_review_col">
 								<div class="add_review">
-									
 									<form id="review_form1" method='post'>
 										<div>
 										<h1>&nbsp;&nbsp;
@@ -470,7 +469,6 @@
 											<textarea id="review_message1" class="input_review" name="review"  placeholder="Your Review" rows="5" required data-error="Please, leave us a review."></textarea>
 										</div>
 										<div class="text-left text-sm-right" style='margin:10px;'>
-											
 											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">확인</button>
 										</div>
 									</form>
@@ -518,12 +516,10 @@
 													<p style='width:720px;'>안녕하세요안녕하세요
 													</p>
 													<p>맘스터치 먹고싶다.</p>
-													
 												</div>
 											</div>
 										</div>
 									</div>
-									
 								</div>
 								<hr>
 							</div>
